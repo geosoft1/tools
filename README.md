@@ -17,8 +17,11 @@ At this time work only on Ubuntu with Unity. Tested on 12.04.
 
 Enjoy.
 
-TODO:
--some Unity2d improvements
--shortcut for other desktops (Gnome,KDE,...)
--adding zenity for more interactivity with the user
--better name for installer
+<p>TODO:
+<ul>
+<li>some Unity2d improvements
+<li>shortcut for other desktops (Gnome,KDE,...)
+<li>adding zenity for more interactivity with the user
+<li>better name for installer
+<li>no plan for Windows users
+</ul>
