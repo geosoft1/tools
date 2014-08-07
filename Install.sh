@@ -51,7 +51,7 @@ mkdir -p $HOME/.local/share/applications/
 echo "Creating more eficient layout for ide (ini.mini)"
 echo "
 [liteenv]
-currentenv=linux32
+currentenv=linux"$a"
 
 [liteide]
 gopath="$HOME"/go-programs
