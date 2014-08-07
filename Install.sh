@@ -22,7 +22,7 @@ clear
 v=`echo $(wget -qO- golang.org) | awk '{ if (match($0,/go[1-9]+.[0-9]+./)) print substr($0,RSTART,RLENGTH) }'`
 #get host computer arch (e.g. i386,amd64)
 a=$(uname -i)
-if [ $a == "i386" ]; then a=${a:1}; else a=$p; fi
+if [ $a == "i386" ]; then a=${a:1}; else a="amd64"; fi
 cname=${v}linux-${a}.tar.gz
 echo "Downloading compiler $cname..."
 #http://golang.org/dl/go1.3.linux-386.tar.gz
@@ -46,6 +46,7 @@ tar -xf $HOME/Downloads/$idename -C $HOME
 echo "Creating \$GOPATH"
 mkdir -p $HOME/go-programs/src
 mkdir -p $HOME/.config/liteide
+mkdir -p $HOME/.local/share/applications/
 
 echo "Creating more eficient layout for ide (ini.mini)"
 echo "
