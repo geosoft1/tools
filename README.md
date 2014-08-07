@@ -13,6 +13,6 @@ launcher for Unity have also some useful shortcuts.
 
 Install.sh can be run periodicaly or if compiler/ide versions change to update the sistem. projects are not affected if you overinstall.
 
-at this time it tested only on Ubuntu 12.04 on 32 bits but basicaly shoud work on 64 bits.
+at this time work only on Ubuntu with Unity. tested on 12.04.
 
 enjoy.
