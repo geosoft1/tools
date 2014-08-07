@@ -11,4 +11,6 @@ it will also create a go-programs directory and a HelloWorld project.
 
 launcher for Unity have also some useful shortcuts.
 
+Install.sh can be run periodicaly or if compiler/ide versions change to update sistem. projects are not affected if overinstall.
+
 enjoy.
