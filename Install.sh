@@ -1,18 +1,21 @@
 #!/bin/bash
 #
-# Golang programming environment installer
+# golang programming environment installer
 # NOTE:
 # this project is third party. for support see http://golang.org and http://code.google.com/p/golangide/
 # author       : geosoft1@gmail.com
 # license      : GPLv3
-# goal         : get last versions of Go compiler and LiteIde,install them, make a nice launcher and a more useful ide layout
-# compatibible : Ubuntu 12.04+ (Unity)
-# version      : 1.0.0.1
+# version      : 1.0.0.2
 #
 # 07.08.2014   - start project, skeleton, tests
+# 08.08.2014   - added $DESKTOP_SESSION support
 #
 # TODO:
-# uninstall
+# +some Unity2d improvements
+# -shortcut for other desktop environments
+# -adding zenity for more interactivity with the user
+# -better name for installer
+# -multiarch support
 #
 clear
 
@@ -88,8 +91,8 @@ WelcomePageVisible=false
 family=Monaco
 fontsize=11" > $HOME/.config/liteide/liteide.ini.mini
 
-echo "
-[Desktop Entry]
+#Creating basic desktop entry
+echo "[Desktop Entry]
 Version=1.0
 Encoding=UTF-8
 Name=LiteIDE
@@ -97,8 +100,13 @@ Comment=LiteIDE is a simple, open source, cross-platform Go IDE.
 Exec=sh -c 'cp .config/liteide/liteide.ini.mini .config/liteide/liteide.ini; "$HOME"/liteide/bin/liteide'
 Icon="$HOME"/go/doc/gopher/gophercolor.png
 Type=Application
-Categories=Network;
+Categories=Network;" > $HOME/Desktop/liteide.desktop
 
+echo "Creating smart launcher"
+case $DESKTOP_SESSION in
+ubuntu*)
+   #Extend desktop entry in Unity with nice options
+   echo "
 Actions=golang;http server;gopath;
 
 [Desktop Action golang]
@@ -114,14 +122,25 @@ OnlyShowIn=Unity;
 [Desktop Action gopath]
 Name=\$GOPATH
 Exec=nautilus go-programs/src %U
-OnlyShowIn=Unity;" > $HOME/.local/share/applications/liteide.desktop
+OnlyShowIn=Unity;" >> $HOME/Desktop/liteide.desktop
+   mv $HOME/Desktop/liteide.desktop $HOME/.local/share/applications
+   #Update launcher
+   b=$(gsettings get com.canonical.Unity.Launcher favorites)
+   if ! [[ $b =~ "liteide.desktop" ]]; then
+      b=${b/]/, \'liteide.desktop\']}
+   fi
+   gsettings set com.canonical.Unity.Launcher favorites "$b"
+   #Unity2d need restart
+   if [[ $DESKTOP_SESSION =~ "2d" ]]; then
+      killall unity-2d-shell;
+   fi
+   ;;
+*)
+   #other desktop environments can be handled here
+   chmod +x $HOME/Desktop/liteide.desktop
+   ;;
+esac
 
-echo "Creating nice launcher"
-b=$(gsettings get com.canonical.Unity.Launcher favorites)
-if ! [[ $b =~ "liteide.desktop" ]]; then
-b=${b/]/, \'liteide.desktop\']}
-gsettings set com.canonical.Unity.Launcher favorites "$b"
-fi
 echo "Creating HelloWorld program"
 mkdir -p $HOME/go-programs/src/HelloWorld
 echo "package main
