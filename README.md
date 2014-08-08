@@ -1,7 +1,7 @@
 tools
 =====
 ##Install.sh
-It's an automated installer for [Golang](golang.org) compiler and [LiteIde](https://github.com/visualfc/liteide).
+It's an automated installer for [Golang](http://golang.org) compiler and [LiteIde](https://github.com/visualfc/liteide).
 
 ###Features
 * It will get last versions of Go compiler and LiteIde,install them, make a nice launcher and a more useful ide layout.
