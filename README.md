@@ -5,8 +5,10 @@ It's an automated installer for [Golang](http://golang.org) compiler and [LiteId
 
 ###Features
 * It will get last versions of Go compiler and LiteIde,install them, make a nice launcher and a more useful ide layout.
-* It will also create a go-programs directory and a HelloWorld project.
-* Launcher for Unity have also some useful shortcuts.
+* Create a more productive custom layout for LiteIDE (liteide.ini.mini)
+* Many Gophers use Monaco.ttf on their Mac's, so add Monaco to LiteIde
+* It will also create a go-programs directory add GOPATH and a HelloWorld project.
+* Add launcher to Unity with some useful functions
 * Run periodicaly or if compiler/ide versions change to update the sistem. Projects are not affected if you overinstall.
 
 ###Using
