@@ -7,12 +7,12 @@
 # license      : GPLv3
 # version      : 1.0.0.3
 #
-# 07.08.2014   - start project, skeleton, tests
-# 08.08.2014   - added $DESKTOP_SESSION support,eye candy,freebsd arch and 64bit support
+# 07.08.2014   - start project, skeleton, tests (1.0.0.1)
+# 08.08.2014   - added $DESKTOP_SESSION,kernel name and 64bit support (1.0.0.2),eye candy (1.0.0.3)
 #
 # TODO:
 # +some Unity2d improvements
-# -shortcut for other desktop environments
+# +shortcut for other desktop environments
 # -adding zenity for more interactivity with the user
 # -better name for installer
 # -multiarch support
@@ -170,12 +170,8 @@ echo "Creating HelloWorld program"
 mkdir -p $HOME/go-programs/src/HelloWorld
 echo "package main
 
-import (
-	\"fmt\"
-)
-
 func main() {
-	fmt.Println(\"Hello World!\")
+	println(\"Hello World!\")
 }" > $HOME/go-programs/src/HelloWorld/main.go
 
 echo "Done."
