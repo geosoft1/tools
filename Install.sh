@@ -5,10 +5,10 @@
 # this project is third party. for support see http://golang.org and http://code.google.com/p/golangide/
 # author       : geosoft1@gmail.com
 # license      : GPLv3
-# version      : 1.0.0.2
+# version      : 1.0.0.3
 #
 # 07.08.2014   - start project, skeleton, tests
-# 08.08.2014   - added $DESKTOP_SESSION support
+# 08.08.2014   - added $DESKTOP_SESSION support,eye candy,freebsd arch and 64bit support
 #
 # TODO:
 # +some Unity2d improvements
@@ -16,42 +16,57 @@
 # -adding zenity for more interactivity with the user
 # -better name for installer
 # -multiarch support
+# -git support
 #
+
 clear
 
-#get go compiler last version (e.g. go1.3)
-#p=`wget -qO- golang.org`
-#v=`echo $p |  awk '{ if (match($0,/go[1-9]+.[0-9]+./)) print substr($0,RSTART,RLENGTH) }'`
+#get last version of go compiler (e.g. go1.3)
 v=`echo $(wget -qO- golang.org) | awk '{ if (match($0,/go[1-9]+.[0-9]+./)) print substr($0,RSTART,RLENGTH) }'`
-#get host computer arch (e.g. i386,amd64)
-a=$(uname -i)
-if [ $a == "i386" ]; then a=${a:1}; else a="amd64"; fi
-cname=${v}linux-${a}.tar.gz
-echo "Downloading compiler $cname..."
-#http://golang.org/dl/go1.3.linux-386.tar.gz
+
+#get host computer arch (e.g. i386|amd64)
+if [[ $(uname -i) == "i386" ]]; then a="386"; else a="amd64"; fi
+
+#get kernel name (e.g. linux|freebsd)
+k=$(uname -s | tr '[:upper:]' '[:lower:]')
+
+#build compiler name
+cname=${v}${k}-${a}.tar.gz
+
+echo "Downloading last compiler $cname..."
 wget -Nq -P $HOME/Downloads http://golang.org/dl/$cname --progress=bar:force 2>&1 | tail -f -n +8
 
-#get liteide last version (e.g. X23.2)
+#get last version of ide (e.g. X23.2)
 v=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/) | awk '{ if(match($0,/X[0-9]+.[0-9]+/)) print substr($0,RSTART,RLENGTH) }'`
-#get host computer LONG_BIT (e.g 32,64)
+
+#get host computer LONG_BIT (e.g 32|64)
 a=$(getconf LONG_BIT)
-idename=liteidex${v:1}.linux-${a}.tar.bz2
-echo "Downloading liteide $idename..."
-#http://sourceforge.net/projects/liteide/files/X23.2/liteidex23.2.linux-32.tar.bz2
-wget -Nq -P $HOME/Downloads http://sourceforge.net/projects/liteide/files/${v}/liteidex${v:1}.linux-${a}.tar.bz2
+
+#build ide name
+idename=liteidex${v:1}.${k}-${a}.tar.bz2
+
+echo "Downloading last ide $idename..."
+wget -Nq -P $HOME/Downloads http://sourceforge.net/projects/liteide/files/${v}/liteidex${v:1}.${k}-${a}.tar.bz2
 
 echo "Getting Monaco font..."
 wget -Nq -P $HOME/.fonts http://usystem.googlecode.com/files/MONACO.TTF
-echo "Unpacking all..."
-#for f in $HOME/Downloads/*;do tar -xf $f -C $HOME;done
+
+echo "Unpacking $cname..."
 tar -xf $HOME/Downloads/$cname -C $HOME
+
+echo "Unpacking $idename..."
 tar -xf $HOME/Downloads/$idename -C $HOME
+
 echo "Creating \$GOPATH"
 mkdir -p $HOME/go-programs/src
+
+#create directory for liteide.ini.mini
 mkdir -p $HOME/.config/liteide
+
+#create directory for liteide.desktop (Unity specific)
 mkdir -p $HOME/.local/share/applications/
 
-echo "Creating more eficient layout for ide (ini.mini)"
+echo "Creating liteide.ini.mini"
 echo "
 [liteenv]
 currentenv=linux"$a"
@@ -126,8 +141,18 @@ OnlyShowIn=Unity;" >> $HOME/Desktop/liteide.desktop
    mv $HOME/Desktop/liteide.desktop $HOME/.local/share/applications
    #Update launcher
    b=$(gsettings get com.canonical.Unity.Launcher favorites)
+   #skip if launcher exists
    if ! [[ $b =~ "liteide.desktop" ]]; then
-      b=${b/]/, \'liteide.desktop\']}
+      #eye candy if put after firefox or nautilus :)
+      #check if firefox has launcher
+      if [[ $b =~ "firefox.desktop" ]]; then
+         b=${b/\'firefox.desktop\'/ \'firefox.desktop\', \'liteide.desktop\'}
+      elif [[ $b =~ "nautilus-home.desktop" ]]; then
+         #if some not use firefox insert after home folder
+         b=${b/\'nautilus-home.desktop\'/ \'nautilus-home.desktop\', \'liteide.desktop\'}
+      else
+         b=${b/]/, \'liteide.desktop\']}
+      fi
    fi
    gsettings set com.canonical.Unity.Launcher favorites "$b"
    #Unity2d need restart
