@@ -9,7 +9,7 @@ Installer for [Golang](http://golang.org) compiler and [LiteIde](https://github.
 * Many gophers use Monaco.ttf font so add Monaco to LiteIde.
 * Also create a GOPATH to the go-programs directory and add a HelloWorld project.
 * Add launcher to Unity with some useful functions on right-click. Other DE users have a shortcut on desktop. 
-* Git support on `ctrl+\``. Be sure you have git installed and proper [SSH keys](https://help.github.com/articles/generating-ssh-keys).
+* Git support on `` ctrl+` ``. Be sure you have git installed and proper [SSH keys](https://help.github.com/articles/generating-ssh-keys).
 
 ###Using
 Download anywhere, make it executable and run. If you want to watch the installation process run it in Terminal.
