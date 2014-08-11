@@ -102,7 +102,7 @@ fontsize=12" > $HOME/.config/liteide/liteide.ini.mini
 
 echo "Adding git support to liteide..."
 mv $HOME/liteide/share/liteide/litebuild/command/go.api $HOME/liteide/share/liteide/litebuild/command/go.api.bk
-echo -e "git commit -m \"-\" -a\ngit push -a\n" >$HOME/liteide/share/liteide/litebuild/command/go.api
+echo -e "git commit -m \"-\" -a\ngit push\n" >$HOME/liteide/share/liteide/litebuild/command/go.api
 
 #Creating generic .desktop file on desktop
 echo "[Desktop Entry]
