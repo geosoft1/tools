@@ -141,7 +141,7 @@ OnlyShowIn=Unity;" >> $HOME/Desktop/liteide.desktop
          #if someone does not use firefox, insert after home folder
          b=${b/\'nautilus-home.desktop\'/ \'nautilus-home.desktop\', \'liteide.desktop\'}
       else
-	     #otherwise, insert after all favorites
+         #otherwise, insert after all favorites
          b=${b/]/, \'liteide.desktop\']}
       fi
       #update the launcher favorites list. in unity changes are shwown immediately.
