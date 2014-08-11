@@ -17,7 +17,8 @@
 # -adding zenity for more interactivity with the user
 # -better name for installer
 # -multiarch support
-# -git support
+# -git support (install,ssh keys)
+# -liteide git support ($HOME/liteide/share/liteide/litebuild/command/go.api)
 #
 
 clear
@@ -98,6 +99,10 @@ WelcomePageVisible=false
 \n[editor]
 family=Monaco
 fontsize=12" > $HOME/.config/liteide/liteide.ini.mini
+
+echo "Adding git support to liteide..."
+mv $HOME/liteide/share/liteide/litebuild/command/go.api $HOME/liteide/share/liteide/litebuild/command/go.api.bk
+echo -e "git commit -m \"-\" -a\ngit push -a\n" >$HOME/liteide/share/liteide/litebuild/command/go.api
 
 #Creating generic .desktop file on desktop
 echo "[Desktop Entry]
