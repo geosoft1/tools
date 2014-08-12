@@ -17,8 +17,7 @@
 # -adding zenity for more interactivity with the user
 # -better name for installer
 # -multiarch support
-# -git support (install,ssh keys)
-# -liteide git support ($HOME/liteide/share/liteide/litebuild/command/go.api)
+# +liteide git support ($HOME/liteide/share/liteide/litebuild/command/go.api)
 #
 
 clear
