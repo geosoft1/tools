@@ -118,7 +118,7 @@ ubuntu*)
    mkdir -p $HOME/.local/share/applications/
 
    #extend .desktop file with nice options
-   echo -e "\nActions=golang;http server;gopath;github;
+   echo -e "\nActions=golang;http server;gopath;
 \n[Desktop Action golang]
 Name=golang.org
 Exec=firefox golang.org/pkg %U
@@ -130,10 +130,6 @@ OnlyShowIn=Unity;
 \n[Desktop Action gopath]
 Name=\$GOPATH
 Exec=nautilus go-programs/src %U
-OnlyShowIn=Unity;
-\n[Desktop Action github]
-Name=github.com/$GITUSER
-Exec=firefox github.com/$GITUSER %U
 OnlyShowIn=Unity;" >> $HOME/Desktop/liteide.desktop
    #add .desktop file to dash and integrate with unity
    mv $HOME/Desktop/liteide.desktop $HOME/.local/share/applications
