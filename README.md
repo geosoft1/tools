@@ -1,6 +1,6 @@
-###tools -
+###tools
 ====
-**Install.sh** - installer for [golang](http://golang.org) compiler and [liteide](https://github.com/visualfc/liteide).
+**Install.sh** - [golang](http://golang.org) compiler and [liteide](https://github.com/visualfc/liteide) installer for Ubuntu.
 
 * **Features**
     * Get and install last versions of go compiler and ide
