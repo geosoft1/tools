@@ -51,20 +51,20 @@
         Git email [here put your email]
         Git server [ENTER for github.com]
         Enter file in which to save the key (/home/george/.ssh/id_rsa): 
-
+        **here you must see**
         Enter passphrase (empty for no passphrase): [here write a password for Github access]
         Enter same passphrase again: 
-
+        **or if you already generate keys**
         /home/george/.ssh/id_rsa already exists.
-        Overwrite (y/n)? n			                        # if you already generate keys just press n to skip this step
-
+        Overwrite (y/n)? n      #just press n to skip this step
+        
         Copy next key to github.com/settings/ssh and press any key   #if already do, just press ENTER
-
+        
         ssh-rsa AAAAB3NzaC1yc2EAAAADAQAB...
         Adb3OAeIrMqix7n3Yj189 ...@gmail.com
-
+        
         Checking the key...
-        Enter passphrase for key '/home/george/.ssh/id_rsa':         # enter the Github access password provided before
+        Enter passphrase for key '/home/george/.ssh/id_rsa':         # enter the Github password provided before
         Hi user! You've successfully authenticated, but GitHub does not provide shell access.
         Add git support to liteide...
         Create liteide.ini.mini
