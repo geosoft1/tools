@@ -82,6 +82,6 @@
 
     Replace PROJECT with your project name from Github to clone.
 	
-	Remember to use `` git add `` command only if a file is open in editor, otherwise the command will fail.
+	Remember to use commands only if a file from project is open in editor, otherwise the command will fail. Only git clone except the rule.
 
 
