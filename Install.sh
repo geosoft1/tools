@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# golang programming environment installer
+# golang programming environment installer for ubuntu
 # NOTE:
 # this project is third party. for support see http://golang.org and http://code.google.com/p/golangide/
 # author       : geosoft1@gmail.com
@@ -16,8 +16,6 @@
 # +shortcut for other desktop environments
 # -adding zenity for more interactivity with the user
 #wget http://storage.googleapis.com/golang/go1.3.1.linux-amd64.tar.gz 2>&1 | sed -u 's/.* \([0-9]%\)\ \+\([0-9.]\+.\) \(.*\)/\1\n# Downloading at \2\/s, ETA \3/' | zenity --progress --title="Downloading go1.3.1.linux-amd64.tar.gz" --auto-close --width="400" 
-# -better name for installer
-# -multiarch support
 # +liteide git support ($HOME/liteide/share/liteide/litebuild/command/go.api)
 #
 
