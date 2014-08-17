@@ -10,7 +10,7 @@
 # 07.08.2014   - start project, skeleton, tests (1.0.0.1).
 # 08.08.2014   - added $DESKTOP_SESSION,kernel name and 64bit support (1.0.0.2),eye candy (1.0.0.3).
 # 10.08.2014   - better integration with unity launcher bar. compact generated files (1.0.0.4).
-# 17.08.2014   - code optimization and experimental git support (2.0.0.1).
+# 17.08.2014   - experimental git support (2.0.0.1).
 #
 # TODO:
 # +some Unity2d improvements
@@ -33,12 +33,12 @@ if [[ $(uname -i) == "i386" ]]; then a="386"; else a="amd64"; fi
 k=$(uname -s | tr '[:upper:]' '[:lower:]')
 
 #build compiler name (e.g. go1.3.linux-386.tar.gz)
-name=${v}${k}-${a}.tar.gz
+n=${v}${k}-${a}.tar.gz
 
-echo "Download last compiler $name..."
-wget -Nq -P $HOME/Downloads http://golang.org/dl/$name --progress=bar:force 2>&1 | tail -f -n +8
+echo "Download last compiler $n..."
+wget -Nq -P $HOME/Downloads http://golang.org/dl/$n
 echo "Unpack..."
-tar -xf $HOME/Downloads/$name -C $HOME
+tar -xf $HOME/Downloads/$n -C $HOME
 
 #get last version of ide (e.g. X23.2)
 v=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/) | awk '{ if(match($0,/X[0-9]+.[0-9]+/)) print substr($0,RSTART,RLENGTH) }'`
@@ -47,12 +47,12 @@ v=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/) | awk '{ if(
 a=$(getconf LONG_BIT)
 
 #build ide name (e.g. liteidex23.2.linux-32.tar.bz2)
-name=liteidex${v:1}.${k}-${a}.tar.bz2
+n=liteidex${v:1}.${k}-${a}.tar.bz2
 
-echo "Download last ide $name..."
-wget -Nq -P $HOME/Downloads http://sourceforge.net/projects/liteide/files/${v}/$name
+echo "Download last ide $n..."
+wget -Nq -P $HOME/Downloads http://sourceforge.net/projects/liteide/files/${v}/$n
 echo "Unpack..."
-tar -xf $HOME/Downloads/$name -C $HOME
+tar -xf $HOME/Downloads/$n -C $HOME
 
 echo "Get Monaco font..."
 wget -Nq -P $HOME/.fonts http://usystem.googlecode.com/files/MONACO.TTF
@@ -90,7 +90,6 @@ echo "Checking the key..."
 ssh -o "StrictHostKeyChecking no" -T git@$GITSERVER
 #create $GITSERVER in $GOPATH
 mkdir -p $GOPATH/src/$GITSERVER/$GITUSER
-
 
 echo "Add git support to liteide..."
 echo -e "git clone git@$GITSERVER:$GITUSER/PROJECT.git $GOPATH/src/$GITSERVER/$GITUSER/PROJECT
