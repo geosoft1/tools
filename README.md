@@ -16,7 +16,18 @@
         chmod +x Install.sh
         ./Install.sh
 
-    Run periodicaly or if compiler/ide versions change to update the sistem. Projects are not affected if you overinstall.
+    Run periodicaly or if compiler/ide versions change to update the sistem.
+    Projects are not affected if you overinstall.
+
+* **Using git from liteide**
+
+    `` ctrl+` `` will provide a list of git commands
+
+        git add
+        git commit -m "-" -a
+        git push
+
+    Remember to use commands only if a file from project is open in editor, otherwise will fail.
 
 ====
 **Install2.sh** - more advanced installer (experimental)
@@ -32,9 +43,6 @@
     * Extend smart launcher with Github option
 
 * **Using**
-
-        chmod +x Install.sh
-        ./Install.sh
 
    Your installation shoud be like that
 
@@ -74,14 +82,10 @@
 
 * **Using git from liteide**
 
-    `` ctrl+` `` will provide a list of git commands
+    `` ctrl+` `` extend list of git commands
 
         git clone git@github.com:gituser/PROJECT.git /home/user/go-programs/src/github.com/gituser/PROJECT
-        git commit -m "-" -a
-        git push
 
     Replace PROJECT with your project name from Github to clone.
-	
-	Remember to use commands only if a file from project is open in editor, otherwise the command will fail. Only git clone except the rule.
 
 
