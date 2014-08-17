@@ -25,7 +25,7 @@
     * Install git
     * Configure git user and email
     * Generate ssh keys pair and connect to Github
-      a workaround prevent `[Permission denied (publickey)]`(https://help.github.com/articles/error-permission-denied-publickey)
+    * a workaround prevent `[Permission denied (publickey)]`(https://help.github.com/articles/error-permission-denied-publickey)
       so, you shoud not get this error
     * Add git server and user to $GOPATH
     * Extend liteide git support with **git clone** command
@@ -36,7 +36,7 @@
         chmod +x Install.sh
         ./Install.sh
 
-    Your installation shoud be like that
+   Your installation shoud be like that
 
         Download last compiler go1.3.linux-386.tar.gz...
         Unpack...
