@@ -81,5 +81,7 @@
         git push
 
     Replace PROJECT with your project name from Github to clone.
+	
+	Remember to use `` git add `` command only if a file is open in editor, otherwise the command will fail.
 
 
