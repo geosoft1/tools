@@ -15,7 +15,7 @@
 # +some Unity2d improvements
 # +shortcut for other desktop environments
 # -adding zenity for more interactivity with the user
-#wget http://storage.googleapis.com/golang/go1.3.1.linux-amd64.tar.gz 2>&1 | sed -u 's/.* \([0-9]%\)\ \+\([0-9.]\+.\) \(.*\)/\1\n# Downloading at \2\/s, ETA \3/' | zenity --progress --title="Downloading go1.3.1.linux-amd64.tar.gz" --auto-close --width="400" 
+# wget http://storage.googleapis.com/golang/go1.3.1.linux-amd64.tar.gz 2>&1 | sed -u 's/.* \([0-9]%\)\ \+\([0-9.]\+.\) \(.*\)/\1\n# Downloading at \2\/s, ETA \3/' | zenity --progress --title="Downloading go1.3.1.linux-amd64.tar.gz" --auto-close --width="400" 
 # +liteide git support ($HOME/liteide/share/liteide/litebuild/command/go.api)
 #
 
