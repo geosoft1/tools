@@ -1,6 +1,6 @@
 ###tools
 ====
-**Install.sh** - [golang](http://golang.org) compiler and [liteide](https://github.com/visualfc/liteide) installer for Ubuntu.
+**Install.sh** - [golang](http://golang.org) compiler and [liteide](https://github.com/visualfc/liteide) simple installer for Ubuntu.
 
 * **Features**
     * Get and install last versions of go compiler and ide
@@ -19,3 +19,69 @@
     Run periodicaly or if compiler/ide versions change to update the sistem. Projects are not affected if you overinstall.
 
 ====
+**Install2.sh** - more advanced installer (experimental)
+
+* **Features**
+    * Install git
+    * Configure git user and email
+    * Generate ssh keys pair and connect to Github
+      a workaround prevent `[Permission denied (publickey)]`(https://help.github.com/articles/error-permission-denied-publickey)
+      so, you shoud not get this error
+    * Add git server and user to $GOPATH
+    * Extend liteide git support with **git clone** command
+    * Extend smart launcher with Github option
+
+* **Using**
+
+        chmod +x Install.sh
+        ./Install.sh
+
+    Your installation shoud be like that
+
+        Download last compiler go1.3.linux-386.tar.gz...
+        Unpack...
+        Download last ide liteidex23.2.linux-32.tar.bz2...
+        Unpack...
+        Get Monaco font...
+        Create $GOPATH
+        Install git...
+        [sudo] password for user: 					here write your sudo password
+        Setup github
+        Git user  [here put your gihub user]
+        Git email [here put your email]
+        Git server [ENTER for github.com]
+        Enter file in which to save the key (/home/george/.ssh/id_rsa): 
+
+        Enter passphrase (empty for no passphrase): 			here write a password for Github access
+        Enter same passphrase again: 
+
+        /home/george/.ssh/id_rsa already exists.
+        Overwrite (y/n)? n						if you already generate keys just press n to skip this step
+
+        Copy next key to github.com/settings/ssh and press any key	copy key to Github and next press ENTER
+                                                                        do NOT press ENTER before otherwise folowing test will be fail
+                                                                        if already do, just press ENTER
+
+        ssh-rsa AAAAB3NzaC1yc2EAAAADAQAB...
+        Adb3OAeIrMqix7n3Yj189 ...@gmail.com
+
+        Checking the key...						# your key must by check so test connection to Github
+        Enter passphrase for key '/home/george/.ssh/id_rsa':            # enter the Github access password provided before
+        Hi user! You've successfully authenticated, but GitHub does not provide shell access.
+        Add git support to liteide...
+        Create liteide.ini.mini
+        Create smart launcher
+        Create HelloWorld program
+        Done.
+
+* **Using git from liteide**
+
+    `` ctrl+` `` will provide a list of git commands
+
+        git clone git@github.com:gituser/PROJECT.git /home/user/go-programs/src/github.com/gituser/PROJECT
+        git commit -m "-" -a
+        git push
+
+    Replace PROJECT with your project name from Github to clone.
+
+
