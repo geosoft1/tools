@@ -94,6 +94,7 @@ mkdir -p $GOPATH/src/$GITSERVER/$GITUSER
 
 echo "Add git support to liteide..."
 echo -e "git clone git@$GITSERVER:$GITUSER/PROJECT.git $GOPATH/src/$GITSERVER/$GITUSER/PROJECT
+git add
 git commit -m \"-\" -a
 git push" >$HOME/liteide/share/liteide/litebuild/command/go.api
 
