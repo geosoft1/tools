@@ -11,7 +11,7 @@
     * Add git support in ide on `` ctrl+` ``. Be sure you have configured [git](https://help.github.com/articles/set-up-git) before and proper [ssh keys](https://help.github.com/articles/generating-ssh-keys)
 * **Using**
 
-    Download anywhere, from your graphical interface make it executable and run with double click. If you prefer Terminal run next commands.
+    Download anywhere, from your graphical interface make it executable and run. If you prefer Terminal run next commands.
 
         chmod +x Install.sh
         ./Install.sh
