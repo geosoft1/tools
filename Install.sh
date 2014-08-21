@@ -5,18 +5,21 @@
 # this project is third party. for support see http://golang.org and http://code.google.com/p/golangide/
 # author       : geosoft1@gmail.com
 # license      : GPLv3
-# version      : 1.0.0.5
+# version      : 1.0.1.5
 #
 # 07.08.2014   - start project, skeleton, tests (1.0.0.1).
 # 08.08.2014   - added $DESKTOP_SESSION,kernel name and 64bit support (1.0.0.2),eye candy (1.0.0.3).
 # 10.08.2014   - better integration with unity launcher bar. compact generated files (1.0.0.4).
 # 17.08.2014   - code restructure (1.0.0.5).
+# 21.08.2014   - added xterm support, basicaly must run on any linux desktop distro (1.0.1.5)
 #
 # TODO:
 # +some Unity2d improvements
 # +shortcut for other desktop environments
 # +liteide git support ($HOME/liteide/share/liteide/litebuild/command/go.api)
 #
+
+if [ $TERM == "dumb" ]; then xterm -hold -e $0; fi
 
 clear
 

@@ -1,6 +1,6 @@
 ###tools
 ====
-**Install.sh** - [golang](http://golang.org) compiler and [liteide](https://github.com/visualfc/liteide) simple installer for Ubuntu.
+**Install.sh** - [golang](http://golang.org) compiler and [liteide](https://github.com/visualfc/liteide) simple installer for Linux.
 
 * **Features**
     * Get and install last versions of go compiler and ide
@@ -11,7 +11,7 @@
     * Add git support in ide on `` ctrl+` ``. Be sure you have configured [git](https://help.github.com/articles/set-up-git) before and proper [ssh keys](https://help.github.com/articles/generating-ssh-keys)
 * **Using**
 
-    Download anywhere, make it executable and run. If you want to watch the installation process run it in Terminal.
+    Download anywhere, from your graphical interface make it executable and run with double click. If you prefer Terminal run next commands.
 
         chmod +x Install.sh
         ./Install.sh
