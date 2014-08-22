@@ -187,13 +187,6 @@ OnlyShowIn=Unity;" >> $HOME/Desktop/liteide.desktop
    ;;
 esac
 
-echo "Create HelloWorld program"
-mkdir -p $GOPATH/src/HelloWorld
-echo -e "package main\n
-func main() {
-	println(\"Hello World!\")
-}" > $GOPATH/src/HelloWorld/main.go
-
 echo "Create some useful templates"
 TEMPL=$HOME/liteide/share/liteide/liteapp/template
 
@@ -239,17 +232,24 @@ echo -e "// \$ROOT\$ project main.go
 func main() {
 }" > $TEMPL/gogpl/main.go
 
+wget -Nq -O $TEMPL/gogpl/LICENSE http://www.gnu.org/licenses/gpl.txt
+touch $TEMPL/gogpl/CONTRIBUTORS
+echo -e "\$ROOT\$\n====" > $TEMPL/gogpl/README.md
+
 echo -e "[SETUP]
 NAME = \"Go1 GPL Project\"
+FILES = main.go LICENSE CONTRIBUTORS README.md
 AUTHOR = geosoft1
 INFO = new go1 gpl project
 TYPE = gopath
-FILES = main.go
 OPEN = main.go
 SCHEME=folder" > $TEMPL/gogpl/setup.inf
 
-wget -Nq -O $TEMPL/gogpl/LICENSE http://www.gnu.org/licenses/gpl.txt
-
-echo -e "\n====" > $TEMPL/gogpl/README.md
+echo "Create HelloWorld program"
+mkdir -p $GOPATH/src/HelloWorld
+echo -e "package main\n
+func main() {
+	println(\"Hello World!\")
+}" > $GOPATH/src/HelloWorld/main.go
 
 echo "Done."
