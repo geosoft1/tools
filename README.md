@@ -9,6 +9,7 @@
     * Also create a GOPATH to the go-programs directory and add a HelloWorld project
     * Add launcher to Unity with some useful functions on right-click. Other DE users have a shortcut on desktop
     * Add git support in ide on `` ctrl+` ``. Be sure you have configured [git](https://help.github.com/articles/set-up-git) before and proper [ssh keys](https://help.github.com/articles/generating-ssh-keys)
+    * Extend project templates with Simple Template and GPL Template
 * **Using**
 
     Download anywhere, from your graphical interface make it executable and run. If you prefer Terminal run next commands.
