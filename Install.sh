@@ -26,7 +26,7 @@
 #    21.08.2014 added xterm support, basicaly must run on any linux desktop distro (1.0.2.5)
 #    22.08.2014 (1.0.3.5) add project templates
 #               Go1 Simple Project -for golang startup,learning,kids
-#               Go1 GPL3 Project - for free programs with README,LICENSE,CONTRIBUTORS
+#               Go1 GPL Project - for free programs with README,LICENSE,CONTRIBUTORS
 #                   (acording to http://www.gnu.org/copyleft/gpl.html)
 #
 #    TODO:
