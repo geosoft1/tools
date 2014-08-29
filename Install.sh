@@ -85,7 +85,7 @@ GOPATH=$HOME/go-programs
 mkdir -p $GOPATH/src
 
 #----------------------------------------------------------------------------------
-#Add complete github suppport (experimetal,do not use or use carefully)
+#Add github suppport (experimental/testing,do not use yet or use carefully)
 
 #echo "Install git..."
 #sudo apt-get install git -y > /dev/null
