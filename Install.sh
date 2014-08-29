@@ -24,9 +24,10 @@
 #    10.08.2014 integration with unity launcher bar,Unity2d improvements (1.0.0.4).
 #    17.08.2014 shortcut for other desktop environments,liteide git support (1.0.1.5).
 #    21.08.2014 added xterm support, basicaly must run on any linux desktop distro (1.0.2.5)
-#    22.08.2014 (1.0.3.5)
-#               Go1 Simple Project -golang startup,learning,kids
-#               Go1 GPL3 Project -free programs,README,LICENSE (acording to http://www.gnu.org/copyleft/gpl.html)
+#    22.08.2014 (1.0.3.5) add project templates
+#               Go1 Simple Project -for golang startup,learning,kids
+#               Go1 GPL3 Project - for free programs with README,LICENSE,CONTRIBUTORS
+#                   (acording to http://www.gnu.org/copyleft/gpl.html)
 #
 #    TODO:
 #    +some Unity2d improvements
