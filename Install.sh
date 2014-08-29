@@ -32,6 +32,7 @@
 #    +some Unity2d improvements
 #    +shortcut for other desktop environments
 #    +liteide git support ($HOME/liteide/share/liteide/litebuild/command/go.api)
+#    -complete github support
 #
 
 if [ $TERM == "dumb" ]; then xterm -hold -e $0; fi
@@ -81,6 +82,45 @@ wget -Nq -P $HOME/.fonts http://usystem.googlecode.com/files/MONACO.TTF
 echo "Create \$GOPATH"
 GOPATH=$HOME/go-programs
 mkdir -p $GOPATH/src
+
+#----------------------------------------------------------------------------------
+#Add complete github suppport (experimetal,do not use or use carefully)
+
+#echo "Install git..."
+#sudo apt-get install git -y > /dev/null
+#echo "Setup github"
+#echo -n "Git user  ";read GITUSER
+#echo -n "Git email ";read EMAIL
+#echo -n "Git server [ENTER for github.com]"; read GITSERVER
+#if [ $GITSERVER=="" ]; then GITSERVER="github.com"; fi
+
+#create git configuration
+#echo -e "[user]
+#	name = $GITUSER
+#	email = $EMAIL" > $HOME/.gitconfig
+
+#KEY="rsa"
+##if [ ! -f $HOME/.ssh/id_$KEY ];
+##then
+#ssh-keygen -qt $KEY -C "$EMAIL"
+#echo "Copy next key to $GITSERVER/settings/ssh and press any key"
+#echo
+#cat $HOME/.ssh/id_$KEY.pub
+#read
+#bug workaround https://help.github.com/articles/error-permission-denied-publickey
+#eval `ssh-agent -s` > /dev/null
+#ssh-add ~/.ssh/id_rsa
+#echo "Checking the key..."
+#ssh -o "StrictHostKeyChecking no" -T git@$GITSERVER
+#create $GITSERVER in $GOPATH
+#mkdir -p $GOPATH/src/$GITSERVER/$GITUSER
+
+#echo "Add git support to liteide..."
+#echo -e "git clone git@$GITSERVER:$GITUSER/PROJECT.git $GOPATH/src/$GITSERVER/$GITUSER/PROJECT
+#git add
+#git commit -m \"-\" -a
+#git push" >$HOME/liteide/share/liteide/litebuild/command/go.api
+#----------------------------------------------------------------------------------
 
 echo "Add git support to liteide..."
 echo -e "git add

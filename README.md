@@ -4,7 +4,7 @@
 
 * **Features**
     * Get and install last versions of go compiler and ide
-    * Create a more practical layout for ide (liteide.ini.mini)
+    * Create a simple layout for ide (liteide.ini.mini)
     * Lot of gophers use Monaco font so add in ide
     * Also create a GOPATH to the go-programs directory and add a HelloWorld project
     * Add launcher to Unity with some useful functions on right-click. Other DE users have a shortcut on desktop
