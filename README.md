@@ -2,6 +2,9 @@
 ====
 **Install.sh** - [golang](http://golang.org) compiler and [liteide](https://github.com/visualfc/liteide) simple installer for Linux.
 
+NOTE:
+this project is third party. for support see http://golang.org and http://code.google.com/p/golangide/
+
 * **Features**
     * Get and install last versions of go compiler and ide
     * Create a simple layout for ide (liteide.ini.mini)
