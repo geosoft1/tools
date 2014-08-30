@@ -1,46 +1,26 @@
 #!/bin/bash
-#
-#    golang programming environment installer
-#    Copyright (C) 2014  geosoft1@gmail.com
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
-#
-#    You should have received a copy of the GNU General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#    NOTE:
-#    this project is third party. for support see http://golang.org and http://code.google.com/p/golangide/
+# golang programming environment installer
+# Copyright (C) 2014  geosoft1@gmail.com
 #
-#    07.08.2014 start project, skeleton, tests (1.0.0.1).
-#    08.08.2014 added $DESKTOP_SESSION,kernel name and 64bit support (1.0.0.2),eye candy (1.0.0.3).
-#    10.08.2014 integration with unity launcher bar,Unity2d improvements (1.0.0.4).
-#    17.08.2014 shortcut for other desktop environments,liteide git support (1.0.1.5).
-#    21.08.2014 added xterm support, basicaly must run on any linux desktop distro (1.0.2.5)
-#    22.08.2014 (1.0.3.5) add project templates
-#               Go1 Simple Project -for golang startup,learning,kids
-#               Go1 GPL Project - for free programs with README,LICENSE,CONTRIBUTORS
-#                   (acording to http://www.gnu.org/copyleft/gpl.html)
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
 #
-#    TODO:
-#    +some Unity2d improvements
-#    +shortcut for other desktop environments
-#    +liteide git support ($HOME/liteide/share/liteide/litebuild/command/go.api)
-#    -complete github support
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
 #
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 if [ $TERM == "dumb" ]; then xterm -hold -e $0; fi
 
 clear
 
-echo -e "golang programming environment installer  Copyright (C) 2014  geosoft1@gmail.com
+echo -e "Golang Programming Environment Installer  Copyright (C) 2014  geosoft1@gmail.com
 This program comes with ABSOLUTELY NO WARRANTY; for details type \`show w'.
 This is free software, and you are welcome to redistribute it
 under certain conditions; type \`show c' for details.
@@ -250,25 +230,24 @@ OPEN = main.go
 SCHEME=folder" > $TEMPL/gosimple/setup.inf
 
 #gpl template
-sed -i '1i gogpl' $TEMPL/project.sub
+sed -i '2i gogpl' $TEMPL/project.sub
 mkdir -p $TEMPL/gogpl
-echo -e "// \$ROOT\$ project main.go
+year=`date +"%Y"`
+echo -e "// <one line to give the program's name and a brief idea of what it does.> \$ROOT\$ project
+// Copyright (C) <$year>  <name of author>  $EMAIL
 //
-//    <one line to give the program's name and a brief idea of what it does.>
-//    Copyright (C) <year>  <name of author>
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
 //
-//    This program is free software: you can redistribute it and/or modify
-//    it under the terms of the GNU General Public License as published by
-//    the Free Software Foundation, either version 3 of the License, or
-//    (at your option) any later version.
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
 //
-//    This program is distributed in the hope that it will be useful,
-//    but WITHOUT ANY WARRANTY; without even the implied warranty of
-//    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-//    GNU General Public License for more details.
-//
-//    You should have received a copy of the GNU General Public License
-//    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
 \npackage main\n
 func main() {
 }" > $TEMPL/gogpl/main.go
