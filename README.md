@@ -2,10 +2,9 @@
 ====
 **Install.sh** - [golang](http://golang.org) compiler and [liteide](https://github.com/visualfc/liteide) simple installer for Linux.
 
-[![latest_release](https://cloud.githubusercontent.com/assets/6298396/4099028/fc8391ec-3045-11e4-8b67-9e27a15fe91d.png)](https://github.com/geosoft1/tools/releases/latest)
+This project is third party. For support see http://golang.org and http://code.google.com/p/golangide/
 
-NOTE:
-this project is third party. for support see http://golang.org and http://code.google.com/p/golangide/
+[![latest_release](https://cloud.githubusercontent.com/assets/6298396/4099028/fc8391ec-3045-11e4-8b67-9e27a15fe91d.png)](https://github.com/geosoft1/tools/releases/latest)
 
 * **Features**
     * Get and install last versions of go compiler and ide
