@@ -214,7 +214,7 @@ TEMPL=$HOME/liteide/share/liteide/liteapp/template
 #simple template
 sed -i '1i gosimple' $TEMPL/project.sub
 mkdir -p $TEMPL/gosimple
-echo -e "// \$ROOT\$ project main.go
+echo -e "// \$ROOT\$ project
 package main\n
 func main() {
 	println(\"Hello World!\")
