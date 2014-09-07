@@ -1,6 +1,6 @@
 ###tools
 ====
-**Install.sh** - [golang](http://golang.org) compiler and [liteide](https://github.com/visualfc/liteide) simple installer for Linux.
+**Install.sh** - [golang](http://golang.org) compiler and [liteide](https://github.com/visualfc/liteide) simple installer for Ubuntu.
 
 This project is third party. For support see http://golang.org and http://code.google.com/p/golangide/
 
