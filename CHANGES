@@ -7,9 +7,12 @@
            Go1 Simple Project -for golang startup,learning,kids
            Go1 GPL Project - for free programs with README,LICENSE,CONTRIBUTORS
                (acording to http://www.gnu.org/copyleft/gpl.html)
+05.09.2014 bugs corrections on Ubuntu 14.04 (1.0.3.1)
+           check network connection (1.0.3.2)
 
 TODO:
 +some Unity2d improvements
 +shortcut for other desktop environments
 +liteide git support ($HOME/liteide/share/liteide/litebuild/command/go.api)
 -complete github support
++check network connection

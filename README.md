@@ -23,6 +23,11 @@ This project is third party. For support see http://golang.org and http://code.g
 
     Run periodicaly or if compiler/ide versions change to update the sistem.
     Projects are not affected if you overinstall.
+    Tested on Ubuntu 12.04 and 14.04.
+	
+    **Note:** Ubuntu 14.04 need script execute activation so run from Terminal
+	
+        gsettings set org.gnome.nautilus.preferences executable-text-activation launch
 
 * **Using git from liteide**
 
@@ -35,4 +40,3 @@ This project is third party. For support see http://golang.org and http://code.g
     Remember to use commands only if a file from project is open in editor, otherwise will fail.
 
 ====
-
