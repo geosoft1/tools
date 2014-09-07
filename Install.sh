@@ -20,17 +20,32 @@ if [ $TERM == "dumb" ]; then xterm -hold -e $0; fi
 
 clear
 
-echo -e "Golang Programming Environment Installer  Copyright (C) 2014  geosoft1@gmail.com
-This program comes with ABSOLUTELY NO WARRANTY; for details type \`show w'.
-This is free software, and you are welcome to redistribute it
-under certain conditions; type \`show c' for details.
-"
+#echo -e "Golang Programming Environment Installer  Copyright (C) 2014  geosoft1@gmail.com
+#This program comes with ABSOLUTELY NO WARRANTY; for details type \`show w'.
+#This is free software, and you are welcome to redistribute it
+#under certain conditions; type \`show c' for details.
+#"
+
+echo -e "Golang Programming Environment Installer
+Copyright (C) 2014  geosoft1@gmail.com"
 
 #get last version of go compiler (e.g. go1.3)
 v=`echo $(wget -qO- golang.org) | awk '{ if (match($0,/go[1-9]+.[0-9]+./)) print substr($0,RSTART,RLENGTH) }'`
+#WORKAROUND: check network connection
+if [ -z "$v" ]; then
+   echo "No network connection"
+   #exit if no network connection otherwise the rest of install will fail 
+   exit
+fi
 
 #get host computer arch (e.g. i386|amd64)
-if [[ $(uname -i) == "i386" ]]; then a="386"; else a="amd64"; fi
+#if [[ $(uname -i) == "i386" ]]; then a="386"; else a="amd64"; fi
+#get host computer arch (e.g. i386,i686|amd64)
+case $(uname -i) in
+#WORKAROUND: Ubuntu 14.04 report i686
+i386|i686 ) a="386";;
+        * ) a="amd64"
+esac
 
 #get kernel name (e.g. linux|freebsd)
 k=$(uname -s | tr '[:upper:]' '[:lower:]')
@@ -182,20 +197,22 @@ OnlyShowIn=Unity;" >> $HOME/Desktop/liteide.desktop
    b=$(gsettings get com.canonical.Unity.Launcher favorites)
    #skip update if liteide launcher already exists
    if ! [[ $b =~ "liteide.desktop" ]]; then
-      #eye candy if is put after firefox or nautilus :)
-      if [[ $b =~ "firefox.desktop" ]]; then
+      #eye candy if is put after firefox :)
+      #if [[ $b =~ "firefox.desktop" ]]; then
          #check if firefox has a launcher and insert liteide after
-         b=${b/\'firefox.desktop\'/ \'firefox.desktop\', \'liteide.desktop\'}
-      elif [[ $b =~ "nautilus-home.desktop" ]]; then
+         #b=${b/\'*firefox.desktop\'/ \'firefox.desktop\', \'liteide.desktop\'}
+      #elif [[ $b =~ "nautilus-home.desktop" ]]; then
          #if someone does not use firefox, insert after home folder
-         b=${b/\'nautilus-home.desktop\'/ \'nautilus-home.desktop\', \'liteide.desktop\'}
-      else
+         #b=${b/\'nautilus-home.desktop\'/ \'nautilus-home.desktop\', \'liteide.desktop\'}
+      #else
          #otherwise, insert after all favorites
-         b=${b/]/, \'liteide.desktop\']}
-      fi
+      b=${b/]/, \'liteide.desktop\']}
+      #fi
+      #WORKAROUND: U14.04 unity need a short delay between get and set
+      sleep 1
       #update the launcher favorites list. in unity changes are shwown immediately.
       gsettings set com.canonical.Unity.Launcher favorites "$b"
-      #unity2d need restart to show last changes
+      #WORKAROUND: unity2d need restart to show last changes
       if [[ $DESKTOP_SESSION =~ "2d" ]]; then
          killall unity-2d-shell;
       fi
