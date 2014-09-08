@@ -31,7 +31,7 @@ Copyright (C) 2014  geosoft1@gmail.com"
 
 #get last version of go compiler (e.g. go1.3)
 v=`echo $(wget -qO- golang.org) | awk '{ if (match($0,/go[1-9]+.[0-9]+./)) print substr($0,RSTART,RLENGTH) }'`
-#WORKAROUND: check network connection
+#B0003 check network connection
 if [ -z "$v" ]; then
    echo "No network connection"
    #exit if no network connection otherwise the rest of install will fail 
@@ -42,7 +42,7 @@ fi
 #if [[ $(uname -i) == "i386" ]]; then a="386"; else a="amd64"; fi
 #get host computer arch (e.g. i386,i686|amd64)
 case $(uname -i) in
-#WORKAROUND: Ubuntu 14.04 report i686
+#B0002 Ubuntu 14.04 report i686
 i386|i686 ) a="386";;
         * ) a="amd64"
 esac
@@ -50,13 +50,19 @@ esac
 #get kernel name (e.g. linux|freebsd)
 k=$(uname -s | tr '[:upper:]' '[:lower:]')
 
+#B0005 get download directory
+#http://www.freedesktop.org/wiki/Software/xdg-user-dirs/
+test -f ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs && source ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs
+
 #build compiler name (e.g. go1.3.linux-386.tar.gz)
 n=${v}${k}-${a}.tar.gz
 
 echo "Download last compiler $n..."
-wget -Nq -P $HOME/Downloads http://golang.org/dl/$n
+#wget -Nq -P ${XDG_DOWNLOAD_DIR} http://golang.org/dl/$n
+#B0005 use https instead http in download link
+wget -Nq -P ${XDG_DOWNLOAD_DIR} https://storage.googleapis.com/golang/$n
 echo "Unpack..."
-tar -xf $HOME/Downloads/$n -C $HOME
+tar -xf ${XDG_DOWNLOAD_DIR}/$n -C $HOME
 
 #get last version of ide (e.g. X23.2)
 v=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/) | awk '{ if(match($0,/X[0-9]+.[0-9]+/)) print substr($0,RSTART,RLENGTH) }'`
@@ -68,9 +74,9 @@ a=$(getconf LONG_BIT)
 n=liteidex${v:1}.${k}-${a}.tar.bz2
 
 echo "Download last ide $n..."
-wget -Nq -P $HOME/Downloads http://sourceforge.net/projects/liteide/files/${v}/$n
+wget -Nq -P ${XDG_DOWNLOAD_DIR} http://sourceforge.net/projects/liteide/files/${v}/$n
 echo "Unpack..."
-tar -xf $HOME/Downloads/$n -C $HOME
+tar -xf ${XDG_DOWNLOAD_DIR}/$n -C $HOME
 
 echo "Get Monaco font..."
 wget -Nq -P $HOME/.fonts http://usystem.googlecode.com/files/MONACO.TTF
@@ -208,7 +214,7 @@ OnlyShowIn=Unity;" >> $HOME/Desktop/liteide.desktop
          #otherwise, insert after all favorites
       b=${b/]/, \'liteide.desktop\']}
       #fi
-      #WORKAROUND: U14.04 unity need a short delay between get and set
+      #B0001 U14.04 unity need a short delay between get and set
       sleep 1
       #update the launcher favorites list. in unity changes are shwown immediately.
       gsettings set com.canonical.Unity.Launcher favorites "$b"

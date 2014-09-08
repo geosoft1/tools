@@ -4,6 +4,8 @@
 
 This project is third party. For support see http://golang.org and http://code.google.com/p/golangide/
 
+Can also be found on [Twitter](https://twitter.com/GopherAcademy/status/508635840432861184)
+
 [![latest_release](https://cloud.githubusercontent.com/assets/6298396/4099028/fc8391ec-3045-11e4-8b67-9e27a15fe91d.png)](https://github.com/geosoft1/tools/releases/latest)
 
 * **Features**

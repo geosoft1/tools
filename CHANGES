@@ -1,18 +1,23 @@
 07.08.2014 start project, skeleton, tests (1.0.0.1).
-08.08.2014 added $DESKTOP_SESSION,kernel name and 64bit support (1.0.0.2),eye candy (1.0.0.3).
+08.08.2014 added DESKTOP_SESSION,kernel name and 64bit support (1.0.0.2),eye candy (1.0.0.3).
 10.08.2014 integration with unity launcher bar,Unity2d improvements (1.0.0.4).
 17.08.2014 shortcut for other desktop environments,liteide git support (1.0.1.5).
-21.08.2014 added xterm support, basicaly must run on any linux desktop distro (1.0.2.0)
+21.08.2014 added xterm support (1.0.2.0)
 22.08.2014 (1.0.3.0) add project templates
            Go1 Simple Project -for golang startup,learning,kids
            Go1 GPL Project - for free programs with README,LICENSE,CONTRIBUTORS
                (acording to http://www.gnu.org/copyleft/gpl.html)
-05.09.2014 bugs corrections on Ubuntu 14.04 (1.0.3.1)
-           check network connection (1.0.3.2)
+05.09.2014 #B0001,B0002 bugs corrections on Ubuntu 14.04 (1.0.3.1)
+           #B0003 check network connection (1.0.3.2)
+08.09.2014 (1.0.3.3)
+           #B0004 use https for go compiler download link thanks Andrew Gerand <nf@wh3rd.net>
+           #B0005 implement XDG_DOWNLOAD_DIR thanks Alin Andrei <andrew@webupd8.org>
 
 TODO:
 +some Unity2d improvements
 +shortcut for other desktop environments
 +liteide git support ($HOME/liteide/share/liteide/litebuild/command/go.api)
 -complete github support
-+check network connection
++check network 
+-run on any linux desktop distro
+-server version
