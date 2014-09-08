@@ -10,8 +10,8 @@
 05.09.2014 #B0001,B0002 bugs corrections on Ubuntu 14.04 (1.0.3.1)
            #B0003 check network connection (1.0.3.2)
 08.09.2014 (1.0.3.3)
-           #B0004 use https for go compiler download link thanks Andrew Gerrand <nf@wh3rd.net>
-           #B0005 implement XDG_DOWNLOAD_DIR thanks Alin Andrei <andrew@webupd8.org>
+           #B0004 use https for go compiler download link.thanks Andrew Gerrand <nf@wh3rd.net>
+           #B0005 implement XDG_DOWNLOAD_DIR.thanks Alin Andrei <andrew@webupd8.org>
 
 TODO:
 +some Unity2d improvements

@@ -4,8 +4,6 @@
 
 This project is third party. For support see http://golang.org and http://code.google.com/p/golangide/
 
-Can also be found on [Twitter](https://twitter.com/GopherAcademy/status/508635840432861184)
-
 [![latest_release](https://cloud.githubusercontent.com/assets/6298396/4099028/fc8391ec-3045-11e4-8b67-9e27a15fe91d.png)](https://github.com/geosoft1/tools/releases/latest)
 
 * **Features**
@@ -18,9 +16,8 @@ Can also be found on [Twitter](https://twitter.com/GopherAcademy/status/50863584
     * Extend project templates
 * **Using**
 
-    Download anywhere, from your graphical interface make it executable and run. If you prefer Terminal run next commands.
-
-        chmod +x Install.sh
+    Download anywhere and run from your file browser with double click. If you prefer Terminal go to the directory with the script and run
+	
         ./Install.sh
 
     Run periodicaly or if compiler/ide versions change to update the sistem.
