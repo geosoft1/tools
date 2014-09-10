@@ -26,7 +26,13 @@ This project is third party. For support see http://golang.org and http://code.g
 	
     **Note:** Ubuntu 14.04 need script execute activation so run from Terminal
 	
+	For Nautilus use:
+	
         gsettings set org.gnome.nautilus.preferences executable-text-activation launch
+		
+	For Nemo use:
+	
+	    gsettings set org.nemo.preferences executable-text-activation ask
 
 * **Using git from liteide**
 

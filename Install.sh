@@ -16,6 +16,9 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+#B0006
+set -e
+
 if [ $TERM == "dumb" ]; then xterm -hold -e $0; fi
 
 clear
@@ -39,10 +42,11 @@ fi
 #get host computer arch (e.g. i386|amd64)
 #if [[ $(uname -i) == "i386" ]]; then a="386"; else a="amd64"; fi
 #get host computer arch (e.g. i386,i686|amd64)
-case $(uname -i) in
+#B0007 uname -m instead -i
+case $(uname -m) in
 #B0002 Ubuntu 14.04 report i686
-i386|i686 ) a="386";;
-        * ) a="amd64"
+i686 ) a="386";;
+   * ) a="amd64"
 esac
 
 #get kernel name (e.g. linux|freebsd)
@@ -173,7 +177,7 @@ Comment=LiteIDE is a simple, open source, cross-platform Go IDE.
 Exec=sh -c 'cp .config/liteide/liteide.ini.mini .config/liteide/liteide.ini; eval \`ssh-agent -s\`; $HOME/liteide/bin/liteide'
 Icon=$GOROOT/doc/gopher/gophercolor.png
 Type=Application
-Categories=Network;" > $HOME/Desktop/liteide.desktop
+Categories=Network;" > ${XDG_DESKTOP_DIR}/liteide.desktop
 
 echo "Create smart launcher"
 case $DESKTOP_SESSION in
@@ -194,9 +198,9 @@ OnlyShowIn=Unity;
 \n[Desktop Action gopath]
 Name=\$GOPATH
 Exec=nautilus go-programs/src %U
-OnlyShowIn=Unity;" >> $HOME/Desktop/liteide.desktop
+OnlyShowIn=Unity;" >> ${XDG_DESKTOP_DIR}/liteide.desktop
    #add .desktop file to dash and integrate with unity
-   mv $HOME/Desktop/liteide.desktop $HOME/.local/share/applications
+   mv ${XDG_DESKTOP_DIR}/liteide.desktop $HOME/.local/share/applications
    #get the current launcher favorites list
    b=$(gsettings get com.canonical.Unity.Launcher favorites)
    #skip update if liteide launcher already exists
@@ -225,7 +229,8 @@ OnlyShowIn=Unity;" >> $HOME/Desktop/liteide.desktop
 #other desktop environments can be handled here
 *)
    #generic desktop environment have only a desktop shortcut
-   chmod +x $HOME/Desktop/liteide.desktop
+   #B0007
+   chmod +x ${XDG_DESKTOP_DIR}/liteide.desktop
    ;;
 esac
 

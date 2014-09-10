@@ -12,6 +12,8 @@
 08.09.2014 (1.0.3.3)
            #B0004 use https for go compiler download link.thanks Andrew Gerrand <nf@wh3rd.net>
            #B0005 implement XDG_DOWNLOAD_DIR.thanks Alin Andrei <andrew@webupd8.org>
+09.09.2014 #B0006 set -e, #B0007 uname -m. thanks Dave Cheney <dave@cheney.net>
+10.09.2014 #B0007 use XDG_DESKTOP_DIR. thanks Victolalm <http://blog.victoralm.com>
 
 TODO:
 +some Unity2d improvements
@@ -21,3 +23,6 @@ TODO:
 +check network 
 -run on any linux desktop distro
 -server version
+-better name, in fact a name
+ PROPOSAL: GoPEI (Go Programming Environment Installer)
+ It's also a kata of Shuri-ryu style (http://en.wikipedia.org/wiki/Shuri-ryu#Forms)
