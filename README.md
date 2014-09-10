@@ -39,16 +39,12 @@ This project is third party. For support see http://golang.org and http://code.g
 
 * **Using git from liteide**
 
-    `` ctrl+` `` will provide a list of git commands
+    `` ctrl+` `` will provide a list of git commands like
 
         git add
         git commit -m "-" -a
         git push
 
     Remember to use commands only if a file from project is open in editor, otherwise will fail.
-
-* **Known issues**
-
-    If you are connected on remote share through vpn and the tunel hang and you launch the installer the script will hang before installing of Monaco font. It's not a script problem but a gvfs problem. Logout and login will simply resolve the problem.
 
 ====

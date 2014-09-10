@@ -17,7 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #B0006
-set -e
+#set -e
 
 if [ $TERM == "dumb" ]; then xterm -hold -e $0; fi
 
