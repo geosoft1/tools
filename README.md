@@ -4,7 +4,9 @@
 
 This project is third party. For support see http://golang.org and http://code.google.com/p/golangide/
 
-[![latest_release](https://cloud.githubusercontent.com/assets/6298396/4099028/fc8391ec-3045-11e4-8b67-9e27a15fe91d.png)](https://github.com/geosoft1/tools/releases/latest)
+![screenshot from 2014-09-07 18 16 40](https://cloud.githubusercontent.com/assets/6298396/4178685/4460829c-36a2-11e4-9674-236082f70d03.png)
+
+[![latest_release](https://cloud.githubusercontent.com/assets/6298396/4099028/fc8391ec-3045-11e4-8b67-9e27a15fe91d.png)](https://github.com/geosoft1/tools/archive/master.zip)
 
 * **Features**
     * Get and install last versions of go compiler and ide
