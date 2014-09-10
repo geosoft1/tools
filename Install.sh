@@ -62,7 +62,10 @@ n=${v}${k}-${a}.tar.gz
 echo "Download last compiler $n..."
 #wget -Nq -P ${XDG_DOWNLOAD_DIR} http://golang.org/dl/$n
 #B0005 use https instead http in download link
-wget -Nq -P ${XDG_DOWNLOAD_DIR} https://storage.googleapis.com/golang/$n
+#WORKAROUND: old sistems like 10.04 need --no-check-certificate to avoid this
+#ERROR: certificate common name `*.googleusercontent.com' doesn't match requested host name `storage.googleapis.com'.
+#To connect to storage.googleapis.com insecurely, use `--no-check-certificate'.
+wget --no-check-certificate -Nq -P ${XDG_DOWNLOAD_DIR} https://storage.googleapis.com/golang/$n
 echo "Unpack..."
 tar -xf ${XDG_DOWNLOAD_DIR}/$n -C $HOME
 
