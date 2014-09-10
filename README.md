@@ -50,4 +50,5 @@ This project is third party. For support see http://golang.org and http://code.g
 * **Known issues**
 
     If you are connected on remote share through vpn and the tunel hang and you launch the installer the script will hang before installing of Monaco font. It's not a script problem but a gvfs problem. Logout and login will simply resolve the problem.
+
 ====
