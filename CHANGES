@@ -24,5 +24,7 @@ TODO:
 -run on any linux desktop distro
 -server version
 -better name, in fact a name
- PROPOSAL: GoPEI (Go Programming Environment Installer)
- It's also a kata of karate Shuri-ryu style (http://en.wikipedia.org/wiki/Shuri-ryu#Forms)
+ PROPOSAL: gopei.sh
+ GoPEI (Go Programming Environment Installer)
+ Gopei Sho it's also a kata of karate Shuri-ryu style
+     (http://en.wikipedia.org/wiki/Shuri-ryu#Forms)
