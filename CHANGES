@@ -24,9 +24,9 @@ TODO:
 -run on any linux desktop distro
 -server version
 -better name, in fact a name
- PROPOSAL: gopei.sh
+ PROPOSAL: gopei.sh (read it gopei shell)
  sense 1:GoPEI (Go Programming Environment Installer)
  sense 2:Gopei Sho it's also a black belt kata of karate Shuri-ryu style
      (http://en.wikipedia.org/wiki/Shuri-ryu#Forms)
-	 name and logo represent the idea of the program, power and elegance
+	 name and logo must represent the ideea of the program, power and elegance
 -check new versions of golang compilerand liteide at liteide start and updates
