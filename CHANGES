@@ -13,8 +13,8 @@
            #B0004 use https for go compiler download link.thanks Andrew Gerrand <nf@wh3rd.net>
            #B0005 implement XDG_DOWNLOAD_DIR.thanks Alin Andrei <andrew@webupd8.org>
 09.09.2014 #B0006 set -e, #B0007 uname -m. thanks Dave Cheney <dave@cheney.net>
-10.09.2014 #B0007 use XDG_DESKTOP_DIR. thanks Victoralm <http://blog.victoralm.com>
-01.10.2014 #B0008 match subversions bug
+10.09.2014 #B0008 use XDG_DESKTOP_DIR. thanks Victoralm <http://blog.victoralm.com>
+01.10.2014 #B0009 match subversions bug
 
 TODO:
 +some Unity2d improvements

@@ -31,7 +31,7 @@ echo -e "Golang Programming Environment Installer
 Copyright (C) 2014  geosoft1@gmail.com"
 
 #get last version of go compiler (e.g. go1.3.3)
-#B0008 match subversions bug
+#B0009 match subversions bug
 #v=`echo $(wget -qO- golang.org) | awk '{ if (match($0,/go[1-9]+.[0-9]+./)) print substr($0,RSTART,RLENGTH) }'`
 v=`echo $(wget -qO- golang.org) | awk '{ if (match($0,/go([0-9].)+/)) print substr($0,RSTART,RLENGTH) }'`
 
@@ -59,7 +59,7 @@ k=$(uname -s | tr '[:upper:]' '[:lower:]')
 #http://www.freedesktop.org/wiki/Software/xdg-user-dirs/
 test -f ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs && source ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs
 
-#build compiler name (e.g. go1.3.linux-386.tar.gz)
+#build compiler name (e.g. go1.3.3.linux-386.tar.gz)
 n=${v}${k}-${a}.tar.gz
 
 echo "Download last compiler $n..."
@@ -74,7 +74,7 @@ echo "Unpack..."
 tar -xf ${XDG_DOWNLOAD_DIR}/$n -C $HOME
 
 #get last version of ide (e.g. X23.2)
-#B0008 match subversions bug
+#B0009 match subversions bug
 #v=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/) | awk '{ if(match($0,/X[0-9]+.[0-9]+/)) print substr($0,RSTART,RLENGTH) }'`
 v=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/) | awk '{ if(match($0,/X([0-9]+.)+/)) print substr($0,RSTART,RLENGTH-1) }'`
 
@@ -239,7 +239,7 @@ OnlyShowIn=Unity;" >> ${XDG_DESKTOP_DIR}/liteide.desktop
 #other desktop environments can be handled here
 *)
    #generic desktop environment have only a desktop shortcut
-   #B0007
+   #B0008
    chmod +x ${XDG_DESKTOP_DIR}/liteide.desktop
    ;;
 esac
