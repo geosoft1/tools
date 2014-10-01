@@ -30,8 +30,11 @@ clear
 echo -e "Golang Programming Environment Installer
 Copyright (C) 2014  geosoft1@gmail.com"
 
-#get last version of go compiler (e.g. go1.3)
-v=`echo $(wget -qO- golang.org) | awk '{ if (match($0,/go[1-9]+.[0-9]+./)) print substr($0,RSTART,RLENGTH) }'`
+#get last version of go compiler (e.g. go1.3.3)
+#B0008 match subversions bug
+#v=`echo $(wget -qO- golang.org) | awk '{ if (match($0,/go[1-9]+.[0-9]+./)) print substr($0,RSTART,RLENGTH) }'`
+v=`echo $(wget -qO- golang.org) | awk '{ if (match($0,/go([0-9].)+/)) print substr($0,RSTART,RLENGTH) }'`
+
 #B0003 check network connection
 if [ -z "$v" ]; then
    echo "No network connection"
@@ -66,11 +69,14 @@ echo "Download last compiler $n..."
 #ERROR: certificate common name `*.googleusercontent.com' doesn't match requested host name `storage.googleapis.com'.
 #To connect to storage.googleapis.com insecurely, use `--no-check-certificate'.
 wget --no-check-certificate -Nq -P ${XDG_DOWNLOAD_DIR} https://storage.googleapis.com/golang/$n
+#rd -r go
 echo "Unpack..."
 tar -xf ${XDG_DOWNLOAD_DIR}/$n -C $HOME
 
 #get last version of ide (e.g. X23.2)
-v=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/) | awk '{ if(match($0,/X[0-9]+.[0-9]+/)) print substr($0,RSTART,RLENGTH) }'`
+#B0008 match subversions bug
+#v=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/) | awk '{ if(match($0,/X[0-9]+.[0-9]+/)) print substr($0,RSTART,RLENGTH) }'`
+v=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/) | awk '{ if(match($0,/X([0-9]+.)+/)) print substr($0,RSTART,RLENGTH-1) }'`
 
 #get host computer LONG_BIT (e.g 32|64)
 a=$(getconf LONG_BIT)
@@ -80,6 +86,7 @@ n=liteidex${v:1}.${k}-${a}.tar.bz2
 
 echo "Download last ide $n..."
 wget -Nq -P ${XDG_DOWNLOAD_DIR} http://sourceforge.net/projects/liteide/files/${v}/$n
+#rd -r liteide
 echo "Unpack..."
 tar -xf ${XDG_DOWNLOAD_DIR}/$n -C $HOME
 
