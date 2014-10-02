@@ -16,38 +16,37 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#B0006 set -e is good but script hang sometimes before install Monaco font
+#B0006
 #set -e
 
+#if dumb terminal (file browser) run xterm so basicaly the script must run on almost any distro
 if [ $TERM == "dumb" ]; then xterm -hold -e $0; fi
 
 clear
 
-#echo -e "Golang Programming Environment Installer  Copyright (C) 2014  geosoft1@gmail.com
+#echo -e "Golang Programming Environment Installer  Copyright (C) 2014 geosoft1@gmail.com
 #This program comes with ABSOLUTELY NO WARRANTY; for details type \`show w'.
 #This is free software, and you are welcome to redistribute it
 #under certain conditions; type \`show c' for details.#"
-echo -e "Golang Programming Environment Installer
-Copyright (C) 2014  geosoft1@gmail.com"
 
-#get last version of go compiler (e.g. go1.3.3)
-#B0009 match subversions bug
+echo -e "Golang Programming Environment Installer\nCopyright (C) 2014  geosoft1@gmail.com"
+
+#get last version of go compiler (e.g. go1.3.3.)
+#B0009
 #v=`echo $(wget -qO- golang.org) | awk '{ if (match($0,/go[1-9]+.[0-9]+./)) print substr($0,RSTART,RLENGTH) }'`
-v=`echo $(wget -qO- golang.org) | awk '{ if (match($0,/go([0-9].)+/)) print substr($0,RSTART,RLENGTH) }'`
+v=`echo $(wget -qO- golang.org) | awk '{ if (match($0,/go([0-9]+.)+/)) print substr($0,RSTART,RLENGTH) }'`
 
-#B0003 check network connection
+#B0003
 if [ -z "$v" ]; then
    echo "No network connection"
-   #exit if no network connection otherwise the rest of install will fail 
+   #exit if no network connection otherwise the rest will fail 
    exit
 fi
 
-#get host computer arch (e.g. i386|amd64)
+#get host computer arch (e.g. i686|amd64)
 #if [[ $(uname -i) == "i386" ]]; then a="386"; else a="amd64"; fi
-#get host computer arch (e.g. i386,i686|amd64)
-#B0007 uname -m instead -i
+#B0002,B0007
 case $(uname -m) in
-#B0002 Ubuntu 14.04 report i686
 i686 ) a="386";;
    * ) a="amd64"
 esac
@@ -55,8 +54,7 @@ esac
 #get kernel name (e.g. linux|freebsd)
 k=$(uname -s | tr '[:upper:]' '[:lower:]')
 
-#B0005 get download directory
-#http://www.freedesktop.org/wiki/Software/xdg-user-dirs/
+#B0005
 test -f ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs && source ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs
 
 #build compiler name (e.g. go1.3.3.linux-386.tar.gz)
@@ -64,17 +62,17 @@ n=${v}${k}-${a}.tar.gz
 
 echo "Download last compiler $n..."
 #wget -Nq -P ${XDG_DOWNLOAD_DIR} http://golang.org/dl/$n
-#B0005 use https instead http in download link
-#WORKAROUND: old sistems like 10.04 need --no-check-certificate to avoid this
+#B0004
 #ERROR: certificate common name `*.googleusercontent.com' doesn't match requested host name `storage.googleapis.com'.
 #To connect to storage.googleapis.com insecurely, use `--no-check-certificate'.
+#WORKAROUND: old sistems like 10.04 need --no-check-certificate to avoid this error
 wget --no-check-certificate -Nq -P ${XDG_DOWNLOAD_DIR} https://storage.googleapis.com/golang/$n
 #rd -r go
 echo "Unpack..."
 tar -xf ${XDG_DOWNLOAD_DIR}/$n -C $HOME
 
 #get last version of ide (e.g. X23.2)
-#B0009 match subversions bug
+#B0009
 #v=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/) | awk '{ if(match($0,/X[0-9]+.[0-9]+/)) print substr($0,RSTART,RLENGTH) }'`
 v=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/) | awk '{ if(match($0,/X([0-9]+.)+/)) print substr($0,RSTART,RLENGTH-1) }'`
 
@@ -128,18 +126,13 @@ mkdir -p $GOPATH/src
 #ssh -o "StrictHostKeyChecking no" -T git@$GITSERVER
 #create $GITSERVER in $GOPATH
 #mkdir -p $GOPATH/src/$GITSERVER/$GITUSER
-
-#echo "Add git support to liteide..."
-#echo -e "git clone git@$GITSERVER:$GITUSER/PROJECT.git $GOPATH/src/$GITSERVER/$GITUSER/PROJECT
-#git add
-#git commit -m \"-\" -a
-#git push" >$HOME/liteide/share/liteide/litebuild/command/go.api
 #----------------------------------------------------------------------------------
 
 echo "Add git support to liteide..."
 echo -e "git add
 git commit -m \"-\" -a
 git push" >$HOME/liteide/share/liteide/litebuild/command/go.api
+#echo -e "git clone git@$GITSERVER:$GITUSER/PROJECT.git $GOPATH/src/$GITSERVER/$GITUSER/PROJECT
 
 #create GOROOT
 GOROOT=$HOME/go
@@ -226,7 +219,7 @@ OnlyShowIn=Unity;" >> ${XDG_DESKTOP_DIR}/liteide.desktop
          #otherwise, insert after all favorites
       b=${b/]/, \'liteide.desktop\']}
       #fi
-      #B0001 U14.04 unity need a short delay between get and set
+      #B0001
       sleep 1
       #update the launcher favorites list. in unity changes are shwown immediately.
       gsettings set com.canonical.Unity.Launcher favorites "$b"
