@@ -47,4 +47,5 @@ This project is third party. For support see http://golang.org and http://code.g
 
     Remember to use commands only if a file from project is open in editor, otherwise will fail.
 
+Important! If you update to new version of go compiler some programs dependencies like sql driver **must** be get and compiled again. Do Build->Get in LiteIDE if your program doesn'n compile.'
 ====
