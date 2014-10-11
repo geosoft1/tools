@@ -169,7 +169,8 @@ Language=en_US
 WelcomePageVisible=false
 \n[editor]
 family=Monaco
-fontsize=12" > $HOME/.config/liteide/liteide.ini.mini
+fontsize=12
+fontzoom=100" > $HOME/.config/liteide/liteide.ini.mini
 
 #create generic .desktop file on desktop
 echo -e "[Desktop Entry]
@@ -246,7 +247,6 @@ mkdir -p $TEMPL/gosimple
 echo -e "// \$ROOT\$ project
 package main\n
 func main() {
-	println(\"Hello World!\")
 }" > $TEMPL/gosimple/main.go
 
 echo -e "[SETUP]
