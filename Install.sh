@@ -91,9 +91,14 @@ tar -xf ${XDG_DOWNLOAD_DIR}/$n -C $HOME
 echo "Get Monaco font..."
 wget -Nq -P $HOME/.fonts http://usystem.googlecode.com/files/MONACO.TTF
 
-echo "Create \$GOPATH"
-GOPATH=$HOME/go-programs
-mkdir -p $GOPATH/src
+# don't create a gopath if its all ready set
+if [ -z "$GOPATH" ]
+ 	then
+	echo "Create \$GOPATH"
+ 	GOPATH=$HOME/go-programs
+	mkdir -p $GOPATH/src
+fi
+
 
 #----------------------------------------------------------------------------------
 #Add github suppport (experimental/testing,do not use yet or use carefully)
