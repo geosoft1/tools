@@ -20,7 +20,7 @@
 10.09.2014 #B0008 use XDG_DESKTOP_DIR. thanks Victoralm <http://blog.victoralm.com>
 02.10.2014 bugs corrections (1.0.3.4)
            #B0009 corrected regular expression to match subversions
-
+		
 TODO:
 +some Unity2d improvements
 +shortcut for other desktop environments (partial implemented)
@@ -37,3 +37,4 @@ TODO:
 	 name and logo must represent the ideea of the program, power and elegance
 -check new versions of golang compiler and liteide at liteide start and ask for update
 -archiving project
+-Liteide don't start on Kubuntu (https://github.com/visualfc/liteide/issues/243)
