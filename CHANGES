@@ -21,8 +21,9 @@
 02.10.2014 bugs corrections (1.0.3.4)
            #B0009 corrected regular expression to match subversions
 01.12.2014 #B0010 wrong escaped characters in window geometry (1.0.3.5)
-           add startup in window mode or fullscreen when create liteide.ini.mini
-           set properly FULLSCREEN value for this
+           add config parameters
+		   FULLSCREEN startup liteide in window mode or fullscreen
+		   HELLOWORLD create HelloWorld program
 
 TODO:
 +some Unity2d improvements

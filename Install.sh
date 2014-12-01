@@ -21,6 +21,11 @@
 #	FULLSCREEN=yes for fullscreen mode
 FULLSCREEN=yes
 
+#set if you don't want HelloWorld program. usefull in reinstalatons.
+#	HELLOWORLD=no
+#	HELLOWORLD=yes
+HELLOWORLD=yes
+
 #B0006
 #set -e
 
@@ -313,11 +318,14 @@ TYPE = gopath
 OPEN = main.go
 SCHEME=folder" > $TEMPL/gogpl/setup.inf
 
+if [ $HELLOWORLD == yes ]
+then
 echo "Create HelloWorld program"
 mkdir -p $GOPATH/src/HelloWorld
 echo -e "package main\n
 func main() {
 	println(\"Hello World!\")
 }" > $GOPATH/src/HelloWorld/main.go
+fi
 
 echo "Done."
