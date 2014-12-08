@@ -8,7 +8,7 @@ This project is third party. For support see http://golang.org and http://code.g
 
 [![latest_release](https://cloud.githubusercontent.com/assets/6298396/4099028/fc8391ec-3045-11e4-8b67-9e27a15fe91d.png)](https://github.com/geosoft1/tools/archive/master.zip)
 
-**Note** Starting with liteidex25 you must use at least release 1.0.3.5.
+**Note:** Starting with liteidex25 you must use at least release 1.0.3.5.
 
 * **Features**
     * Get and install last versions of go compiler and ide
