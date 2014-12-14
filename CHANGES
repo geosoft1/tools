@@ -29,6 +29,9 @@ http://sourceforge.net/error-404.html?project=liteide
 The sourceforge.net website is temporarily in static offline mode.
 Only a very limited set of project pages are available until the main website returns to service.
 
+TEST REPORT:
+DATE			GO	LITEIDE		RESULT		RELEASE
+14.12.2014	1.4	25.1			ok			1.0.3.5
 
 TODO:
 +some Unity2d improvements
