@@ -29,6 +29,7 @@ http://sourceforge.net/error-404.html?project=liteide
 The sourceforge.net website is temporarily in static offline mode.
 Only a very limited set of project pages are available until the main website returns to service.
 20.12.2014 #B0012 setup GOROOT and PATH in /home/george/liteide/share/liteide/liteenv/sistem.env
+           fix: proper LiteIDE support link, thanks Dobrosław Żybort
 
 TEST REPORT:
 DATE         RELEASE    GO   LITEIDE   RESULT  BUGS
