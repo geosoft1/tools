@@ -191,6 +191,9 @@ Icon=$GOROOT/doc/gopher/gophercolor.png
 Type=Application
 Categories=Network;" > ${XDG_DESKTOP_DIR}/liteide.desktop
 
+#B0012
+echo -e 'GOROOT=$HOME/go\nPATH=$PATH:$GOROOT/bin' >> $HOME/liteide/share/liteide/liteenv/system.env
+
 echo "Create smart launcher"
 case $DESKTOP_SESSION in
 ubuntu*)
