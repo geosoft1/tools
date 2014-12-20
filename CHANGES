@@ -31,8 +31,9 @@ Only a very limited set of project pages are available until the main website re
 20.12.2014 #B0012 setup GOROOT and PATH in /home/george/liteide/share/liteide/liteenv/sistem.env
 
 TEST REPORT:
-DATE         RELEASE    GO   LITEIDE   RESULT
+DATE         RELEASE    GO   LITEIDE   RESULT  BUGS
 14.12.2014   1.0.3.5   1.4      25.1       ok
+20.12.2014   1.0.3.5   1.4      25.2       ok  #B0012
 
 TODO:
 +some Unity2d improvements
