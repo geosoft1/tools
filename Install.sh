@@ -92,6 +92,10 @@ echo "Create \$GOPATH"
 GOPATH=$HOME/go-programs
 mkdir -p $GOPATH/src
 
+#create GOROOT
+GOROOT=$HOME/go
+
+echo "Add git support to liteide..."
 #----------------------------------------------------------------------------------
 #Add github suppport (experimental/testing,do not use yet or use carefully)
 
@@ -124,15 +128,9 @@ mkdir -p $GOPATH/src
 #create $GITSERVER in $GOPATH
 #mkdir -p $GOPATH/src/$GITSERVER/$GITUSER
 #----------------------------------------------------------------------------------
-
-echo "Add git support to liteide..."
 echo -e "git add
 git commit -m \"-\" -a
 git push" >$HOME/liteide/share/liteide/litebuild/command/go.api
-#git clone git@$GITSERVER:$GITUSER/PROJECT.git $GOPATH/src/$GITSERVER/$GITUSER/PROJECT
-
-#create GOROOT
-GOROOT=$HOME/go
 
 echo "Create liteide.ini.mini"
 #create directory for liteide.ini.mini
@@ -171,7 +169,6 @@ WelcomePageVisible=false
 family=Monaco
 fontsize=12
 fontzoom=100" >> $HOME/.config/liteide/liteide.ini.mini
-
 
 #create generic .desktop file on desktop
 echo -e "[Desktop Entry]
