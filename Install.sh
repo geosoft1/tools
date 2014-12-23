@@ -213,15 +213,6 @@ OnlyShowIn=Unity;" >> ${XDG_DESKTOP_DIR}/liteide.desktop
    b=$(gsettings get com.canonical.Unity.Launcher favorites)
    #skip update if liteide launcher already exists
    if ! [[ $b =~ "liteide.desktop" ]]; then
-      #eye candy if is put after firefox :)
-      #if [[ $b =~ "firefox.desktop" ]]; then
-         #check if firefox has a launcher and insert liteide after
-         #b=${b/\'*firefox.desktop\'/ \'firefox.desktop\', \'liteide.desktop\'}
-      #elif [[ $b =~ "nautilus-home.desktop" ]]; then
-         #if someone does not use firefox, insert after home folder
-         #b=${b/\'nautilus-home.desktop\'/ \'nautilus-home.desktop\', \'liteide.desktop\'}
-      #else
-         #otherwise, insert after all favorites
       b=${b/]/, \'liteide.desktop\']}
       #B0001
       sleep 1
