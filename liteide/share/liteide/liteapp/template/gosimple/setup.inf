@@ -1,8 +1,0 @@
-[SETUP]
-NAME = "Go1 Simple Project"
-AUTHOR = geosoft1
-INFO = new go1 simple project
-TYPE = gopath
-FILES = main.go
-OPEN = main.go
-SCHEME=folder
