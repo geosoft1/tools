@@ -223,7 +223,6 @@ OnlyShowIn=Unity;" >> ${XDG_DESKTOP_DIR}/liteide.desktop
       #else
          #otherwise, insert after all favorites
       b=${b/]/, \'liteide.desktop\']}
-      #fi
       #B0001
       sleep 1
       #update the launcher favorites list. in unity changes are shwown immediately.
