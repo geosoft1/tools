@@ -52,3 +52,5 @@ TODO:
 -check new versions of golang compiler and liteide at liteide start and ask for update
 -archiving project
 -liteide don't start on Kubuntu (https://github.com/visualfc/liteide/issues/243)
+-liteide.ini.mini become hard to maintain inside the script. get it from github.com
+echo -e $(wget -qO- https://raw.githubusercontent.com/geosoft1/tools/master/liteide.ini.mini) | sed -e "s#\$HOME#$HOME#g; s#\$GOPATH#$GOPATH#g"
