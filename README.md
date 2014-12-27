@@ -46,8 +46,10 @@ This project is third party. For support see http://golang.org and https://githu
         git add
         git commit -m "-" -a
         git push
+        
+        clone githubusername/projectname (e.g. clone geosoft1/tools)
 
-    Remember to use commands only if a file from project is open in editor, otherwise will fail.
+    Remember to use commands only if a file from project is open in editor, otherwise will fail. Except aliases and scripts from this rule (e.g. clone command).
 
 **Important!**
 
