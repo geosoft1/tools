@@ -131,6 +131,10 @@ echo "Add git support to liteide..."
 echo -e "git add
 git commit -m \"-\" -a
 git push" >$HOME/liteide/share/liteide/litebuild/command/go.api
+#git clone support
+echo '#!/bin/bash
+git clone git@github.com:$1.git '$GOPATH'/src/github.com/$1' > $HOME/liteide/bin/clone
+chmod +x $HOME/liteide/bin/clone
 
 #liteide.ini.mini become hard to maintain inside the script. get it from github.com
 #echo -e $(wget -qO- https://raw.githubusercontent.com/geosoft1/tools/master/liteide.ini.mini) | sed -e "s#\$HOME#$HOME#g; s#\$GOPATH#$GOPATH#g"
