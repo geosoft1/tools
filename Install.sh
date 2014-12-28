@@ -130,9 +130,14 @@ echo "Add git support to liteide..."
 #----------------------------------------------------------------------------------
 echo -e "git add
 git commit -m \"-\" -a
-git push" >$HOME/liteide/share/liteide/litebuild/command/go.api
-#git clone support
+git push
+clone" >$HOME/liteide/share/liteide/litebuild/command/go.api
+#implement git clone support
 echo '#!/bin/bash
+if [ -z $1 ]; then
+        echo "Use: clone githubusername/projectname"
+        exit
+fi
 git clone git@github.com:$1.git '$GOPATH'/src/github.com/$1' > $HOME/liteide/bin/clone
 chmod +x $HOME/liteide/bin/clone
 
