@@ -25,6 +25,10 @@ This project is third party. For support see http://golang.org and https://githu
 	
         ./Install.sh
 
+    To uninstall use
+
+        ./Install.sh -u
+
     Run periodicaly or if compiler/ide versions change to update the sistem.
     Projects are not affected if you overinstall.
     Tested on Ubuntu 12.04 and 14.04.
