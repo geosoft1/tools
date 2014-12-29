@@ -31,7 +31,7 @@ Only a very limited set of project pages are available until the main website re
            fix: proper LiteIDE support link, thanks Dobrosław Żybort
 27.12.2014 add git clone support (1.0.3.6)
 29.12.2014 (1.0.3.7) add uninstall option -u.
-           liteide.ini.mini become hard to maintain inside the script. get it from github.com.
+           liteide.ini.mini become hard to maintain inside the script. get it from github.
 
 
 TEST REPORT:

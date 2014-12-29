@@ -25,7 +25,7 @@ This project is third party. For support see http://golang.org and https://githu
 	
         ./Install.sh
 
-    To uninstall use
+    To uninstall use:
 
         ./Install.sh -u
 
