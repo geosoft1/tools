@@ -6,7 +6,8 @@ This project is third party. For support see http://golang.org and https://githu
 
 ![screenshot from 2014-09-07 18 16 40](https://cloud.githubusercontent.com/assets/6298396/4178685/4460829c-36a2-11e4-9674-236082f70d03.png)
 
-[![latest_release](https://cloud.githubusercontent.com/assets/6298396/4099028/fc8391ec-3045-11e4-8b67-9e27a15fe91d.png)](https://github.com/geosoft1/tools/archive/master.zip)
+[![last-version-blue](https://cloud.githubusercontent.com/assets/6298396/5602522/8967405e-935b-11e4-8777-de3623ed6ad7.png)](https://github.com/geosoft1/tools/archive/master.zip)
+[![last-release-green](https://cloud.githubusercontent.com/assets/6298396/5602520/83eb3f72-935b-11e4-9fc0-296506ca5c9a.png)](https://github.com/geosoft1/tools/releases/latest)
 
 **Note:** Starting with liteidex25 you must use at least release 1.0.3.5.
 
