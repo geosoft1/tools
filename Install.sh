@@ -32,6 +32,12 @@ if [ "$1" == "-u" ]; then
    rm -rf $HOME/.local/share/applications/liteide.desktop
    rm -rf $HOME/.config/liteide/
    rm -rf $HOME/.fonts/MONACO.TTF
+
+   #ugly! must rewrite sometime
+   sed --in-place '/export GOROOT=$HOME\/go/d' $HOME/.bashrc
+   sed --in-place '/export PATH=$PATH:$GOROOT\/bin/d' $HOME/.bashrc
+   sed --in-place '/export GOPATH=$HOME\/go-programs/d' $HOME/.bashrc
+
    echo "Uninstalled."
    exit
 fi
@@ -277,5 +283,11 @@ echo -e "package main\n
 func main() {
 	println(\"Hello World!\")
 }" > $GOPATH/src/HelloWorld/main.go
+
+#B0013, add GOPATH,GOROOT to PATH but in $HOME/.bashrc to avoid root rights.
+#ugly! must rewrite sometime
+grep -q 'export GOROOT=$HOME\/go' $HOME/.bashrc || sed -i '$ a\export GOROOT=$HOME\/go' $HOME/.bashrc
+grep -q 'export PATH=$PATH:$GOROOT\/bin' $HOME/.bashrc || sed -i '$ a\export PATH=$PATH:$GOROOT\/bin' $HOME/.bashrc
+grep -q 'export GOPATH=$HOME\/go-programs' $HOME/.bashrc || sed -i '$ a\export GOPATH=$HOME\/go-programs' $HOME/.bashrc
 
 echo "Done."

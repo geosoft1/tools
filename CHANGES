@@ -32,7 +32,9 @@ Only a very limited set of project pages are available until the main website re
 27.12.2014 add git clone support (1.0.3.6)
 29.12.2014 (1.0.3.7) add uninstall option -u.
            liteide.ini.mini become hard to maintain inside the script. get it from github.
-
+21.01.2015 (1.0.3.8)
+           #B0013 add GOPATH,GOROOT to PATH to use go compiler from terminal
+           thanks <github.com/davidhtims> and <github.com/pavesi>
 
 TEST REPORT:
 DATE         RELEASE    GO   LITEIDE   RESULT  BUGS
