@@ -6,6 +6,6 @@ Using go from Terminal
          go install
          ~/go-programs/bin/HelloWorld
 
-If program have dependecies do go get command
+If program have dependecies do go get command before go build
 
          go get github.com/user/repo
