@@ -24,11 +24,11 @@ This project is third party. For support see http://golang.org and https://githu
 
     Download anywhere and run from your file browser with double click. If you prefer Terminal go to the directory with the script and run
 	
-        ./install.sh
+        ./Install.sh
 
     To uninstall use:
 
-        ./install.sh -u
+        ./Install.sh -u
 
     Run periodicaly or if compiler/ide versions change to update the sistem.
     Projects are not affected if you overinstall.
