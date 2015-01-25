@@ -18,23 +18,23 @@ This project is third party. For support see http://golang.org and https://githu
     * Also create a GOPATH to the go-programs directory and add a HelloWorld project
     * Add launcher to Unity with some useful functions on right-click. Other DE users have a shortcut on desktop
     * Add git support in ide on `` ctrl+` ``. Be sure you have configured [git](https://help.github.com/articles/set-up-git) before and proper [ssh keys](https://help.github.com/articles/generating-ssh-keys)
-    * Extend project templates `` ctrl+n `` with **Go1 Simple Project** and **Go1 GPL Project**
+    * Extend project templates with **Go1 Simple Project** and **Go1 GPL Project**
 	
 * **Using**
 
     Download anywhere and run from your file browser with double click. If you prefer Terminal go to the directory with the script and run
 	
-        ./Install.sh
+        ./install.sh
 
     To uninstall use:
 
-        ./Install.sh -u
+        ./install.sh -u
 
     Run periodicaly or if compiler/ide versions change to update the sistem.
     Projects are not affected if you overinstall.
-    Tested on Ubuntu 12.04 and 14.04.
+    Tested on Ubuntu 12.04,14.04,14.10.
 	
-    **Note:** Ubuntu 14.04 need script execute activation so run from Terminal
+    **Note:** Ubuntu 14.04+ need script execute activation so run from Terminal
 	
 	For Nautilus use:
 	
@@ -58,6 +58,6 @@ This project is third party. For support see http://golang.org and https://githu
 
 **Important!**
 
-If you update to new version of go compiler some programs dependencies like sql driver **must** be get and compiled again. Do Build->Get in LiteIDE if your program doesn't compile.
+If you update to new version of go compiler some programs dependencies like sql driver **must** be get and compiled again. Do Build|Get in LiteIDE if your program doesn't compile.
 	
 ====

@@ -35,12 +35,14 @@ Only a very limited set of project pages are available until the main website re
 21.01.2015 (1.0.3.8)
            #B0013 add GOPATH,GOROOT to PATH to use go compiler from terminal
            thanks <github.com/davidhtims> and <github.com/pavesi>
+25.01.2014 add help on -h switch
 
 TEST REPORT:
 DATE         RELEASE    GO   LITEIDE   RESULT  BUGS
 14.12.2014   1.0.3.5   1.4      25.1       ok
 20.12.2014   1.0.3.5   1.4      25.2       ok  #B0012
 26.12.2014   1.0.3.5   1.4        26       ok
+21.01.2015   1.0.3.8   1.4.1      26       ok
 
 TODO:
 +some Unity2d improvements
@@ -55,9 +57,9 @@ TODO:
  sense 1:GoPEI (Go Programming Environment Installer)
  sense 2:Gopei Sho it's also a black belt kata of karate Shuri-ryu style
      (http://en.wikipedia.org/wiki/Shuri-ryu#Forms)
-	 name and logo must represent the ideea of the program, power and elegance
+     + name and logo must represent the ideea of the program, power and elegance
 -check new versions of golang compiler and liteide at liteide start and ask for update
--archiving project
+-archiving projects and backup
 -liteide don't start on Kubuntu (https://github.com/visualfc/liteide/issues/243)
 -add chrome application mode on launcher
      (google-chrome --app=http://localhost:8080)
