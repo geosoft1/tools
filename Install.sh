@@ -192,18 +192,22 @@ ubuntu*)
    mkdir -p $HOME/.local/share/applications/
 
    #extend .desktop file with nice options
-   echo -e "\nActions=golang;http server;gopath;
+   echo -e "\nActions=golang;http;app;gopath;
 \n[Desktop Action golang]
 Name=golang.org
 Exec=firefox golang.org/pkg %U
 OnlyShowIn=Unity;
-\n[Desktop Action http server]
+\n[Desktop Action http]
 Name=HTTP server (localhost:8080)
 Exec=firefox localhost:8080
 OnlyShowIn=Unity;
 \n[Desktop Action gopath]
 Name=\$GOPATH
 Exec=nautilus go-programs/src %U
+OnlyShowIn=Unity;
+\n[Desktop Action app]
+Name=--app=http://localhost:8080
+Exec=google-chrome --app=http://localhost:8080
 OnlyShowIn=Unity;" >> ${XDG_DESKTOP_DIR}/liteide.desktop
    #add .desktop file to dash and integrate with unity
    mv ${XDG_DESKTOP_DIR}/liteide.desktop $HOME/.local/share/applications

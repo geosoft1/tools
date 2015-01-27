@@ -35,7 +35,8 @@ Only a very limited set of project pages are available until the main website re
 21.01.2015 (1.0.3.8)
            #B0013 add GOPATH,GOROOT to PATH to use go compiler from terminal
            thanks <github.com/davidhtims> and <github.com/pavesi>
-25.01.2014 add help on -h switch
+25.01.2015 add help on -h switch
+25.01.2015 add google-chrome application mode on launcher :)
 
 TEST REPORT:
 DATE         RELEASE    GO   LITEIDE   RESULT  BUGS
@@ -61,6 +62,6 @@ TODO:
 -check new versions of golang compiler and liteide at liteide start and ask for update
 -archiving projects and backup
 -liteide don't start on Kubuntu (https://github.com/visualfc/liteide/issues/243)
--add chrome application mode on launcher
++add chrome application mode on launcher
      (google-chrome --app=http://localhost:8080)
 -add github account on launcher
