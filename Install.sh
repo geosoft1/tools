@@ -17,7 +17,7 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #B0006
-#set -e
+set -e
 
 #if dumb terminal (file browser) run xterm
 if [ $TERM == "dumb" ]; then xterm -hold -e $0; fi
@@ -26,30 +26,29 @@ clear
 
 echo -e "Golang Programming Environment Installer\nCopyright (C) 2014  geosoft1@gmail.com"
 
-if [ "$1" == "-h" ]; then
+case $1 in
+-h|--help)
    echo "Usage: install [options]"
    echo ""
    echo "Options:"
-   echo "-h         show this help message and exit"
-   echo "-u         unistall"
+   echo "-h, --help         show this help message and exit"
+   echo "-u, --uninstall    unistall"
    exit
-fi
-
-if [ "$1" == "-u" ]; then
+   ;;
+-u|--uninstall)
    rm -rf $HOME/liteide/
    rm -rf $HOME/go/
    rm -rf $HOME/.local/share/applications/liteide.desktop
    rm -rf $HOME/.config/liteide/
    rm -rf $HOME/.fonts/MONACO.TTF
-
    #ugly! must rewrite sometime
    sed --in-place '/export GOROOT=$HOME\/go/d' $HOME/.bashrc
    sed --in-place '/export PATH=$PATH:$GOROOT\/bin/d' $HOME/.bashrc
    sed --in-place '/export GOPATH=$HOME\/go-programs/d' $HOME/.bashrc
-
    echo "Uninstalled."
    exit
-fi
+   ;;
+esac
 
 #get last version of go compiler (e.g. go1.3.3.)
 #B0009
@@ -83,7 +82,7 @@ echo "Download last compiler $n..."
 #To connect to storage.googleapis.com insecurely, use `--no-check-certificate'.
 #WORKAROUND: old sistems like 10.04 need --no-check-certificate to avoid this error
 #B0004
-wget --no-check-certificate -Nq -P ${XDG_DOWNLOAD_DIR} https://storage.googleapis.com/golang/$n
+wget --no-check-certificate -qNP ${XDG_DOWNLOAD_DIR} https://storage.googleapis.com/golang/$n
 echo "Unpack..."
 tar -xf ${XDG_DOWNLOAD_DIR}/$n -C $HOME
 
@@ -104,12 +103,12 @@ a=$(getconf LONG_BIT)
 n=liteidex${v:1}.${k}-${a}.tar.bz2
 
 echo "Download last ide $n..."
-wget -Nq -P ${XDG_DOWNLOAD_DIR} http://sourceforge.net/projects/liteide/files/${v}/$n
+wget -qNP ${XDG_DOWNLOAD_DIR} http://sourceforge.net/projects/liteide/files/${v}/$n
 echo "Unpack..."
 tar -xf ${XDG_DOWNLOAD_DIR}/$n -C $HOME
 
 echo "Get Monaco font..."
-wget -Nq -P $HOME/.fonts http://usystem.googlecode.com/files/MONACO.TTF
+wget -qP $HOME/.fonts http://usystem.googlecode.com/files/MONACO.TTF
 
 echo "Create \$GOPATH"
 GOPATH=$HOME/go-programs
@@ -174,13 +173,11 @@ sed -i "s#\$a#$a#g; s#\$GOPATH#$GOPATH#g; s#\$GOROOT#$GOROOT#g; s#\$HOME#$HOME#g
 #create generic .desktop file on desktop
 echo -e "[Desktop Entry]
 Version=1.0
-Encoding=UTF-8
 Name=LiteIDE
 Comment=LiteIDE is a simple, open source, cross-platform Go IDE. 
 Exec=sh -c 'cp .config/liteide/liteide.ini.mini .config/liteide/liteide.ini; eval \`ssh-agent -s\`; $HOME/liteide/bin/liteide'
 Icon=$GOROOT/doc/gopher/gophercolor.png
-Type=Application
-Categories=Network;" > ${XDG_DESKTOP_DIR}/liteide.desktop
+Type=Application" > ${XDG_DESKTOP_DIR}/liteide.desktop
 
 #B0012
 echo -e 'GOROOT=$HOME/go\nPATH=$PATH:$GOROOT/bin' >> $HOME/liteide/share/liteide/liteenv/system.env
@@ -190,25 +187,21 @@ case $DESKTOP_SESSION in
 ubuntu*)
    #create directory for liteide.desktop
    mkdir -p $HOME/.local/share/applications/
-
+   #B0014
    #extend .desktop file with nice options
-   echo -e "\nActions=golang;http;app;gopath;
-\n[Desktop Action golang]
+   echo -e "X-Ayatana-Desktop-Shortcuts=golang;http;gopath;
+\n[golang Shortcut Group]
 Name=golang.org
-Exec=firefox golang.org/pkg %U
-OnlyShowIn=Unity;
-\n[Desktop Action http]
+Exec=xdg-open http://golang.org/pkg
+TargetEnvironment=Unity
+\n[http Shortcut Group]
 Name=HTTP server (localhost:8080)
-Exec=firefox localhost:8080
-OnlyShowIn=Unity;
-\n[Desktop Action gopath]
-Name=\$GOPATH
-Exec=nautilus go-programs/src %U
-OnlyShowIn=Unity;
-\n[Desktop Action app]
-Name=--app=http://localhost:8080
-Exec=google-chrome --app=http://localhost:8080
-OnlyShowIn=Unity;" >> ${XDG_DESKTOP_DIR}/liteide.desktop
+Exec=xdg-open http://localhost:8080
+TargetEnvironment=Unity
+\n[gopath Shortcut Group]
+Name=GOPATH
+Exec=xdg-open go-programs/src
+TargetEnvironment=Unity" >> ${XDG_DESKTOP_DIR}/liteide.desktop
    #add .desktop file to dash and integrate with unity
    mv ${XDG_DESKTOP_DIR}/liteide.desktop $HOME/.local/share/applications
    #get the current launcher favorites list

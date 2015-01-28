@@ -15,7 +15,7 @@
            #B0004 use https instead http in download link.thanks Andrew Gerrand <nf@wh3rd.net>
            #B0005 implement XDG_DOWNLOAD_DIR (http://www.freedesktop.org/wiki/Software/xdg-user-dirs/)
 		   thanks Alin Andrei <andrew@webupd8.org>
-09.09.2014 #B0006 with set -e script hang sometimes before install Monaco font
+09.09.2014 #B0006 script stop on error
            #B0007  uname -m instead -i. thanks Dave Cheney <dave@cheney.net>
 10.09.2014 #B0008 use XDG_DESKTOP_DIR. thanks Victoralm <http://blog.victoralm.com>
 02.10.2014 bugs corrections (1.0.3.4)
@@ -35,8 +35,9 @@ Only a very limited set of project pages are available until the main website re
 21.01.2015 (1.0.3.8)
            #B0013 add GOPATH,GOROOT to PATH to use go compiler from terminal
            thanks <github.com/davidhtims> and <github.com/pavesi>
-25.01.2015 add help on -h switch
-25.01.2015 add google-chrome application mode on launcher :)
+25.01.2015 add help option -h.
+28.01.2015 switch from Desktop Action to X-Ayatana-Desktop-Shortcuts in .desktop file
+           #B0014 use xdg-open to open default applications
 
 TEST REPORT:
 DATE         RELEASE    GO   LITEIDE   RESULT  BUGS
@@ -45,7 +46,7 @@ DATE         RELEASE    GO   LITEIDE   RESULT  BUGS
 26.12.2014   1.0.3.5   1.4        26       ok
 21.01.2015   1.0.3.8   1.4.1      26       ok
 
-TODO:
+TODO/PROPOSALS:
 +some Unity2d improvements
 +shortcut for other desktop environments (partial implemented)
 +liteide git support ($HOME/liteide/share/liteide/litebuild/command/go.api)
@@ -62,6 +63,6 @@ TODO:
 -check new versions of golang compiler and liteide at liteide start and ask for update
 -archiving projects and backup
 -liteide don't start on Kubuntu (https://github.com/visualfc/liteide/issues/243)
-+add chrome application mode on launcher
+-add chrome application mode on launcher
      (google-chrome --app=http://localhost:8080)
 -add github account on launcher
