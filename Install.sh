@@ -189,19 +189,16 @@ ubuntu*)
    mkdir -p $HOME/.local/share/applications/
    #B0014
    #extend .desktop file with nice options
-   echo -e "X-Ayatana-Desktop-Shortcuts=golang;http;gopath;
-\n[golang Shortcut Group]
+   echo -e "Actions=golang;http;gopath
+\n[Desktop Action golang]
 Name=golang.org
 Exec=xdg-open http://golang.org/pkg
-TargetEnvironment=Unity
-\n[http Shortcut Group]
+\n[Desktop Action http]
 Name=HTTP server (localhost:8080)
 Exec=xdg-open http://localhost:8080
-TargetEnvironment=Unity
-\n[gopath Shortcut Group]
+\n[Desktop Action gopath]
 Name=GOPATH
-Exec=xdg-open go-programs/src
-TargetEnvironment=Unity" >> ${XDG_DESKTOP_DIR}/liteide.desktop
+Exec=xdg-open go-programs/src" >> ${XDG_DESKTOP_DIR}/liteide.desktop
    #add .desktop file to dash and integrate with unity
    mv ${XDG_DESKTOP_DIR}/liteide.desktop $HOME/.local/share/applications
    #get the current launcher favorites list

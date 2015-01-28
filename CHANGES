@@ -36,8 +36,7 @@ Only a very limited set of project pages are available until the main website re
            #B0013 add GOPATH,GOROOT to PATH to use go compiler from terminal
            thanks <github.com/davidhtims> and <github.com/pavesi>
 25.01.2015 add help option -h.
-28.01.2015 switch from Desktop Action to X-Ayatana-Desktop-Shortcuts in .desktop file
-           #B0014 use xdg-open to open default applications
+28.01.2015 #B0014 use xdg-open to open default applications
 
 TEST REPORT:
 DATE         RELEASE    GO   LITEIDE   RESULT  BUGS
