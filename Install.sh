@@ -108,7 +108,7 @@ echo "Unpack..."
 tar -xf ${XDG_DOWNLOAD_DIR}/$n -C $HOME
 
 echo "Get Monaco font..."
-wget -qP $HOME/.fonts http://usystem.googlecode.com/files/MONACO.TTF
+wget -nc -qP $HOME/.fonts http://usystem.googlecode.com/files/MONACO.TTF
 
 echo "Create \$GOPATH"
 GOPATH=$HOME/go-programs
