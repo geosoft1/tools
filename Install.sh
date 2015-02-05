@@ -105,7 +105,7 @@ if [ -z "$v" ]; then
 fi
 
 #B0015
-vv=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/X27) | awk '{ if(match($0,/liteidex([0-9]+.)+/)) print substr($0,RSTART,RLENGTH-1) }'`
+vv=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/$v) | awk '{ if(match($0,/liteidex([0-9]+.)+/)) print substr($0,RSTART,RLENGTH-1) }'`
 
 #build ide name (e.g. liteidex23.2.linux-32.tar.bz2)
 n=${vv}.${k}-${a}.tar.bz2
