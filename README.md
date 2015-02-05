@@ -9,7 +9,7 @@ This project is third party. For support see http://golang.org and https://githu
 [![last-version-blue](https://cloud.githubusercontent.com/assets/6298396/5602522/8967405e-935b-11e4-8777-de3623ed6ad7.png)](https://github.com/geosoft1/tools/archive/master.zip)
 [![last-release-green](https://cloud.githubusercontent.com/assets/6298396/5602520/83eb3f72-935b-11e4-9fc0-296506ca5c9a.png)](https://github.com/geosoft1/tools/releases/latest)
 
-**Note:**
+* **Note:**
     * Starting with X27 you must use at least 1.0.3.9 release or last version
     * Starting with liteidex25 you must use at least 1.0.3.5 version
 
