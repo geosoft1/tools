@@ -10,8 +10,8 @@ This project is third party. For support see http://golang.org and https://githu
 [![last-release-green](https://cloud.githubusercontent.com/assets/6298396/5602520/83eb3f72-935b-11e4-9fc0-296506ca5c9a.png)](https://github.com/geosoft1/tools/releases/latest)
 
 * **Note:**
-    * Starting with X27 you must use at least 1.0.3.9 release or last version
-    * Starting with liteidex25 you must use at least 1.0.3.5 version
+    * Starting with liteidex27 you must use at least 1.0.3.9 release or last version
+    * Starting with liteidex25 you must use at least 1.0.3.5 releae
 
 * **Features**
     * Get and install last versions of go compiler and ide.
