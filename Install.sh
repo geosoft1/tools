@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # golang programming environment installer
-# Copyright (C) 2014  geosoft1@gmail.com
+# Copyright (C) 2014,2015  geosoft1@gmail.com
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -33,6 +33,7 @@ case $1 in
    echo "Options:"
    echo "-h, --help         show this help message and exit"
    echo "-u, --uninstall    unistall"
+   echo "-v, --version      version"
    exit
    ;;
 -u|--uninstall)
@@ -46,6 +47,10 @@ case $1 in
    sed --in-place '/export PATH=$PATH:$GOROOT\/bin/d' $HOME/.bashrc
    sed --in-place '/export GOPATH=$HOME\/go-programs/d' $HOME/.bashrc
    echo "Uninstalled."
+   exit
+   ;;
+-v|--version)
+   echo "1.0.3.8"
    exit
    ;;
 esac
@@ -98,7 +103,8 @@ fi
 
 #get host computer LONG_BIT (e.g 32|64)
 a=$(getconf LONG_BIT)
-
+#---temporary version conflict problem!
+v=X26
 #build ide name (e.g. liteidex23.2.linux-32.tar.bz2)
 n=liteidex${v:1}.${k}-${a}.tar.bz2
 

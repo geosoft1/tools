@@ -12,7 +12,7 @@ This project is third party. For support see http://golang.org and https://githu
 **Note:** Starting with liteidex25 you must use at least release 1.0.3.5.
 
 * **Features**
-    * Get and install last versions of go compiler and ide
+    * Get and install last versions of go compiler and ide.
     * Create a simple layout for ide (liteide.ini.mini)
     * Lot of gophers use Monaco font so add in ide
     * Also create a GOPATH to the go-programs directory and add a HelloWorld project
