@@ -38,7 +38,7 @@ Only a very limited set of project pages are available until the main website re
 25.01.2015 add help option -h.
 28.01.2015 #B0014 use xdg-open to open default applications
 05.02.2015 (1.0.3.9)
-           #B0015 temporary lock liteide download to x26 due a version conflict on sourceforge
+           #B0015 sourceforge change name at re-upload
 
 TEST REPORT:
 DATE         RELEASE    GO   LITEIDE   RESULT  BUGS

@@ -91,6 +91,9 @@ wget --no-check-certificate -qNP ${XDG_DOWNLOAD_DIR} https://storage.googleapis.
 echo "Unpack..."
 tar -xf ${XDG_DOWNLOAD_DIR}/$n -C $HOME
 
+#get host computer LONG_BIT (e.g 32|64)
+a=$(getconf LONG_BIT)
+
 #get last version of ide (e.g. X23.2)
 #B0009
 v=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/) | awk '{ if(match($0,/X([0-9]+.)+/)) print substr($0,RSTART,RLENGTH-1) }'`
@@ -101,12 +104,11 @@ if [ -z "$v" ]; then
 	exit
 fi
 
-#get host computer LONG_BIT (e.g 32|64)
-a=$(getconf LONG_BIT)
-#---temporary version conflict problem!
-v=X26
+#B0015
+vv=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/X27) | awk '{ if(match($0,/liteidex([0-9]+.)+/)) print substr($0,RSTART,RLENGTH-1) }'`
+
 #build ide name (e.g. liteidex23.2.linux-32.tar.bz2)
-n=liteidex${v:1}.${k}-${a}.tar.bz2
+n=${vv}.${k}-${a}.tar.bz2
 
 echo "Download last ide $n..."
 wget -qNP ${XDG_DOWNLOAD_DIR} http://sourceforge.net/projects/liteide/files/${v}/$n
