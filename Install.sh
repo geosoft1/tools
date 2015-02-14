@@ -40,6 +40,7 @@ case $1 in
    rm -rf $HOME/liteide/
    rm -rf $HOME/go/
    rm -rf $HOME/.local/share/applications/liteide.desktop
+   rm -rf $HOME/.local/share/data/liteide/
    rm -rf $HOME/.config/liteide/
    rm -rf $HOME/.fonts/MONACO.TTF
    #ugly! must rewrite sometime
@@ -50,7 +51,7 @@ case $1 in
    exit
    ;;
 -v|--version)
-   echo "1.0.3.8"
+   echo "1.0.3.9"
    exit
    ;;
 esac
@@ -104,7 +105,7 @@ if [ -z "$v" ]; then
 	exit
 fi
 
-#B0015
+#B0015 (liteidex27-1)
 vv=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/$v) | awk '{ if(match($0,/liteidex([0-9]+.)+/)) print substr($0,RSTART,RLENGTH-1) }'`
 
 #build ide name (e.g. liteidex23.2.linux-32.tar.bz2)
