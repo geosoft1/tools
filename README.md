@@ -11,7 +11,7 @@ This project is third party. For support see http://golang.org and https://githu
 
 1.0.4.0 milestone is ready with new features and git support. Using manual will be ready soon.
 
-**Features**
+* **Features**
     * Get and install last versions of go compiler and ide.
     * Create a simple layout for ide (liteide.ini.mini)
     * Lot of gophers use Monaco font so add in ide
@@ -22,7 +22,7 @@ This project is third party. For support see http://golang.org and https://githu
     * Extend project templates with **Go1 Simple Project** and **Go1 GPL Project**
     * see [CHANGES](https://github.com/geosoft1/tools/blob/master/CHANGES) for new features and bug corrections or use -h option to get help
 	
-**Using**
+* **Using**
 
     Download anywhere and run from your file browser with double click. If you prefer Terminal go to the directory with the script and run
 	
@@ -48,7 +48,7 @@ This project is third party. For support see http://golang.org and https://githu
 	
 	    gsettings set org.nemo.preferences executable-text-activation ask
 
-**Using git from liteide**
+* **Using git from liteide**
 
     `` ctrl+` `` will provide a list of git commands like
 
