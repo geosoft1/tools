@@ -39,6 +39,11 @@ Only a very limited set of project pages are available until the main website re
 28.01.2015 #B0014 use xdg-open to open default applications
 05.02.2015 (1.0.3.9)
            #B0015 sourceforge change name at re-upload
+23.02.2015 (1.0.4.0) milestone
+           launch Gopei shell with github support
+           stop supporting Unity2d
+
+
 
 TEST REPORT:
 DATE         RELEASE    GO   LITEIDE   RESULT  BUGS
@@ -52,11 +57,9 @@ TODO/PROPOSALS:
 +some Unity2d improvements
 +shortcut for other desktop environments (partial implemented)
 +liteide git support ($HOME/liteide/share/liteide/litebuild/command/go.api)
--complete github support
++github support
 +check network connection
--run on any linux desktop distro
--server version
--better name, in fact a name (planned for version 1.0.4.0+)
++better name, in fact a name (planned for version 1.0.4.0+)
  PROPOSAL: gopei.sh (read it gopei shell)
  sense 1:GoPEI (Go Programming Environment Installer)
  sense 2:Gopei Sho it's also a black belt kata of karate Shuri-ryu style

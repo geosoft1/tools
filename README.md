@@ -9,29 +9,30 @@ This project is third party. For support see http://golang.org and https://githu
 [![last-version-blue](https://cloud.githubusercontent.com/assets/6298396/5602522/8967405e-935b-11e4-8777-de3623ed6ad7.png)](https://github.com/geosoft1/tools/archive/master.zip)
 [![last-release-green](https://cloud.githubusercontent.com/assets/6298396/5602520/83eb3f72-935b-11e4-9fc0-296506ca5c9a.png)](https://github.com/geosoft1/tools/releases/latest)
 
-* **Note:**
-    * Starting with liteidex27 you must use at least 1.0.3.9 release or last version
-    * Starting with liteidex25 you must use at least 1.0.3.5 releae
+1.0.4.0 milestone is ready with new features and git support. Using manual will be ready soon.
 
-* **Features**
+**Features**
     * Get and install last versions of go compiler and ide.
     * Create a simple layout for ide (liteide.ini.mini)
     * Lot of gophers use Monaco font so add in ide
     * Also create a GOPATH to the go-programs directory and add a HelloWorld project
+	* add git support (1.0.4.0+)
     * Add launcher to Unity with some useful functions on right-click. Other DE users have a shortcut on desktop
-    * Add git support in ide on `` ctrl+` ``. Be sure you have configured [git](https://help.github.com/articles/set-up-git) before and proper [ssh keys](https://help.github.com/articles/generating-ssh-keys)
+    * Add git support in ide on `` ctrl+` ``. Be sure you have configured [git](https://help.github.com/articles/set-up-git) with proper [ssh keys](https://help.github.com/articles/generating-ssh-keys) or use -g switch for.
     * Extend project templates with **Go1 Simple Project** and **Go1 GPL Project**
-    * see [CHANGES](https://github.com/geosoft1/tools/blob/master/CHANGES) for new features and bug corrections
+    * see [CHANGES](https://github.com/geosoft1/tools/blob/master/CHANGES) for new features and bug corrections or use -h option to get help
 	
-* **Using**
+**Using**
 
     Download anywhere and run from your file browser with double click. If you prefer Terminal go to the directory with the script and run
 	
         ./Install.sh
 
-    To uninstall use:
+    To add git support run
 
-        ./Install.sh -u
+	    ./Install.sh -g
+
+    To see other options use -h switch. Read [USING.md](https://github.com/geosoft1/tools/blob/master/USING.md) for more detalies.
 
     Run periodicaly or if compiler/ide versions change to update the sistem.
     Projects are not affected if you overinstall.
@@ -47,7 +48,7 @@ This project is third party. For support see http://golang.org and https://githu
 	
 	    gsettings set org.nemo.preferences executable-text-activation ask
 
-* **Using git from liteide**
+**Using git from liteide**
 
     `` ctrl+` `` will provide a list of git commands like
 

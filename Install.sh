@@ -16,6 +16,8 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+VERSION=1.0.4.0
+
 #B0006
 set -e
 
@@ -27,33 +29,39 @@ clear
 echo -e "Golang Programming Environment Installer\nCopyright (C) 2014  geosoft1@gmail.com"
 
 case $1 in
+-g|--github)
+   GITSUPPORT=yes
+   echo $VERSION" Gopei shell";;
 -h|--help)
    echo "Usage: install [options]"
-   echo ""
+   echo
    echo "Options:"
-   echo "-h, --help         show this help message and exit"
-   echo "-u, --uninstall    unistall"
-   echo "-v, --version      version"
-   exit
-   ;;
--u|--uninstall)
+   echo "-g, --git           enable git suppport"
+   echo "-h, --help          show this help message and exit"
+   echo "-u, --uninstall     uninstall"
+   echo "-ua                 uninstall all, including .gitconfig file and .ssh folder"
+   echo "-v, --version       version"
+   exit;;
+-u|-ua|--uninstall)
    rm -rf $HOME/liteide/
    rm -rf $HOME/go/
    rm -rf $HOME/.local/share/applications/liteide.desktop
    rm -rf $HOME/.local/share/data/liteide/
    rm -rf $HOME/.config/liteide/
    rm -rf $HOME/.fonts/MONACO.TTF
+   if [ "$1" == "-ua" ]; then
+      rm -f $HOME/.gitconfig
+      rm -rf $HOME/.ssh/
+   fi
    #ugly! must rewrite sometime
    sed --in-place '/export GOROOT=$HOME\/go/d' $HOME/.bashrc
    sed --in-place '/export PATH=$PATH:$GOROOT\/bin/d' $HOME/.bashrc
    sed --in-place '/export GOPATH=$HOME\/go-programs/d' $HOME/.bashrc
    echo "Uninstalled."
-   exit
-   ;;
+   exit;;
 -v|--version)
-   echo "1.0.3.9"
-   exit
-   ;;
+   echo $VERSION
+   exit;;
 esac
 
 #get last version of go compiler (e.g. go1.3.3.)
@@ -101,8 +109,8 @@ v=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/) | awk '{ if(
 #exit if sourceforge is offline otherwise the rest will fail 
 #B0011
 if [ -z "$v" ]; then
-	echo "The sourceforge.net website is temporarily in static offline mode."
-	exit
+   echo "The sourceforge.net website is temporarily in static offline mode."
+   exit
 fi
 
 #B0015 (liteidex27-1)
@@ -128,36 +136,49 @@ GOROOT=$HOME/go
 
 echo "Add git support to liteide..."
 #----------------------------------------------------------------------------------
-#Add github suppport (experimental/testing,do not use yet or use carefully)
-
-#echo "Install git..."
-#sudo apt-get install git -y > /dev/null
-#echo "Setup github"
-#echo -n "Git user  ";read GITUSER
-#echo -n "Git email ";read EMAIL
-#echo -n "Git server [ENTER for github.com]"; read GITSERVER
-#if [ $GITSERVER=="" ]; then GITSERVER="github.com"; fi
-
-#create git configuration
-#echo -e "[user]
-#	name = $GITUSER
-#	email = $EMAIL" > $HOME/.gitconfig
-
-#KEY="rsa"
-##if [ ! -f $HOME/.ssh/id_$KEY ];
-##then
-#ssh-keygen -qt $KEY -C "$EMAIL"
-#echo "Copy next key to $GITSERVER/settings/ssh and press any key"
-#echo
-#cat $HOME/.ssh/id_$KEY.pub
-#read
-#bug workaround https://help.github.com/articles/error-permission-denied-publickey
-#eval `ssh-agent -s` > /dev/null
-#ssh-add ~/.ssh/id_rsa
-#echo "Checking the key..."
-#ssh -o "StrictHostKeyChecking no" -T git@$GITSERVER
-#create $GITSERVER in $GOPATH
-#mkdir -p $GOPATH/src/$GITSERVER/$GITUSER
+#enable full git suppport (experimental, use carefully)
+if [ -n "$GITSUPPORT" ]; then
+   echo "Install git..."
+   sudo apt-get install git -y > /dev/null
+   #create git configuration if not exist.otherwise use existent.
+   if [ ! -f $HOME/.gitconfig ]; then
+      echo "Setup git"
+      echo -n "Git user ";read GITUSER
+      echo -n "Git email [ENTER for $GITUSER@gmail.com] ";read EMAIL
+      #try to guess git email
+      if [ -z "$EMAIL" ]; then EMAIL="$GITUSER@gmail.com"; fi
+      echo -n "Git server [ENTER for github.com] "; read GITSERVER
+      git config --global user.name "$GITUSER"
+      git config --global user.email "$EMAIL"
+      #echo -e "[user]\n\tname = $GITUSER\n\temail = $EMAIL" > $HOME/.gitconfig
+   else
+       #get GITUSER if .gitconfig exist
+       GITUSER=`awk 'NR==2 {print $3}' .gitconfig`
+   fi
+   #set github.com as defaul git server
+   if [ -z "$GITSERVER" ]; then GITSERVER="github.com"; fi
+   #generate ssh keys if not exist.otherwise use existent.
+   #https://help.github.com/articles/generating-ssh-keys/
+   KEY="rsa"
+   if [ ! -f $HOME/.ssh/id_$KEY ]; then
+      ssh-keygen -qt $KEY -C "$EMAIL" -f $HOME/.ssh/id_$KEY
+      echo -e "Copy next key to $GITSERVER/settings/ssh and press any key\n"
+      cat $HOME/.ssh/id_$KEY.pub | while read -n 64 i; do echo $i; done
+      read
+   fi
+   #bug workaround https://help.github.com/articles/error-permission-denied-publickey
+   eval `ssh-agent -s` > /dev/null
+   #ssh-add $HOME/.ssh/id_$KEY 2> /dev/null
+   echo "Checking the keys..."
+   #workaround
+   #if ssh result is false (Permission denied (publickey).) set -e will stop the script
+   #prevent this by changing result code to true and let the script to continue
+   ssh -o StrictHostKeyChecking=no -o LogLevel=error -T git@$GITSERVER || true
+   #create $GITSERVER in $GOPATH
+   mkdir -p $GOPATH/src/$GITSERVER/$GITUSER
+   #show gopei shell mode :-)
+   wget -q https://raw.githubusercontent.com/geosoft1/tools/master/gopher/gopeicolor.png -O  $GOROOT/doc/gopher/gophercolor.png
+fi
 #----------------------------------------------------------------------------------
 echo -e "git add
 git commit -m \"-\" -a
@@ -166,8 +187,8 @@ clone" >$HOME/liteide/share/liteide/litebuild/command/go.api
 #implement git clone support
 echo '#!/bin/bash
 if [ -z $1 ]; then
-        echo "Use: clone githubusername/projectname"
-        exit
+   echo "Use: clone githubusername/projectname"
+   exit
 fi
 git clone git@github.com:$1.git '$GOPATH'/src/github.com/$1' > $HOME/liteide/bin/clone
 chmod +x $HOME/liteide/bin/clone
@@ -178,13 +199,16 @@ mkdir -p $HOME/.config/liteide
 #get liteide.ini.mini from github.com
 wget -q https://raw.githubusercontent.com/geosoft1/tools/master/liteide.ini.mini -O $HOME/.config/liteide/liteide.ini.mini
 sed -i "s#\$a#$a#g; s#\$GOPATH#$GOPATH#g; s#\$GOROOT#$GOROOT#g; s#\$HOME#$HOME#g" $HOME/.config/liteide/liteide.ini.mini
+#add customizer command
+
+CUSTOMIZER="cp .config/liteide/liteide.ini.mini .config/liteide/liteide.ini;"
 
 #create generic .desktop file on desktop
 echo -e "[Desktop Entry]
 Version=1.0
 Name=LiteIDE
 Comment=LiteIDE is a simple, open source, cross-platform Go IDE. 
-Exec=sh -c 'cp .config/liteide/liteide.ini.mini .config/liteide/liteide.ini; eval \`ssh-agent -s\`; $HOME/liteide/bin/liteide'
+Exec=sh -c '$CUSTOMIZER eval \`ssh-agent -s\`; $HOME/liteide/bin/liteide'
 Icon=$GOROOT/doc/gopher/gophercolor.png
 Type=Application" > ${XDG_DESKTOP_DIR}/liteide.desktop
 
@@ -220,9 +244,9 @@ Exec=xdg-open go-programs/src" >> ${XDG_DESKTOP_DIR}/liteide.desktop
       #update the launcher favorites list. in unity changes are shwown immediately.
       gsettings set com.canonical.Unity.Launcher favorites "$b"
       #WORKAROUND: unity2d need restart to show last changes
-      if [[ $DESKTOP_SESSION =~ "2d" ]]; then
-         killall unity-2d-shell;
-      fi
+      #if [[ $DESKTOP_SESSION =~ "2d" ]]; then
+      #  killall unity-2d-shell;
+      #fi
    fi
    ;;
 #other desktop environments can be handled here
@@ -277,7 +301,8 @@ func main() {
 }" > $TEMPL/gogpl/main.go
 
 wget -Nq -O $TEMPL/gogpl/LICENSE http://www.gnu.org/licenses/gpl.txt
-touch $TEMPL/gogpl/CONTRIBUTORS
+#touch $TEMPL/gogpl/CONTRIBUTORS
+echo GITUSER > $TEMPL/gogpl/CONTRIBUTORS
 echo -e "\$ROOT\$\n====" > $TEMPL/gogpl/README.md
 
 echo -e "[SETUP]
@@ -293,7 +318,7 @@ echo "Create HelloWorld program"
 mkdir -p $GOPATH/src/HelloWorld
 echo -e "package main\n
 func main() {
-	println(\"Hello World!\")
+\tprintln(\"Hello World!\")
 }" > $GOPATH/src/HelloWorld/main.go
 
 #B0013, add GOPATH,GOROOT to PATH but in $HOME/.bashrc to avoid root rights.
