@@ -9,7 +9,7 @@ This project is third party. For support see http://golang.org and https://githu
 [![last-version-blue](https://cloud.githubusercontent.com/assets/6298396/5602522/8967405e-935b-11e4-8777-de3623ed6ad7.png)](https://github.com/geosoft1/tools/archive/master.zip)
 [![last-release-green](https://cloud.githubusercontent.com/assets/6298396/5602520/83eb3f72-935b-11e4-9fc0-296506ca5c9a.png)](https://github.com/geosoft1/tools/releases/latest)
 
-1.0.4.0 milestone is ready with new features and git support. Using manual will be ready soon.
+1.0.4.0 milestone is ready with new features and git support. User manual will be ready soon.
 
 * **Features**
     * Get and install last versions of go compiler and ide.
@@ -18,21 +18,21 @@ This project is third party. For support see http://golang.org and https://githu
     * Also create a GOPATH to the go-programs directory and add a HelloWorld project
 	* add git support (1.0.4.0+)
     * Add launcher to Unity with some useful functions on right-click. Other DE users have a shortcut on desktop
-    * Add git support in ide on `` ctrl+` ``. Be sure you have configured [git](https://help.github.com/articles/set-up-git) with proper [ssh keys](https://help.github.com/articles/generating-ssh-keys) or use -g switch for.
+    * Add git support in ide on `` ctrl+` ``. Be sure you have configured [git] before (https://help.github.com/articles/set-up-git) with proper [ssh keys](https://help.github.com/articles/generating-ssh-keys) or use -g switch for.
     * Extend project templates with **Go1 Simple Project** and **Go1 GPL Project**
     * see [CHANGES](https://github.com/geosoft1/tools/blob/master/CHANGES) for new features and bug corrections or use -h option to get help
 	
-* **Using**
+* **Use**
 
     Download anywhere and run from your file browser with double click. If you prefer Terminal go to the directory with the script and run
 	
         ./Install.sh
 
-    To add git support run
+    To add git support run from Terminal
 
 	    ./Install.sh -g
 
-    To see other options use -h switch. Read [USING.md](https://github.com/geosoft1/tools/blob/master/USING.md) for more detalies.
+    To see other options use -h switch. Read [USING.md](https://github.com/geosoft1/tools/blob/master/USING.md) for more details.
 
     Run periodicaly or if compiler/ide versions change to update the sistem.
     Projects are not affected if you overinstall.
