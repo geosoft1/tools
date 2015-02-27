@@ -9,8 +9,6 @@ This project is third party. For support see http://golang.org and https://githu
 [![last-version-blue](https://cloud.githubusercontent.com/assets/6298396/5602522/8967405e-935b-11e4-8777-de3623ed6ad7.png)](https://github.com/geosoft1/tools/archive/master.zip)
 [![last-release-green](https://cloud.githubusercontent.com/assets/6298396/5602520/83eb3f72-935b-11e4-9fc0-296506ca5c9a.png)](https://github.com/geosoft1/tools/releases/latest)
 
-1.0.4.0 milestone is ready with new features and git support. User manual will be ready soon.
-
 * **Features**
     * Get and install last versions of go compiler and ide.
     * Create a simple layout for ide (liteide.ini.mini)
