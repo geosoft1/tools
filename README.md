@@ -14,23 +14,26 @@ This project is third party. For support see http://golang.org and https://githu
     * Create a simple layout for ide (liteide.ini.mini)
     * Lot of gophers use Monaco font so add in ide
     * Also create a GOPATH to the go-programs directory and add a HelloWorld project
-	* add git support (1.0.4.0+)
+    * Add git support (1.0.4.0+)
     * Add launcher to Unity with some useful functions on right-click. Other DE users have a shortcut on desktop
     * Add git support in ide on `` ctrl+` ``. Be sure you have configured [git] (https://help.github.com/articles/set-up-git) before with proper [ssh keys](https://help.github.com/articles/generating-ssh-keys) or use -g switch for.
     * Extend project templates with **Go1 Simple Project** and **Go1 GPL Project**
-    * see [CHANGES](https://github.com/geosoft1/tools/blob/master/CHANGES) for new features and bug corrections or use -h option to get help
+    
+    See [CHANGES](https://github.com/geosoft1/tools/blob/master/CHANGES) for new features and bug corrections or use -h option to get help. Read [USING.md](https://github.com/geosoft1/tools/blob/master/USING.md) for more details.
 	
 * **Use**
 
     Download anywhere and run from your file browser with double click. If you prefer Terminal go to the directory with the script and run
-	
+
         ./Install.sh
 
     To add git support run from Terminal
 
-	    ./Install.sh -g
+        ./Install.sh -g
 
-    To see other options use -h switch. Read [USING.md](https://github.com/geosoft1/tools/blob/master/USING.md) for more details.
+    To uninstall use
+
+        ./Install.sh -u
 
     Run periodicaly or if compiler/ide versions change to update the sistem.
     Projects are not affected if you overinstall.
@@ -41,10 +44,10 @@ This project is third party. For support see http://golang.org and https://githu
 	For Nautilus use:
 	
         gsettings set org.gnome.nautilus.preferences executable-text-activation launch
-		
+
 	For Nemo use:
 	
-	    gsettings set org.nemo.preferences executable-text-activation ask
+        gsettings set org.nemo.preferences executable-text-activation ask
 
 * **Using git from liteide**
 
@@ -61,5 +64,3 @@ This project is third party. For support see http://golang.org and https://githu
 **Important!**
 
 If you update to new version of go compiler some programs dependencies like sql driver **must** be get and compiled again. Do Build|Get in LiteIDE if your program doesn't compile.
-	
-====
