@@ -1,10 +1,12 @@
-**Using Gopei Shell**  
-
-To install in clasic mode run
+###Gopei Shell User Manual
+====
+* To install in clasic mode run
 
         ./Install.sh
 
 Gopei will install the last go compiler and the last ide and link them. Also will add GOPATH in LiteIDE.
+
+* To install in full mode run
 
         ./Install.sh -g
 
@@ -15,17 +17,17 @@ for colaborative work.
 
 Note that if you reinstall with -g Gopei will look for existing ssh key and git profile to not to override them.
 
+* Uninstall
+
         ./Install.sh -u
 
-Uninstall all but not ssh keys and git profile.
+* Uninstall all but not ssh keys and git profile.
 
         ./Install.sh -ua
 
 Uninstall all and ssh keys (.ssh folder) and git profile (.gitconfig file). Be carefuly with this option if you have other keys in .ssh folder.
 
-**Important!**
-
-If you update to new version of go compiler some programs dependencies like sql driver **must** be get and compiled again. Do Build|Get in LiteIDE if your program doesn't compile.
+**Important!** If you update to new version of go compiler some programs dependencies like sql driver **must** be get and compiled again. Do Build|Get in LiteIDE if your program doesn't compile.
 
 **Using git from LiteIDE**
 
