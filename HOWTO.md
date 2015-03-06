@@ -19,7 +19,7 @@ Note that if you reinstall with -g Gopei will look for existing ssh key and git 
 
 Uninstall all but not ssh keys and git profile.
 
-        ./Install.sh -u
+        ./Install.sh -ua
 
 Uninstall all and ssh keys (.ssh folder) and git profile (.gitconfig file). Be carefuly with this option if you have other keys in .ssh folder.
 
@@ -37,7 +37,7 @@ If you update to new version of go compiler some programs dependencies like sql 
 	    git push origin master             (if is first push on repository)
         clone githubusername/projectname   (e.g. clone geosoft1/tools)
 
-    Remember to use commands only if a file from project is open in editor, otherwise will fail. Except aliases and scripts from this rule (e.g. clone command).
+Remember to use commands only if a file from project is open in editor, otherwise will fail. Except aliases and scripts from this rule (e.g. clone command).
 
 **Using go from Terminal**
 
@@ -49,4 +49,4 @@ If you update to new version of go compiler some programs dependencies like sql 
 
 If program have dependecies do go get command before go build
 
-         go get github.com/user/repo
+         go get github.com/user/repository
