@@ -78,7 +78,6 @@ If program have dependecies do go get command before go build
 * Enter user and email used with github
 * Copy suggested key into github page
 * Create a new repository on github
-* Start LiteIDE
-* Clone existing project or create new
+* Start LiteIDE, clone existing project or create new
 * Use `` git add <filename> `` to add files to your repository
 * Use `` git commit -m "-" -a `` and `` git push `` to push files to github. Note that first time you will need to use `` git push origin master ``.
