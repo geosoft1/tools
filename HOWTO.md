@@ -74,10 +74,7 @@ If program have dependecies do go get command before go build
 
 * Create a git acoount on github
 * Go to [Personal settings/SSH keys](https://github.com/settings/ssh) and Add SSH key
-* Open Terminal and run
-
-        ./Install.sh -g
-
+* Open Terminal and run `` ./Install.sh -g ``
 * Enter user and email used with github
 * Copy suggested key into github page
 * Create a new repository on github
