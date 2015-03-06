@@ -19,7 +19,7 @@ This project is third party. For support see http://golang.org and https://githu
     * Add git support in ide on `` ctrl+` ``. Be sure you have configured [git] (https://help.github.com/articles/set-up-git) before with proper [ssh keys](https://help.github.com/articles/generating-ssh-keys) or use -g switch for.
     * Extend project templates with **Go1 Simple Project** and **Go1 GPL Project**
     
-    See [CHANGES](https://github.com/geosoft1/tools/blob/master/CHANGES) for new features and bug corrections or use -h option to get help. Read [USING.md](https://github.com/geosoft1/tools/blob/master/HOW.md) for more details.
+    See [CHANGES](https://github.com/geosoft1/tools/blob/master/CHANGES) for new features and bug corrections or use -h option to get help. Read [HOWTO.md](https://github.com/geosoft1/tools/blob/master/HOWTO.md) for more details.
 	
 * **Use**
 
