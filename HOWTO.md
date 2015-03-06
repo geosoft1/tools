@@ -4,7 +4,7 @@
 
         ./Install.sh
 
-Gopei will install the last go compiler and the last ide and link them. Also will add GOPATH in LiteIDE.
+Gopei will install last versions of [golang](http://golang.org) compiler and [LiteIDEiteide](https://github.com/visualfc/liteide). Also will link go compiler with  LiteIDE.
 
 **Install in full mode**
 
