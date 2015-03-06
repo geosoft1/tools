@@ -14,6 +14,7 @@ This option activate full mode (clasic+git suport). You must have a git server a
 Default is github.com. You will be asked for user and email and Gopei will generate a ssh
 key for use with git server. Copy sugested public key to git server and you are ready
 for colaborative work.
+Also you will be asked for sudo password. Don't worry about, is only for installing git.
 
 Note that if you reinstall with -g Gopei will look for existing ssh key and git profile to not to override them.
 
@@ -66,7 +67,7 @@ Is strongly recomanded to work in LiteIDE but Gopei set environment for go in .b
          go install
          ~/go-programs/bin/HelloWorld
 
-If program have dependecies do go get command before go build
+If the program have dependecies do go get command before go build
 
          go get github.com/user/repository
 
