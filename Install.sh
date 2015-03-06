@@ -183,6 +183,7 @@ fi
 echo -e "git add
 git commit -m \"-\" -a
 git push
+git pull
 clone" >$HOME/liteide/share/liteide/litebuild/command/go.api
 #implement git clone support
 echo '#!/bin/bash

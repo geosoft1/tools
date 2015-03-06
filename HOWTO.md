@@ -31,15 +31,28 @@ Uninstall all and ssh keys (.ssh folder) and git profile (.gitconfig file). Be c
 
 **Important!** If you update to new version of go compiler some programs dependencies like sql driver **must** be get and compiled again. Do Build|Get in LiteIDE if your program doesn't compile.
 
+**After install**
+
+I used Ubuntu as main platform and best view is in Unity interface. Right click on Gopei launcher icon show some usefull options.
+
+* golang.org
+* HTTP server (localhost:8080)
+* GOPATH
+
+In full mode also you will see the new Gopei Shell icon :-)
+
 **Using git from LiteIDE**
 
-    `` ctrl+` `` will provide a list of git commands like
+**CTRL+`** will provide a list of git commands like
 
         git add <filename>
         git commit -m "-" -a
         git push
-	    git push origin master             (if is first push on repository)
+        git pull
+        git push origin master             (if is first push on repository)
         clone githubusername/projectname   (e.g. clone geosoft1/tools)
+
+These commands are generally sufficient but it is possible to receive some suggestions from git server in certain situations (like git pull). Use those commands when you will be asked.
 
 Remember to use commands only if a file from project is open in editor, otherwise will fail. Except aliases and scripts from this rule (e.g. clone command).
 
