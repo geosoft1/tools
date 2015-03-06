@@ -1,12 +1,12 @@
 ###Gopei Shell User Manual
 ====
-* To install in clasic mode run
+**Install in clasic mode**
 
         ./Install.sh
 
 Gopei will install the last go compiler and the last ide and link them. Also will add GOPATH in LiteIDE.
 
-* To install in full mode run
+**Install in full mode**
 
         ./Install.sh -g
 
@@ -17,11 +17,13 @@ for colaborative work.
 
 Note that if you reinstall with -g Gopei will look for existing ssh key and git profile to not to override them.
 
-* Uninstall
+**Uninstall**
 
         ./Install.sh -u
 
-* Uninstall all but not ssh keys and git profile.
+Uninstall all but not ssh keys and git profile.
+
+**Uninstall all**
 
         ./Install.sh -ua
 
@@ -42,6 +44,8 @@ Uninstall all and ssh keys (.ssh folder) and git profile (.gitconfig file). Be c
 Remember to use commands only if a file from project is open in editor, otherwise will fail. Except aliases and scripts from this rule (e.g. clone command).
 
 **Using go from Terminal**
+
+Is strongly recomanded to work in LiteIDE but Gopei set environment for go in .bashrc so is posible to use Terminal.
 
          cd $GOPATH
          cd src/HelloWorld/
