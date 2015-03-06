@@ -78,6 +78,7 @@ If program have dependecies do go get command before go build
 
         ./Install.sh -g
 
+* Enter user and email used with github
 * Copy suggested key into github page
 * Create a new repository on github
 * Start LiteIDE
