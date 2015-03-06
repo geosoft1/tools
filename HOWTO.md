@@ -33,7 +33,7 @@ Uninstall all and ssh keys (.ssh folder) and git profile (.gitconfig file). Be c
 
 **After install**
 
-I used Ubuntu as main platform and best view is in Unity interface. Right click on Gopei launcher icon show some usefull options.
+I used Ubuntu as main platform and best functionality is on Unity interface. Right click on Gopei launcher icon show some usefull options.
 
 * golang.org
 * HTTP server (localhost:8080)
@@ -69,3 +69,18 @@ Is strongly recomanded to work in LiteIDE but Gopei set environment for go in .b
 If program have dependecies do go get command before go build
 
          go get github.com/user/repository
+
+**Practical example to start a colaborative project**
+
+* Create a git acoount on github
+* Go to [Personal settings/SSH keys](https://github.com/settings/ssh) and Add SSH key
+* Open Terminal and run
+
+        ./Install.sh -g
+
+* Copy suggested key into github page
+* Create a new repository on github
+* Start LiteIDE
+* Clone existing project or create new
+* Use `` git add <filename> `` to add files to your repository
+* Use `` git commit -m "-" -a `` and `` git push `` to push files to github. Note that first time you will need to use `` git push origin master ``.
