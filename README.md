@@ -19,21 +19,15 @@ This project is third party. For support see http://golang.org and https://githu
     * Add git support in ide on `` ctrl+` ``. Be sure you have configured [git] (https://help.github.com/articles/set-up-git) before with proper [ssh keys](https://help.github.com/articles/generating-ssh-keys) or use -g switch for.
     * Extend project templates with **Go1 Simple Project** and **Go1 GPL Project**
     
-    See [CHANGES](https://github.com/geosoft1/tools/blob/master/CHANGES) for new features and bug corrections or use -h option to get help. Read [USING.md](https://github.com/geosoft1/tools/blob/master/USING.md) for more details.
+    See [CHANGES](https://github.com/geosoft1/tools/blob/master/CHANGES) for new features and bug corrections or use -h option to get help. Read [USING.md](https://github.com/geosoft1/tools/blob/master/HOW.md) for more details.
 	
 * **Use**
 
     Download anywhere and run from your file browser with double click. If you prefer Terminal go to the directory with the script and run
 
-        ./Install.sh
+        ./Install.sh -h
 
-    To add git support run from Terminal
-
-        ./Install.sh -g
-
-    To uninstall use
-
-        ./Install.sh -u
+    To see all options.
 
     Run periodicaly or if compiler/ide versions change to update the sistem.
     Projects are not affected if you overinstall.
@@ -48,19 +42,3 @@ This project is third party. For support see http://golang.org and https://githu
 	For Nemo use:
 	
         gsettings set org.nemo.preferences executable-text-activation ask
-
-* **Using git from liteide**
-
-    `` ctrl+` `` will provide a list of git commands like
-
-        git add
-        git commit -m "-" -a
-        git push
-        
-        clone githubusername/projectname (e.g. clone geosoft1/tools)
-
-    Remember to use commands only if a file from project is open in editor, otherwise will fail. Except aliases and scripts from this rule (e.g. clone command).
-
-**Important!**
-
-If you update to new version of go compiler some programs dependencies like sql driver **must** be get and compiled again. Do Build|Get in LiteIDE if your program doesn't compile.
