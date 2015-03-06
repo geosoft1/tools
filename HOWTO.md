@@ -11,10 +11,10 @@ Gopei will install last versions of [golang](http://golang.org) compiler and [Li
         ./Install.sh -g
 
 This option activate full mode (clasic+git suport). You must have a git server account.
-Default is github.com. You will be asked for user and email and Gopei will generate a ssh
-key for use with git server. Copy sugested public key to git server and you are ready
-for colaborative work.
-Also you will be asked for sudo password. Don't worry about, is only for installing git.
+Default is github.com.
+You will be asked for sudo password. Don't worry about, is only for installing git.
+Next you will be asked for user and email and Gopei will generate a ssh key for use with git server. Copy sugested public key to git server and you are ready for colaborative work.
+Also you must provide a password. You will be asked for this password at any push on server. You may set no password but is unsecured.
 
 Note that if you reinstall with -g Gopei will look for existing ssh key and git profile to not to override them.
 
