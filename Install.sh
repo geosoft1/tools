@@ -202,7 +202,7 @@ wget -q https://raw.githubusercontent.com/geosoft1/tools/master/liteide.ini.mini
 sed -i "s#\$a#$a#g; s#\$GOPATH#$GOPATH#g; s#\$GOROOT#$GOROOT#g; s#\$HOME#$HOME#g" $HOME/.config/liteide/liteide.ini.mini
 #add customizer command
 
-CUSTOMIZER="cp .config/liteide/liteide.ini.mini .config/liteide/liteide.ini;"
+CUSTOMIZER="cp $HOME/.config/liteide/liteide.ini.mini $HOME/.config/liteide/liteide.ini;"
 
 #create generic .desktop file on desktop
 echo -e "[Desktop Entry]
