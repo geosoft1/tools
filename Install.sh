@@ -159,7 +159,7 @@ if [ -n "$GITSUPPORT" ]; then
       #echo -e "[user]\n\tname = $GITUSER\n\temail = $EMAIL" > $HOME/.gitconfig
    else
        #get GITUSER if .gitconfig exist
-       GITUSER=`awk 'NR==2 {print $3}' .gitconfig`
+       GITUSER=`awk 'NR==2 {print $3}' $HOME/.gitconfig`
    fi
    #set github.com as defaul git server
    if [ -z "$GITSERVER" ]; then GITSERVER="github.com"; fi
