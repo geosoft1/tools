@@ -33,7 +33,7 @@ This project is third party. For support see http://golang.org and https://githu
 
     Run periodicaly or if compiler/ide versions change to update the sistem.
     Projects are not affected if you overinstall.
-    Tested on Ubuntu 12.04,14.04,14.10.
+    Tested on Ubuntu 12.04,14.04,14.10 32/64.
 	
     **Note:** Ubuntu 14.04+ need script execute activation so run from Terminal
 	

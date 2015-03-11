@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-VERSION=1.0.4.0
+VERSION=1.0.4.1
 
 #B0006
 set -e
@@ -26,30 +26,35 @@ if [ $TERM == "dumb" ]; then xterm -hold -e $0; fi
 
 clear
 
-echo -e "Golang Programming Environment Installer\nCopyright (C) 2014  geosoft1@gmail.com"
+echo -e "Golang Programming Environment Installer\nCopyright (C) 2014,2015  geosoft1@gmail.com"
 
-case $1 in
--g|--github)
-   GITSUPPORT=yes
-   echo $VERSION" Gopei shell";;
--h|--help)
+while getopts ":cghu:v" OPTION; do
+#avoid error if -u $OPTION=: and $OPTARG=u
+if [ "$OPTION" == ":" ]; then OPTION=$OPTARG; fi
+case $OPTION in
+c|classroom)
+   CLASSROOM=yes;;
+g|github)
+   GITSUPPORT=yes;;
+h|help)
    echo "Usage: install [options]"
    echo
    echo "Options:"
+   echo "-c, --classroom     enable classroom mode"
    echo "-g, --git           enable git suppport"
    echo "-h, --help          show this help message and exit"
    echo "-u, --uninstall     uninstall"
-   echo "-ua                 uninstall all, including .gitconfig file and .ssh folder"
+   echo "--uninstall --all   include .gitconfig file and .ssh folder"
    echo "-v, --version       version"
    exit;;
--u|-ua|--uninstall)
+u|uninstall)
    rm -rf $HOME/liteide/
    rm -rf $HOME/go/
    rm -rf $HOME/.local/share/applications/liteide.desktop
    rm -rf $HOME/.local/share/data/liteide/
    rm -rf $HOME/.config/liteide/
    rm -rf $HOME/.fonts/MONACO.TTF
-   if [ "$1" == "-ua" ]; then
+   if [ "$OPTARG" == "--all" ]; then
       rm -f $HOME/.gitconfig
       rm -rf $HOME/.ssh/
    fi
@@ -59,10 +64,11 @@ case $1 in
    sed --in-place '/export GOPATH=$HOME\/go-programs/d' $HOME/.bashrc
    echo "Uninstalled."
    exit;;
--v|--version)
+v|-version)
    echo $VERSION
    exit;;
 esac
+done
 
 #get last version of go compiler (e.g. go1.3.3.)
 #B0009
@@ -198,18 +204,21 @@ echo "Create liteide.ini.mini"
 #create directory for liteide.ini.mini
 mkdir -p $HOME/.config/liteide
 #get liteide.ini.mini from github.com
-wget -q https://raw.githubusercontent.com/geosoft1/tools/master/liteide.ini.mini -O $HOME/.config/liteide/liteide.ini.mini
-sed -i "s#\$a#$a#g; s#\$GOPATH#$GOPATH#g; s#\$GOROOT#$GOROOT#g; s#\$HOME#$HOME#g" $HOME/.config/liteide/liteide.ini.mini
-#add customizer command
-
-CUSTOMIZER="cp $HOME/.config/liteide/liteide.ini.mini $HOME/.config/liteide/liteide.ini;"
+wget -q https://raw.githubusercontent.com/geosoft1/tools/master/liteide.ini.mini -O $HOME/.config/liteide/liteide.ini
+sed -i "s#\$a#$a#g; s#\$GOPATH#$GOPATH#g; s#\$GOROOT#$GOROOT#g; s#\$HOME#$HOME#g" $HOME/.config/liteide/liteide.ini
+if [ "$CLASSROOM" == "yes" ]; then
+   #B0016
+   cp $HOME/.config/liteide/liteide.ini $HOME/.config/liteide/liteide.ini.mini
+   #add customizer command
+   CUSTOMIZER="cp $HOME/.config/liteide/liteide.ini.mini $HOME/.config/liteide/liteide.ini;"
+fi
 
 #create generic .desktop file on desktop
 echo -e "[Desktop Entry]
 Version=1.0
 Name=LiteIDE
 Comment=LiteIDE is a simple, open source, cross-platform Go IDE. 
-Exec=sh -c '$CUSTOMIZER eval \`ssh-agent -s\`; $HOME/liteide/bin/liteide'
+Exec=sh -c 'eval \`ssh-agent -s\`;$CUSTOMIZER$HOME/liteide/bin/liteide'
 Icon=$GOROOT/doc/gopher/gophercolor.png
 Type=Application" > ${XDG_DESKTOP_DIR}/liteide.desktop
 

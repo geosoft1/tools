@@ -43,6 +43,9 @@ Only a very limited set of project pages are available until the main website re
            launch Gopei shell with github support
            stop supporting Unity2d
 06.03.2015 user manual
+09.03.2015 (1.0.4.1) #B0016 $HOME in customizer path
+           add combined switch in parsing arguments and classroom mode
+           thanks Alin Andrei <andrew@webupd8.org>
 
 
 TEST REPORT:

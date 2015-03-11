@@ -1,12 +1,18 @@
 ###Gopei Shell User Manual
 ====
-**Install in clasic mode**
+**Install in clasic session mode**
 
         ./Install.sh
 
 Gopei will install last versions of [golang](http://golang.org) compiler and [LiteIDE](https://github.com/visualfc/liteide). Also will link go compiler with  LiteIDE.
 
-**Install in full mode**
+**Install in classroom mode**
+
+        ./Install.sh -c
+
+This option activate classroom mode. No settings are preserved after closing LiteIDE.
+
+**Install in full mode (Gopei Shell mode)**
 
         ./Install.sh -g
 
@@ -26,9 +32,11 @@ Uninstall all but not ssh keys and git profile.
 
 **Uninstall all**
 
-        ./Install.sh -ua
+        ./Install.sh -u all
 
 Uninstall all and ssh keys (.ssh folder) and git profile (.gitconfig file). Be carefuly with this option if you have other keys in .ssh folder.
+
+Note that, starting with 1.0.4.1 options can be combined (e.g -cg).
 
 **Important!** If you update to new version of go compiler some programs dependencies like sql driver **must** be get and compiled again. Do Build|Get in LiteIDE if your program doesn't compile.
 
@@ -41,6 +49,10 @@ I used Ubuntu as main platform and best functionality is on Unity interface. Rig
 * GOPATH
 
 In full mode also you will see the new Gopei Shell icon :-)
+
+Note that are sistems where Qt may conflict. Just remove Qt from LiteIDE if wont start.
+
+        rm liteide/lib/liteide/libQt*.*
 
 **Using git from LiteIDE**
 
