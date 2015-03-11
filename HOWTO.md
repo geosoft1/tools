@@ -12,7 +12,7 @@ Gopei will install last versions of [golang](http://golang.org) compiler and [Li
 
 This option activate classroom mode. No settings are preserved after closing LiteIDE.
 
-**Install in full mode (Gopei Shell mode)**
+**Install in full mode**
 
         ./Install.sh -g
 
@@ -20,7 +20,7 @@ This option activate full mode (clasic+git suport). You must have a git server a
 Default is github.com.
 You will be asked for sudo password. Don't worry about, is only for installing git.
 Next you will be asked for user and email and Gopei will generate a ssh key for use with git server. Copy sugested public key to git server and you are ready for colaborative work.
-Also you must provide a password. You will be asked for this password at any push on server. You may set no password but is unsecured.
+Also you must provide a password. You will be asked for this password at any push on server. You may set no password but is unsecure.
 
 Note that if you reinstall with -g Gopei will look for existing ssh key and git profile to not override them.
 
@@ -36,13 +36,15 @@ Uninstall all but not ssh keys and git profile.
 
 Uninstall all and ssh keys (.ssh folder) and git profile (.gitconfig file). Be carefuly with this option if you have other keys in .ssh folder.
 
+The uninstall process don't delete go-programs folder.
+
 Note that, starting with 1.0.4.1 options can be combined (e.g -cg).
 
 **Important!** If you update to new version of go compiler some programs dependencies like sql driver **must** be get and compiled again. Do Build|Get in LiteIDE if your program doesn't compile.
 
 **After install**
 
-I used Ubuntu as main platform and best functionality is on Unity interface. Right click on Gopei launcher icon show some usefull options.
+If you use Ubuntu Unity interface right click on Gopei launcher icon show some usefull options.
 
 * golang.org
 * HTTP server (localhost:8080)
@@ -65,7 +67,7 @@ Note that are sistems where Qt may conflict. Just remove Qt from LiteIDE if wont
         git push origin master             (if is first push on repository)
         clone githubusername/projectname   (e.g. clone geosoft1/tools)
 
-These commands are generally sufficient but it is possible to receive some suggestions from git server in certain situations (like git pull). Use those commands when you will be asked.
+These commands are generally sufficient but it is possible to receive some suggestions from git server in certain situations. Use those commands when you will be asked.
 
 Remember to use commands only if a file from project is open in editor, otherwise will fail. Except aliases and scripts from this rule (e.g. clone command).
 
