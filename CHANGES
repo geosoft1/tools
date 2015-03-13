@@ -67,10 +67,11 @@ TODO/PROPOSALS:
  sense 1:GoPEI (Go Programming Environment Installer)
  sense 2:Gopei Sho it's also a black belt kata of karate Shuri-ryu style
      (http://en.wikipedia.org/wiki/Shuri-ryu#Forms)
-     + name and logo must represent the ideea of the program, power and elegance
+     +name and logo must represent the ideea of the program, power and elegance
 -check new versions of golang compiler and liteide at liteide start and ask for update
 -archiving projects and backup
 -liteide don't start on Kubuntu (https://github.com/visualfc/liteide/issues/243)
 -add chrome application mode on launcher
      (google-chrome --app=http://localhost:8080)
 -add github account on launcher
+-liteide don't start if are Qt versions in conflict

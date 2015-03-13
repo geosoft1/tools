@@ -21,7 +21,7 @@ This project is third party. For support see http://golang.org and https://githu
     
     See [CHANGES](https://github.com/geosoft1/tools/blob/master/CHANGES) for new features and bug corrections or use -h option to get help.
 
-	Read [User Manual](https://github.com/geosoft1/tools/blob/master/HOWTO.md) for more details.
+	Read the [User Manual](https://github.com/geosoft1/tools/blob/master/HOWTO.md) for more details.
 	
 * **Use**
 
