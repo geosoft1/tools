@@ -190,8 +190,10 @@ echo -e "git add
 git commit -m \"-\" -a
 git push
 git pull
-clone" >$HOME/liteide/share/liteide/litebuild/command/go.api
-#implement git clone support
+clone
+repo" >$HOME/liteide/share/liteide/litebuild/command/go.api
+
+#git clone repository
 echo '#!/bin/bash
 if [ -z $1 ]; then
    echo "Use: clone githubusername/projectname"
@@ -199,6 +201,24 @@ if [ -z $1 ]; then
 fi
 git clone git@github.com:$1.git '$GOPATH'/src/github.com/$1' > $HOME/liteide/bin/clone
 chmod +x $HOME/liteide/bin/clone
+
+#git create repository
+echo -e '#!/bin/bash
+if [ -z $1 ]; then
+   echo "Use: repo githubpassword"
+   exit
+fi
+GITUSER=`awk '\'NR==2 {print \$3}\'' $HOME/.gitconfig`
+GITSERVER=`awk '\'NR==3 {print \$3}\'' $HOME/.gitconfig`
+REPO=${PWD##*/}
+PASSWORD=$1
+curl -u $GITUSER:$PASSWORD https://api.github.com/user/repos -d '\''{"name":"'\''$REPO'\''"}'\'' >/dev/null 2>&1
+git init
+git add *
+git commit -m "first commit"
+git remote add origin git@github.com:$GITUSER/$REPO.git
+git push -u origin master' > $HOME/liteide/bin/repo
+chmod +x $HOME/liteide/bin/repo
 
 echo "Create liteide.ini.mini"
 #create directory for liteide.ini.mini
