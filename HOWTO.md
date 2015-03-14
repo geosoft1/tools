@@ -92,7 +92,12 @@ If the program have dependecies do go get command before go build
 * Open Terminal and run `` ./Install.sh -g ``
 * Enter user and email used with github
 * Copy suggested key into github page
-* Create a new repository on github
-* Start LiteIDE, clone existing project or create new
-* Use `` git add <filename> `` to add files to your repository
-* Use `` git commit -m "-" -a `` and `` git push `` to push files to github. Note that first time you will need to use `` git push origin master ``.
+* Start LiteIDE and create new project Go1 Simple Project
+* At Name write `` github.com/githubuser/projectname ``
+* Open `` main.go `` from this project
+* Use `` repo gitpassword ``. You will be asked for password again. Now your project will became a repo on github :-)
+* Use `` git add filename `` to add other files to your repo as you wish
+* Use `` git commit -m "-" -a `` and `` git push `` to push files to github. Note that first time you will need to use `` git push origin master `` but not if you use `` repo `` command.
+* Use `` clone github.com/projectname `` to clone projects.
+
+Enjoy.
