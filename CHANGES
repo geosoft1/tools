@@ -46,7 +46,7 @@ Only a very limited set of project pages are available until the main website re
 09.03.2015 (1.0.4.1) #B0016 $HOME in customizer path
            add combined switch in parsing arguments and classroom mode
            thanks Alin Andrei <andrew@webupd8.org> for suggestions
-
+14.03.2015 add repo command.
 
 TEST REPORT:
 DATE         RELEASE    GO   LITEIDE   RESULT  BUGS
