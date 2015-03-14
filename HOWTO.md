@@ -66,6 +66,7 @@ Note that are sistems where Qt may conflict. Just remove Qt from LiteIDE if wont
         git pull
         git push origin master             (if is first push on repository)
         clone githubusername/projectname   (e.g. clone geosoft1/tools)
+        repo gitpassword                   (create repo from your current project directory)
 
 These commands are generally sufficient but it is possible to receive some suggestions from git server in certain situations. Use those commands when you will be asked.
 
