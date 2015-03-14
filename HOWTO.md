@@ -4,7 +4,7 @@
 
         ./Install.sh
 
-Gopei will install last versions of [golang](http://golang.org) compiler and [LiteIDE](https://github.com/visualfc/liteide). Also will link go compiler with  LiteIDE.
+Gopei will install last versions of [golang](http://golang.org) compiler and [LiteIDE](https://github.com/visualfc/liteide). Also will link go compiler with  LiteIDE. No root rights are required.
 
 **Install in classroom mode**
 
