@@ -30,12 +30,12 @@ Only a very limited set of project pages are available until the main website re
 20.12.2014 #B0012 setup GOROOT and PATH in /home/george/liteide/share/liteide/liteenv/sistem.env
            fix: proper LiteIDE support link, thanks Dobrosław Żybort
 27.12.2014 add git clone support (1.0.3.6)
-29.12.2014 (1.0.3.7) add uninstall option -u.
+29.12.2014 (1.0.3.7) add uninstall option -u
            liteide.ini.mini become hard to maintain inside the script. get it from github.
 21.01.2015 (1.0.3.8)
            #B0013 add GOPATH,GOROOT to PATH to use go compiler from terminal
            thanks <github.com/davidhtims> and <github.com/pavesi>
-25.01.2015 add help option -h.
+25.01.2015 add help option -h
 28.01.2015 #B0014 use xdg-open to open default applications
 05.02.2015 (1.0.3.9)
            #B0015 sourceforge change name at re-upload
@@ -46,7 +46,7 @@ Only a very limited set of project pages are available until the main website re
 09.03.2015 (1.0.4.1) #B0016 $HOME in customizer path
            add combined switch in parsing arguments and classroom mode
            thanks Alin Andrei <andrew@webupd8.org> for suggestions
-14.03.2015 add repo command.
+14.03.2015 add repo command
 19.03.2015 add github.com/gituser on Unity launcher
 
 TEST REPORT:
@@ -74,5 +74,5 @@ TODO/PROPOSALS:
 -liteide don't start on Kubuntu (https://github.com/visualfc/liteide/issues/243)
 -add chrome application mode on launcher
      (google-chrome --app=http://localhost:8080)
--add github account on launcher
++add github account on launcher
 -liteide don't start if are Qt versions in conflict
