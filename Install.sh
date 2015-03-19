@@ -158,8 +158,8 @@ if [ -n "$GITSUPPORT" ]; then
       git config --global user.email "$EMAIL"
       #echo -e "[user]\n\tname = $GITUSER\n\temail = $EMAIL" > $HOME/.gitconfig
    else
-       #get GITUSER if .gitconfig exist
-       GITUSER=`awk 'NR==2 {print $3}' $HOME/.gitconfig`
+      #get GITUSER if .gitconfig exist
+      GITUSER=`awk 'NR==2 {print $3}' $HOME/.gitconfig`
    fi
    #set github.com as defaul git server
    if [ -z "$GITSERVER" ]; then GITSERVER="github.com"; fi
@@ -252,7 +252,11 @@ ubuntu*)
    mkdir -p $HOME/.local/share/applications/
    #B0014
    #extend .desktop file with nice options
-   echo -e "Actions=golang;http;gopath
+   if [ -f $HOME/.gitconfig ]; then
+      #get GITUSER if .gitconfig exist
+      GITUSER=`awk 'NR==2 {print $3}' $HOME/.gitconfig`
+   fi
+   echo -e "Actions=golang;http;gopath;github
 \n[Desktop Action golang]
 Name=golang.org
 Exec=xdg-open http://golang.org/pkg
@@ -261,7 +265,10 @@ Name=HTTP server (localhost:8080)
 Exec=xdg-open http://localhost:8080
 \n[Desktop Action gopath]
 Name=GOPATH
-Exec=xdg-open go-programs/src" >> ${XDG_DESKTOP_DIR}/liteide.desktop
+Exec=xdg-open go-programs/src
+\n[Desktop Action github]
+Name=github.com/$GITUSER
+Exec=xdg-open http://github.com/$GITUSER" >> ${XDG_DESKTOP_DIR}/liteide.desktop
    #add .desktop file to dash and integrate with unity
    mv ${XDG_DESKTOP_DIR}/liteide.desktop $HOME/.local/share/applications
    #get the current launcher favorites list

@@ -47,6 +47,7 @@ Only a very limited set of project pages are available until the main website re
            add combined switch in parsing arguments and classroom mode
            thanks Alin Andrei <andrew@webupd8.org> for suggestions
 14.03.2015 add repo command.
+19.03.2015 add github.com/gituser on Unity launcher
 
 TEST REPORT:
 DATE         RELEASE    GO   LITEIDE   RESULT  BUGS
