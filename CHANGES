@@ -12,12 +12,12 @@
            #B0002 Ubuntu 14.04 report i686
            #B0003 no network connection (1.0.3.2)
 08.09.2014 (1.0.3.3)
-           #B0004 use https instead http in download link.thanks Andrew Gerrand <nf@wh3rd.net>
+           #B0004 use https instead http in download link.thanks to Andrew Gerrand <nf@wh3rd.net>
            #B0005 implement XDG_DOWNLOAD_DIR (http://www.freedesktop.org/wiki/Software/xdg-user-dirs/)
-		   thanks Alin Andrei <andrew@webupd8.org>
+		   thanks to Alin Andrei <andrew@webupd8.org>
 09.09.2014 #B0006 script stop on error
-           #B0007  uname -m instead -i. thanks Dave Cheney <dave@cheney.net>
-10.09.2014 #B0008 use XDG_DESKTOP_DIR. thanks Victoralm <http://blog.victoralm.com>
+           #B0007  uname -m instead -i. thanks to Dave Cheney <dave@cheney.net>
+10.09.2014 #B0008 use XDG_DESKTOP_DIR. thanks to Victoralm <http://blog.victoralm.com>
 02.10.2014 bugs corrections (1.0.3.4)
            #B0009 corrected regular expression to match subversions
 01.12.2014 #B0010 wrong escaped characters in window geometry (1.0.3.5)
@@ -28,13 +28,13 @@ http://sourceforge.net/error-404.html?project=liteide
 The sourceforge.net website is temporarily in static offline mode.
 Only a very limited set of project pages are available until the main website returns to service.
 20.12.2014 #B0012 setup GOROOT and PATH in /home/george/liteide/share/liteide/liteenv/sistem.env
-           fix: proper LiteIDE support link, thanks Dobrosław Żybort
+           fix: proper LiteIDE support link, thanks to Dobrosław Żybort
 27.12.2014 add git clone support (1.0.3.6)
 29.12.2014 (1.0.3.7) add uninstall option -u
            liteide.ini.mini become hard to maintain inside the script. get it from github.
 21.01.2015 (1.0.3.8)
            #B0013 add GOPATH,GOROOT to PATH to use go compiler from terminal
-           thanks <github.com/davidhtims> and <github.com/pavesi>
+           thanks to <github.com/davidhtims> and <github.com/pavesi>
 25.01.2015 add help option -h
 28.01.2015 #B0014 use xdg-open to open default applications
 05.02.2015 (1.0.3.9)
@@ -45,7 +45,7 @@ Only a very limited set of project pages are available until the main website re
 06.03.2015 user manual
 09.03.2015 (1.0.4.1) #B0016 $HOME in customizer path
            add combined switch in parsing arguments and classroom mode
-           thanks Alin Andrei <andrew@webupd8.org> for suggestions
+           thanks to Alin Andrei <andrew@webupd8.org> for suggestions
 14.03.2015 add repo command
 19.03.2015 add github.com/gituser on Unity launcher
 
@@ -69,7 +69,7 @@ TODO/PROPOSALS:
  sense 2:Gopei Sho it's also a black belt kata of karate Shuri-ryu style
      (http://en.wikipedia.org/wiki/Shuri-ryu#Forms)
      +name and logo must represent the ideea of the program, power and elegance
-	 thanks my daughter for the idea
+     thanks to my daughter Andreea for the idea
 -check new versions of golang compiler and liteide at liteide start and ask for update
 -archiving projects and backup
 -liteide don't start on Kubuntu (https://github.com/visualfc/liteide/issues/243)
