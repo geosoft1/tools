@@ -110,5 +110,3 @@ If the program have dependecies do go get command before go build
 * Use `` git add filename `` to add other files to your repo as you wish
 * Use `` git commit -m "-" -a `` and `` git push `` to push files to github. Note that first time you will need to use `` git push origin master `` but not if you use `` repo `` command.
 * Use `` clone github.com/projectname `` to clone projects.
-
-Enjoy.
