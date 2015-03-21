@@ -72,6 +72,16 @@ These commands are generally sufficient but it is possible to receive some sugge
 
 Remember to use commands only if a file from project is open in editor, otherwise will fail. Except aliases and scripts from this rule (e.g. clone command).
 
+**Troubleshooting**
+
+        fatal: remote error: 
+          GitHub is offline for maintenance. See http://status.github.com for more info.
+
+Github is under maintenance. Open github.com and you will see
+
+        No server is currently available to service your request.
+        Sorry about that. Please try refreshing and contact us if the problem persists.
+
 **Using go from Terminal**
 
 Is strongly recomanded to work in LiteIDE but Gopei set environment for go in .bashrc so is posible to use Terminal.
