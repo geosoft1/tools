@@ -204,20 +204,18 @@ chmod +x $HOME/liteide/bin/clone
 
 #git create repository
 echo -e '#!/bin/bash
-if [ -z $1 ]; then
-   echo "Use: repo githubpassword"
-   exit
-fi
 GITUSER=`awk '\'NR==2 {print \$3}\'' $HOME/.gitconfig`
-GITSERVER=`awk '\'NR==3 {print \$3}\'' $HOME/.gitconfig`
+echo -n "Enter your github.com/$GITUSER password:"
+read PASSWORD
 REPO=${PWD##*/}
-PASSWORD=$1
+echo "Create repository github.com/$GITUSER/$REPO"
 curl -u $GITUSER:$PASSWORD https://api.github.com/user/repos -d '\''{"name":"'\''$REPO'\''"}'\'' >/dev/null 2>&1
 git init
 git add *
 git commit -m "first commit"
 git remote add origin git@github.com:$GITUSER/$REPO.git
-git push -u origin master' > $HOME/liteide/bin/repo
+git push -u origin master
+echo "Done."' > $HOME/liteide/bin/repo
 chmod +x $HOME/liteide/bin/repo
 
 echo "Create liteide.ini.mini"

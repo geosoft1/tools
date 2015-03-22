@@ -66,11 +66,11 @@ Note that are sistems where Qt may conflict. Just remove Qt from LiteIDE if wont
         git pull                           pull changes from github
         git push origin master             push changes first time
         clone githubusername/projectname   (e.g. clone geosoft1/tools)
-        repo gitpassword                   create repo from your current project directory
+        repo                               create repo from your current project directory
 
 These commands are generally sufficient but it is possible to receive some suggestions from git server in certain situations. Use those commands when you will be asked.
 
-Remember to use commands only if a file from project is open in editor, otherwise will fail. Except aliases and scripts from this rule (e.g. clone command).
+Remember to use commands only if a file from project is open in editor, otherwise will fail. Except from this rule clone command.
 
 **Troubleshooting**
 
@@ -106,7 +106,7 @@ If the program have dependecies do go get command before go build
 * Start LiteIDE and create new project Go1 Simple Project
 * At Name write `` github.com/githubuser/projectname ``
 * Open `` main.go `` from this project
-* Use `` repo gitpassword ``. You will be asked for password again. Now your project will became a repo on github :-)
+* Use `` repo ``. You will be asked for password twice. Now your project will became a repo on github :-)
 * Use `` git add filename `` to add other files to your repo as you wish
 * Use `` git commit -m "-" -a `` and `` git push `` to push files to github. Note that first time you will need to use `` git push origin master `` but not if you use `` repo `` command.
 * Use `` clone github.com/projectname `` to clone projects.
