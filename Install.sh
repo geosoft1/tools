@@ -195,7 +195,7 @@ clone
 repo" >$HOME/liteide/share/liteide/litebuild/command/go.api
 
 #add git clone repository command (external script)
-wget -q https://raw.githubusercontent.com/geosoft1/tools/master/scripts/clone -O $HOME/liteide/bin/
+wget -q https://raw.githubusercontent.com/geosoft1/tools/master/scripts/clone -O $HOME/liteide/bin/clone
 chmod +x $HOME/liteide/bin/clone
 
 #add git create repository command (external script)
