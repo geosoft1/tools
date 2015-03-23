@@ -10,7 +10,7 @@ echo -n "Enter your github.com/$GITUSER password:"
 read PASSWORD
 err=`curl -s -u $GITUSER:$PASSWORD https://api.github.com/user/repos -d '{"name":"'$REPO'"}' | awk '/message/ { gsub(/^[\t]+|[\",]/,"");print }'`
 if [ "$err" != "" ]; then
-   echo -n $err;
+   echo -n $err
    echo 
    exit
 fi
