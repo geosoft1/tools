@@ -183,48 +183,23 @@ if [ -n "$GITSUPPORT" ]; then
    #create $GITSERVER in $GOPATH
    mkdir -p $GOPATH/src/$GITSERVER/$GITUSER
    #show gopei shell mode :-)
-   wget -q https://raw.githubusercontent.com/geosoft1/tools/master/gopher/gopeicolor.png -O  $GOROOT/doc/gopher/gophercolor.png
+   wget -q https://raw.githubusercontent.com/geosoft1/tools/master/gopher/gopeicolor.png -O $GOROOT/doc/gopher/gophercolor.png
 fi
 #----------------------------------------------------------------------------------
-echo -e "git add
+#build essential git commands list
+echo -e "git add *
 git commit -m \"-\" -a
 git push
 git pull
 clone
 repo" >$HOME/liteide/share/liteide/litebuild/command/go.api
 
-#git clone repository
-echo '#!/bin/bash
-if [ -z $1 ]; then
-   echo "Use: clone githubusername/projectname"
-   exit
-fi
-git clone git@github.com:$1.git '$GOPATH'/src/github.com/$1' > $HOME/liteide/bin/clone
+#add git clone repository command (external script)
+wget -q https://raw.githubusercontent.com/geosoft1/tools/master/scripts/clone -O $HOME/liteide/bin/
 chmod +x $HOME/liteide/bin/clone
 
-#git create repository
-echo -e '#!/bin/bash
-GITUSER=`awk '\'NR==2 {print \$3}\'' $HOME/.gitconfig`
-REPO=${PWD##*/}
-echo -n "Create repository github.com/$GITUSER/$REPO [y/n]"
-read opt
-if [ "$opt" == "n" ]; then
-   exit;
-fi
-echo -n "Enter your github.com/$GITUSER password:"
-read PASSWORD
-#curl -u $GITUSER:$PASSWORD https://api.github.com/user/repos -d '\''{"name":"'\''$REPO'\''"}'\'' >/dev/null 2>&1
-err=`curl -s -u $GITUSER:$PASSWORD https://api.github.com/user/repos -d '\''{"name":"'\''$REPO'\''"}'\'' | awk '\''/message/ { gsub(/^[\\t]+|[\",]/,"");print }'\''`
-if [ "$err" != "" ]; then
-   echo -n $err;
-   exit;
-fi
-git init
-git add *
-git commit -m "first commit"
-git remote add origin git@github.com:$GITUSER/$REPO.git
-git push -u origin master
-echo "Done."' > $HOME/liteide/bin/repo
+#add git create repository command (external script)
+wget -q https://raw.githubusercontent.com/geosoft1/tools/master/scripts/repo -O $HOME/liteide/bin/repo
 chmod +x $HOME/liteide/bin/repo
 
 echo "Create liteide.ini.mini"
