@@ -4,7 +4,7 @@ REPO=${PWD##*/}
 echo -n "Create repository github.com/$GITUSER/$REPO [y/n]"
 read opt
 if [ "$opt" == "n" ]; then
-   exit;
+   exit
 fi
 echo -n "Enter your github.com/$GITUSER password:"
 read PASSWORD
@@ -12,7 +12,7 @@ err=`curl -s -u $GITUSER:$PASSWORD https://api.github.com/user/repos -d '{"name"
 if [ "$err" != "" ]; then
    echo -n $err;
    echo 
-   exit;
+   exit
 fi
 git init
 git add *
