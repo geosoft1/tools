@@ -1,0 +1,7 @@
+#!/bin/bash
+if [ -z $1 ]; then
+   echo "Use: clone githubusername/projectname"
+   exit
+fi
+git clone git@github.com:$1.git /home/george/go-programs/src/github.com/$1
+
