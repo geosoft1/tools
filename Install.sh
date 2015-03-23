@@ -205,11 +205,20 @@ chmod +x $HOME/liteide/bin/clone
 #git create repository
 echo -e '#!/bin/bash
 GITUSER=`awk '\'NR==2 {print \$3}\'' $HOME/.gitconfig`
+REPO=${PWD##*/}
+echo -n "Create repository github.com/$GITUSER/$REPO [y/n]"
+read opt
+if [ "$opt" == "n" ]; then
+   exit;
+fi
 echo -n "Enter your github.com/$GITUSER password:"
 read PASSWORD
-REPO=${PWD##*/}
-echo "Create repository github.com/$GITUSER/$REPO"
-curl -u $GITUSER:$PASSWORD https://api.github.com/user/repos -d '\''{"name":"'\''$REPO'\''"}'\'' >/dev/null 2>&1
+#curl -u $GITUSER:$PASSWORD https://api.github.com/user/repos -d '\''{"name":"'\''$REPO'\''"}'\'' >/dev/null 2>&1
+err=`curl -s -u $GITUSER:$PASSWORD https://api.github.com/user/repos -d '\''{"name":"'\''$REPO'\''"}'\'' | awk '\''/message/ { gsub(/^[\\t]+|[\",]/,"");print }'\''`
+if [ "$err" != "" ]; then
+   echo -n $err;
+   exit;
+fi
 git init
 git add *
 git commit -m "first commit"
