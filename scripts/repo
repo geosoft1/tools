@@ -6,7 +6,7 @@ read opt
 if [ "$opt" == "n" ]; then
    exit
 fi
-echo -n "Enter your github.com/$GITUSER password:"
+echo -n "Password:"
 read PASSWORD
 err=`curl -s -u $GITUSER:$PASSWORD https://api.github.com/user/repos -d '{"name":"'$REPO'"}' | awk '/message/ { gsub(/^[\t]+|[\",]/,"");print }'`
 if [ "$err" != "" ]; then
