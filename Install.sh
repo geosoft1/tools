@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-VERSION=1.0.4.2
+VERSION=1.0.4.3
 
 #B0006
 set -e
@@ -174,7 +174,11 @@ if [ -n "$GITSUPPORT" ]; then
       #add a new deploy key on github with api (https://developer.github.com/v3/)
       echo -n "Password:"; read PASSWORD
       KEY=`cat $HOME/.ssh/id_$KEY_TYPE.pub`
-      curl -s -u $GITUSER:$PASSWORD https://api.github.com/user/keys -d '{"title":"'$EMAIL'", "key":"'"${KEY}"'"}'
+      err=`curl -s -u $GITUSER:$PASSWORD https://api.github.com/user/keys -d '{"title":"'$EMAIL'", "key":"'"${KEY}"'"}'| awk '/message/ { gsub(/^[\t]+|[\",]/,"");print }'`
+      if [ "$err" != "" ]; then
+         echo -n $err
+         echo 
+      fi
    fi
    #bug workaround https://help.github.com/articles/error-permission-denied-publickey
    eval `ssh-agent -s` > /dev/null

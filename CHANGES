@@ -49,7 +49,7 @@ Only a very limited set of project pages are available until the main website re
 14.03.2015 add repo command
 19.03.2015 add github.com/gituser on Unity launcher
 23.03.2014 (1.0.4.2) move clone and repo scripts to github
-29.03.2015 add automatic deploy key to github
+29.03.2015 (1.0.4.3) add automatic deploy key to github
 
 TEST REPORT:
 DATE         RELEASE    GO   LITEIDE   RESULT  BUGS
