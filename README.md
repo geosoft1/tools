@@ -1,6 +1,6 @@
-###tools
+###GoPEI
 ====
-**Install.sh** - [golang](http://golang.org) compiler and [liteide](https://github.com/visualfc/liteide) simple installer for Ubuntu.
+**GoPEI** is a simple installer for [golang](http://golang.org) compiler and [liteide](https://github.com/visualfc/liteide) on Ubuntu.
 
 This project is third party. For support see http://golang.org and https://github.com/visualfc/liteide
 
