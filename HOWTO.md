@@ -42,7 +42,7 @@ Uninstall all but not ssh keys and git profile.
 
 **Uninstall all**
 
-        ./Install.sh -u all
+        ./Install.sh -u --all
 
 Uninstall all and ssh keys (.ssh folder) and git profile (.gitconfig file). Be carefuly with this option if you have other keys in .ssh folder.
 
