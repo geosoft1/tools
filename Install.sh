@@ -171,7 +171,7 @@ if [ -n "$GITSUPPORT" ]; then
       #echo -e "Copy next key to $GITSERVER/settings/ssh and press any key\n"
       #cat $HOME/.ssh/id_$KEY_TYPE.pub | while read -n 64 i; do echo $i; done
       #read
-      #copy key on github with api
+      #add a new deploy key on github with api (https://developer.github.com/v3/)
       echo -n "Password:"; read PASSWORD
       KEY=`cat $HOME/.ssh/id_$KEY_TYPE.pub`
       curl -s -u $GITUSER:$PASSWORD https://api.github.com/user/keys -d '{"title":"'$EMAIL'", "key":"'"${KEY}"'"}'
