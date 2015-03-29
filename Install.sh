@@ -171,6 +171,9 @@ if [ -n "$GITSUPPORT" ]; then
       echo -e "Copy next key to $GITSERVER/settings/ssh and press any key\n"
       cat $HOME/.ssh/id_$KEY.pub | while read -n 64 i; do echo $i; done
       read
+	  #copy key on github with api
+      #$KEY=`cat $HOME/.ssh/id_$KEY.pub | while read -n 64 i; do echo $i; done`
+	  #curl -s -u $GITUSER:$PASSWORD https://api.github.com/user/keys -d '{"title":"'$EMAIL'","key":"'$KEY'"}'
    fi
    #bug workaround https://help.github.com/articles/error-permission-denied-publickey
    eval `ssh-agent -s` > /dev/null
