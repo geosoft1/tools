@@ -32,6 +32,8 @@ Next you will be asked for Github account password. Do not confuse with previous
 
 Note that if you reinstall with -g Gopei will look for existing ssh key and git profile to not override them.
 
+Remember that sometime key deploy can be very slow during github mentenance. Just be patience or reinstall later.
+
 **Uninstall**
 
         ./Install.sh -u
