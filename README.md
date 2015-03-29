@@ -27,13 +27,11 @@ Read the [User Manual](https://github.com/geosoft1/tools/blob/master/HOWTO.md) f
 
 Download anywhere and run from your file browser with double click. If you prefer Terminal go to the directory with the script and run
 
-    ./Install.sh -h
+    ./Install.sh
 
-To see all options.
+Use `` -h `` switch to see all options.
 
-Run periodicaly or if compiler/ide versions change to update the sistem.
-Projects are not affected if you overinstall.
-Tested on Ubuntu 12.04,14.04,14.10 32/64.
+Run periodicaly or if compiler/ide versions change to update the sistem. Projects are not affected if you overinstall.
 	
 Ubuntu 14.04+ need script execute activation so run from Terminal
 	
