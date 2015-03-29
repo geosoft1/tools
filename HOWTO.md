@@ -30,7 +30,6 @@ Next you will be asked for Github account password. Do not confuse with previous
 
         Password:
 
-
 Note that if you reinstall with -g Gopei will look for existing ssh key and git profile to not override them.
 
 **Uninstall**
