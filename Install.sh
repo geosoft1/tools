@@ -165,19 +165,20 @@ if [ -n "$GITSUPPORT" ]; then
    if [ -z "$GITSERVER" ]; then GITSERVER="github.com"; fi
    #generate ssh keys if not exist.otherwise use existent.
    #https://help.github.com/articles/generating-ssh-keys/
-   KEY="rsa"
-   if [ ! -f $HOME/.ssh/id_$KEY ]; then
-      ssh-keygen -qt $KEY -C "$EMAIL" -f $HOME/.ssh/id_$KEY
-      echo -e "Copy next key to $GITSERVER/settings/ssh and press any key\n"
-      cat $HOME/.ssh/id_$KEY.pub | while read -n 64 i; do echo $i; done
-      read
-	  #copy key on github with api
-      #$KEY=`cat $HOME/.ssh/id_$KEY.pub | while read -n 64 i; do echo $i; done`
-	  #curl -s -u $GITUSER:$PASSWORD https://api.github.com/user/keys -d '{"title":"'$EMAIL'","key":"'$KEY'"}'
+   KEY_TYPE="rsa"
+   if [ ! -f $HOME/.ssh/id_$KEY_TYPE ]; then
+      ssh-keygen -qt $KEY_TYPE -C "$EMAIL" -f $HOME/.ssh/id_$KEY_TYPE
+      #echo -e "Copy next key to $GITSERVER/settings/ssh and press any key\n"
+      #cat $HOME/.ssh/id_$KEY_TYPE.pub | while read -n 64 i; do echo $i; done
+      #read
+      #copy key on github with api
+      echo -n "Password:"; read PASSWORD
+      KEY=`cat $HOME/.ssh/id_$KEY_TYPE.pub`
+      curl -s -u $GITUSER:$PASSWORD https://api.github.com/user/keys -d '{"title":"'$EMAIL'", "key":"'"${KEY}"'"}'
    fi
    #bug workaround https://help.github.com/articles/error-permission-denied-publickey
    eval `ssh-agent -s` > /dev/null
-   #ssh-add $HOME/.ssh/id_$KEY 2> /dev/null
+   #ssh-add $HOME/.ssh/id_$KEY_TYPE 2> /dev/null
    echo "Checking the keys..."
    #workaround
    #if ssh result is false (Permission denied (publickey).) set -e will stop the script
@@ -186,7 +187,7 @@ if [ -n "$GITSUPPORT" ]; then
    #create $GITSERVER in $GOPATH
    mkdir -p $GOPATH/src/$GITSERVER/$GITUSER
    #show gopei shell mode :-)
-   wget -q https://raw.githubusercontent.com/geosoft1/tools/master/gopher/gopeicolor.png -O $GOROOT/doc/gopher/gophercolor.png
+   #wget -q https://raw.githubusercontent.com/geosoft1/tools/master/gopher/gopeicolor.png -O $GOROOT/doc/gopher/gophercolor.png
 fi
 #----------------------------------------------------------------------------------
 #build essential git commands list

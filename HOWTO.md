@@ -19,8 +19,17 @@ This option activate classroom mode. No settings are preserved after closing Lit
 This option activate full mode (clasic+git suport). You must have a git server account.
 Default is github.com.
 You will be asked for sudo password. Don't worry about, is only for installing git.
-Next you will be asked for user and email and Gopei will generate a ssh key for use with git server. Copy sugested public key to git server and you are ready for colaborative work.
+Next you will be asked for user and email and Gopei will generate a ssh key for use with git server.
+
 Also you must provide a password. You will be asked for this password at any push on server. You may set no password but is unsecure.
+
+        Enter passphrase (empty for no passphrase): 
+        Enter same passphrase again: 
+
+Next you will be asked for Github account password. Do not confuse with previous password.
+
+        Password:
+
 
 Note that if you reinstall with -g Gopei will look for existing ssh key and git profile to not override them.
 
