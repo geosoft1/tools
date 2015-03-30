@@ -85,7 +85,7 @@ fi
 #B0002,B0007
 case $(uname -m) in
 i686 ) a="386";;
-   * ) a="amd64"
+   * ) a="amd64";;
 esac
 
 #get kernel name (e.g. linux|freebsd)
@@ -163,14 +163,10 @@ if [ -n "$GITSUPPORT" ]; then
    fi
    #set github.com as defaul git server
    if [ -z "$GITSERVER" ]; then GITSERVER="github.com"; fi
-   #generate ssh keys if not exist.otherwise use existent.
-   #https://help.github.com/articles/generating-ssh-keys/
+   #generate ssh keys if not exist.otherwise use existent (https://help.github.com/articles/generating-ssh-keys/)
    KEY_TYPE="rsa"
    if [ ! -f $HOME/.ssh/id_$KEY_TYPE ]; then
       ssh-keygen -qt $KEY_TYPE -C "$EMAIL" -f $HOME/.ssh/id_$KEY_TYPE
-      #echo -e "Copy next key to $GITSERVER/settings/ssh and press any key\n"
-      #cat $HOME/.ssh/id_$KEY_TYPE.pub | while read -n 64 i; do echo $i; done
-      #read
       #add a new deploy key on github with api (https://developer.github.com/v3/)
       echo -n "Password:"; read -s PASSWORD
       echo 
@@ -183,7 +179,6 @@ if [ -n "$GITSUPPORT" ]; then
    fi
    #bug workaround https://help.github.com/articles/error-permission-denied-publickey
    eval `ssh-agent -s` > /dev/null
-   #ssh-add $HOME/.ssh/id_$KEY_TYPE 2> /dev/null
    echo "Checking the keys..."
    #workaround
    #if ssh result is false (Permission denied (publickey).) set -e will stop the script
@@ -275,14 +270,12 @@ Exec=xdg-open http://github.com/$GITUSER" >> ${XDG_DESKTOP_DIR}/liteide.desktop
       #if [[ $DESKTOP_SESSION =~ "2d" ]]; then
       #  killall unity-2d-shell;
       #fi
-   fi
-   ;;
+   fi;;
 #other desktop environments can be handled here
 *)
    #generic desktop environment have only a desktop shortcut
    #B0008
-   chmod +x ${XDG_DESKTOP_DIR}/liteide.desktop
-   ;;
+   chmod +x ${XDG_DESKTOP_DIR}/liteide.desktop;;
 esac
 
 echo "Create some useful templates"
@@ -309,7 +302,7 @@ SCHEME=folder" > $TEMPL/gosimple/setup.inf
 sed -i '2i gogpl' $TEMPL/project.sub
 mkdir -p $TEMPL/gogpl
 year=`date +"%Y"`
-echo -e "// <one line to give the program's name and a brief idea of what it does.> \$ROOT\$ project
+echo -e "// \$ROOT\$ project
 // Copyright (C) <$year>  <name of author>  $EMAIL
 //
 // This program is free software: you can redistribute it and/or modify
