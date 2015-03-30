@@ -26,7 +26,7 @@ Next you will be asked for Github account password. Do not confuse with previous
 Now the new key are deployed on Github. You will be asked again for phassphrase to check if the key work.
 
 Note that if you reinstall with -g Gopei will look for existing ssh key and git profile to not override them.
-If you uninstall with --all new key will be generate on Github. Old keys can be delete manualy from Github * [Personal settings/SSH keys](https://github.com/settings/ssh).
+If you uninstall with --all new key will be generate on Github. Old keys can be delete manualy from  [Personal settings/SSH keys](https://github.com/settings/ssh).
 
 Remember that sometime key deploy can be very slow during Github mentenance. Just be patience or reinstall later.
 
