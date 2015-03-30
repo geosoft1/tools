@@ -153,7 +153,7 @@ if [ -n "$GITSUPPORT" ]; then
       echo -n "Git email [ENTER for $GITUSER@gmail.com] ";read EMAIL
       #try to guess git email
       if [ -z "$EMAIL" ]; then EMAIL="$GITUSER@gmail.com"; fi
-      echo -n "Git server [ENTER for github.com] "; read GITSERVER
+      #echo -n "Git server [ENTER for github.com] "; read GITSERVER
       git config --global user.name "$GITUSER"
       git config --global user.email "$EMAIL"
       #echo -e "[user]\n\tname = $GITUSER\n\temail = $EMAIL" > $HOME/.gitconfig
@@ -172,7 +172,8 @@ if [ -n "$GITSUPPORT" ]; then
       #cat $HOME/.ssh/id_$KEY_TYPE.pub | while read -n 64 i; do echo $i; done
       #read
       #add a new deploy key on github with api (https://developer.github.com/v3/)
-      echo -n "Password:"; read PASSWORD
+      echo -n "Password:"; read -s PASSWORD
+      echo 
       KEY=`cat $HOME/.ssh/id_$KEY_TYPE.pub`
       err=`curl -s -u $GITUSER:$PASSWORD https://api.github.com/user/keys -d '{"title":"'$EMAIL'", "key":"'"${KEY}"'"}'| awk '/message/ { gsub(/^[\t]+|[\",]/,"");print }'`
       if [ "$err" != "" ]; then
