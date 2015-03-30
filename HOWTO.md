@@ -14,7 +14,7 @@ This option activate full mode (clasic+git suport). You must have a github accou
 You will be asked for sudo password. Don't worry about, is only for installing git.
 Next you will be asked for user and email and Gopei will generate a ssh key for use with git server.
 
-Also you must provide a password. You will be asked for this password at any push on server. You may set no password but is unsecure.
+Also you must provide a password. You will be asked for this password at any push on server. You may set no password but is unsecure. For simplicity you can use the github account password.
 
         Enter passphrase (empty for no passphrase): 
         Enter same passphrase again: 
