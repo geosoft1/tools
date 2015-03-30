@@ -144,8 +144,10 @@ echo "Add git support to liteide..."
 #----------------------------------------------------------------------------------
 #enable full git suppport (experimental, use carefully)
 if [ -n "$GITSUPPORT" ]; then
-   echo "Install git..."
-   sudo apt-get install git -y > /dev/null
+   if ! which git > /dev/null; then
+      echo "Install git..."
+      sudo apt-get install git -y > /dev/null
+   fi
    #create git configuration if not exist.otherwise use existent.
    if [ ! -f $HOME/.gitconfig ]; then
       echo "Setup git"
@@ -153,16 +155,12 @@ if [ -n "$GITSUPPORT" ]; then
       echo -n "Git email [ENTER for $GITUSER@gmail.com] ";read EMAIL
       #try to guess git email
       if [ -z "$EMAIL" ]; then EMAIL="$GITUSER@gmail.com"; fi
-      #echo -n "Git server [ENTER for github.com] "; read GITSERVER
       git config --global user.name "$GITUSER"
       git config --global user.email "$EMAIL"
-      #echo -e "[user]\n\tname = $GITUSER\n\temail = $EMAIL" > $HOME/.gitconfig
    else
       #get GITUSER if .gitconfig exist
       GITUSER=`awk 'NR==2 {print $3}' $HOME/.gitconfig`
    fi
-   #set github.com as defaul git server
-   if [ -z "$GITSERVER" ]; then GITSERVER="github.com"; fi
    #generate ssh keys if not exist.otherwise use existent (https://help.github.com/articles/generating-ssh-keys/)
    KEY_TYPE="rsa"
    if [ ! -f $HOME/.ssh/id_$KEY_TYPE ]; then
@@ -183,9 +181,9 @@ if [ -n "$GITSUPPORT" ]; then
    #workaround
    #if ssh result is false (Permission denied (publickey).) set -e will stop the script
    #prevent this by changing result code to true and let the script to continue
-   ssh -o StrictHostKeyChecking=no -o LogLevel=error -T git@$GITSERVER || true
-   #create $GITSERVER in $GOPATH
-   mkdir -p $GOPATH/src/$GITSERVER/$GITUSER
+   ssh -o StrictHostKeyChecking=no -o LogLevel=error -T git@github.com || true
+   #create github.com in $GOPATH
+   mkdir -p $GOPATH/src/github.com/$GITUSER
    #show gopei shell mode :-)
    #wget -q https://raw.githubusercontent.com/geosoft1/tools/master/gopher/gopeicolor.png -O $GOROOT/doc/gopher/gophercolor.png
 fi
