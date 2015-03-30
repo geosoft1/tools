@@ -10,11 +10,11 @@ Gopei will install last versions of [golang](http://golang.org) compiler and [Li
 
         ./Install.sh -g
 
-This option activate full mode (clasic+git suport). You must have a github account.
+This option activate full mode (clasic+git suport). You must have a Github account.
 You will be asked for sudo password. Don't worry about, is only for installing git.
 Next you will be asked for user and email and Gopei will generate a ssh key for use with git server.
 
-Also you must provide a password. You will be asked for this password at any push on server. You may set no password but is unsecure. For simplicity you can use the github account password.
+Also you must provide a password. You will be asked for this password at any push on server. You may set no password but is unsecure. For simplicity you can use the Github account password.
 
         Enter passphrase (empty for no passphrase): 
         Enter same passphrase again: 
@@ -23,12 +23,12 @@ Next you will be asked for Github account password. Do not confuse with previous
 
         Password:
 
-Now the new key are deployed on github. You will be asked again for phassphrase to check if the key work.
+Now the new key are deployed on Github. You will be asked again for phassphrase to check if the key work.
 
 Note that if you reinstall with -g Gopei will look for existing ssh key and git profile to not override them.
-If you uninstall with --all new key will be generate on github. Old keys can be delete manualy from github * [Personal settings/SSH keys](https://github.com/settings/ssh).
+If you uninstall with --all new key will be generate on Github. Old keys can be delete manualy from Github * [Personal settings/SSH keys](https://github.com/settings/ssh).
 
-Remember that sometime key deploy can be very slow during github mentenance. Just be patience or reinstall later.
+Remember that sometime key deploy can be very slow during Github mentenance. Just be patience or reinstall later.
 
 **Classroom mode**
 
@@ -74,8 +74,8 @@ Note that are sistems where Qt may conflict. Just remove Qt from LiteIDE if wont
 
         git add filename                   add filename to repo
         git commit -m "-" -a               commit changes to repo
-        git push                           push changes to github
-        git pull                           pull changes from github
+        git push                           push changes to Github
+        git pull                           pull changes from Github
         git push origin master             push changes first time
         clone githubusername/projectname   (e.g. clone geosoft1/tools)
         repo                               create repo from your current project directory
@@ -89,7 +89,7 @@ Remember to use commands only if a file from project is open in editor, otherwis
         fatal: remote error: 
           GitHub is offline for maintenance. See http://status.github.com for more info.
 
-Github is under maintenance. Open github.com and you will see
+Github is under maintenance, open github.com and you will see
 
         No server is currently available to service your request.
         Sorry about that. Please try refreshing and contact us if the problem persists.
@@ -110,13 +110,13 @@ If the program have dependecies do go get command before go build
 
 **Practical example to start a colaborative project**
 
-* Create a git acoount on github.
+* Create a git acoount on Github.
 * Open Terminal and run `` ./Install.sh -g ``
-* Enter user,email and password used with github and wait setup to complete.
+* Enter user,email and password used with Github and wait setup to complete.
 * Start LiteIDE and create new project Go1 Simple Project.
 * At Name write `` github.com/githubuser/projectname ``
 * Open `` main.go `` from this project.
-* Use `` repo ``. You will be asked for password twice. Now your project will became a repo on github.
+* Use `` repo ``. You will be asked for password twice. Now your project will became a repo on Github.
 * Use `` git add filename `` to add other files to your repo as you wish.
-* Use `` git commit -m "-" -a `` and `` git push `` to push files to github. Note that first time you will need to use `` git push origin master `` but not if you use `` repo `` command.
+* Use `` git commit -m "-" -a `` and `` git push `` to push files to Github. Note that first time you will need to use `` git push origin master `` but not if you use `` repo `` command.
 * Use `` clone github.com/projectname `` to clone projects.
