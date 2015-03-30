@@ -11,13 +11,13 @@ This project is third party. For support see http://golang.org and https://githu
 
 **Features**
 * Get and install last versions of go compiler and ide.
-* Create a simple layout for ide (liteide.ini.mini)
-* Lot of gophers use Monaco font so add in ide
-* Also create a GOPATH to the go-programs directory and add a HelloWorld project
-* Add git support (1.0.4.0+)
-* Add launcher to Unity with some useful functions on right-click. Other DE users have a shortcut on desktop
+* Create a simple layout for ide (liteide.ini.mini).
+* Lot of gophers use Monaco font so add in ide.
+* Also create a GOPATH to the go-programs directory and add a HelloWorld project.
+* Add git support (1.0.4.0+).
+* Add launcher to Unity with some useful functions on right-click. Other DE users have a shortcut on desktop.
 * Add git support in ide on `` ctrl+` ``. Be sure you have configured [git] (https://help.github.com/articles/set-up-git) before with proper [ssh keys](https://help.github.com/articles/generating-ssh-keys) or use `` -g `` switch for.
-* Extend project templates with **Go1 Simple Project** and **Go1 GPL Project**
+* Extend project templates with **Go1 Simple Project** and **Go1 GPL Project**.
 
 Read the [User Manual](https://github.com/geosoft1/tools/blob/master/HOWTO.md) for more details.
 
