@@ -25,7 +25,7 @@ See [CHANGES](https://github.com/geosoft1/tools/blob/master/CHANGES) for new fea
 
 **How to use**
 
-Download anywhere and run from your file browser with double click. If you prefer Terminal go to the directory with the script and run
+Download anywhere and run from your file browser with double click. If you prefer Terminal go to the directory with the script and run:
 
     ./Install.sh
 
