@@ -142,7 +142,6 @@ GOROOT=$HOME/go
 
 echo "Add git support to liteide..."
 #----------------------------------------------------------------------------------
-#enable full git suppport (experimental, use carefully)
 if [ -n "$GITSUPPORT" ]; then
    if ! which git > /dev/null; then
       echo "Install git..."
