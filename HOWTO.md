@@ -65,6 +65,7 @@ If you use Ubuntu Unity interface right click on Gopei launcher icon show some u
 * golang.org
 * HTTP server (localhost:8080)
 * GOPATH
+* github.com/username
 
 Note that are sistems where Qt may conflict. Just remove Qt from LiteIDE if wont start.
 
