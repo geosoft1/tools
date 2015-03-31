@@ -25,7 +25,11 @@ Next you will be asked for Github account password. Do not confuse with previous
 
 Now the new key are deployed on Github. You will be asked again for phassphrase to check if the key work.
 
-Note that if you reinstall with -g Gopei will look for existing ssh key and git profile to not override them.
+        Checking the keys...
+        Enter passphrase for key '/home/george/.ssh/id_rsa': 
+        Hi geosoft1! You've successfully authenticated, but GitHub does not provide shell access.
+
+Note that if you reinstall with `` -g `` Gopei will look for existing ssh key and git profile to not override them.
 If you uninstall with --all new key will be generate on Github. Old keys can be delete manualy from  [Personal settings/SSH keys](https://github.com/settings/ssh).
 
 Remember that sometime key deploy can be very slow during Github mentenance. Just be patience or reinstall later.
@@ -50,7 +54,7 @@ Uninstall all and ssh keys (.ssh folder) and git profile (.gitconfig file). Be c
 
 The uninstall process don't delete go-programs folder.
 
-Note that, starting with 1.0.4.1 some options can be combined (e.g -cg).
+Note that, starting with 1.0.4.1 some options can be combined (e.g `` -cg ``).
 
 **Important!** If you update to new version of go compiler some programs dependencies like sql driver **must** be get and compiled again. Do Build|Get in LiteIDE if your program doesn't compile.
 
@@ -85,6 +89,10 @@ These commands are generally sufficient but it is possible to receive some sugge
 Remember to use commands only if a file from project is open in editor, otherwise will fail. Except from this rule clone command.
 
 **Troubleshooting**
+
+        Permission denied (publickey).
+
+You enter work password. Uninstall, reinstall and check password.
 
         fatal: remote error: 
           GitHub is offline for maintenance. See http://status.github.com for more info.
