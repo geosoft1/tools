@@ -30,7 +30,7 @@ Now the new key are deployed on Github. You will be asked again for phassphrase 
         Hi geosoft1! You've successfully authenticated, but GitHub does not provide shell access.
 
 Note that if you reinstall with `` -g `` Gopei will look for existing ssh key and git profile to not override them.
-If you uninstall with --all new key will be generate on Github. Old keys can be delete manualy from  [Personal settings/SSH keys](https://github.com/settings/ssh).
+If you uninstall with `` --all `` new key will be generate on Github. Old keys can be delete manualy from  [Personal settings/SSH keys](https://github.com/settings/ssh).
 
 Remember that sometime key deploy can be very slow during Github mentenance. Just be patience or reinstall later.
 
@@ -65,8 +65,6 @@ If you use Ubuntu Unity interface right click on Gopei launcher icon show some u
 * golang.org
 * HTTP server (localhost:8080)
 * GOPATH
-
-In full mode also you will see the new Gopei Shell icon :-)
 
 Note that are sistems where Qt may conflict. Just remove Qt from LiteIDE if wont start.
 
