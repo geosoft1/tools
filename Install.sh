@@ -22,12 +22,13 @@ VERSION=1.0.4.3
 set -e
 
 #if dumb terminal (file browser) run xterm
-if [ $TERM == "dumb" ]; then xterm -hold -e $0; fi
+if [ $TERM == "dumb" ]; then
+   xterm -hold -e $0
+fi
 
 clear
-
 echo -e "Golang Programming Environment Installer\nCopyright (C) 2014,2015  geosoft1@gmail.com"
-
+#-------------------------------------------------------------------------------
 while getopts ":cghu:v" OPTION; do
 #avoid error if -u $OPTION=: and $OPTARG=u
 if [ "$OPTION" == ":" ]; then OPTION=$OPTARG; fi
@@ -69,6 +70,7 @@ v|-version)
    exit;;
 esac
 done
+#-------------------------------------------------------------------------------
 
 #get last version of go compiler (e.g. go1.3.3.)
 #B0009
@@ -141,52 +143,58 @@ mkdir -p $GOPATH/src
 GOROOT=$HOME/go
 
 echo "Add git support to liteide..."
-#----------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 if [ -n "$GITSUPPORT" ]; then
+   GITSERVER="github.com"
+   #install git if not installed
    if ! which git > /dev/null; then
       echo "Install git..."
       sudo apt-get install git -y > /dev/null
    fi
-   #create git configuration if not exist.otherwise use existent.
-   if [ ! -f $HOME/.gitconfig ]; then
+   #create git configuration if not exist, otherwise use existent (~/.gitconfig)
+   if [ -f $HOME/.gitconfig ]; then
+      GITUSER=`awk 'NR==2 {print $3}' $HOME/.gitconfig`
+      GITEMAIL=`awk 'NR==3 {print $3}' $HOME/.gitconfig`
+   else
       echo "Setup git"
       echo -n "Git user ";read GITUSER
-      echo -n "Git email [ENTER for $GITUSER@gmail.com] ";read EMAIL
+      echo -n "Git email [ENTER for $GITUSER@gmail.com] ";read GITEMAIL
       #try to guess git email
-      if [ -z "$EMAIL" ]; then EMAIL="$GITUSER@gmail.com"; fi
+      if [ -z "$GITEMAIL" ]; then GITEMAIL="$GITUSER@gmail.com"; fi
       git config --global user.name "$GITUSER"
-      git config --global user.email "$EMAIL"
-   else
-      #get GITUSER if .gitconfig exist
-      GITUSER=`awk 'NR==2 {print $3}' $HOME/.gitconfig`
+      git config --global user.email "$GITEMAIL"
    fi
-   #generate ssh keys if not exist.otherwise use existent (https://help.github.com/articles/generating-ssh-keys/)
-   KEY_TYPE="rsa"
-   if [ ! -f $HOME/.ssh/id_$KEY_TYPE ]; then
-      ssh-keygen -qt $KEY_TYPE -C "$EMAIL" -f $HOME/.ssh/id_$KEY_TYPE
+   #generate ssh keys if not exist, otherwise use existent (https://help.github.com/articles/generating-ssh-keys/)
+   KEYTYPE="rsa"
+   if [ ! -f $HOME/.ssh/id_$KEYTYPE ]; then
+      ssh-keygen -qt $KEYTYPE -C "$GITEMAIL" -f $HOME/.ssh/id_$KEYTYPE
       #add a new deploy key on github with api (https://developer.github.com/v3/)
-      echo -n "Password:"; read -s PASSWORD
+      echo -n "Password:"; read -s GITPASSWORD
       echo 
-      KEY=`cat $HOME/.ssh/id_$KEY_TYPE.pub`
-      err=`curl -s -u $GITUSER:$PASSWORD https://api.github.com/user/keys -d '{"title":"'$EMAIL'", "key":"'"${KEY}"'"}'| awk '/message/ { gsub(/^[\t]+|[\",]/,"");print }'`
+      KEY=`cat $HOME/.ssh/id_$KEYTYPE.pub`
+      err=`curl -s -u $GITUSER:$GITPASSWORD https://api.github.com/user/keys -d '{"title":"'$GITEMAIL'", "key":"'"${KEY}"'"}'| awk '/message/ { gsub(/^[\t ]+|[\",]/,"");print }'`
       if [ "$err" != "" ]; then
-         echo -n $err
-         echo 
+         echo -e $err
       fi
    fi
    #bug workaround https://help.github.com/articles/error-permission-denied-publickey
    eval `ssh-agent -s` > /dev/null
    echo "Checking the keys..."
-   #workaround
-   #if ssh result is false (Permission denied (publickey).) set -e will stop the script
+   #workaround: if ssh result is false (Permission denied (publickey).) set -e will stop the script
    #prevent this by changing result code to true and let the script to continue
    ssh -o StrictHostKeyChecking=no -o LogLevel=error -T git@github.com || true
    #create github.com in $GOPATH
    mkdir -p $GOPATH/src/github.com/$GITUSER
    #show gopei shell mode :-)
    #wget -q https://raw.githubusercontent.com/geosoft1/tools/master/gopher/gopeicolor.png -O $GOROOT/doc/gopher/gophercolor.png
+
+   #setup desktop action to launcher
+   GITACTION="$GITSERVER;"
+   GITDESKTOPACTION="[Desktop Action $GITSERVER]
+Name=github.com/$GITUSER
+Exec=xdg-open http://github.com/$GITUSER"
 fi
-#----------------------------------------------------------------------------------
+#-------------------------------------------------------------------------------
 #build essential git commands list
 echo -e "git add *
 git commit -m \"-\" -a
@@ -202,6 +210,10 @@ chmod +x $HOME/liteide/bin/clone
 #add git create repository command (external script)
 wget -q https://raw.githubusercontent.com/geosoft1/tools/master/scripts/repo -O $HOME/liteide/bin/repo
 chmod +x $HOME/liteide/bin/repo
+
+#create system environment for ide
+#B0012
+echo -e 'GOROOT=$HOME/go\nPATH=$PATH:$GOROOT/bin' >> $HOME/liteide/share/liteide/liteenv/system.env
 
 echo "Create liteide.ini.mini"
 #create directory for liteide.ini.mini
@@ -225,9 +237,6 @@ Exec=sh -c 'eval \`ssh-agent -s\`;$CUSTOMIZER$HOME/liteide/bin/liteide'
 Icon=$GOROOT/doc/gopher/gophercolor.png
 Type=Application" > ${XDG_DESKTOP_DIR}/liteide.desktop
 
-#B0012
-echo -e 'GOROOT=$HOME/go\nPATH=$PATH:$GOROOT/bin' >> $HOME/liteide/share/liteide/liteenv/system.env
-
 echo "Create smart launcher"
 case $DESKTOP_SESSION in
 ubuntu*)
@@ -235,11 +244,7 @@ ubuntu*)
    mkdir -p $HOME/.local/share/applications/
    #B0014
    #extend .desktop file with nice options
-   if [ -f $HOME/.gitconfig ]; then
-      #get GITUSER if .gitconfig exist
-      GITUSER=`awk 'NR==2 {print $3}' $HOME/.gitconfig`
-   fi
-   echo -e "Actions=golang;http;gopath;github
+   echo -e "Actions=golang;http;gopath;$GITACTION
 \n[Desktop Action golang]
 Name=golang.org
 Exec=xdg-open http://golang.org/pkg
@@ -249,9 +254,8 @@ Exec=xdg-open http://localhost:8080
 \n[Desktop Action gopath]
 Name=GOPATH
 Exec=xdg-open go-programs/src
-\n[Desktop Action github]
-Name=github.com/$GITUSER
-Exec=xdg-open http://github.com/$GITUSER" >> ${XDG_DESKTOP_DIR}/liteide.desktop
+\n$GITDESKTOPACTION" >> ${XDG_DESKTOP_DIR}/liteide.desktop
+
    #add .desktop file to dash and integrate with unity
    mv ${XDG_DESKTOP_DIR}/liteide.desktop $HOME/.local/share/applications
    #get the current launcher favorites list
@@ -278,9 +282,10 @@ esac
 echo "Create some useful templates"
 TEMPL=$HOME/liteide/share/liteide/liteapp/template
 
-#simple template
+#create simple template
 sed -i '1i gosimple' $TEMPL/project.sub
 mkdir -p $TEMPL/gosimple
+
 echo -e "// \$ROOT\$ project
 package main\n
 func main() {
@@ -295,12 +300,21 @@ FILES = main.go
 OPEN = main.go
 SCHEME=folder" > $TEMPL/gosimple/setup.inf
 
-#gpl template
+#create gpl template
 sed -i '2i gogpl' $TEMPL/project.sub
 mkdir -p $TEMPL/gogpl
+
 year=`date +"%Y"`
+author=$GITUSER
+email=$GITEMAIL
+if [ "$author" == "" ]; then
+   author="<name of the author>"
+fi
+if [ "$email" == "" ]; then
+   email="<email>"
+fi
 echo -e "// \$ROOT\$ project
-// Copyright (C) <$year>  <name of author>  $EMAIL
+// Copyright (C) $year  $author  $email
 //
 // This program is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -318,11 +332,6 @@ echo -e "// \$ROOT\$ project
 func main() {
 }" > $TEMPL/gogpl/main.go
 
-wget -Nq -O $TEMPL/gogpl/LICENSE http://www.gnu.org/licenses/gpl.txt
-#touch $TEMPL/gogpl/CONTRIBUTORS
-echo GITUSER > $TEMPL/gogpl/CONTRIBUTORS
-echo -e "\$ROOT\$\n====" > $TEMPL/gogpl/README.md
-
 echo -e "[SETUP]
 NAME = \"Go1 GPL Project\"
 FILES = main.go LICENSE CONTRIBUTORS README.md
@@ -332,6 +341,11 @@ TYPE = gopath
 OPEN = main.go
 SCHEME=folder" > $TEMPL/gogpl/setup.inf
 
+wget -Nq -O $TEMPL/gogpl/LICENSE http://www.gnu.org/licenses/gpl.txt
+#touch $TEMPL/gogpl/CONTRIBUTORS
+echo $GITEMAIL > $TEMPL/gogpl/CONTRIBUTORS
+echo -e "\$ROOT\$\n====" > $TEMPL/gogpl/README.md
+
 echo "Create HelloWorld program"
 mkdir -p $GOPATH/src/HelloWorld
 echo -e "package main\n
@@ -339,7 +353,7 @@ func main() {
 \tprintln(\"Hello World!\")
 }" > $GOPATH/src/HelloWorld/main.go
 
-#B0013, add GOPATH,GOROOT to PATH but in $HOME/.bashrc to avoid root rights.
+#B0013, add GOPATH,GOROOT to PATH but in $HOME/.bashrc to avoid root rights
 #ugly! must rewrite sometime
 grep -q 'export GOROOT=$HOME\/go' $HOME/.bashrc || sed -i '$ a\export GOROOT=$HOME\/go' $HOME/.bashrc
 grep -q 'export PATH=$PATH:$GOROOT\/bin' $HOME/.bashrc || sed -i '$ a\export PATH=$PATH:$GOROOT\/bin' $HOME/.bashrc
