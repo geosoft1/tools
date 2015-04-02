@@ -51,7 +51,7 @@ Only a very limited set of project pages are available until the main website re
 23.03.2014 (1.0.4.2) move clone and repo scripts to github
 29.03.2015 (1.0.4.3) add automatic deploy key to github
 01.04.2015 #B0016 corect author name and email in main.go and CONTRIBUTORS files
-02.04.2015 (1.0.4.4) important code restructure
+02.04.2015 (1.0.4.4) significant restructuring of code
 
 TEST REPORT:
 DATE         RELEASE    GO   LITEIDE   RESULT  BUGS
