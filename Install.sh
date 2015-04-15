@@ -146,10 +146,10 @@ echo "Add git support to liteide..."
 #-------------------------------------------------------------------------------
 if [ -n "$GITSUPPORT" ]; then
    GITSERVER="github.com"
-   #install git if not installed
+   #install git and curl if not installed (#B0017)
    if ! which git > /dev/null; then
       echo "Install git..."
-      sudo apt-get install git -y > /dev/null
+      sudo apt-get install git curl-y > /dev/null
    fi
    #create git configuration if not exist, otherwise use existent (~/.gitconfig)
    if [ -f $HOME/.gitconfig ]; then
