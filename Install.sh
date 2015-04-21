@@ -113,7 +113,8 @@ a=$(getconf LONG_BIT)
 
 #get last version of ide (e.g. X23.2)
 #B0009
-v=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/) | awk '{ if(match($0,/X([0-9]+.)+/)) print substr($0,RSTART,RLENGTH-1) }'`
+###v=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/) | awk '{ if(match($0,/X([0-9]+.)+/)) print substr($0,RSTART,RLENGTH-1) }'`
+v=X27.1
 #exit if sourceforge is offline otherwise the rest will fail 
 #B0011
 if [ -z "$v" ]; then
@@ -122,7 +123,8 @@ if [ -z "$v" ]; then
 fi
 
 #B0015 (liteidex27-1)
-vv=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/$v) | awk '{ if(match($0,/liteidex([0-9]+.)+/)) print substr($0,RSTART,RLENGTH-1) }'`
+###vv=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/$v) | awk '{ if(match($0,/liteidex([0-9]+.)+/)) print substr($0,RSTART,RLENGTH-1) }'`
+vv=liteidex27.1
 
 #build ide name (e.g. liteidex23.2.linux-32.tar.bz2)
 n=${vv}.${k}-${a}.tar.bz2
