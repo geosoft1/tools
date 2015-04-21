@@ -5,8 +5,8 @@ Simple installer for [golang](http://golang.org) compiler and [liteide](https://
 This project is third party. For support see http://golang.org and https://github.com/visualfc/liteide.
 
 [![last-version-blue](https://cloud.githubusercontent.com/assets/6298396/5602522/8967405e-935b-11e4-8777-de3623ed6ad7.png)](https://github.com/geosoft1/tools/archive/master.zip)
-[![last-release-green](https://cloud.githubusercontent.com/assets/6298396/5602520/83eb3f72-935b-11e4-9fc0-296506ca5c9a.png)](https://github.com/geosoft1/tools/releases/latest)
-
+<!---[![last-release-green](https://cloud.githubusercontent.com/assets/6298396/5602520/83eb3f72-935b-11e4-9fc0-296506ca5c9a.png)](https://github.com/geosoft1/tools/releases/latest)
+-->
 ![screenshot from 2014-09-07 18 16 40](https://cloud.githubusercontent.com/assets/6298396/4178685/4460829c-36a2-11e4-9674-236082f70d03.png)
 
 **Features**
@@ -14,7 +14,6 @@ This project is third party. For support see http://golang.org and https://githu
 * Create a simple layout for ide (liteide.ini.mini).
 * Lot of gophers use Monaco font so add in ide.
 * Also create a GOPATH to the go-programs directory and add a HelloWorld project.
-* Add git support (1.0.4.0+).
 * Add launcher to Unity with some useful functions on right-click. Other DE users have a shortcut on desktop.
 * Add git support in ide on `` ctrl+` ``. Be sure you have configured [git] (https://help.github.com/articles/set-up-git) before with proper [ssh keys](https://help.github.com/articles/generating-ssh-keys) or use `` -g `` switch for.
 * Extend project templates with **Go1 Simple Project** and **Go1 GPL Project**.
