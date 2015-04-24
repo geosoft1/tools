@@ -53,9 +53,7 @@ Only a very limited set of project pages are available until the main website re
 01.04.2015 #B0016 corect author name and email in main.go and CONTRIBUTORS files
 02.04.2015 (1.0.4.4) significant restructuring of code
 15.04.2015 #B0017 installs curl on systems that do not have default (Ubuntu 15.04)
-21.04.2015 #B0018
-           because frequent changes on LiteIDE sourceforge page, maintenance of Gopei is becoming increasingly difficult.
-           so, downloaded version of LiteIDE are locked to 27.1 until i find a solution.
+21.04.2015 #B0018 freeze 1.0.4.4 at LiteIDE 27.1 stable
 
 TEST REPORT:
 DATE         RELEASE    GO   LITEIDE   RESULT  BUGS
@@ -64,7 +62,7 @@ DATE         RELEASE    GO   LITEIDE   RESULT  BUGS
 26.12.2014   1.0.3.5   1.4        26       ok
 21.01.2015   1.0.3.8   1.4.1      26       ok
 18.02.2015   1.0.3.9   1.4.2    27.1       ok
-21.04.2015   1.0.4.4   1.4.2    27.2   not ok #B018
+21.04.2015   1.0.4.4   1.4.2    27.2   not ok  #B0018
 
 TODO:
 +some Unity2d improvements
