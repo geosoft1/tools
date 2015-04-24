@@ -54,6 +54,7 @@ Only a very limited set of project pages are available until the main website re
 02.04.2015 (1.0.4.4) significant restructuring of code
 15.04.2015 #B0017 installs curl on systems that do not have default (Ubuntu 15.04)
 21.04.2015 #B0018 freeze 1.0.4.4 at LiteIDE 27.1 stable
+24.04.2015 (1.0.4.5) add [output] section in LiteIDE
 
 TEST REPORT:
 DATE         RELEASE    GO   LITEIDE   RESULT  BUGS
