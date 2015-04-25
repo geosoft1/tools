@@ -1,12 +1,14 @@
 ###Gopei Shell User Manual
 ====
+Aply to: GoPEI v1.0.4.0+, Revision: 2
+
 **Install in beginer mode (sempai mode)**
 
         ./Install.sh
 
 Gopei will install last versions of [golang](http://golang.org) compiler and [LiteIDE](https://github.com/visualfc/liteide). Also will link go compiler with  LiteIDE. No root rights are required.
 
-**Install in advanced mode (sensei mode)**
+**Install in advanced mode (sensei mode)** (1.0.4.0+)
 
         ./Install.sh -g
 
@@ -40,6 +42,12 @@ Remember that sometime key deploy can be very slow during Github mentenance. Jus
 
 This option activate classroom mode. Can be combined with `` -g ``. No settings are preserved after closing LiteIDE.
 
+**System only** (1.0.4.5+)
+
+        ./Install.sh -s
+
+This option remove Qt libs to solve conflict problems on some systems. The author of LiteIDE also provide a separate version without Qt containing `` -system `` in name.
+
 **Uninstall**
 
         ./Install.sh -u
@@ -67,7 +75,7 @@ If you use Ubuntu Unity interface right click on Gopei launcher icon show some u
 * GOPATH
 * github.com/username
 
-Note that are sistems where Qt may conflict. Just remove Qt from LiteIDE if wont start.
+Note that are sistems where Qt may conflict. Just remove Qt from LiteIDE if wont start or use `` -s ``.
 
         rm liteide/lib/liteide/libQt*.*
 

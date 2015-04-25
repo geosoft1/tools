@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-VERSION=1.0.4.4
+VERSION=1.0.4.5
 
 #B0006
 set -e
@@ -29,7 +29,7 @@ fi
 clear
 echo -e "Golang Programming Environment Installer\nCopyright (C) 2014,2015  geosoft1@gmail.com"
 #-------------------------------------------------------------------------------
-while getopts ":cghu:v" OPTION; do
+while getopts ":cghsu:v" OPTION; do
 #avoid error if -u $OPTION=: and $OPTARG=u
 if [ "$OPTION" == ":" ]; then OPTION=$OPTARG; fi
 case $OPTION in
@@ -44,10 +44,13 @@ h|help)
    echo "-c, --classroom     enable classroom mode"
    echo "-g, --git           enable git suppport"
    echo "-h, --help          show this help message and exit"
+   echo "-s, --system        install system only, no qt libs"
    echo "-u, --uninstall     uninstall"
    echo "--uninstall --all   include .gitconfig file and .ssh folder"
    echo "-v, --version       version"
    exit;;
+s|system)
+   QTLIBS=no;;
 u|uninstall)
    rm -rf $HOME/liteide/
    rm -rf $HOME/go/
@@ -71,18 +74,6 @@ v|-version)
 esac
 done
 #-------------------------------------------------------------------------------
-
-#get last version of go compiler (e.g. go1.3.3.)
-#B0009
-v=`echo $(wget -qO- golang.org) | awk '{ if (match($0,/go([0-9]+.)+/)) print substr($0,RSTART,RLENGTH) }'`
-
-#exit if no network connection otherwise the rest will fail 
-#B0003
-if [ -z "$v" ]; then
-   echo "No network connection"
-   exit
-fi
-
 #get host computer arch (e.g. i686|amd64)
 #B0002,B0007
 case $(uname -m) in
@@ -90,11 +81,29 @@ i686 ) a="386";;
    * ) a="amd64";;
 esac
 
+#get host computer LONG_BIT (e.g 32|64)
+b=$(getconf LONG_BIT)
+
 #get kernel name (e.g. linux|freebsd)
 k=$(uname -s | tr '[:upper:]' '[:lower:]')
 
+#get localized user directories
 #B0005
 test -f ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs && source ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs
+#-------------------------------------------------------------------------------
+#get last version of go compiler (e.g. go1.3.3.)
+#B0009
+v=`echo $(wget -qO- golang.org) | 
+awk '{
+   if (match($0,/go([0-9]+.)+/)) 
+      print substr($0,RSTART,RLENGTH)
+}'`
+
+#B0003 exit if no network connection otherwise the rest will fail 
+if [ -z "$v" ]; then
+   echo "No network connection"
+   exit
+fi
 
 #build compiler name (e.g. go1.3.3.linux-386.tar.gz)
 n=${v}${k}-${a}.tar.gz
@@ -102,38 +111,43 @@ n=${v}${k}-${a}.tar.gz
 echo "Download last compiler $n..."
 #ERROR: certificate common name `*.googleusercontent.com' doesn't match requested host name `storage.googleapis.com'.
 #To connect to storage.googleapis.com insecurely, use `--no-check-certificate'.
-#WORKAROUND: old sistems like 10.04 need --no-check-certificate to avoid this error
+#WORKAROUND: expired sistems need --no-check-certificate to avoid this error
 #B0004
 wget --no-check-certificate -qNP ${XDG_DOWNLOAD_DIR} https://storage.googleapis.com/golang/$n
 echo "Unpack..."
 tar -xf ${XDG_DOWNLOAD_DIR}/$n -C $HOME
-
-#get host computer LONG_BIT (e.g 32|64)
-a=$(getconf LONG_BIT)
-
-#get last version of ide (e.g. X23.2)
-#B0009
-v=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/) | awk '{ if(match($0,/X([0-9]+.)+/)) print substr($0,RSTART,RLENGTH-1) }'`
-v=X27.1
-#exit if sourceforge is offline otherwise the rest will fail 
-#B0011
+#-------------------------------------------------------------------------------
+#determine last version of ide (e.g. X27.2.1) from github instead sourceforge
+#B0009,B0011
+#exit if github is offline otherwise the rest will fail 
+v=`echo $(wget -qO- https://github.com/visualfc/liteide/blob/master/README.md/) | 
+awk '{ 
+   if(match($0,/Version: X([0-9]+.)+/)) 
+      print substr($0,RSTART+10,RLENGTH-10-1) 
+}'`
 if [ -z "$v" ]; then
-   echo "The sourceforge.net website is temporarily in static offline mode."
+   echo "github.com website is temporarily in static offline mode."
    exit
 fi
 
-#B0015 (liteidex27-1)
-vv=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/$v) | awk '{ if(match($0,/liteidex([0-9]+.)+/)) print substr($0,RSTART,RLENGTH-1) }'`
-#B0018 lock liteide version
-vv=liteidex27.1
-
-#build ide name (e.g. liteidex23.2.linux-32.tar.bz2)
-n=${vv}.${k}-${a}.tar.bz2
+#build ide name (e.g. liteidex23.2.linux-32.tar.bz2 | liteidex27.2.1.linux-32-qt4-system.tar.bz2)
+#B0015,#B0018
+n=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/X$v) | 
+awk '{ 
+   if(match($0, /liteidex([0-9 -]+\.)+'"$k"'-'"$b"'([-. a-z 0-9])+tar\.bz2\// )) { 
+      print substr($0,RSTART,RLENGTH-1); 
+      exit 0; 
+   }
+}'`
 
 echo "Download last ide $n..."
-wget -qNP ${XDG_DOWNLOAD_DIR} http://sourceforge.net/projects/liteide/files/${v}/$n
+wget -qNP ${XDG_DOWNLOAD_DIR} http://sourceforge.net/projects/liteide/files/X${v}/$n
 echo "Unpack..."
 tar -xf ${XDG_DOWNLOAD_DIR}/$n -C $HOME
+#-------------------------------------------------------------------------------
+if [ -n "$QTLIBS" ]; then
+   rm $HOME/liteide/lib/liteide/libQt*.*
+fi
 
 echo "Get Monaco font..."
 wget -nc -qP $HOME/.fonts http://usystem.googlecode.com/files/MONACO.TTF
@@ -199,10 +213,10 @@ Exec=xdg-open http://github.com/$GITUSER"
 fi
 #-------------------------------------------------------------------------------
 #build essential git commands list
-echo -e "git add *
-git commit -m \"-\" -a
+echo -e "git commit -m \"-\" -a
 git push
 git pull
+git add *
 clone
 repo" >$HOME/liteide/share/liteide/litebuild/command/go.api
 
@@ -213,7 +227,7 @@ chmod +x $HOME/liteide/bin/clone
 #add git create repository command (external script)
 wget -q https://raw.githubusercontent.com/geosoft1/tools/master/scripts/repo -O $HOME/liteide/bin/repo
 chmod +x $HOME/liteide/bin/repo
-
+#-------------------------------------------------------------------------------
 #create system environment for ide
 #B0012
 echo -e 'GOROOT=$HOME/go\nPATH=$PATH:$GOROOT/bin' >> $HOME/liteide/share/liteide/liteenv/system.env
