@@ -142,6 +142,16 @@ awk '{
 
 echo "Download last ide $n..."
 wget -qNP ${XDG_DOWNLOAD_DIR} http://sourceforge.net/projects/liteide/files/X${v}/$n
+
+#get last version name (experimental): liteidex27.2.1.linux-32-qt4-system.tar.bz2
+#echo $(wget -qO- http://sourceforge.net/projects/liteide/files/) |  awk '{ 
+#   if(match($0, /liteidex([0-9 -]+\.)+linux-[0-9][0-9]([-. a-z 0-9])+tar\.bz2/ )) { 
+#      print substr($0,RSTART,RLENGTH);  
+#   }
+#}'
+#get latest version file (experimental)
+#wget -qNP ${XDG_DOWNLOAD_DIR} http://sourceforge.net/projects/liteide/files/latest/$n
+
 echo "Unpack..."
 tar -xf ${XDG_DOWNLOAD_DIR}/$n -C $HOME
 #-------------------------------------------------------------------------------
