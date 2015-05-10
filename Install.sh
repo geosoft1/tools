@@ -120,7 +120,7 @@ tar -xf ${XDG_DOWNLOAD_DIR}/$n -C $HOME
 #determine last version of ide (e.g. X27.2.1) from github instead sourceforge
 #B0009,B0011
 #exit if github is offline otherwise the rest will fail 
-v=`echo $(wget -qO- https://github.com/visualfc/liteide/blob/master/README.md/) | 
+v=`echo $(wget -qO- https://github.com/visualfc/liteide/blob/master/README.md) | 
 awk '{ 
    if(match($0,/Version: X([0-9]+.)+/)) 
       print substr($0,RSTART+10,RLENGTH-10-1) 
