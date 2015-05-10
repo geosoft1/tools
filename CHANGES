@@ -67,6 +67,7 @@ DATE         RELEASE    GO   LITEIDE   RESULT  BUGS
 21.01.2015   1.0.3.8   1.4.1      26       ok
 18.02.2015   1.0.3.9   1.4.2    27.1       ok
 21.04.2015   1.0.4.4   1.4.2    27.2   not ok  #B0018
+25.04.2014   1.0.4.5   1.4.2    27.2       ok
 
 TODO:
 +some Unity2d improvements
