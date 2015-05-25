@@ -239,8 +239,8 @@ wget -q https://raw.githubusercontent.com/geosoft1/tools/master/scripts/repo -O 
 chmod +x $HOME/liteide/bin/repo
 #-------------------------------------------------------------------------------
 #create system environment for ide
-#B0012
-echo -e 'GOROOT=$HOME/go\nPATH=$PATH:$GOROOT/bin' >> $HOME/liteide/share/liteide/liteenv/system.env
+#B0012,#B0019
+echo -e 'GOARCH='$a'\nGOROOT=$HOME/go\nPATH=$PATH:$GOROOT/bin' >> $HOME/liteide/share/liteide/liteenv/system.env
 
 echo "Create liteide.ini.mini"
 #create directory for liteide.ini.mini
