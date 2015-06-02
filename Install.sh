@@ -140,6 +140,11 @@ awk '{
    }
 }'`
 
+if [ -z "$n" ]; then
+   echo "sourceforge.com website is temporarily in static offline mode."
+   exit
+fi
+
 echo "Download last ide $n..."
 wget -qNP ${XDG_DOWNLOAD_DIR} http://sourceforge.net/projects/liteide/files/X${v}/$n
 

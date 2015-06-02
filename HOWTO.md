@@ -97,6 +97,10 @@ Remember to use commands only if a file from project is open in editor, otherwis
 
 **Troubleshooting**
 
+        sourceforge.com website is temporarily in static offline mode.
+
+Due to maintenance procedure sourceforge.com can be inaccesible. You must try later.
+
         Permission denied (publickey).
 
 You enter work password. Uninstall, reinstall and check password.
