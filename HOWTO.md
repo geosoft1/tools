@@ -99,19 +99,16 @@ Remember to use commands only if a file from project is open in editor, otherwis
 
         sourceforge.com website is temporarily in static offline mode.
 
-Due to maintenance procedure sourceforge.com can be inaccesible. You must try later.
-
-        Permission denied (publickey).
-
-You enter work password. Uninstall, reinstall and check password.
+        github.com website is temporarily in static offline mode.
 
         fatal: remote error: 
           GitHub is offline for maintenance. See http://status.github.com for more info.
 
-Github is under maintenance, open github.com and you will see
+Due to maintenance procedure sites can be inaccesible. You must try later.
 
-        No server is currently available to service your request.
-        Sorry about that. Please try refreshing and contact us if the problem persists.
+        Permission denied (publickey).
+
+You enter work password. Uninstall, reinstall and check password.
 
 **Using go from Terminal**
 

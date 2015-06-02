@@ -125,6 +125,7 @@ awk '{
    if(match($0,/Version: X([0-9]+.)+/)) 
       print substr($0,RSTART+10,RLENGTH-10-1) 
 }'`
+
 if [ -z "$v" ]; then
    echo "github.com website is temporarily in static offline mode."
    exit
