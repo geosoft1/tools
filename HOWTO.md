@@ -104,7 +104,7 @@ Remember to use commands only if a file from project is open in editor, otherwis
         fatal: remote error: 
           GitHub is offline for maintenance. See http://status.github.com for more info.
 
-Due to maintenance procedure sites can be inaccesible. You must try later.
+Due to maintenance procedure this sites can be inaccessible. You must try later.
 
         Permission denied (publickey).
 
