@@ -86,7 +86,7 @@ TODO:
      thanks to my daughter Andreea for the idea
 -check new versions of golang compiler and liteide at liteide start and ask for update
 -archiving projects and backup
--liteide don't start on Kubuntu (https://github.com/visualfc/liteide/issues/243)
++liteide don't start on Kubuntu (https://github.com/visualfc/liteide/issues/243)
 -add chrome application mode on launcher
      (google-chrome --app=http://localhost:8080)
 +add github account on launcher
