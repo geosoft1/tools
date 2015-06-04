@@ -1,6 +1,8 @@
 ###tools
 ====
-Simple [Go](http://golang.org) compiler and [LiteIDE](https://github.com/visualfc/liteide) installer for Ubuntu. Current version is 1.0.4.5.
+Simple [Go](http://golang.org) compiler and [LiteIDE](https://github.com/visualfc/liteide) installer for Ubuntu.
+
+Current version is 1.0.4.5.
 
 This project is third party. For support see http://golang.org and https://github.com/visualfc/liteide.
 
