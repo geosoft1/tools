@@ -59,6 +59,7 @@ Only a very limited set of project pages are available until the main website re
            add QTLIBS switch for systems with qt conflict
 25.05.2015 #B0019 (gofmt: Timed out after 500ms when starting go code format.)
            set proper GOARCH in system.env
+22.06.2015 set the same font (MONACO) in editor and output
 
 TEST REPORT:
 SO           Ubuntu: 12.04,14.04,14.10,15.04
