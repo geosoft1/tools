@@ -36,3 +36,8 @@ WelcomePageVisible=false
 family=Monaco
 fontsize=12
 fontzoom=100
+
+[output]
+family=Monaco
+fontsize=12
+fontzoom=100
