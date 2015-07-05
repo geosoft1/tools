@@ -144,5 +144,5 @@ If the program have dependecies do go get command before go build
 * Create new project Go Present Slide File. Use Location/Browse to put it in $GOPATH/src.
 * Open and edit your presentation (see http://godoc.org/golang.org/x/tools/present).
 * Execute `` go-programs/bin/present `` to start presentation server.
-* Go to View/WebKitBrowser menu, open http://127.0.0.1:3999 and click on your .slide file.
+* Go to View/WebKitBrowser menu or in your favorite browser open http://127.0.0.1:3999 and click on your .slide file.
 * With the arrows keys navigate through the presentation.
