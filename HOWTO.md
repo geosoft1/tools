@@ -140,9 +140,9 @@ If the program have dependecies do go get command before go build
 
 **Make presentations**
 
-* Start LiteIDE and create new project Go Present Slide File. Use Location/Browse to put it in $GOPATH/src.
-* Press `` ctrl+` ``
-* Execute `` go get golang.org/x/tools/cmd/present `` only once, first time.
+* Start LiteIDE press `` ctrl+` `` and execute `` go get golang.org/x/tools/cmd/present `` only once, first time.
+* Create new project Go Present Slide File. Use Location/Browse to put it in $GOPATH/src.
 * Open and edit your presentation.
 * Execute `` go-programs/bin/present `` to start presentation server.
 * Go to View/WebKitBrowser menu, open http://127.0.0.1:3999 and click on your .slide file.
+* With the arrows keys navigate through the presentation.

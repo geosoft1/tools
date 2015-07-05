@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-VERSION=1.0.4.5
+VERSION=1.0.4.6
 
 #B0006
 set -e
@@ -234,7 +234,9 @@ git push
 git pull
 git add *
 clone
-repo" >$HOME/liteide/share/liteide/litebuild/command/go.api
+repo
+go get golang.org/x/tools/cmd/present
+go-programs/bin/present" >$HOME/liteide/share/liteide/litebuild/command/go.api
 
 #add git clone repository command (external script)
 wget -q https://raw.githubusercontent.com/geosoft1/tools/master/scripts/clone -O $HOME/liteide/bin/clone

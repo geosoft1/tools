@@ -60,7 +60,7 @@ Only a very limited set of project pages are available until the main website re
 25.05.2015 #B0019 (gofmt: Timed out after 500ms when starting go code format.)
            set proper GOARCH in system.env
 22.06.2015 set the same font (MONACO) in editor and output
-05.07.2015 add how to use presentation support (see README.md)
+05.07.2015 (1.0.4.6) add presentation support (see README.md)
 
 TEST REPORT:
 SO           Ubuntu: 12.04,14.04,14.10,15.04
