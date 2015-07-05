@@ -81,7 +81,7 @@ Note that are sistems where Qt may conflict. Just remove Qt from LiteIDE if wont
 
 **Using git from LiteIDE**
 
-**CTRL+`** will provide a list of git commands like
+`` ctrl+` `` will provide a list of git commands like
 
         git add filename                   add filename to repo
         git commit -m "-" -a               commit changes to repo
@@ -132,7 +132,7 @@ If the program have dependecies do go get command before go build
 * Start LiteIDE and create new project Go1 Simple Project.
 * At Name write `` github.com/githubuser/projectname ``
 * Open `` main.go `` from this project.
-* Press Ctrl + ~
+* Press `` ctrl+` ``
 * Use `` repo ``. You will be asked for password twice. Now your project will became a repo on Github.
 * Use `` git add filename `` to add other files to your repo as you wish.
 * Use `` git commit -m "-" -a `` and `` git push `` to push files to Github. Note that first time you will need to use `` git push origin master `` but not if you use `` repo `` command.
@@ -141,7 +141,7 @@ If the program have dependecies do go get command before go build
 **Make presentations**
 
 * Start LiteIDE and create new project Go Present Slide File. Use Location/Browse to put it in $GOPATH/src.
-* Press Ctrl + ~
+* Press `` ctrl+` ``
 * Execute `` go get golang.org/x/tools/cmd/present `` only once, first time.
 * Open and edit your presentation.
 * Execute `` go-programs/bin/present `` to start presentation server.
