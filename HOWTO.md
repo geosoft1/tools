@@ -141,7 +141,7 @@ If the program have dependecies do go get command before go build
 **Make presentations** (1.0.4.6+)
 
 * Start LiteIDE press `` ctrl+` `` and execute `` go get golang.org/x/tools/cmd/present `` only once, first time.
-* Create a new directory named talks in $GOPATH/src or in $GOPATH/src/github.com/gituser.
+* Create a new directory named `` talks `` in $GOPATH/src or in $GOPATH/src/github.com/gituser.
 * Create new project Go Present Slide File. Use Location/Browse to put it in your talks directory.
 * Open and edit your presentation (see http://godoc.org/golang.org/x/tools/present).
 * Execute `` go-programs/bin/present `` to start presentation server.
