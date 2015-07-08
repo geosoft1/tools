@@ -138,7 +138,7 @@ If the program have dependecies do go get command before go build
 * Use `` git commit -m "-" -a `` and `` git push `` to push files to Github. Note that first time you will need to use `` git push origin master `` but not if you use `` repo `` command.
 * Use `` clone github.com/projectname `` to clone projects.
 
-**Make presentations**
+**Make presentations** (1.0.4.6+)
 
 * Start LiteIDE press `` ctrl+` `` and execute `` go get golang.org/x/tools/cmd/present `` only once, first time.
 * Create new project Go Present Slide File. Use Location/Browse to put it in $GOPATH/src.
