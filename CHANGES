@@ -93,3 +93,4 @@ TODO:
      (google-chrome --app=http://localhost:8080)
 +add github account on launcher
 +liteide don't start if are Qt versions in conflict
+-more useful snippets (liteide/share/liteide/packages/go/go.snippet.json)
