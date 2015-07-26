@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<style-scheme version="1.0" name="carbon">
+  <!-- clasic vim black and white scheme -->
+  <style name="Text" foreground="#ffffff" background="#000000"/>
+  <style name="Extra" foreground="#ffffff" background="#000000"/> 
+  <style name="Selection" foreground="#000000" background="#ffffff"/>
+  <style name="CurrentLine" background="#000000"/>
+  <style name="IndentLine" foreground="#ffffff"/>
+  <style name="VisualWhitespace" foreground="#555555"/>
+  <style name="Keyword" foreground="#ffffff" bold="false"/>
+  <style name="DataType" foreground="#ffffff" bold="false" /> 
+  <style name="Decimal" foreground="#ffffff" bold="false"/>
+  <style name="BaseN" foreground="#ffffff" bold="false"/>
+  <style name="Float" foreground="#ffffff" bold="false"/>
+  <style name="Char" foreground="#ffffff"/>
+  <style name="String" foreground="#ffffff"/>
+  <style name="Comment" foreground="#ffffff" italic="false" bold="true"/>
+  <style name="Alert" foreground="yellow"/>
+  <style name="Error" foreground="red"/>
+  <style name="Function" foreground="#ffffff"/>
+  <style name="RegionMarker" foreground="#ffffff"/>
+  <style name="Symbol" foreground="#ffffff" bold="true"/> 
+  <style name="BuiltinFunc" foreground="#ffffff" bold="false"/>
+  <style name="Predeclared" foreground="#ffffff" bold="false"/>
+  <style name="FuncDecl" foreground="#ffffff"/>
+  <style name="Placeholder" foreground="#ffffff"/>
+  <style name="ToDo" foreground="#ffffff" background="#000000" bold="true"/>
+</style-scheme>
