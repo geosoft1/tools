@@ -1,4 +1,4 @@
-###tools
+####Gopei (Go Programming Environment Installer)
 ====
 Simple [Go](http://golang.org) compiler and [LiteIDE](https://github.com/visualfc/liteide) installer for Ubuntu.
 
