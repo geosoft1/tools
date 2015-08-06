@@ -61,7 +61,7 @@ u|uninstall)
    rm -rf $HOME/.fonts/MONACO.TTF
    if [ "$OPTARG" == "--all" ]; then
       rm -rf $HOME/.local/share/data/liteide/
-      rm -f $HOME/.gitconfig
+      rm -f  $HOME/.gitconfig
       rm -rf $HOME/.ssh/
    fi
    #ugly! must rewrite sometime
@@ -207,7 +207,11 @@ if [ -n "$GITSUPPORT" ]; then
       echo -n "Password:"; read -s GITPASSWORD
       echo 
       KEY=`cat $HOME/.ssh/id_$KEYTYPE.pub`
-      err=`curl -s -u $GITUSER:$GITPASSWORD https://api.github.com/user/keys -d '{"title":"'$GITEMAIL'", "key":"'"${KEY}"'"}'| awk '/message/ { gsub(/^[\t ]+|[\",]/,"");print }'`
+      #Key management:
+	  #curl -s -X GET -u $GITUSER:$GITPASSWORD https://api.github.com/user/keys
+      #curl -s -X DELETE -u $GITUSER:$GITPASSWORD https://api.github.com/user/keys/13146480
+      #curl -s -X POST -u $GITUSER:$GITPASSWORD https://api.github.com/user/keys -d '{"key":"'"${KEY}"'"}'
+      err=`curl -s -u $GITUSER:$GITPASSWORD https://api.github.com/user/keys -d '{"key":"'"${KEY}"'"}'| awk '/message/ { gsub(/^[\t ]+|[\",]/,"");print }'`
       if [ "$err" != "" ]; then
          echo -e $err
       fi
