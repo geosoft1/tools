@@ -58,9 +58,9 @@ Uninstall all but not ssh keys and git profile.
 
         ./Install.sh -u --all
 
-Uninstall all and ssh keys (.ssh folder) and git profile (.gitconfig file). Be carefuly with this option if you have other keys in .ssh folder.
+Uninstall all and ssh keys (.ssh folder) and git profile (.gitconfig file). Be carefuly with this option if you have other keys in .ssh folder. Also keep safe .ssh folder and .gitconfig file to avoid keys regeneration at every update.
 
-The uninstall process don't delete go-programs folder.
+The uninstall process don't delete go-programs folder. `` --all `` option will delete .local/share/data/liteide/goplay folder.
 
 Note that, starting with 1.0.4.1 some options can be combined (e.g `` -cg ``).
 

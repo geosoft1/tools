@@ -55,10 +55,12 @@ u|uninstall)
    rm -rf $HOME/liteide/
    rm -rf $HOME/go/
    rm -rf $HOME/.local/share/applications/liteide.desktop
-   rm -rf $HOME/.local/share/data/liteide/
+   #B0020
+   rm -f  $HOME/.local/share/data/liteide/*.*
    rm -rf $HOME/.config/liteide/
    rm -rf $HOME/.fonts/MONACO.TTF
    if [ "$OPTARG" == "--all" ]; then
+      rm -rf $HOME/.local/share/data/liteide/
       rm -f $HOME/.gitconfig
       rm -rf $HOME/.ssh/
    fi
