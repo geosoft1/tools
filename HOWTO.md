@@ -87,13 +87,13 @@ Note that are sistems where Qt may conflict. Just remove Qt from LiteIDE if wont
         git commit -m "-" -a               commit changes to repo
         git push                           push changes to Github
         git pull                           pull changes from Github
-        git push origin master             push changes first time
+        git push origin master             push changes first time (default not included)
         clone githubusername/projectname   (e.g. clone geosoft1/tools)
         repo                               create repo from your current project directory
 
 These commands are generally sufficient but it is possible to receive some suggestions from git server in certain situations. Use those commands when you will be asked.
 
-Remember to use commands only if a file from project is open in editor, otherwise will fail. Except from this rule clone command.
+Remember to use commands only if a file from project is open in editor, otherwise will fail. Except from this rule `` clone `` command.
 
 **Troubleshooting**
 
@@ -108,7 +108,7 @@ Due to maintenance procedure this sites can be inaccessible. You must try later.
 
         Permission denied (publickey).
 
-You enter work password. Uninstall, reinstall and check password.
+You enter a wrong password. Reinstall and check the password.
 
 **Using go from Terminal**
 
