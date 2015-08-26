@@ -6,7 +6,7 @@ Current version is 1.0.4.6.
 
 This project is third party. For support see http://golang.org and https://github.com/visualfc/liteide.
 
-[![last-version-blue](https://cloud.githubusercontent.com/assets/6298396/5602522/8967405e-935b-11e4-8777-de3623ed6ad7.png)](https://github.com/geosoft1/tools/archive/master.zip)
+[![last-version-blue](https://cloud.githubusercontent.com/assets/6298396/5602522/8967405e-935b-11e4-8777-de3623ed6ad7.png)](https://github.com/geosoft1/tools/archive/master.zip) ![go1.5 passed](http://b.repl.ca/v1/go1.5-passed-brightgreen.png)
 <!--
 [![last-release-green](https://cloud.githubusercontent.com/assets/6298396/5602520/83eb3f72-935b-11e4-9fc0-296506ca5c9a.png)](https://github.com/geosoft1/tools/releases/latest)
 -->
