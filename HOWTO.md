@@ -1,6 +1,10 @@
 ###Gopei Shell User Manual
 ====
-Aply to: GoPEI v1.0.4.0+, Revision: 3
+Aply to: GoPEI v1.0.4.0+, Revision: 4
+
+**Before install**
+
+Gopei create GOPATH in $HOME/go-programs but if you keep this folder in other place (e.g. $HOME/my/go-programs) don't forget to make a link to that location in $HOME (e.g. ln -s $HOME/my/go-programs).
 
 **Install in beginer mode (sempai mode)**
 
