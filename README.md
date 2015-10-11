@@ -1,17 +1,20 @@
 ###Gopei (Go Programming Environment Installer)
 ====
 Simple [Go](http://golang.org) compiler and [LiteIDE](https://github.com/visualfc/liteide) installer for Ubuntu.
-
-Current version is 1.0.4.6.
+<!--Current version is 1.0.4.6.-->
 
 This project is third party. For support see http://golang.org and https://github.com/visualfc/liteide.
 
-[![last-version-blue](https://cloud.githubusercontent.com/assets/6298396/5602522/8967405e-935b-11e4-8777-de3623ed6ad7.png)](https://github.com/geosoft1/tools/archive/master.zip) [![go1.5 passed](http://b.repl.ca/v1/go1.5-passed-brightgreen.png)](https://blog.golang.org/go1.5)
-<!--
-[![last-release-green](https://cloud.githubusercontent.com/assets/6298396/5602520/83eb3f72-935b-11e4-9fc0-296506ca5c9a.png)](https://github.com/geosoft1/tools/releases/latest)
+<!--[![last-version-blue](https://cloud.githubusercontent.com/assets/6298396/5602522/8967405e-935b-11e4-8777-de3623ed6ad7.png)](https://github.com/geosoft1/tools/archive/master.zip) [![go1.5 passed](http://b.repl.ca/v1/go1.5-passed-brightgreen.png)](https://blog.golang.org/go1.5)
 -->
+[![version](https://img.shields.io/badge/version-1.0.4.6-blue.svg)](https://github.com/geosoft1/tools/archive/master.zip)
+[![license](https://img.shields.io/badge/license-GPL-blue.svg)](https://github.com/geosoft1/tools/blob/master/LICENSE)
+[![go1.5 passed](https://img.shields.io/badge/go1.5-passed-brightgreen.svg)](https://blog.golang.org/go1.5)
 
-![screenshot from 2014-09-07 18 16 40](https://cloud.githubusercontent.com/assets/6298396/4178685/4460829c-36a2-11e4-9674-236082f70d03.png)
+<img src="https://cloud.githubusercontent.com/assets/6298396/10415856/62b936b0-7005-11e5-90f5-0a8644e632d7.png" width=600px>
+
+<!--
+![screenshot from 2014-09-07 18 16 40](https://cloud.githubusercontent.com/assets/6298396/4178685/4460829c-36a2-11e4-9674-236082f70d03.png)-->
 
 **Features**
 * Get and install last versions of go compiler and ide.
