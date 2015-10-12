@@ -38,7 +38,7 @@ Download anywhere and run from your file browser with double click. If you prefe
 
 Use `` -h `` switch to see all options.
 
-Run periodicaly or if compiler/ide versions change to update the sistem. Projects are not affected if you overinstall.
+Run periodicaly or if compiler/ide versions change to update the system. Projects are not affected if you overinstall.
 	
 Ubuntu 14.04+ need script execute activation so run from Terminal
 	
