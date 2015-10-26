@@ -67,7 +67,7 @@ Only a very limited set of project pages are available until the main website re
 11.10.2015 update some old images
 
 TEST REPORT:
-SO           Ubuntu: 12.04,14.04,14.10,15.04
+SO           Ubuntu: 12.04,14.04,14.10,15.04,15.10
 DATE         RELEASE    GO   LITEIDE   RESULT  BUGS
 14.12.2014   1.0.3.5   1.4      25.1       ok
 20.12.2014   1.0.3.5   1.4      25.2       ok  #B0012
