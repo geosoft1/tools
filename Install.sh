@@ -119,7 +119,7 @@ wget --no-check-certificate -qNP ${XDG_DOWNLOAD_DIR} https://storage.googleapis.
 echo "Unpack..."
 tar -xf ${XDG_DOWNLOAD_DIR}/$n -C $HOME
 #-------------------------------------------------------------------------------
-#determine last version of ide (e.g. X27.2.1) from github instead sourceforge
+#determine last version of ide (e.g. X27.2.1) from sourceforge
 #B0009,B0011
 #exit if github is offline otherwise the rest will fail 
 v=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/) | 
