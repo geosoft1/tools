@@ -1,6 +1,6 @@
 ###Gopei Shell User Manual
 ====
-Aply to: GoPEI v1.0.4.0+, Revision: 4
+Aply to: GoPEI v1.0.4.0+, Revision: 5
 
 **Before install**
 
@@ -11,6 +11,20 @@ Gopei create GOPATH in $HOME/go-programs but if you keep this folder in other pl
         ./Install.sh
 
 Gopei will install last versions of [golang](http://golang.org) compiler and [LiteIDE](https://github.com/visualfc/liteide). Also will link go compiler with  LiteIDE. No root rights are required.
+
+**Classroom mode**
+
+        ./Install.sh -c
+
+This option activate classroom mode. Can be combined with `` -g ``. No settings are preserved after closing LiteIDE. Do not use with LiteIDE prior than 27.1 due a compatibility issue in `` system.env ``.
+
+**Emergency mode** (1.0.4.7+)
+
+This option let you install a previous specific version on LiteIDE if the last version in unavailable. The versions can be taked from [here](http://sourceforge.net/projects/liteide/files/) (e.g. X27.2.1).
+
+        ./Install.sh -e X27.2.1
+
+Remember that if you downgrade the ide version you must check and switch the current environment (see Environment Toolbar) to system. Otherwise your programs will not be compiled.
 
 **Install in advanced mode (sensei mode)** (1.0.4.0+)
 
@@ -40,12 +54,6 @@ If you uninstall with `` --all `` new key will be generate on Github. Old keys c
 
 Remember that sometime key deploy can be very slow during Github mentenance. Just be patience or reinstall later.
 
-**Classroom mode**
-
-        ./Install.sh -c
-
-This option activate classroom mode. Can be combined with `` -g ``. No settings are preserved after closing LiteIDE.
-
 **System only** (1.0.4.5+)
 
         ./Install.sh -s
@@ -60,11 +68,11 @@ Uninstall all but not ssh keys and git profile.
 
 **Uninstall all**
 
-        ./Install.sh -u --all
+        ./Install.sh -U
 
 Uninstall all and ssh keys (.ssh folder) and git profile (.gitconfig file). Be carefuly with this option if you have other keys in .ssh folder. Also keep safe .ssh folder and .gitconfig file to avoid keys regeneration at every update.
 
-The uninstall process don't delete go-programs folder. `` --all `` option will delete .local/share/data/liteide/goplay folder.
+The uninstall process don't delete go-programs folder. `` -U `` option will delete .local/share/data/liteide/goplay folder.
 
 Note that, starting with 1.0.4.1 some options can be combined (e.g `` -cg ``).
 
@@ -110,9 +118,17 @@ Remember to use commands only if a file from project is open in editor, otherwis
 
 Due to maintenance procedure this sites can be inaccessible. You must try later.
 
+Note that if you receive this message repeatedly and sourceforge is not offline use `` -e `` switch to install emergency ide version because from some reason the last version of the ide is not available.
+
         Permission denied (publickey).
 
 You enter a wrong password. Reinstall and check the password.
+
+**Useful installation schemes**
+
+Install curent go compiler, LiteIDE X27.1 with git, in classroom mode, without qt libs
+
+        ./Install.sh -gcse X27.1
 
 **Using go from Terminal**
 

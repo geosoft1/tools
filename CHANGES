@@ -65,7 +65,13 @@ Only a very limited set of project pages are available until the main website re
 06.08.2015 #B0020 uninstall also delete .local/share/data/liteide/goplay
            skip this on -u and do it on -u --all
 11.10.2015 update some old images
-04.11.2015 update liteide download link, move to sourceforge
+08.11.2015 (1.0.4.7)
+           -better liteide version detection (maybe the last dynamic detection)
+           -replaced --u --all with -U
+           -introducind emergency ide version (-e switch)
+           -reworked the switches
+           -reworked the user manual
+
 
 TEST REPORT:
 SO           Ubuntu: 12.04,14.04,14.10,15.04,15.10

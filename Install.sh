@@ -16,8 +16,6 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-VERSION=1.0.4.6
-
 #B0006
 set -e
 
@@ -26,56 +24,60 @@ if [ $TERM == "dumb" ]; then
    xterm -hold -e $0
 fi
 
+#-------------------------------------------------------------------------------
+
 clear
-echo -e "Golang Programming Environment Installer\nCopyright (C) 2014,2015  geosoft1@gmail.com"
-#-------------------------------------------------------------------------------
-while getopts ":cghsu:v" OPTION; do
-#avoid error if -u $OPTION=: and $OPTARG=u
-if [ "$OPTION" == ":" ]; then OPTION=$OPTARG; fi
-case $OPTION in
-c|classroom)
-   CLASSROOM=yes;;
-g|github)
-   GITSUPPORT=yes;;
-h|help)
-   echo "Usage: install [options]"
-   echo
+
+echo "Golang Programming Environment Installer"
+echo "Copyright (C) 2014,2015  geosoft1@gmail.com"
+
+usage()  {
+   echo "Usage: "`basename "$0"`" [options]"
    echo "Options:"
-   echo "-c, --classroom     enable classroom mode"
-   echo "-g, --git           enable git suppport"
-   echo "-h, --help          show this help message and exit"
-   echo "-s, --system        install system only, no qt libs"
-   echo "-u, --uninstall     uninstall"
-   echo "--uninstall --all   include .gitconfig file and .ssh folder"
-   echo "-v, --version       version"
-   exit;;
-s|system)
-   QTLIBS=no;;
-u|uninstall)
-   rm -rf $HOME/liteide/
-   rm -rf $HOME/go/
-   rm -rf $HOME/.local/share/applications/liteide.desktop
-   #B0020
-   rm -f  $HOME/.local/share/data/liteide/*.*
-   rm -rf $HOME/.config/liteide/
-   rm -rf $HOME/.fonts/MONACO.TTF
-   if [ "$OPTARG" == "--all" ]; then
-      rm -rf $HOME/.local/share/data/liteide/
-      rm -f  $HOME/.gitconfig
-      rm -rf $HOME/.ssh/
-   fi
-   #ugly! must rewrite sometime
-   sed --in-place '/export GOROOT=$HOME\/go/d' $HOME/.bashrc
-   sed --in-place '/export PATH=$PATH:$GOROOT\/bin/d' $HOME/.bashrc
-   sed --in-place '/export GOPATH=$HOME\/go-programs/d' $HOME/.bashrc
-   echo "Uninstalled."
-   exit;;
-v|-version)
-   echo $VERSION
-   exit;;
-esac
+   echo "-c        enable classroom mode"
+   echo "-e        install emergency ide version"
+   echo "-g        enable git suppport"
+   echo "-h        show this help message and exit"
+   echo "-s        install system only, no qt libs"
+   echo "-u        uninstall"
+   echo "-U        uninstall include .gitconfig file and .ssh folder"
+   echo "-v        version"
+   exit
+}
+
+while getopts ":e:cghsuUrv" OPTION; do
+case $OPTION in
+   c ) CLASSROOM=yes;;
+   e ) EMERGENCY=$OPTARG/;;
+   g ) GITSUPPORT=yes;;
+   h ) usage;;
+   s ) QTLIBS=no;;
+   U ) rm -rf $HOME/.local/share/data/liteide/
+       rm -f  $HOME/.gitconfig
+       rm -rf $HOME/.ssh/
+       ;&
+   u ) rm -rf $HOME/liteide/
+       rm -rf $HOME/go/
+       rm -rf $HOME/.local/share/applications/liteide.desktop
+       #B0020
+       rm -f  $HOME/.local/share/data/liteide/*.*
+       rm -rf $HOME/.config/liteide/
+       rm -rf $HOME/.fonts/MONACO.TTF
+       sed --in-place '/export GOROOT=$HOME\/go/d' $HOME/.bashrc
+       sed --in-place '/export PATH=$PATH:$GOROOT\/bin/d' $HOME/.bashrc
+       sed --in-place '/export GOPATH=$HOME\/go-programs/d' $HOME/.bashrc
+       echo "Uninstalled."
+       exit;;
+   v ) echo ${VERSION=1.0.4.7}; exit;;
+
+   \?) echo "Unknown option: -$OPTARG"; exit;;
+   : ) echo "Missing option argument for -$OPTARG"; exit;;
+   * ) echo "Unimplemented option: -$OPTARG"; exit;;
+   esac
 done
+
 #-------------------------------------------------------------------------------
+
 #get host computer arch (e.g. i686|amd64)
 #B0002,B0007
 case $(uname -m) in
@@ -92,77 +94,74 @@ k=$(uname -s | tr '[:upper:]' '[:lower:]')
 #get localized user directories
 #B0005
 test -f ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs && source ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs
+
 #-------------------------------------------------------------------------------
-#get last version of go compiler (e.g. go1.3.3.)
+
+#get last version of go compiler (e.g. go1.5.1.)
 #B0009
 v=`echo $(wget -qO- golang.org) | 
-awk '{
+awk '{ 
    if (match($0,/go([0-9]+.)+/)) 
-      print substr($0,RSTART,RLENGTH)
+      print substr($0,RSTART,RLENGTH) 
 }'`
 
-#B0003 exit if no network connection otherwise the rest will fail 
+#exit if no network connection otherwise the rest will fail
+#B0003 
 if [ -z "$v" ]; then
-   echo "No network connection"
-   exit
+    echo "No network connection"; exit
 fi
 
-#build compiler name (e.g. go1.3.3.linux-386.tar.gz)
+#build compiler name (e.g. go1.5.1.linux-386.tar.gz)
 n=${v}${k}-${a}.tar.gz
 
 echo "Download last compiler $n..."
 #ERROR: certificate common name `*.googleusercontent.com' doesn't match requested host name `storage.googleapis.com'.
 #To connect to storage.googleapis.com insecurely, use `--no-check-certificate'.
-#WORKAROUND: expired sistems need --no-check-certificate to avoid this error
 #B0004
 wget --no-check-certificate -qNP ${XDG_DOWNLOAD_DIR} https://storage.googleapis.com/golang/$n
+
 echo "Unpack..."
 tar -xf ${XDG_DOWNLOAD_DIR}/$n -C $HOME
+
 #-------------------------------------------------------------------------------
+
 #determine last version of ide (e.g. X27.2.1) from sourceforge
 #B0009,B0011
-#exit if github is offline otherwise the rest will fail 
+v=$EMERGENCY
+if [ -z "$v" ]; then
 v=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/) | 
 awk '{ 
    if(match($0,/X([0-9]+.)+/)) 
-      print substr($0,RSTART+1,RLENGTH-1) 
+      print substr($0,RSTART,RLENGTH) 
 }'`
-
-if [ -z "$v" ]; then
-   echo "github.com website is temporarily in static offline mode."
-   exit
 fi
 
-#build ide name (e.g. liteidex23.2.linux-32.tar.bz2 | liteidex27.2.1.linux-32-qt4-system.tar.bz2)
-#B0015,#B0018
-n=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/X$v) | 
+#exit if github is offline otherwise the rest will fail 
+if [ -z "$v" ]; then
+   echo "github.com website is temporarily in static offline mode."; exit
+fi
+
+#build ide name (e.g. liteidex27.2.1.linux-32-qt4-system.tar.bz2)
+#B0015,B0018
+n=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/$v) | 
 awk '{ 
-   if(match($0, /liteidex([0-9 -]+\.)+'"$k"'-'"$b"'([-. a-z 0-9])+tar\.bz2\// )) { 
-      print substr($0,RSTART,RLENGTH-1); 
-      exit 0; 
-   }
+   if(match($0, /liteidex'"${v:1:-1}"'([-. 0-9])+'"$k"'-'"$b"'([-. qt 0-9])+tar\.bz2/ )) { 
+      print substr($0,RSTART,RLENGTH) 
+   } 
 }'`
 
 if [ -z "$n" ]; then
-   echo "sourceforge.com website is temporarily in static offline mode."
-   exit
+   echo "sourceforge.com website is temporarily in static offline mode."; exit
 fi
 
 echo "Download last ide $n..."
-wget -qNP ${XDG_DOWNLOAD_DIR} http://sourceforge.net/projects/liteide/files/X${v}/$n
-
-#get last version name (experimental): liteidex27.2.1.linux-32-qt4-system.tar.bz2
-#echo $(wget -qO- http://sourceforge.net/projects/liteide/files/) |  awk '{ 
-#   if(match($0, /liteidex([0-9 -]+\.)+linux-[0-9][0-9]([-. a-z 0-9])+tar\.bz2/ )) { 
-#      print substr($0,RSTART,RLENGTH);  
-#   }
-#}'
-#get latest version file (experimental)
-#wget -qNP ${XDG_DOWNLOAD_DIR} http://sourceforge.net/projects/liteide/files/latest/$n
+wget -qNP ${XDG_DOWNLOAD_DIR} http://sourceforge.net/projects/liteide/files/$v$n
 
 echo "Unpack..."
 tar -xf ${XDG_DOWNLOAD_DIR}/$n -C $HOME
+
 #-------------------------------------------------------------------------------
+
 if [ -n "$QTLIBS" ]; then
    rm $HOME/liteide/lib/liteide/libQt*.*
 fi
@@ -177,11 +176,13 @@ mkdir -p $GOPATH/src
 #create GOROOT
 GOROOT=$HOME/go
 
-echo "Add git support to liteide..."
 #-------------------------------------------------------------------------------
+
+echo "Add git support to liteide..."
 if [ -n "$GITSUPPORT" ]; then
    GITSERVER="github.com"
-   #install git and curl if not installed (#B0017)
+   #install git and curl if not installed
+   #B0017
    if ! which git > /dev/null; then
       echo "Install git..."
       sudo apt-get install git curl -y > /dev/null
@@ -233,7 +234,9 @@ if [ -n "$GITSUPPORT" ]; then
 Name=github.com/$GITUSER
 Exec=xdg-open http://github.com/$GITUSER"
 fi
+
 #-------------------------------------------------------------------------------
+
 #build essential git commands list
 echo -e "git commit -m \"-\" -a
 git push
@@ -251,9 +254,11 @@ chmod +x $HOME/liteide/bin/clone
 #add git create repository command (external script)
 wget -q https://raw.githubusercontent.com/geosoft1/tools/master/scripts/repo -O $HOME/liteide/bin/repo
 chmod +x $HOME/liteide/bin/repo
+
 #-------------------------------------------------------------------------------
+
 #create system environment for ide
-#B0012,#B0019
+#B0012,B0019
 echo -e 'GOARCH='$a'\nGOROOT=$HOME/go\nPATH=$PATH:$GOROOT/bin' >> $HOME/liteide/share/liteide/liteenv/system.env
 
 echo "Create liteide.ini.mini"
@@ -308,7 +313,7 @@ Exec=xdg-open go-programs/src
       sleep 1
       #update the launcher favorites list. in unity changes are shwown immediately.
       gsettings set com.canonical.Unity.Launcher favorites "$b"
-      #WORKAROUND: unity2d need restart to show last changes
+      #WORKAROUND: unity2d need restart to show last changes (OBSOLETE)
       #if [[ $DESKTOP_SESSION =~ "2d" ]]; then
       #  killall unity-2d-shell;
       #fi
@@ -394,8 +399,8 @@ func main() {
 \tprintln(\"Hello World!\")
 }" > $GOPATH/src/HelloWorld/main.go
 
-#B0013, add GOPATH,GOROOT to PATH but in $HOME/.bashrc to avoid root rights
-#ugly! must rewrite sometime
+#add GOPATH,GOROOT to PATH but in $HOME/.bashrc to avoid root rights
+#B0013
 grep -q 'export GOROOT=$HOME\/go' $HOME/.bashrc || sed -i '$ a\export GOROOT=$HOME\/go' $HOME/.bashrc
 grep -q 'export PATH=$PATH:$GOROOT\/bin' $HOME/.bashrc || sed -i '$ a\export PATH=$PATH:$GOROOT\/bin' $HOME/.bashrc
 grep -q 'export GOPATH=$HOME\/go-programs' $HOME/.bashrc || sed -i '$ a\export GOPATH=$HOME\/go-programs' $HOME/.bashrc
