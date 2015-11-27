@@ -71,7 +71,7 @@ Only a very limited set of project pages are available until the main website re
            -introducind emergency ide version (-e switch)
            -reworked the switches
            -reworked the user manual
-
+27.11.2015 (1.0.4.8) #B0021 add --no-check-certificate to golang.org for older systems
 
 TEST REPORT:
 SO           Ubuntu: 12.04,14.04,14.10,15.04,15.10
@@ -85,6 +85,7 @@ DATE         RELEASE    GO   LITEIDE   RESULT  BUGS
 25.04.2015   1.0.4.5   1.4.2  27.2.1       ok
 19.08.2015   1.0.4.6   1.5    27.2.1       ok
 11.10.2015   1.0.4.6   1.5.1  27.2.1       ok
+27.11.2015   1.0.4.7   1.5.1  27.2.1   not ok  #B0021 (on U12.0.4.5)
 
 TODO:
 +some Unity2d improvements

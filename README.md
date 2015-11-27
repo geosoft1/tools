@@ -4,7 +4,7 @@ Simple [Go](http://golang.org) compiler and [LiteIDE](https://github.com/visualf
 
 This project is third party. For support see http://golang.org and https://github.com/visualfc/liteide.
 
-[![version](https://img.shields.io/badge/version-1.0.4.7-blue.svg)](https://github.com/geosoft1/tools/archive/master.zip)
+[![version](https://img.shields.io/badge/version-1.0.4.8-blue.svg)](https://github.com/geosoft1/tools/archive/master.zip)
 [![license](https://img.shields.io/badge/license-GPL-blue.svg)](https://github.com/geosoft1/tools/blob/master/LICENSE)
 [![go1.5 passed](https://img.shields.io/badge/go1.5-passed-brightgreen.svg)](https://blog.golang.org/go1.5)
 

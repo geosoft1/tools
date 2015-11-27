@@ -98,8 +98,8 @@ test -f ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs && source ${XDG_CONFIG_HOME
 #-------------------------------------------------------------------------------
 
 #get last version of go compiler (e.g. go1.5.1.)
-#B0009
-v=`echo $(wget -qO- golang.org) | 
+#B0009,B0021
+v=`echo $(wget --no-check-certificate -qO- golang.org) | 
 awk '{ 
    if (match($0,/go([0-9]+.)+/)) 
       print substr($0,RSTART,RLENGTH) 
@@ -113,6 +113,7 @@ fi
 
 #build compiler name (e.g. go1.5.1.linux-386.tar.gz)
 n=${v}${k}-${a}.tar.gz
+#n=$v$k-$a.tar.gz
 
 echo "Download last compiler $n..."
 #ERROR: certificate common name `*.googleusercontent.com' doesn't match requested host name `storage.googleapis.com'.
@@ -149,6 +150,7 @@ awk '{
       print substr($0,RSTART,RLENGTH) 
    } 
 }'`
+#   if(match($0, /liteidex'${v:1:-1}.$k-$b'([-.qt0-9])+tar.bz2/ )) { 
 
 if [ -z "$n" ]; then
    echo "sourceforge.com website is temporarily in static offline mode."; exit
