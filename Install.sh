@@ -68,7 +68,7 @@ case $OPTION in
        sed --in-place '/export GOPATH=$HOME\/go-programs/d' $HOME/.bashrc
        echo "Uninstalled."
        exit;;
-   v ) echo ${VERSION=1.0.4.7}; exit;;
+   v ) echo ${VERSION=1.0.4.8}; exit;;
 
    \?) echo "Unknown option: -$OPTARG"; exit;;
    : ) echo "Missing option argument for -$OPTARG"; exit;;
