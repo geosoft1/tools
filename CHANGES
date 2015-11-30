@@ -72,6 +72,7 @@ Only a very limited set of project pages are available until the main website re
            -reworked the switches
            -reworked the user manual
 27.11.2015 (1.0.4.8) #B0021 add --no-check-certificate to golang.org for older systems
+30.11.2015 add sublime theme (experimental)
 
 TEST REPORT:
 SO           Ubuntu: 12.04,14.04,14.10,15.04,15.10
