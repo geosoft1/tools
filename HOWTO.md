@@ -24,7 +24,7 @@ This option let you install a previous specific version on LiteIDE if the last v
 
         ./Install.sh -e X27.2.1
 
-Remember that if you downgrade the ide version you must check and switch the current environment (see Environment Toolbar) to system. Otherwise your programs will not be compiled.
+Remember that if you downgrade the ide version you must check and switch the current environment (see View:Environment Toolbar) to system. Otherwise your programs will not be compiled.
 
 **Install in advanced mode (sensei mode)** (1.0.4.0+)
 
