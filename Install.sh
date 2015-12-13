@@ -68,7 +68,7 @@ case $OPTION in
        sed --in-place '/export GOPATH=$HOME\/go-programs/d' $HOME/.bashrc
        echo "Uninstalled."
        exit;;
-   v ) echo ${VERSION=1.0.4.8}; exit;;
+   v ) echo ${VERSION=1.0.4.9}; exit;;
 
    \?) echo "Unknown option: -$OPTARG"; exit;;
    : ) echo "Missing option argument for -$OPTARG"; exit;;
@@ -143,14 +143,13 @@ if [ -z "$v" ]; then
 fi
 
 #build ide name (e.g. liteidex27.2.1.linux-32-qt4-system.tar.bz2)
-#B0015,B0018
+#B0015,B0018,B0022
 n=`echo $(wget -qO- http://sourceforge.net/projects/liteide/files/$v) | 
 awk '{ 
-   if(match($0, /liteidex'"${v:1:-1}"'([-. 0-9])+'"$k"'-'"$b"'([-. qt 0-9])+tar\.bz2/ )) { 
+   if(match($0, /liteidex([-. '${v:1:-1}' '$k' qt(4|5) '$b'])+tar.bz2/ )) { 
       print substr($0,RSTART,RLENGTH) 
    } 
 }'`
-#   if(match($0, /liteidex'${v:1:-1}.$k-$b'([-.qt0-9])+tar.bz2/ )) { 
 
 if [ -z "$n" ]; then
    echo "sourceforge.com website is temporarily in static offline mode."; exit
@@ -250,11 +249,11 @@ go get golang.org/x/tools/cmd/present
 go-programs/bin/present" >$HOME/liteide/share/liteide/litebuild/command/go.api
 
 #add git clone repository command (external script)
-wget -q https://raw.githubusercontent.com/geosoft1/tools/master/scripts/clone -O $HOME/liteide/bin/clone
+wget -q https://raw.githubusercontent.com/geosoft1/tools/master/resources/scripts/clone -O $HOME/liteide/bin/clone
 chmod +x $HOME/liteide/bin/clone
 
 #add git create repository command (external script)
-wget -q https://raw.githubusercontent.com/geosoft1/tools/master/scripts/repo -O $HOME/liteide/bin/repo
+wget -q https://raw.githubusercontent.com/geosoft1/tools/master/resources/scripts/repo -O $HOME/liteide/bin/repo
 chmod +x $HOME/liteide/bin/repo
 
 #-------------------------------------------------------------------------------
@@ -267,7 +266,7 @@ echo "Create liteide.ini.mini"
 #create directory for liteide.ini.mini
 mkdir -p $HOME/.config/liteide
 #get liteide.ini.mini from github.com
-wget -q https://raw.githubusercontent.com/geosoft1/tools/master/liteide.ini.mini -O $HOME/.config/liteide/liteide.ini
+wget -q https://raw.githubusercontent.com/geosoft1/tools/master/resources/liteide.ini.mini -O $HOME/.config/liteide/liteide.ini
 sed -i "s#\$a#$a#g; s#\$GOPATH#$GOPATH#g; s#\$GOROOT#$GOROOT#g; s#\$HOME#$HOME#g" $HOME/.config/liteide/liteide.ini
 if [ "$CLASSROOM" == "yes" ]; then
    #B0016
@@ -275,6 +274,8 @@ if [ "$CLASSROOM" == "yes" ]; then
    #add customizer command
    CUSTOMIZER="cp $HOME/.config/liteide/liteide.ini.mini $HOME/.config/liteide/liteide.ini;"
 fi
+#sublime theme workaround
+echo -e "QAbstractScrollArea {\n\tborder: 0px;\n}\nQTreeView {\n\tborder: 1px solid #cccccc;\n}" > $HOME/liteide/share/liteide/liteapp/qss/sublime.qss
 
 #create generic .desktop file on desktop
 echo -e "[Desktop Entry]
