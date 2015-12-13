@@ -1,6 +1,6 @@
 ###Gopei Shell User Manual
 ====
-Aply to: GoPEI v1.0.4.0+, Revision: 5
+Aply to: GoPEI v1.0.4.0+, Revision: 6
 
 **Before install**
 
