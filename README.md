@@ -7,6 +7,7 @@ This project is third party. For support see http://golang.org and https://githu
 [![version](https://img.shields.io/badge/version-1.0.4.9-blue.svg)](https://github.com/geosoft1/tools/archive/master.zip)
 [![license](https://img.shields.io/badge/license-GPL-blue.svg)](https://github.com/geosoft1/tools/blob/master/LICENSE)
 [![go1.5 passed](https://img.shields.io/badge/go1.5-passed-brightgreen.svg)](https://blog.golang.org/go1.5)
+[![go1.6 passed](https://img.shields.io/badge/go1.6-passed-brightgreen.svg)](https://blog.golang.org/go1.6)
 
 <img src="https://cloud.githubusercontent.com/assets/6298396/10415856/62b936b0-7005-11e5-90f5-0a8644e632d7.png" width=600px>
 
