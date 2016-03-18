@@ -276,8 +276,6 @@ if [ "$CLASSROOM" == "yes" ]; then
 fi
 #sublime theme workaround
 echo -e "QAbstractScrollArea {\n\tborder: 0px;\n}\nQTreeView {\n\tborder: 1px solid #cccccc;\n}" > $HOME/liteide/share/liteide/liteapp/qss/sublime.qss
-#add sublime2 color scheme
-wget -qN https://raw.githubusercontent.com/geosoft1/tools/master/resources/color/sublime2.xml -P $HOME/liteide/share/liteide/liteeditor/color/
 
 #create generic .desktop file on desktop
 echo -e "[Desktop Entry]
