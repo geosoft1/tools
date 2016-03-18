@@ -276,8 +276,6 @@ if [ "$CLASSROOM" == "yes" ]; then
 fi
 #sublime theme workaround
 echo -e "QAbstractScrollArea {\n\tborder: 0px;\n}\nQTreeView {\n\tborder: 1px solid #cccccc;\n}" > $HOME/liteide/share/liteide/liteapp/qss/sublime.qss
-#add popular monokai color scheme
-wget -qN https://raw.githubusercontent.com/geosoft1/tools/master/resources/color/monokai.xml -P $HOME/liteide/share/liteide/liteeditor/color/
 
 #create generic .desktop file on desktop
 echo -e "[Desktop Entry]
@@ -318,10 +316,6 @@ Exec=xdg-open go-programs/src
       sleep 1
       #update the launcher favorites list. in unity changes are shwown immediately.
       gsettings set com.canonical.Unity.Launcher favorites "$b"
-      #WORKAROUND: unity2d need restart to show last changes (OBSOLETE)
-      #if [[ $DESKTOP_SESSION =~ "2d" ]]; then
-      #  killall unity-2d-shell;
-      #fi
    fi;;
 #other desktop environments can be handled here
 *)

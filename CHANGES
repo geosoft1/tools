@@ -74,7 +74,7 @@ Only a very limited set of project pages are available until the main website re
 27.11.2015 (1.0.4.8) #B0021 add --no-check-certificate to golang.org for older systems
 30.11.2015 add sublime theme (experimental)
 13.12.2015 (1.0.4.9) #B0022 better liteide version detection (the last dynamic detection)
-18.03.2016 add popular monokai color scheme
+18.03.2016 add Monokai color scheme
 
 TEST REPORT:
 SO           Ubuntu: 12.04,14.04,14.10,15.04,15.10
