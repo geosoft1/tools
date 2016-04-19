@@ -59,6 +59,8 @@ case $OPTION in
    u ) rm -rf $HOME/liteide/
        rm -rf $HOME/go/
        rm -rf $HOME/.local/share/applications/liteide.desktop
+       rm -rf $HOME/.dlv/
+       rm -rf $HOME/.config/gocode/
        #B0020
        rm -f  $HOME/.local/share/data/liteide/*.*
        rm -rf $HOME/.config/liteide/
@@ -68,7 +70,7 @@ case $OPTION in
        sed --in-place '/export GOPATH=$HOME\/go-programs/d' $HOME/.bashrc
        echo "Uninstalled."
        exit;;
-   v ) echo ${VERSION=1.0.4.9}; exit;;
+   v ) echo ${VERSION=1.0.5}; exit;;
 
    \?) echo "Unknown option: -$OPTARG"; exit;;
    : ) echo "Missing option argument for -$OPTARG"; exit;;
@@ -246,7 +248,8 @@ git add *
 clone
 repo
 go get golang.org/x/tools/cmd/present
-go-programs/bin/present" >$HOME/liteide/share/liteide/litebuild/command/go.api
+go-programs/bin/present
+go get github.com/derekparker/delve/cmd/dlv" >$HOME/liteide/share/liteide/litebuild/command/go.api
 
 #add git clone repository command (external script)
 wget -q https://raw.githubusercontent.com/geosoft1/tools/master/resources/scripts/clone -O $HOME/liteide/bin/clone

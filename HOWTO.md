@@ -167,3 +167,9 @@ If the program have dependecies do go get command before go build
 * Execute `` go-programs/bin/present `` to start presentation server.
 * Go to View/WebKitBrowser menu or in your favorite browser open http://127.0.0.1:3999 and click on your .slide file.
 * With the arrows keys navigate through the presentation.
+
+**Install Delve debugger** (1.0.5+)
+
+* Start LiteIDE press `` ctrl+` `` and execute once `` go get github.com/derekparker/delve/cmd/dlv ``.
+* Go to `` Debug `` menu and select once `` debugger/delve ``.
+* Use F5, F10 and F11 to debug your code.

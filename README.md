@@ -4,10 +4,13 @@ Simple [Go](http://golang.org) compiler and [LiteIDE](https://github.com/visualf
 
 This project is third party. For support see http://golang.org and https://github.com/visualfc/liteide.
 
-[![version](https://img.shields.io/badge/version-1.0.4.9-blue.svg)](https://github.com/geosoft1/tools/archive/master.zip)
+[![version](https://img.shields.io/badge/version-1.0.5-blue.svg)](https://github.com/geosoft1/tools/archive/master.zip)
 [![license](https://img.shields.io/badge/license-GPL-blue.svg)](https://github.com/geosoft1/tools/blob/master/LICENSE)
 [![go1.5 passed](https://img.shields.io/badge/go1.5-passed-brightgreen.svg)](https://blog.golang.org/go1.5)
 [![go1.6 passed](https://img.shields.io/badge/go1.6-passed-brightgreen.svg)](https://blog.golang.org/go1.6)
+
+[![ubuntu16.04 compatible](https://img.shields.io/badge/ubuntu16.04-compatible-orange.svg)]
+(http://www.ubuntu.com/)
 
 <img src="https://cloud.githubusercontent.com/assets/6298396/10415856/62b936b0-7005-11e5-90f5-0a8644e632d7.png" width=600px>
 
@@ -21,6 +24,7 @@ This project is third party. For support see http://golang.org and https://githu
 * Extend project templates with **Go1 Simple Project** and **Go1 GPL Project**.
 * Add some nice color schemes.
 * Real gophers make slides and articles so add presenter to ide on `` ctrl+` ``.
+* Add delve install command on `` ctrl+` ``.
 
 Read the [User Manual](https://github.com/geosoft1/tools/blob/master/HOWTO.md) for more details.
 
