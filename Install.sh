@@ -29,7 +29,7 @@ fi
 clear
 
 echo "Golang Programming Environment Installer"
-echo "Copyright (C) 2014,2015  geosoft1@gmail.com"
+echo "Copyright (C) 2014-2016 geosoft1@gmail.com"
 
 usage()  {
    echo "Usage: "`basename "$0"`" [options]"
