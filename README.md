@@ -24,7 +24,7 @@ This project is third party. For support see http://golang.org and https://githu
 * Extend project templates with **Go1 Simple Project** and **Go1 GPL Project**.
 * Add some nice color schemes.
 * Real gophers make slides and articles so add presenter to ide on `` ctrl+` ``.
-* Add delve install command on `` ctrl+` ``.
+* Add [delve](https://github.com/derekparker/delve) debugger install command on `` ctrl+` ``.
 
 Read the [User Manual](https://github.com/geosoft1/tools/blob/master/HOWTO.md) for more details.
 
