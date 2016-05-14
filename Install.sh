@@ -29,7 +29,7 @@ fi
 clear
 
 echo "Golang Programming Environment Installer"
-echo "Copyright (C) 2014-2016 geosoft1@gmail.com"
+echo "Copyright (C) 2014-2016  geosoft1@gmail.com"
 
 usage()  {
    echo "Usage: "`basename "$0"`" [options]"
@@ -70,7 +70,7 @@ case $OPTION in
        sed --in-place '/export GOPATH=$HOME\/go-programs/d' $HOME/.bashrc
        echo "Uninstalled."
        exit;;
-   v ) echo ${VERSION=1.0.5}; exit;;
+   v ) echo ${VERSION=1.0.5.1}; exit;;
 
    \?) echo "Unknown option: -$OPTARG"; exit;;
    : ) echo "Missing option argument for -$OPTARG"; exit;;
@@ -139,9 +139,9 @@ awk '{
 }'`
 fi
 
-#exit if github is offline otherwise the rest will fail 
+#exit if site is offline otherwise the rest will fail 
 if [ -z "$v" ]; then
-   echo "github.com website is temporarily in static offline mode."; exit
+   echo "website is temporarily in static offline mode."; exit
 fi
 
 #build ide name (e.g. liteidex27.2.1.linux-32-qt4-system.tar.bz2)
@@ -153,8 +153,9 @@ awk '{
    } 
 }'`
 
+#exit if site is offline otherwise the rest will fail 
 if [ -z "$n" ]; then
-   echo "sourceforge.com website is temporarily in static offline mode."; exit
+   echo "website is temporarily in static offline mode."; exit
 fi
 
 echo "Download last ide $n..."
@@ -215,7 +216,7 @@ if [ -n "$GITSUPPORT" ]; then
       #curl -s -X GET -u $GITUSER:$GITPASSWORD https://api.github.com/user/keys
       #curl -s -X DELETE -u $GITUSER:$GITPASSWORD https://api.github.com/user/keys/13146480
       #curl -s -X POST -u $GITUSER:$GITPASSWORD https://api.github.com/user/keys -d '{"key":"'"${KEY}"'"}'
-      err=`curl -s -X POST -u $GITUSER:$GITPASSWORD https://api.github.com/user/keys -d '{"key":"'"${KEY}"'"}'| awk '/message/ { gsub(/^[\t ]+|[\",]/,"");print }'`
+      err=`curl -s -X POST -u $GITUSER:$GITPASSWORD https://api.$GITSERVER/user/keys -d '{"key":"'"${KEY}"'"}'| awk '/message/ { gsub(/^[\t ]+|[\",]/,"");print }'`
       if [ "$err" != "" ]; then
          echo -e $err
       fi
@@ -225,20 +226,28 @@ if [ -n "$GITSUPPORT" ]; then
    echo "Checking the keys..."
    #workaround: if ssh result is false (Permission denied (publickey).) set -e will stop the script
    #prevent this by changing result code to true and let the script to continue
-   ssh -o StrictHostKeyChecking=no -o LogLevel=error -T git@github.com || true
+   ssh -o StrictHostKeyChecking=no -o LogLevel=error -T git@$GITSERVER || true
    #create github.com in $GOPATH
-   mkdir -p $GOPATH/src/github.com/$GITUSER
+   mkdir -p $GOPATH/src/$GITSERVER/$GITUSER
    #show gopei shell mode :-)
    #wget -q https://raw.githubusercontent.com/geosoft1/tools/master/gopher/gopeicolor.png -O $GOROOT/doc/gopher/gophercolor.png
 
    #setup desktop action to launcher
    GITACTION="$GITSERVER;"
    GITDESKTOPACTION="[Desktop Action $GITSERVER]
-Name=github.com/$GITUSER
-Exec=xdg-open http://github.com/$GITUSER"
+Name=$GITSERVER/$GITUSER
+Exec=xdg-open http://$GITSERVER/$GITUSER"
 fi
 
 #-------------------------------------------------------------------------------
+
+#get other usefull tools
+wget -q https://raw.githubusercontent.com/geosoft1/tools/master/resources/scripts/clone -O $HOME/liteide/bin/clone
+wget -q https://raw.githubusercontent.com/geosoft1/tools/master/resources/scripts/repo -O $HOME/liteide/bin/repo
+wget -q https://raw.githubusercontent.com/geosoft1/tools/master/resources/scripts/get -O $HOME/liteide/bin/get
+chmod +x $HOME/liteide/bin/clone
+chmod +x $HOME/liteide/bin/repo
+chmod +x $HOME/liteide/bin/get
 
 #build essential git commands list
 echo -e "git commit -m \"-\" -a
@@ -247,17 +256,8 @@ git pull
 git add *
 clone
 repo
-go get golang.org/x/tools/cmd/present
-go-programs/bin/present
-go get github.com/derekparker/delve/cmd/dlv" >$HOME/liteide/share/liteide/litebuild/command/go.api
-
-#add git clone repository command (external script)
-wget -q https://raw.githubusercontent.com/geosoft1/tools/master/resources/scripts/clone -O $HOME/liteide/bin/clone
-chmod +x $HOME/liteide/bin/clone
-
-#add git create repository command (external script)
-wget -q https://raw.githubusercontent.com/geosoft1/tools/master/resources/scripts/repo -O $HOME/liteide/bin/repo
-chmod +x $HOME/liteide/bin/repo
+get
+present" >$HOME/liteide/share/liteide/litebuild/command/go.api
 
 #-------------------------------------------------------------------------------
 
@@ -268,7 +268,7 @@ echo -e 'GOARCH='$a'\nGOROOT=$HOME/go\nPATH=$PATH:$GOROOT/bin' >> $HOME/liteide/
 echo "Create liteide.ini.mini"
 #create directory for liteide.ini.mini
 mkdir -p $HOME/.config/liteide
-#get liteide.ini.mini from github.com
+#get liteide.ini.mini
 wget -q https://raw.githubusercontent.com/geosoft1/tools/master/resources/liteide.ini.mini -O $HOME/.config/liteide/liteide.ini
 sed -i "s#\$a#$a#g; s#\$GOPATH#$GOPATH#g; s#\$GOROOT#$GOROOT#g; s#\$HOME#$HOME#g" $HOME/.config/liteide/liteide.ini
 if [ "$CLASSROOM" == "yes" ]; then

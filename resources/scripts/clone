@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # golang programming environment installer
-# Copyright (C) 2014,2015  geosoft1@gmail.com
+# Copyright (C) 2014-2016  geosoft1@gmail.com
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,9 +16,11 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+GITSERVER="github.com"
+GOPATH=$HOME/go-programs
 if [ -z $1 ]; then
-   echo "Use: clone githubusername/projectname"
+   echo "Usage: clone githubusername/projectname"
    exit
 fi
-git clone git@github.com:$1.git $HOME/go-programs/src/github.com/$1
-
+git clone git@$GITSERVER:$1.git $GOPATH/src/$GITSERVER/$1
+echo "Done."

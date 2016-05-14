@@ -161,15 +161,17 @@ If the program have dependecies do go get command before go build
 **Make presentations** (1.0.4.6+)
 
 * Start LiteIDE press `` ctrl+` `` and execute `` go get golang.org/x/tools/cmd/present `` only once, first time.
+* Starting with 1.0.5.1 use `` get present ``
 * Create a new directory named `` talks `` in $GOPATH/src or in $GOPATH/src/github.com/gituser.
 * Create new project Go Present Slide File. Use Location/Browse to put it in your talks directory.
 * Open and edit your presentation (see http://godoc.org/golang.org/x/tools/present).
-* Execute `` go-programs/bin/present `` to start presentation server.
+* Execute `` go-programs/bin/present `` to start presentation server. Starting with 1.0.5.1 use only `` present ``.
 * Go to View/WebKitBrowser menu or in your favorite browser open http://127.0.0.1:3999 and click on your .slide file.
 * With the arrows keys navigate through the presentation.
 
 **Install Delve debugger** (1.0.5+)
 
 * Start LiteIDE press `` ctrl+` `` and execute once `` go get github.com/derekparker/delve/cmd/dlv ``.
+* Starting with 1.0.5.1 use `` get delve ``
 * Go to `` Debug `` menu and select once `` debugger/delve ``.
 * Use F5, F10 and F11 to debug your code.
