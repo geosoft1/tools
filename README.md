@@ -11,6 +11,8 @@ Also, add some high level commands wich help you easy make a repository, clone, 
 
 This project is third party. For support see [golang.org](http://golang.org) and [github.com/visualfc/liteide](https://github.com/visualfc/liteide).
 
+Read the user manual on the [wiki page](https://github.com/geosoft1/tools/wiki).
+
 **Features**
 
 - Convergence, Gopei run now on many Unix/Linux based desktops and servers (yes, work on Mac).
