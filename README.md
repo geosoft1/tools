@@ -1,53 +1,48 @@
-###Gopei (Go Programming Environment Installer)
-====
-Simple [Go](http://golang.org) compiler and [LiteIDE](https://github.com/visualfc/liteide) installer for Ubuntu.
+## Gopei (Go Programming Environment Installer)<br/>The Convergence
 
-This project is third party. For support see http://golang.org and https://github.com/visualfc/liteide.
-
-[![version](https://img.shields.io/badge/version-1.0.5.1-blue.svg)](https://github.com/geosoft1/tools/archive/master.zip)
+[![version](https://img.shields.io/badge/version-1.6-blue.svg)](https://github.com/geosoft1/tools/archive/master.zip)
 [![license](https://img.shields.io/badge/license-GPL-blue.svg)](https://github.com/geosoft1/tools/blob/master/LICENSE)
-[![go1.5 passed](https://img.shields.io/badge/go1.5-passed-brightgreen.svg)](https://blog.golang.org/go1.5)
-[![go1.6 passed](https://img.shields.io/badge/go1.6-passed-brightgreen.svg)](https://blog.golang.org/go1.6)
 
-[![ubuntu16.04 compatible](https://img.shields.io/badge/ubuntu16.04-compatible-orange.svg)]
-(http://www.ubuntu.com/)
+Gopei shell install [Go](http://golang.org) compiler, [LiteIDE](https://github.com/visualfc/liteide) and configure for you the entire environment, variables, paths, ide interface and even link the machine with your Github account in a few minutes with just one command.
 
-<img src="https://cloud.githubusercontent.com/assets/6298396/10415856/62b936b0-7005-11e5-90f5-0a8644e632d7.png" width=600px>
+You don't need to use complicated commands on Mac or Linux so you just have to write go programs. 
+
+Also, add some high level commands wich help you easy make a repository, clone, push or get a project and more.
+
+This project is third party. For support see [golang.org](http://golang.org) and [github.com/visualfc/liteide](https://github.com/visualfc/liteide).
 
 **Features**
-* Get and install last versions of go compiler and ide.
-* Create a simple layout for ide (liteide.ini.mini).
-* Lot of gophers use Monaco font so add into ide.
-* Also create a GOPATH to the go-programs directory and add a HelloWorld project.
-* Add launcher to Unity with some useful functions on right-click. Other DE users have a shortcut on desktop.
-* Add git support in ide on `` ctrl+` ``. Be sure you have configured [git] (https://help.github.com/articles/set-up-git) before with proper [ssh keys](https://help.github.com/articles/generating-ssh-keys) or use `` -g `` switch for.
-* Extend project templates with **Go1 Simple Project** and **Go1 GPL Project**.
-* Add some nice color schemes.
-* Real gophers make slides and articles so add presenter to ide on `` ctrl+` ``.
-* Add [delve](https://github.com/derekparker/delve) debugger install command on `` ctrl+` ``.
 
-Read the [User Manual](https://github.com/geosoft1/tools/blob/master/HOWTO.md) for more details.
+- Convergence, Gopei run now on many Unix/Linux based desktops and servers (yes, work on Mac).
+- Install last versions of Go compiler and a stable version of LiteIDE.
+- Create a simple and practical layout for ide (liteide.ini.mini).
+- Lot of gophers use Monaco font so add into ide.
+- Also create `GOPATH` and add a helloworld project.
+- Add a nice launcher to dock or desktop.
+- Extend project templates with **Go1 Simple Project** and **Go1 GPL Project**.
+- Add some useful scripts for
+   - working with git (be sure you have installed `git` before and a valid acount)
+   - easy install some useful tools like [delve](https://github.com/derekparker/delve) debugger or [presenter](https://godoc.org/golang.org/x/tools/present)
+   - cloud features (next frontier)
+- Gopei shell is free as in free speech and free beer...
 
-See [CHANGES](https://github.com/geosoft1/tools/blob/master/CHANGES) for new features and bug corrections.
+**What's new in 1.6 (milestone)**
+
+- complete code rewritten, new approach.
+- versioning acording to [semantic versioning](http://semver.org), see `dfc` [manifest](http://dave.cheney.net/2016/06/24/gophers-please-tag-your-releases).
+- go environment moved into `.go_profile` file also inspired from `dfc` [~/.bashrc](https://forum.golangbridge.org/t/where-to-place-tools/2430/5)
 
 **How to use**
 
-Download anywhere and run from your file browser with double click. If you prefer Terminal go to the directory with the script and run:
+[Download](https://github.com/geosoft1/tools/archive/master.zip) anywhere and unarchive. From Terminal go to the `tools` folder and simply run:
 
-    ./Install.sh
+    ./gopei
 
 Use `` -h `` switch to see all options.
 
-Run periodicaly or if compiler/ide versions change to update the system. Projects are not affected if you overinstall.
-	
-Ubuntu 14.04+ need script execute activation so run from Terminal
-	
-For Nautilus use:
+Run periodicaly or if compiler/ide versions change to update the system. Projects are never affected if you overinstall.
 
-     gsettings set org.gnome.nautilus.preferences executable-text-activation launch
+Note that your system must have `bash`,`curl` and `git` installed before. Also, some systems may need additional packages.
 
-For Nemo use:
+Read the [wiki page](https://github.com/geosoft1/tools/wiki) for more details.
 
-     gsettings set org.nemo.preferences executable-text-activation ask
-
-Note that on 14.04+ is better to install with `` -s `` to have proper Qt interface.

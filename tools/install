@@ -16,11 +16,23 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-GITSERVER="github.com"
-GOPATH=$HOME/go-programs
-if [ -z $1 ]; then
-   echo "Usage: clone githubusername/projectname"
+usage()  {
+   echo "Usage: "`basename "$0"`" [options]"
+   echo "Options:"
+   echo "present   present tool"
+   echo "delve     delve debugger"
    exit
-fi
-git clone git@$GITSERVER:$1.git $GOPATH/src/$GITSERVER/$1
+}
+
+case $1 in
+   present )
+      REPO=golang.org/x/tools/cmd/present;;
+   delve)
+      REPO=github.com/derekparker/delve/cmd/dlv;;
+   * ) usage;;
+esac
+
+echo "Installing $1 (from $REPO)..."
+go get $REPO
+
 echo "Done."

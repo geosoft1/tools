@@ -1,13 +1,14 @@
-<geosoft1@gmail.com> main coding
-<andrew@webupd8.org> bugs correction, promoting on webupd8
-     http://www.webupd8.org/2014/09/easily-install-latest-golang-compiler.html
-<nf@wh3rd.net> go compiler link suggestion
-<bketelsen@gopheracademy.com> promoting to gophers community
-     https://twitter.com/GopherAcademy/status/508635840432861184
-<dave@cheney.net> bugs correction
-<http://blog.victoralm.com> bugs correction
-<https://github.com/matrixik> bugs correction
-<http://golangweekly.com/issues/77> promoting to gophers community
+George Calianu <geosoft1@gmail.com> main developer
+Alin Andrei <andrew@webupd8.org> bugs correction, publishing
+     webupd8.org/2014/09/easily-install-latest-golang-compiler.html
+Andrew Gerand <nf@wh3rd.net> go compiler suggestions
+Brian Ketelsen <bketelsen@gopheracademy.com> promoting to gophers community
+     twitter.com/GopherAcademy/status/508635840432861184
+Dave Cheney<dave@cheney.net> bugs correction and inspiration for many things
+<github.com/Victoralm> localization issues correction
+Dobrosław Żybort <github.com/matrixik> bugs correction
+Cooper Press <golangweekly.com/issues/77> publishing
+Laura Draghici <laura.drgh@gmail.com> OS X testing support
 
 All contributors that help in some way.
 If they are missing, please let me know.

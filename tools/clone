@@ -17,25 +17,12 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 GITSERVER="github.com"
-GITUSER=`awk 'NR==2 {print $3}' $HOME/.gitconfig`
-REPO=${PWD##*/}
-echo -n "Create repository $GITSERVER/$GITUSER/$REPO [y/n] "
-read opt
-if [ "$opt" == "n" ]; then
-   exit
-fi
-echo -n "Password:"
-read PASSWORD
-err=`curl -s -u $GITUSER:$PASSWORD https://api.$GITSERVER/user/repos -d '{"name":"'$REPO'"}' | awk '/message/ { gsub(/^[\t]+|[\",]/,"");print }'`
-if [ "$err" != "" ]; then
-   echo -n $err
-   echo 
-   exit
-fi
-git init
-git add *
-git commit -m "first commit"
-git remote add origin git@$GITSERVER:$GITUSER/$REPO.git
-git push -u origin master
-echo "Done."
+GOPATH=$HOME
 
+if [ -z $1 ]; then
+   echo "Usage: clone githubusername/projectname" && exit
+fi
+
+git clone git@$GITSERVER:$1.git $GOPATH/src/$GITSERVER/$1
+
+echo "Done."

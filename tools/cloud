@@ -19,25 +19,28 @@
 usage()  {
    echo "Usage: "`basename "$0"`" [options]"
    echo "Options:"
-   echo "present   present tool"
-   echo "delve     delve debugger"
+   echo "init                  -- push ssh key to remote server(s)"
+   echo "                      (use .servers list from local project folder)"
+   echo "push source|binary     -- push curent source+binary tree"
+   echo "run                    -- run project remote,view result locally"
+   echo "build                  -- build project remote from remote source"
+   echo "                       (use if you develop for different arch)"
+   echo "deploy                 -- push binary and run on many servers"
+   echo "                       (use .servers list from local project folder)"
    exit
 }
 
 if [ -z $1 ]; then
-   usage   exit
+   usage
 fi
 
 case $1 in
-   present ) repo=golang.org/x/tools/cmd/present;;
-   delve   ) repo=github.com/derekparker/delve/cmd/dlv;;
-   #
-   # feel free to add new commands here :-)
-   #
+   init    ) ;;
+   push    ) ;;
+   run     ) ;;
+   build   ) ;;
+   deploy  ) ;;
    *       ) usage;;
 esac
-
-echo "Installing $1 ($repo)..."
-go get $repo
 
 echo "Done."
