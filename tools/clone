@@ -1,6 +1,6 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-# golang programming environment installer
+# clone tool
 # Copyright (C) 2014-2016  geosoft1@gmail.com
 #
 # This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-GITSERVER="github.com"
+GITSERVER=github.com
 GOPATH=$HOME
 
 if [ -z $1 ]; then

@@ -1,0 +1,8 @@
+What's new in 1.6 (milestone)
+
+- complete code rewritten, new approach.
+- versioning acording to [semantic versioning](http://semver.org), see `dfc` [manifest](http://dave.cheney.net/2016/06/24/gophers-please-tag-your-releases).
+- go environment moved into `.go_profile` file also inspired from `dfc` [~/.bashrc](https://forum.golangbridge.org/t/where-to-place-tools/2430/5)
+
+1.6.1
+- minor bugs corrections, tested on Arch Linux

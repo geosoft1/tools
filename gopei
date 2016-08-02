@@ -22,12 +22,13 @@ GOPEI_AUTHOR="geosoft1@gmail.com"
 GOPEI_COPYRIGHT="Copyright (C) 2014-2016  $GOPEI_AUTHOR"
 GOPEI_MAJOR_VERSION=1
 GOPEI_MINOR_VERSION=6
-GOPEI_PATCH_VERSION=0
+GOPEI_PATCH_VERSION=1
 GOPEI_STAGE="release"
 GOPEI_VERSION=$GOPEI_MAJOR_VERSION.$GOPEI_MINOR_VERSION.$GOPEI_PATCH_VERSION
 GOPEI_ROOT=`dirname $0`
 GOPEI_NAME=`basename $0`
 GOPEI_DATE="05 July 2016"
+GOPEI_LAST="02 Aug 2016"
 
 GOROOT=$HOME/go
 GOPATH=$HOME
@@ -73,9 +74,7 @@ linux )
    IDE_NAME=liteidex$IDE_VERSION.$PLATFORM_NAME-$MACHINE_BITS-qt4.tar.bz2
    IDE_RESOURCES=$IDEROOT/share/liteide
    #get localized user directories
-   test -f ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs && source ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs
-   #check if platform is a server
-   [ "`cat /etc/apt/sources.list | grep Server`" ] && IS_SERVER=1;;
+   test -f ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs && source ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs;;
 macosx )
    PROFILE_FILE=$HOME/.bash_profile
    IDE_NAME=liteidex$IDE_VERSION.$PLATFORM_NAME-qt4.zip
@@ -121,7 +120,6 @@ case $OPTION in
       rm -rf $HOME/.local/share/applications/liteide.desktop
       #Linux specific
       rm -f $XDG_DESKTOP_DIR/liteide.desktop
-      rm -f  $HOME/.local/share/data/liteide/*.*
       #rm -rf $HOME/.fonts/MONACO.TTF
       if [ $IS_MACOSX ] && [ $LAUNCHER ]; then
          /usr/libexec/PlistBuddy -c "Delete persistent-apps:$LAUNCHER" ~/Library/Preferences/com.apple.dock.plist
@@ -130,8 +128,10 @@ case $OPTION in
       if [ $OPTION == U ]; then
          rm -rf $HOME/.ssh/
          rm -f  $HOME/.gitconfig
-         #Linux specific
-         rm -rf $HOME/.local/share/data/liteide/
+         #test "$(ls -A "$HOME/.local/share/data/liteide/goplay" 2>/dev/null)" || rm -rf $HOME/.local/share/data/liteide
+         #if [ $IS_MACOSX ]; then
+         #   test "$(ls -A "$HOME/Library/Application Support/LiteIDE/liteide/goplay" 2>/dev/null)" || rm -rf "$HOME/Library/Application Support/LiteIDE"
+         #fi
       fi
       #restore original profile file
       [ -e $PROFILE_FILE ] && sed -i.bk '/. ~\/.go_profile/d' $PROFILE_FILE
@@ -338,8 +338,8 @@ echo $GITEMAIL > $IDE_TEMPLATE/gogpl/CONTRIBUTORS
 echo "\$ROOT\$
 ====" > $IDE_TEMPLATE/gogpl/README.md
 
-#get GPL license acording to FSF
-curl -o $IDE_TEMPLATE/gogpl/LICENSE -fsSLOk www.gnu.org/licenses/gpl.txt || exit;
+#set GPL license acording to FSF
+cp $GOPEI_ROOT/LICENSE $IDE_TEMPLATE/gogpl/LICENSE
 
 #add common git comands to liteide
 echo "git add *
