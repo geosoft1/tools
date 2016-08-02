@@ -5,4 +5,4 @@ What's new in 1.6 (milestone)
 - go environment moved into `.go_profile` file also inspired from `dfc` [~/.bashrc](https://forum.golangbridge.org/t/where-to-place-tools/2430/5)
 
 1.6.1
-- minor bugs corrections, tested on Arch Linux
+- some minor bugs corrections
