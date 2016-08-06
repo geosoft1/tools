@@ -11,7 +11,7 @@ Also, add some high level commands wich help you easy make a repository, clone, 
 
 This project is third party. For support see [golang.org](http://golang.org) and [github.com/visualfc/liteide](https://github.com/visualfc/liteide).
 
-Read the user manual on the [wiki page](https://github.com/geosoft1/tools/wiki). For cloud tool read [here](https://github.com/geosoft1/tools/wiki/Cloud-tool)
+Read the user manual on the [wiki page](https://github.com/geosoft1/tools/wiki). For cloud tool read [here](https://github.com/geosoft1/tools/wiki/Cloud-tool).
 
 **Features**
 
