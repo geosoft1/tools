@@ -16,23 +16,34 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+LONG_NAME="Install tool"
+CODE_NAME=""
+AUTHOR="geosoft1@gmail.com"
+COPYRIGHT="Copyright (C) 2014-2016  $AUTHOR"
+MAJOR_VERSION=1
+MINOR_VERSION=1
+PATCH_VERSION=0
+STAGE="release"
+VERSION=$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION
+DATE=""
+LAST="06 August 2016"
+
 usage()  {
    echo "Usage: "`basename "$0"`" [options]"
    echo "Options:"
    echo "present   present tool"
    echo "delve     delve debugger"
+   echo "version   version"
    exit
 }
 
 case $1 in
-   present )
-      REPO=golang.org/x/tools/cmd/present;;
-   delve)
-      REPO=github.com/derekparker/delve/cmd/dlv;;
-   * ) usage;;
+   present ) URL=golang.org/x/tools/cmd/present;;
+   delve   ) URL=github.com/derekparker/delve/cmd/dlv;;
+   version ) echo $VERSION && exit;;
+   *       ) usage;;
 esac
 
-echo "Installing $1 (from $REPO)..."
-go get $REPO
+echo "Installing $1 (from $URL)..." && go get $URL
 
 echo "Done."

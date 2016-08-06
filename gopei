@@ -21,8 +21,8 @@ GOPEI_CODE_NAME="The Convergence"
 GOPEI_AUTHOR="geosoft1@gmail.com"
 GOPEI_COPYRIGHT="Copyright (C) 2014-2016  $GOPEI_AUTHOR"
 GOPEI_MAJOR_VERSION=1
-GOPEI_MINOR_VERSION=6
-GOPEI_PATCH_VERSION=1
+GOPEI_MINOR_VERSION=7
+GOPEI_PATCH_VERSION=0
 GOPEI_STAGE="release"
 GOPEI_VERSION=$GOPEI_MAJOR_VERSION.$GOPEI_MINOR_VERSION.$GOPEI_PATCH_VERSION
 GOPEI_ROOT=`dirname $0`
@@ -346,10 +346,9 @@ echo "git add *
 git commit -m \"-\" -a
 git push
 git pull
-tools/clone
-tools/cloud
+tools/github 
 tools/install
-tools/repo" > $IDE_RESOURCES/litebuild/command/go.api
+tools/cloud" > $IDE_RESOURCES/litebuild/command/go.api
 
 #add scripts to environment
 [ -e $GOPEI_ROOT/tools ] && cp -R $GOPEI_ROOT/tools $GOROOT/bin

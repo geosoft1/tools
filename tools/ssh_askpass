@@ -1,11 +1,15 @@
 #!/usr/bin/env bash
 
-# clone tool
-# Copyright (C) 2014-2016  geosoft1@gmail.com
+# 
+# script that passes password from stdin to ssh
+#
+# Copyright (C) 2010 André Frimberger <andre OBVIOUS_SIGN frimberger.de>
+#
+# modified by  geosoft1@gmail.com
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
-# the Free Software Foundation, either version 3 of the License, or
+# the Free Software Foundation, either version 3 of the License, or 
 # (at your option) any later version.
 #
 # This program is distributed in the hope that it will be useful,
@@ -15,14 +19,14 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
 
-GITSERVER=github.com
-GOPATH=$HOME
-
-if [ -z $1 ]; then
-   echo "Usage: clone githubusername/projectname" && exit
+if [ -n "$SSH_ASKPASS_PASSWORD" ]; then
+    cat <<< "$SSH_ASKPASS_PASSWORD"
+else
+    read SSH_ASKPASS_PASSWORD
+    export SSH_ASKPASS=$0
+    export SSH_ASKPASS_PASSWORD
+    [ $DISPLAY ] || export DISPLAY=dummydisplay:0
+    exec "$@"
 fi
-
-git clone git@$GITSERVER:$1.git $GOPATH/src/$GITSERVER/$1
-
-echo "Done."
