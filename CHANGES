@@ -10,3 +10,8 @@ What's new in 1.6 The Convergence (milestone)
 What's new in 1.7 (milestone)
 -add unified github tool
 -add cloud tool (Quantum Teleporter)
+
+1.7.1
+- switch to LiteIDE X30 due an incompatibility between go1.7 and gocode in X29
+- add some conditional compilation commands on ctrl+`
+
