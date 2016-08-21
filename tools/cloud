@@ -22,13 +22,13 @@ AUTHOR="geosoft1@gmail.com"
 COPYRIGHT="Copyright (C) 2014-2016  $AUTHOR"
 MAJOR_VERSION=1
 MINOR_VERSION=0
-PATCH_VERSION=0
+PATCH_VERSION=1
 STAGE="alpha"
 VERSION=$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION
 ROOT=`dirname $0`
 NAME=`basename $0`
 DATE="05 July 2016"
-LAST="01 August 2016"
+LAST="21 August 2016"
 
 GOROOT=$HOME/go
 GOBIN=$GOROOT/bin
@@ -38,11 +38,20 @@ TMP_FOLDER=/tmp/.ssh
 
 SSH_OPTIONS=(-o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/null" -q)
 
+# project path structure
+#
+# /home/george/src/github.com/geosoft1/project_name/templates -- templates folder
+#                                                   .servers  -- servers file
+# |           |                       |             main.go   -- go files,other files
+# |HOME       |                       |            |
+# |REMOTE_HOME|BASEPATH               |BASENAME    |
+#                                     |PROJECT_NAME|
+#                                     |EXECUTABLE_NAME
+
 BASENAME=`basename $PWD`
 PROJECT_NAME=$BASENAME
 EXECUTABLE_NAME=$PROJECT_NAME
-
-#SRC_PATH=`echo $PWD | sed 's/.*\(src\)/\1/g'`
+BASEPATH=`echo $PWD | sed -e "s,$HOME\/,," | sed -e "s,\/$BASENAME$,,"`
 
 set -e
 
@@ -77,7 +86,7 @@ eval $(cat .servers | awk '{print "REMOTE_ADDR=\""$1"\";REMOTE_USER=\""$2"\""}')
 
 getRemoteEnv() {
    REMOTE_HOME=`ssh "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR printenv HOME`
-   PROJECT_PATH=$REMOTE_HOME/src/$PROJECT_NAME
+   PROJECT_PATH=$REMOTE_HOME/$BASEPATH/$PROJECT_NAME
 }
 
 init() {
@@ -113,9 +122,9 @@ init() {
 push() {
    echo "-- push current source+binary tree on $REMOTE_USER@$REMOTE_ADDR"
    #force copy read-only files like some .git content
-   ssh "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR mkdir -p src
-   ssh "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR chmod -R +w src
-   scp -r "${SSH_OPTIONS[@]}" $PWD $REMOTE_USER@$REMOTE_ADDR:src
+   ssh "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR mkdir -p $BASEPATH
+   ssh "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR chmod -R +w $BASEPATH
+   scp -r "${SSH_OPTIONS[@]}" $PWD $REMOTE_USER@$REMOTE_ADDR:$BASEPATH
 }
 
 run() {
