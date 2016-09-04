@@ -9,8 +9,9 @@ Dave Cheney<dave@cheney.net> bugs correction and inspiration for many things
 Dobrosław Żybort <github.com/matrixik> bugs correction
 Cooper Press <golangweekly.com/issues/77> publishing
 Laura Draghici <laura.drgh@gmail.com> OS X testing support
-Pompiliu Maftei <bobses@gmail.comm> bugs correction, testing, publishing
+Pompiliu Maftei <bobses@gmail.comm> bugs correction, arch linux testing, publishing
       http://www.bobses.eu/2016/08/01/programeaza-in-go-sub-linux-cu-gopei
+Razvan Ghitescu <razvan.ghitescu@gmail.com> armv7 testing support
 
 All contributors that help in some way.
 If they are missing, please let me know.

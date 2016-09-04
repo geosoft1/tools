@@ -15,3 +15,6 @@ What's new in 1.7 (milestone)
 - switch to LiteIDE X30 because of incompatibilities between go1.7 and gocode in X29
 - add some conditional compilation commands on ctrl+`
 
+1.7.2
+- old monaco.ttf url no more exist so switch to other url
+- add armv7 support

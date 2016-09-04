@@ -40,14 +40,16 @@ IDEROOT=$HOME/liteide
 set -e
 
 #-------------------------------------------------------------------------------
-#get host computer arch (e.g. i686|x86_64|arm6l)
+#get host computer arch (e.g. i686|x86_64|armv6l)
 case $(uname -m) in
    i686 )
       MACHINE_TYPE=386;;
    x86_64|amd64 )
       MACHINE_TYPE=amd64;;
-   arm6l )
-      MACHINE_TYPE=arm6l;;
+   armv6l|armv7l )
+      IS_ARM=1
+      MACHINE_TYPE=armv6l;;
+   * )echo "Unknown architecture" && exit;;
 esac
 
 #get host computer LONG_BIT (e.g 32|64)
@@ -171,7 +173,7 @@ grep -sq '. ~/.go_profile' $PROFILE_FILE || echo '. ~/.go_profile' >> $PROFILE_F
 echo "Create helloworld program"
 mkdir -p $GOPATH/src/helloworld && cp -r $GOROOT/test/helloworld.go $GOPATH/src/helloworld
 
-if [ $IS_SERVER ]; then
+if [ $IS_SERVER ] || [ $IS_ARM ]; then
   echo "Done." && exit
 fi
 
@@ -185,7 +187,7 @@ linux )
    #small ajustment on some Linux machines
    [ $NO_QTLIBS ] && rm $IDEROOT/lib/liteide/libQt*.*
    echo "Get Monaco font..."
-   curl -o $HOME/.fonts/MONACO.TTF --create-dirs -fsSLOk usystem.googlecode.com/files/MONACO.TTF || exit;;
+   curl -o $HOME/.fonts/MONACO.TTF --create-dirs -fsSLOk jorrel.googlepages.com/Monaco_Linux.ttf || exit;;
 macosx )
    mkdir -p $IDEROOT && unzip -q -o $IDE_NAME -d $IDEROOT;;
 esac
