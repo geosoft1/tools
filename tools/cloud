@@ -16,29 +16,7 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-LONG_NAME="Cloud tool"
-CODE_NAME="Quantum Teleporter"
-AUTHOR="geosoft1@gmail.com"
-COPYRIGHT="Copyright (C) 2014-2016  $AUTHOR"
-MAJOR_VERSION=1
-MINOR_VERSION=0
-PATCH_VERSION=1
-STAGE="alpha"
-VERSION=$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION
-ROOT=`dirname $0`
-NAME=`basename $0`
-DATE="05 July 2016"
-LAST="21 August 2016"
-
-GOROOT=$HOME/go
-GOBIN=$GOROOT/bin
-
-SERVERS_FILE=$PWD/.servers
-TMP_FOLDER=/tmp/.ssh
-
-SSH_OPTIONS=(-o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/null" -q)
-
-# project path structure
+# remote project path structure
 #
 # /home/george/src/github.com/geosoft1/project_name/templates -- templates folder
 #                                                   .servers  -- servers file
@@ -47,6 +25,28 @@ SSH_OPTIONS=(-o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/null" -q)
 # |REMOTE_HOME|BASEPATH               |BASENAME    |
 #                                     |PROJECT_NAME|
 #                                     |EXECUTABLE_NAME
+
+LONG_NAME="Cloud tool"
+CODE_NAME="Quantum Teleporter"
+AUTHOR="geosoft1@gmail.com"
+COPYRIGHT="Copyright (C) 2014-2016  $AUTHOR"
+MAJOR_VERSION=1
+MINOR_VERSION=1
+PATCH_VERSION=0
+STAGE="alpha"
+VERSION=$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION
+ROOT=`dirname $0`
+NAME=`basename $0`
+DATE="05 July 2016"
+LAST="20 November 2016"
+
+GOROOT=$HOME/go
+GOBIN=$GOROOT/bin
+
+SERVERS_FILE=$PWD/.servers
+TMP_FOLDER=/tmp/.ssh
+
+SSH_OPTIONS=(-o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/null" -q)
 
 BASENAME=`basename $PWD`
 PROJECT_NAME=$BASENAME
@@ -61,36 +61,40 @@ usage()  {
    echo "init             -- push ssh key to remote server(s)"
    echo "push             -- push curent source+binary tree"
    #echo "pull             -- pull remote source+binary tree"
-   echo "run | run file   -- run project or file remote,view result locally"
+   echo "run [filename]   -- run project or file remote,view result locally"
    echo "teleport         -- push and run project remote,view result locally"
    echo "kill             -- stop the project remote"
    #echo "build            -- build project remote from remote source"
    echo "deploy           -- deploy project on remote server(s)"
    echo "remove           -- uninstall project from remote server(s)"
-   echo "term             free remote ssh commands"
+   echo "terminal         free remote ssh commands"
    echo "version          version"
    exit
 }
 
 [ -z $1 ] && usage
 
-#read server list from .servers file
+#read server list from .servers file (ip port user)
 if [ ! -f $SERVERS_FILE ]; then
    echo -n "Remote server ";read REMOTE_ADDR
+   #try to guess remote ssh port
+   echo -n "Remote port [ENTER for 22] ";read REMOTE_PORT
+   if [ -z "$REMOTE_PORT" ]; then REMOTE_PORT="22"; fi
+   #try to guess remote user
    echo -n "Remote user [ENTER for $USER] ";read REMOTE_USER
    [ -z $REMOTE_USER ] && REMOTE_USER=$USER
-   echo -e "$REMOTE_ADDR\t$REMOTE_USER" > $SERVERS_FILE
+   echo -e "$REMOTE_ADDR $REMOTE_PORT $REMOTE_USER" > $SERVERS_FILE
 fi
 
-eval $(cat .servers | awk '{print "REMOTE_ADDR=\""$1"\";REMOTE_USER=\""$2"\""}')
+eval $(cat .servers | awk '{print "REMOTE_ADDR=\""$1"\";REMOTE_PORT=\""$2"\";REMOTE_USER=\""$3"\""}')
 
 getRemoteEnv() {
-   REMOTE_HOME=`ssh "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR printenv HOME`
+   REMOTE_HOME=`ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR printenv HOME`
    PROJECT_PATH=$REMOTE_HOME/$BASEPATH/$PROJECT_NAME
 }
 
 init() {
-   echo "-- push ssh key to $REMOTE_USER@$REMOTE_ADDR"
+   echo "-- push ssh key to $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
    if [ ! -f $HOME/.ssh/id_rsa.pub ]; then
      echo "No public key found." && exit
    fi
@@ -101,10 +105,10 @@ init() {
    cp $HOME/.ssh/id_rsa.pub $TMP_FOLDER/authorized_keys
    #safe deploy the public key to remote server
    if [ -z $LITEIDE_TERM ]; then
-      scp -r "${SSH_OPTIONS[@]}" $TMP_FOLDER $REMOTE_USER@$REMOTE_ADDR:
+      scp -P $REMOTE_PORT -r "${SSH_OPTIONS[@]}" $TMP_FOLDER $REMOTE_USER@$REMOTE_ADDR:
    else
       echo -n "Password "
-      $GOBIN/tools/ssh_askpass scp -r "${SSH_OPTIONS[@]}" $TMP_FOLDER $REMOTE_USER@$REMOTE_ADDR:
+      $GOBIN/tools/ssh_askpass scp -P $REMOTE_PORT -r "${SSH_OPTIONS[@]}" $TMP_FOLDER $REMOTE_USER@$REMOTE_ADDR:
    fi
    #clean the mess
    rm -rf $TMP_FOLDER
@@ -120,18 +124,18 @@ init() {
 }
 
 push() {
-   echo "-- push current source+binary tree on $REMOTE_USER@$REMOTE_ADDR"
+   echo "-- push current source+binary tree on $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
    #force copy read-only files like some .git content
-   ssh "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR mkdir -p $BASEPATH
-   ssh "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR chmod -R +w $BASEPATH
-   scp -r "${SSH_OPTIONS[@]}" $PWD $REMOTE_USER@$REMOTE_ADDR:$BASEPATH
+   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR mkdir -p $BASEPATH
+   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR chmod -R +w $BASEPATH
+   scp -P $REMOTE_PORT -r "${SSH_OPTIONS[@]}" $PWD $REMOTE_USER@$REMOTE_ADDR:$BASEPATH
 }
 
 run() {
-   echo "-- run project on $REMOTE_USER@$REMOTE_ADDR"
+   echo "-- run project on $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
    [ $1 ] && EXECUTABLE_NAME=$1
    getRemoteEnv
-   ssh "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR $PROJECT_PATH/$EXECUTABLE_NAME
+   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR $PROJECT_PATH/$EXECUTABLE_NAME
 }
 
 teleport() {
@@ -139,44 +143,42 @@ teleport() {
    push && run
 }
 
-kill_project() {
-   echo "-- kill project on $REMOTE_USER@$REMOTE_ADDR"
+_kill() {
+   echo "-- kill project on $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
    [ $1 ] && EXECUTABLE_NAME=$1
-   ssh "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR killall $EXECUTABLE_NAME
+   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR killall $EXECUTABLE_NAME
 }
 
 deploy() {
-   echo "-- deploy project on $REMOTE_USER@$REMOTE_ADDR"
+   echo "-- deploy project on $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
    getRemoteEnv
-   ssh "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR "(crontab -l 2>/dev/null; echo '@reboot $PROJECT_PATH/$EXECUTABLE_NAME') | crontab -"
+   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR "(crontab -l 2>/dev/null; echo '@reboot $PROJECT_PATH/$EXECUTABLE_NAME') | crontab -"
 }
 
 remove() {
-   echo "-- remove project from $REMOTE_USER@$REMOTE_ADDR"
+   echo "-- remove project from $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
    getRemoteEnv
-   ssh "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR "(crontab -l 2>/dev/null; echo '@reboot $PROJECT_PATH/$EXECUTABLE_NAME') | grep -v $EXECUTABLE_NAME | crontab -"
-   ssh "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR rm -rf $PROJECT_PATH
+   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR "(crontab -l 2>/dev/null; echo '@reboot $PROJECT_PATH/$EXECUTABLE_NAME') | grep -v $EXECUTABLE_NAME | crontab -"
+   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR rm -rf $PROJECT_PATH
 }
 
-term() {
-   ssh "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR
+terminal() {
+   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR
 }
 
 case $1 in
    init    ) init;;
    push    ) push;;
-   pull    ) ;;
    run     ) run $2;;
    teleport) teleport;;
-   kill    ) kill_project $2;;
-   build   ) ;;
-   deploy  ) kill_project || true
+   kill    ) _kill $2;;
+   deploy  ) _kill || true
              remove
              push && deploy
              run;;
-   remove  ) kill_project || true
+   remove  ) _kill || true
              remove;;
-   term    ) term;;
+   terminal) terminal;;
    version ) echo $VERSION && exit;;
    *       ) usage;;
 esac
