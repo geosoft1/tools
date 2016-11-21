@@ -7,7 +7,8 @@ What's new in 1.6 The Convergence (milestone)
 1.6.1
 - some minor bugs corrections
 
-What's new in 1.7 (milestone)
+What's new in 1.7 The Convergence (milestone)
+
 - add unified github tool
 - add cloud tool (Quantum Teleporter)
 
@@ -18,3 +19,6 @@ What's new in 1.7 (milestone)
 1.7.2
 - old monaco.ttf url no more exist so switch to other url
 - add armv7 support
+
+1.7.3
+- cloud tool add port forwarding in ssh connections
