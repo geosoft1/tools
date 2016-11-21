@@ -16,15 +16,17 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-# remote project path structure
+# Project path structure
 #
-# /home/george/src/github.com/geosoft1/project_name/templates -- templates folder
-#                                                   .servers  -- servers file
-# |           |                       |             main.go   -- go files,other files
-# |HOME       |                       |            |
-# |REMOTE_HOME|BASEPATH               |BASENAME    |
-#                                     |PROJECT_NAME|
+# /home/george/src/github.com/geosoft1/project_name/*.go
+# |HOME       |BASEPATH               |BASENAME    |.servers
+# |REMOTE_HOME|                       |PROJECT_NAME|
 #                                     |EXECUTABLE_NAME
+#
+# .servers file structure
+#
+# REMOTE_ADDR REMOTE_PORT REMOTE_USER
+#
 
 LONG_NAME="Cloud tool"
 CODE_NAME="Quantum Teleporter"
