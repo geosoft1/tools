@@ -22,3 +22,6 @@ What's new in 1.7 The Convergence (milestone)
 
 1.7.3
 - cloud tool add port forwarding in ssh connections
+
+1.7.4
+- cloud tool add detach command

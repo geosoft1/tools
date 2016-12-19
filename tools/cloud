@@ -18,10 +18,10 @@
 
 # Project path structure
 #
-# /home/george/src/github.com/geosoft1/project_name/*.go
-# |HOME       |BASEPATH               |BASENAME    |.servers
-# |REMOTE_HOME|                       |PROJECT_NAME|
-#                                     |EXECUTABLE_NAME
+# /home/username/src/github.com/githubusername/projectname/*.go
+# |HOME         |BASEPATH                     |BASENAME   |.servers
+# |REMOTE_HOME  |                             |PROJECT_NAME
+#                                             |EXECUTABLE_NAME
 #
 # .servers file structure
 #
@@ -33,14 +33,14 @@ CODE_NAME="Quantum Teleporter"
 AUTHOR="geosoft1@gmail.com"
 COPYRIGHT="Copyright (C) 2014-2016  $AUTHOR"
 MAJOR_VERSION=1
-MINOR_VERSION=1
+MINOR_VERSION=2
 PATCH_VERSION=0
 STAGE="alpha"
 VERSION=$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION
 ROOT=`dirname $0`
 NAME=`basename $0`
 DATE="05 July 2016"
-LAST="20 November 2016"
+LAST="19 December 2016"
 
 GOROOT=$HOME/go
 GOBIN=$GOROOT/bin
@@ -60,17 +60,18 @@ set -e
 usage()  {
    echo "Usage: $NAME [options]"
    echo "Options:"
-   echo "init             -- push ssh key to remote server(s)"
-   echo "push             -- push curent source+binary tree"
+   echo "init              -- push ssh key to remote server(s)"
+   echo "push              -- push curent source+binary tree"
    #echo "pull             -- pull remote source+binary tree"
-   echo "run [filename]   -- run project or file remote,view result locally"
-   echo "teleport         -- push and run project remote,view result locally"
-   echo "kill             -- stop the project remote"
+   echo "run [filename]    -- run project or file remote,view result locally"
+   echo "detach [filename] -- run and detach project or file remote"
+   echo "teleport          -- push and run project remote,view result locally"
+   echo "kill              -- stop the project remote"
    #echo "build            -- build project remote from remote source"
-   echo "deploy           -- deploy project on remote server(s)"
-   echo "remove           -- uninstall project from remote server(s)"
-   echo "terminal         free remote ssh commands"
-   echo "version          version"
+   echo "deploy            -- deploy project on remote server(s)"
+   echo "remove            -- uninstall project from remote server(s)"
+   echo "terminal          free remote ssh commands"
+   echo "version           version"
    exit
 }
 
@@ -140,6 +141,13 @@ run() {
    ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR $PROJECT_PATH/$EXECUTABLE_NAME
 }
 
+detach() {
+   echo "-- run and detach project on $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
+   [ $1 ] && EXECUTABLE_NAME=$1
+   getRemoteEnv
+   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR "sh -c 'nohup $PROJECT_PATH/$EXECUTABLE_NAME > /dev/null 2>&1 &'"
+}
+
 teleport() {
    echo "-- teleporting project"
    push && run
@@ -172,12 +180,13 @@ case $1 in
    init    ) init;;
    push    ) push;;
    run     ) run $2;;
+   detach  ) detach $2;;
    teleport) teleport;;
    kill    ) _kill $2;;
    deploy  ) _kill || true
              remove
              push && deploy
-             run;;
+             detach;;
    remove  ) _kill || true
              remove;;
    terminal) terminal;;
