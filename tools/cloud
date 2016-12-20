@@ -103,7 +103,7 @@ init() {
    fi
    #scp create destination folder only if it copies folders
    #so we prepare here a temporary folder for key transfer
-   mkdir -p $TMP_FOLDER
+   mkdir -m 700 -p $TMP_FOLDER
    #copy only the key in temporary folder
    cp $HOME/.ssh/id_rsa.pub $TMP_FOLDER/authorized_keys
    #safe deploy the public key to remote server
@@ -145,7 +145,7 @@ detach() {
    echo "-- run and detach project on $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
    [ $1 ] && EXECUTABLE_NAME=$1
    getRemoteEnv
-   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR "sh -c 'nohup $PROJECT_PATH/$EXECUTABLE_NAME > /dev/null 2>&1 &'"
+   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR "bash -c 'nohup $PROJECT_PATH/$EXECUTABLE_NAME > /dev/null 2>&1 &'"
 }
 
 teleport() {
