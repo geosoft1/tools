@@ -25,3 +25,4 @@ What's new in 1.7 The Convergence (milestone)
 
 1.7.4
 - cloud tool add detach command
+- add chmod 700 .ssh for connections to OS X
