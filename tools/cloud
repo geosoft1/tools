@@ -186,7 +186,7 @@ case $1 in
    deploy  ) _kill || true
              remove
              push && deploy
-             detach;;
+             run;;
    remove  ) _kill || true
              remove;;
    terminal) terminal;;
