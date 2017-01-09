@@ -1,0 +1,117 @@
+#!/usr/bin/env bash
+
+# nightly build tool
+# Copyright (C) 2014-2017  geosoft1@gmail.com
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+LONG_NAME="Nightly build tool"
+CODE_NAME="Night Bird"
+AUTHOR="geosoft1@gmail.com"
+COPYRIGHT="Copyright (C) 2014-2017  $AUTHOR"
+MAJOR_VERSION=1
+MINOR_VERSION=0
+PATCH_VERSION=0
+STAGE="alpha"
+VERSION=$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION
+ROOT=`dirname $0`
+NAME=`basename $0`
+DATE="09 January 2017"
+LAST=""
+
+GOROOT=$HOME/go
+GOBIN=$GOROOT/bin
+
+SERVERS_FILE=$PWD/.servers
+
+BASENAME=`basename $PWD`
+PROJECT_NAME=$BASENAME
+EXECUTABLE_NAME=$PROJECT_NAME
+BASEPATH=`echo $PWD | sed -e "s,$HOME\/,," | sed -e "s,\/$BASENAME$,,"`
+
+LITEIDE_INI=$HOME/.config/liteide/liteide.ini
+
+set -e
+
+usage()  {
+   echo "Usage: $NAME [options]"
+   echo "Options:"
+   echo "add               -- add schedule"
+   echo "remove            -- remove schedule"
+   echo "version           version"
+   exit
+}
+
+[ -z $1 ] && usage
+
+getGOOS() {
+   #ensure that GOOS is proper detect from LIteIDE and Terminal
+   GOOS=`go env | grep GOOS | sed 's/"//g' | awk 'BEGIN{FS="="}{print $2}'`
+   if [ -f $LITEIDE_INI ]; then
+      ENV_FILE=`cat $LITEIDE_INI | grep currentenvid | awk 'BEGIN{FS="="}{print $2}'`
+      GOOS=`cat $HOME/liteide/share/liteide/liteenv/$ENV_FILE.env | grep GOOS | awk 'BEGIN{FS="="}{print $2}'`
+   fi
+   echo "GOOS=$GOOS"
+}
+
+getServers() {
+   if [ ! -f $SERVERS_FILE ]; then
+      $GOBIN/tools/cloud init
+   fi
+}
+
+# Edit this file to introduce tasks to be run by cron.
+#
+# Each task to run has to be defined through a single line
+# indicating with different fields when the task will be run
+# and what command to run for the task
+#
+# To define the time you can provide concrete values for
+# minute (m), hour (h), day of month (dom), month (mon),
+# and day of week (dow) or use '*' in these fields (for 'any').#
+# Notice that tasks will be started based on the cron's system
+# daemon's notion of time and timezones.
+#
+# Output of the crontab jobs (including errors) is sent through
+# email to the user the crontab file belongs to (unless redirected).
+#
+# For example, you can run a backup of all your user accounts
+# at 5 a.m every week with:
+# 0 5 * * 1 tar -zcf /var/backups/home.tgz /home/
+#
+# For more information see the manual pages of crontab(5) and cron(8)
+#
+# m h  dom mon dow   command
+
+add() {
+   echo "-- add schedule on project $PROJECT_NAME"
+   getGOOS
+   getServers
+   echo -n "nightly build ? [ENTER @midnight | m h dom mon dow] ";read BUILD_TIME
+   if [ -z "$BUILD_TIME" ]; then BUILD_TIME="@midnight"; fi
+   (crontab -l 2>/dev/null; echo "$BUILD_TIME (export GOROOT=$HOME/go;cd $PWD && $GOBIN/go build -i && $GOBIN/tools/cloud teleport && $GOBIN/tools/cloud detach)") | crontab -
+}
+
+remove() {
+   echo "-- remove schedule from project $PROJECT_NAME" && (crontab -l 2>/dev/null) | grep -v $PROJECT_NAME | crontab -
+}
+
+case $1 in
+   add     ) remove && add;;
+   remove  ) remove;;
+   version ) echo $VERSION && exit;;
+   *       ) usage;;
+esac
+
+echo "Done."
