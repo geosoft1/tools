@@ -25,7 +25,8 @@ Read the user manual on the [wiki page](https://github.com/geosoft1/tools/wiki).
 - Add some useful scripts for
    - working with git (be sure you have installed `git` before and a valid acount)
    - easy install some useful tools like [delve](https://github.com/derekparker/delve) debugger or [presenter](https://godoc.org/golang.org/x/tools/present)
-   - cloud features ([Quantum Teleporter](https://github.com/geosoft1/tools/wiki/Cloud-tool))
+   - cloud features (see [Quantum Teleporter](https://github.com/geosoft1/tools/wiki/Cloud-tool))
+   - nightly build tool (see [Night Bird](https://github.com/geosoft1/tools/wiki#nightly-build-tool))
 - Gopei shell is free as in free speech and free beer...
 
 **How to use**
