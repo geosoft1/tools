@@ -1,6 +1,6 @@
 ## Gopei (Go Programming Environment Installer)<br/>The Convergence
 
-[![version](https://img.shields.io/badge/version-1.7.5-blue.svg)](https://github.com/geosoft1/tools/archive/master.zip)
+[![version](https://img.shields.io/badge/version-1.7.6-blue.svg)](https://github.com/geosoft1/tools/archive/master.zip)
 [![license](https://img.shields.io/badge/license-gpl-blue.svg)](https://github.com/geosoft1/tools/blob/master/LICENSE)
 
 Gopei shell install [Go](http://golang.org) compiler, [LiteIDE](https://github.com/visualfc/liteide) and configure for you the entire environment, variables, paths, ide interface and even link the machine with your Github account in a few minutes with just one command.
@@ -27,6 +27,7 @@ Read the user manual on the [wiki page](https://github.com/geosoft1/tools/wiki).
    - easy install some useful tools like [delve](https://github.com/derekparker/delve) debugger or [presenter](https://godoc.org/golang.org/x/tools/present)
    - cloud features (see [Quantum Teleporter](https://github.com/geosoft1/tools/wiki/Cloud-tool))
    - nightly build tool (see [Night Bird](https://github.com/geosoft1/tools/wiki#nightly-build-tool))
+   - backup features (see [Backup tool](https://github.com/geosoft1/tools/wiki/Cloud-tool#backup))
 - Gopei shell is free as in free speech and free beer...
 
 **How to use**

@@ -17,45 +17,65 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 # Project path structure
-#
+# ---
 # /home/username/src/github.com/githubusername/projectname/*.go
 # |HOME         |BASEPATH                     |BASENAME   |.servers
 # |REMOTE_HOME  |                             |PROJECT_NAME
 #                                             |EXECUTABLE_NAME
-#
-# .servers file structure
-#
+# .servers,.backup files structure
+# ---
 # REMOTE_ADDR REMOTE_PORT REMOTE_USER
-#
+# ---
 
 LONG_NAME="Cloud tool"
 CODE_NAME="Quantum Teleporter"
 AUTHOR="geosoft1@gmail.com"
 COPYRIGHT="Copyright (C) 2014-2017  $AUTHOR"
-MAJOR_VERSION=1
+MAJOR_VERSION=3
 MINOR_VERSION=2
 PATCH_VERSION=0
-STAGE="alpha"
+STAGE="alpha3"
 VERSION=$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION
 ROOT=`dirname $0`
 NAME=`basename $0`
 DATE="05 July 2016"
-LAST="19 December 2016"
+LAST="18 Feb 2016"
 
 GOROOT=$HOME/go
 GOBIN=$GOROOT/bin
-
-SERVERS_FILE=$PWD/.servers
-TMP_FOLDER=/tmp/.ssh
-
-SSH_OPTIONS=(-o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/null" -q)
+GOPATH=$HOME
 
 BASENAME=`basename $PWD`
 PROJECT_NAME=$BASENAME
 EXECUTABLE_NAME=$PROJECT_NAME
 BASEPATH=`echo $PWD | sed -e "s,$HOME\/,," | sed -e "s,\/$BASENAME$,,"`
 
-set -e
+CONFIG_FILE=$PWD/.servers
+TMP_FOLDER=/tmp/.ssh
+
+SSH_OPTIONS=(-o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/null" -q)
+
+#set -e
+#set -o errtrace
+#trap 'echo "Error occurred on $FUNCNAME."' ERR
+
+set -T
+
+sshcmd() {
+   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR $1
+   #echo $?
+   #check error code of remote ssh which tipically must be 0
+   #if error code is 1 or more print original command error message
+   if [ $? -eq 255 ]; then
+      #simulate scp lost connection when command fail :P
+      echo "lost connection" && exit
+   fi
+}
+
+scpcmd() {
+   #scp already get lost connection when command fail :P
+   scp -P $REMOTE_PORT -r "${SSH_OPTIONS[@]}" $1
+}
 
 usage()  {
    echo "Usage: $NAME [options]"
@@ -70,36 +90,25 @@ usage()  {
    #echo "build            -- build project remote from remote source"
    echo "deploy            -- deploy project on remote server(s)"
    echo "remove            -- uninstall project from remote server(s)"
+   echo "backup            backup GOPATH folder on remote server(s)"
+   echo "                  init                initialize connection to server(s)"
+   echo "                  list                list all available backups"
+   echo "                  remove [filemask]   eg. backup-george@ao756-* or backup-*"
+   echo "                  mirror              do mirror copy"
    echo "terminal          free remote ssh commands"
    echo "version           version"
    exit
 }
 
-[ -z $1 ] && usage
-
-#read server list from .servers file (ip port user)
-if [ ! -f $SERVERS_FILE ]; then
-   echo -n "Remote server ";read REMOTE_ADDR
-   #try to guess remote ssh port
-   echo -n "Remote port [ENTER for 22] ";read REMOTE_PORT
-   if [ -z "$REMOTE_PORT" ]; then REMOTE_PORT="22"; fi
-   #try to guess remote user
-   echo -n "Remote user [ENTER for $USER] ";read REMOTE_USER
-   [ -z $REMOTE_USER ] && REMOTE_USER=$USER
-   echo -e "$REMOTE_ADDR $REMOTE_PORT $REMOTE_USER" > $SERVERS_FILE
-fi
-
-eval $(cat .servers | awk '{print "REMOTE_ADDR=\""$1"\";REMOTE_PORT=\""$2"\";REMOTE_USER=\""$3"\""}')
-
 getRemoteEnv() {
-   REMOTE_HOME=`ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR printenv HOME`
+   REMOTE_HOME=`sshcmd "printenv HOME"`
    PROJECT_PATH=$REMOTE_HOME/$BASEPATH/$PROJECT_NAME
 }
 
-init() {
+pushKeys() {
    echo "-- push ssh key to $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
    if [ ! -f $HOME/.ssh/id_rsa.pub ]; then
-     echo "No public key found." && exit
+     echo "no public key found" && exit
    fi
    #scp create destination folder only if it copies folders
    #so we prepare here a temporary folder for key transfer
@@ -108,76 +117,128 @@ init() {
    cp $HOME/.ssh/id_rsa.pub $TMP_FOLDER/authorized_keys
    #safe deploy the public key to remote server
    if [ -z $LITEIDE_TERM ]; then
-      scp -P $REMOTE_PORT -r "${SSH_OPTIONS[@]}" $TMP_FOLDER $REMOTE_USER@$REMOTE_ADDR:
+      scpcmd "$TMP_FOLDER $REMOTE_USER@$REMOTE_ADDR:"
    else
-      echo -n "Password "
+      echo -n "$REMOTE_USER@$REMOTE_ADDR's password: "
+      #because of askpass can't use scpcmd function here
       $GOBIN/tools/ssh_askpass scp -P $REMOTE_PORT -r "${SSH_OPTIONS[@]}" $TMP_FOLDER $REMOTE_USER@$REMOTE_ADDR:
    fi
    #clean the mess
    rm -rf $TMP_FOLDER
+}
 
-   #if [ -z $LITEIDE_TERM ]; then
-   #   ssh-copy-id -o "StrictHostKeyChecking no" -f $REMOTE_USER@$REMOTE_ADDR
-   #else
-   #   echo -n "Password "
-      # StrictHostKeyChecking no
-      # -f force overite the key
-   #   $GOBIN/tools/ssh_askpass ssh-copy-id -o "StrictHostKeyChecking no" -f $REMOTE_USER@$REMOTE_ADDR
-   #fi
+readConfigFile() {
+   eval $(cat $CONFIG_FILE | awk '{print "REMOTE_ADDR=\""$1"\";REMOTE_PORT=\""$2"\";REMOTE_USER=\""$3"\""}')
+}
+
+createConfigFile() {
+   echo -n "Remote server ";read REMOTE_ADDR
+   #try to guess remote ssh port
+   echo -n "Remote port [ENTER for 22] ";read REMOTE_PORT
+   if [ -z "$REMOTE_PORT" ]; then REMOTE_PORT="22"; fi
+   #try to guess remote user
+   echo -n "Remote user [ENTER for $USER] ";read REMOTE_USER
+   [ -z $REMOTE_USER ] && REMOTE_USER=$USER
+   echo -e "$REMOTE_ADDR $REMOTE_PORT $REMOTE_USER" > $CONFIG_FILE
+   readConfigFile
+   pushKeys
+}
+
+checkConfigFile() {
+   if [ ! -f $CONFIG_FILE ]; then
+      createConfigFile
+   else
+      readConfigFile
+   fi
 }
 
 push() {
-   echo "-- push current source+binary tree on $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
+   checkConfigFile
+   echo "-- push $PWD source+binary tree on $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
+   getRemoteEnv
    #force copy read-only files like some .git content
-   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR mkdir -p $BASEPATH
-   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR chmod -R +w $BASEPATH
-   scp -P $REMOTE_PORT -r "${SSH_OPTIONS[@]}" $PWD $REMOTE_USER@$REMOTE_ADDR:$BASEPATH
+   sshcmd "mkdir -p $BASEPATH"
+   sshcmd "chmod -R +w $BASEPATH"
+   scpcmd "$PWD $REMOTE_USER@$REMOTE_ADDR:$BASEPATH"
 }
 
 run() {
+   checkConfigFile
    echo "-- run project on $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
    [ $1 ] && EXECUTABLE_NAME=$1
    getRemoteEnv
-   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR $PROJECT_PATH/$EXECUTABLE_NAME
+   sshcmd "$PROJECT_PATH/$EXECUTABLE_NAME"
 }
 
 detach() {
+   checkConfigFile
    echo "-- run and detach project on $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
    [ $1 ] && EXECUTABLE_NAME=$1
    getRemoteEnv
-   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR "bash -c 'nohup $PROJECT_PATH/$EXECUTABLE_NAME > /dev/null 2>&1 &'"
+   sshcmd "bash -c 'nohup $PROJECT_PATH/$EXECUTABLE_NAME > /dev/null 2>&1 &'"
 }
 
 teleport() {
-   echo "-- teleporting project"
+   checkConfigFile
+   echo "-- teleporting project on $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
    push && run
 }
 
 _kill() {
+   checkConfigFile
    echo "-- kill project on $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
    [ $1 ] && EXECUTABLE_NAME=$1
-   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR killall $EXECUTABLE_NAME
+   #getRemoteEnv
+   sshcmd "killall $EXECUTABLE_NAME"
 }
 
 deploy() {
+   checkConfigFile
    echo "-- deploy project on $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
    getRemoteEnv
-   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR "(crontab -l 2>/dev/null; echo '@reboot $PROJECT_PATH/$EXECUTABLE_NAME') | crontab -"
+   sshcmd "(crontab -l 2>/dev/null; echo '@reboot $PROJECT_PATH/$EXECUTABLE_NAME') | crontab -"
 }
 
 remove() {
+   checkConfigFile
    echo "-- remove project from $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
    getRemoteEnv
-   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR "(crontab -l 2>/dev/null; echo '@reboot $PROJECT_PATH/$EXECUTABLE_NAME') | grep -v $EXECUTABLE_NAME | crontab -"
-   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR rm -rf $PROJECT_PATH
+   sshcmd "(crontab -l 2>/dev/null; echo '@reboot $PROJECT_PATH/$EXECUTABLE_NAME') | grep -v $EXECUTABLE_NAME | crontab -"
+   sshcmd "rm -rf $PROJECT_PATH"
 }
 
 terminal() {
-   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR
+   checkConfigFile
+   sshcmd
+}
+
+backup() {
+   PWD=$GOPATH/src
+   CONFIG_FILE=$PWD/.backup
+   checkConfigFile
+   case $1 in
+      init  ) createConfigFile;;
+      list  ) echo "-- list backups from $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
+              sshcmd "ls | grep backup";;
+      remove) if [ -z $2 ]; then
+                 echo "nothing to remove" && exit
+              fi
+              echo -n "-- remove $2 from $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT? [y/n] " && read Y
+              if [ "$Y" == "y" ]; then
+              sshcmd "rm -rf $2"
+              else
+                 echo "Aborted!" && exit
+              fi;;
+      mirror) BASEPATH="backup"
+              echo "-- remove $BASEPATH source+binary tree from $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
+              sshcmd "rm -rf $BASEPATH"
+              push;;
+      *     ) BASEPATH="backup-$USER@$HOSTNAME-$(date +%d%m%Y%M%S)" && push;;
+   esac
 }
 
 case $1 in
-   init    ) init;;
+   init    ) createConfigFile;;
    push    ) push;;
    run     ) run $2;;
    detach  ) detach $2;;
@@ -190,6 +251,7 @@ case $1 in
    remove  ) _kill || true
              remove;;
    terminal) terminal;;
+   backup  ) backup $2 $3;;
    version ) echo $VERSION && exit;;
    *       ) usage;;
 esac

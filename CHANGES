@@ -31,3 +31,5 @@ What's new in 1.7 The Convergence (milestone)
 - add nightly build tool
 - godoc command in ide on ctrl+`
 
+1.7.6
+- add backup tool
