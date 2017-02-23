@@ -80,7 +80,7 @@ linux )
 macosx )
    PROFILE_FILE=$HOME/.bash_profile
    IDE_NAME=liteidex$IDE_VERSION.$PLATFORM_NAME-qt4.zip
-   IDE_RESOURCES=$IDEROOT/LiteIDE.app/Contents/Resources/
+   IDE_RESOURCES=$IDEROOT/liteide/LiteIDE.app/Contents/Resources/
    LAUNCHER=$(defaults read com.apple.dock | grep _CFURLString\"| awk '/LiteIDE/ {print NR-1}');;
 freebsd )
    PROFILE_FILE=$HOME/.bashrc
@@ -427,7 +427,7 @@ macosx )
    <dict>
    <key>file-data</key>
       <dict>
-      <key>_CFURLString</key><string>'$IDEROOT'/LiteIDE.app</string>
+      <key>_CFURLString</key><string>'$IDEROOT'/liteide/LiteIDE.app</string>
       <key>_CFURLStringType</key><integer>0</integer>
       </dict>
    </dict>
