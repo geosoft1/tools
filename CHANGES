@@ -36,5 +36,5 @@ What's new in 1.7 The Convergence (milestone)
 
 1.8.0
 - switch to LiteIDE X30.3 because of incompatibilities between go1.8 and gocode in X30
-- corrects some issue with LiteIDE path in OS X
+- corrects some issues with LiteIDE path in OS X
 
