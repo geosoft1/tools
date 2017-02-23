@@ -33,3 +33,7 @@ What's new in 1.7 The Convergence (milestone)
 
 1.7.6
 - add backup tool
+
+1.8.0
+- switch to LiteIDE X30.3 because of incompatibilities between go1.8 and gocode in X30
+
