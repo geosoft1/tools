@@ -39,4 +39,4 @@ What's new in 1.7 The Convergence (milestone)
 - corrects some issues with LiteIDE path in OS X
 
 1.9.0
-- switch to LiteIDE X30.3 because of incompatibilities between go1.9 and gocode
+- switch to LiteIDE X32.2 because of incompatibilities between go1.9 and gocode
