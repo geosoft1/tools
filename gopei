@@ -22,13 +22,13 @@ GOPEI_AUTHOR="geosoft1@gmail.com"
 GOPEI_COPYRIGHT="Copyright (C) 2014-2017  $GOPEI_AUTHOR"
 GOPEI_MAJOR_VERSION=1
 GOPEI_MINOR_VERSION=9
-GOPEI_PATCH_VERSION=0
+GOPEI_PATCH_VERSION=1
 GOPEI_STAGE="release"
 GOPEI_VERSION=$GOPEI_MAJOR_VERSION.$GOPEI_MINOR_VERSION.$GOPEI_PATCH_VERSION
 GOPEI_ROOT=`dirname $0`
 GOPEI_NAME=`basename $0`
 GOPEI_DATE="05 July 2016"
-GOPEI_LAST="09 January 2017"
+GOPEI_LAST="20 Octomber 2017"
 
 GOROOT=$HOME/go
 GOPATH=$HOME
@@ -404,13 +404,16 @@ linux )
       mkdir -p $HOME/.local/share/applications/
       #add .desktop file to dash and integrate with unity
       mv ${XDG_DESKTOP_DIR}/liteide.desktop $HOME/.local/share/applications
-      #get the current launcher favorites list
-      LAUNCHER=$(gsettings get com.canonical.Unity.Launcher favorites)
-      #skip update if liteide launcher already exists
-      if ! [[ $LAUNCHER =~ "liteide.desktop" ]]; then
-         LAUNCHER=${LAUNCHER/]/, \'liteide.desktop\']} && sleep 1
-         #update the launcher favorites list,in unity changes are shwown immediately.
-         gsettings set com.canonical.Unity.Launcher favorites "$LAUNCHER"
+      #already obsolete Unity interface support
+      if [ $DESKTOP_SESSION == "ubuntu" ]; then
+         #get the current launcher favorites list
+         LAUNCHER=$(gsettings get com.canonical.Unity.Launcher favorites)
+         #skip update if liteide launcher already exists
+         if ! [[ $LAUNCHER =~ "liteide.desktop" ]]; then
+            LAUNCHER=${LAUNCHER/]/, \'liteide.desktop\']} && sleep 1
+            #update the launcher favorites list,in unity changes are shwown immediately.
+            gsettings set com.canonical.Unity.Launcher favorites "$LAUNCHER"
+         fi
       fi;;
    #generic desktop environment have only a desktop shortcut
    * )chmod +x ${XDG_DESKTOP_DIR}/liteide.desktop;;
