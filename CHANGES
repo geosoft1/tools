@@ -40,3 +40,6 @@ What's new in 1.7 The Convergence (milestone)
 
 1.9.0
 - switch to LiteIDE X32.2 because of incompatibilities between go1.9 and gocode
+
+1.9.1
+- corrects some issues with Ubuntu 17+
