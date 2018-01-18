@@ -30,11 +30,11 @@
 LONG_NAME="Cloud tool"
 CODE_NAME="Quantum Teleporter"
 AUTHOR="geosoft1@gmail.com"
-COPYRIGHT="Copyright (C) 2014-2017  $AUTHOR"
+COPYRIGHT="Copyright (C) 2014-2018  $AUTHOR"
 MAJOR_VERSION=3
-MINOR_VERSION=2
+MINOR_VERSION=3
 PATCH_VERSION=0
-STAGE="alpha3"
+STAGE="release"
 VERSION=$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION
 ROOT=`dirname $0`
 NAME=`basename $0`
@@ -89,6 +89,7 @@ usage()  {
    echo "kill              -- stop the project remote"
    #echo "build            -- build project remote from remote source"
    echo "deploy            -- deploy project on remote server(s)"
+   echo "delete            -- delete project from remote server(s)"
    echo "remove            -- uninstall project from remote server(s)"
    echo "backup            backup GOPATH folder on remote server(s)"
    echo "                  init                initialize connection to server(s)"
@@ -199,12 +200,19 @@ deploy() {
    sshcmd "(crontab -l 2>/dev/null; echo '@reboot $PROJECT_PATH/$EXECUTABLE_NAME') | crontab -"
 }
 
+delete() {
+   checkConfigFile
+   echo "-- delete project from $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
+   getRemoteEnv
+   sshcmd "rm -rf $PROJECT_PATH"
+}
+
 remove() {
    checkConfigFile
    echo "-- remove project from $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
    getRemoteEnv
-   sshcmd "(crontab -l 2>/dev/null; echo '@reboot $PROJECT_PATH/$EXECUTABLE_NAME') | grep -v $EXECUTABLE_NAME | crontab -"
    sshcmd "rm -rf $PROJECT_PATH"
+   sshcmd "(crontab -l 2>/dev/null; echo '@reboot $PROJECT_PATH/$EXECUTABLE_NAME') | grep -v $EXECUTABLE_NAME | crontab -"
 }
 
 terminal() {
@@ -248,6 +256,8 @@ case $1 in
              remove
              push && deploy
              run;;
+   delete  ) _kill || true
+             delete;;
    remove  ) _kill || true
              remove;;
    terminal) terminal;;

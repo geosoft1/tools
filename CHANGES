@@ -43,3 +43,7 @@ What's new in 1.7 The Convergence (milestone)
 
 1.9.1
 - corrects some issues with Ubuntu 17+
+
+1.9.2
+- cloud tool 3.3.0 add delete command
+
