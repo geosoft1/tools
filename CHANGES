@@ -47,3 +47,6 @@ What's new in 1.7 The Convergence (milestone)
 1.9.2
 - cloud tool 3.3.0 add delete command
 
+1.9.3
+- resolve some changes on golang.org site
+

@@ -22,7 +22,7 @@ GOPEI_AUTHOR="geosoft1@gmail.com"
 GOPEI_COPYRIGHT="Copyright (C) 2014-2017  $GOPEI_AUTHOR"
 GOPEI_MAJOR_VERSION=1
 GOPEI_MINOR_VERSION=9
-GOPEI_PATCH_VERSION=2
+GOPEI_PATCH_VERSION=3
 GOPEI_STAGE="release"
 GOPEI_VERSION=$GOPEI_MAJOR_VERSION.$GOPEI_MINOR_VERSION.$GOPEI_PATCH_VERSION
 GOPEI_ROOT=`dirname $0`
@@ -153,11 +153,11 @@ GOLANG_ORG=`curl -fsSLk --connect-timeout 3 golang.org || exit`
 COMPILER_VERSION=`echo $GOLANG_ORG | 
 awk '{ 
    if (match($0,/go([0-9]+.)+/)) 
-      print substr($0,RSTART,RLENGTH) 
+      print substr($0,RSTART,RLENGTH-1) 
 }'`
 
 #build compiler name (e.g. go1.5.1.linux-386.tar.gz|go1.6.2.darvin-amd64.tar.gz)
-COMPILER_NAME=$COMPILER_VERSION$KERNEL_NAME-$MACHINE_TYPE.tar.gz
+COMPILER_NAME=$COMPILER_VERSION.$KERNEL_NAME-$MACHINE_TYPE.tar.gz
 
 echo "Installing $COMPILER_NAME..."
 curl -fsSLkOz $COMPILER_NAME storage.googleapis.com/golang/$COMPILER_NAME || exit
