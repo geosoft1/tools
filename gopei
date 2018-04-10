@@ -405,7 +405,7 @@ linux )
       #add .desktop file to dash and integrate with unity
       mv ${XDG_DESKTOP_DIR}/liteide.desktop $HOME/.local/share/applications
       #already obsolete Unity interface support
-      if [ $DESKTOP_SESSION == "ubuntu" ]; then
+      if [[ $XDG_CURRENT_DESKTOP =~ "Unity" ]]; then
          #get the current launcher favorites list
          LAUNCHER=$(gsettings get com.canonical.Unity.Launcher favorites)
          #skip update if liteide launcher already exists
