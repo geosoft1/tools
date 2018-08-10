@@ -1,0 +1,8 @@
+[SETUP]
+NAME = "Go1 Lambda Function Project"
+AUTHOR = geosoft1
+INFO = new go1 lambda project
+TYPE = gopath
+FILES = main.go
+OPEN = main.go
+SCHEME=folder

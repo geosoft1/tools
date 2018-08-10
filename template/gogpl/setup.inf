@@ -1,0 +1,8 @@
+[SETUP]
+NAME = "Go1 GPL Project"
+FILES = main.go LICENSE CONTRIBUTORS README.md
+AUTHOR = geosoft1
+INFO = new go1 gpl project
+TYPE = gopath
+OPEN = main.go
+SCHEME=folder
