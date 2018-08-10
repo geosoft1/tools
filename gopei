@@ -18,8 +18,8 @@
 
 set -e
 
-GOPEI_LONG_NAME="Golang Programming Environment Installer"
-GOPEI_CODE_NAME="The Convergence"
+GOPEI_LONG_NAME="Golang Programming Environment Installer\n"
+GOPEI_CODE_NAME=""
 GOPEI_AUTHOR="geosoft1@gmail.com"
 GOPEI_COPYRIGHT="Copyright (C) 2014-2018  $GOPEI_AUTHOR"
 GOPEI_VERSION=2.0.0
@@ -166,7 +166,7 @@ case $OPTION in
    esac
 done
 
-clear && echo -e "$GOPEI_LONG_NAME\n$GOPEI_CODE_NAME\n$GOPEI_COPYRIGHT"
+clear && echo -e "$GOPEI_LONG_NAME$GOPEI_CODE_NAME$GOPEI_COPYRIGHT"
 
 #-------------------------------------------------------------------------------
 echo "Installing $COMPILER_NAME..."
