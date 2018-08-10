@@ -26,7 +26,7 @@ Cloud tool let you run and deploy your projects on servers or on other computers
 
 Cloud tool can easy used from LiteIDE by pressing `` ctrl+` `` and chosing
 
-        tools/cloud
+        cloud
 
 with no arguments to see all options. Also can be used from [Terminal](#using-from-terminal).
 
@@ -48,36 +48,36 @@ Cloud tool need a `.servers` file in every project folder. First line of this fi
 
 e.g.
 
-        192.168.88.161 2222 george
+        192.168.88.161 2222 user
 
 Note that if this file missing you will be ask to create.
 
 #### Commands
 #### `init`
 
-        tools/cloud init
+        cloud init
 
 Initialize a connection with a remote machine. Run this command one time for one machine from your local project folder.
 
 You will be asked for remote server address, user and password. The current public `ssh` key will be pushed on remote machine and you will be linked with for further commands.
 
         Remote server 192.168.88.161
-        Remote user [ENTER for george] 
-        -- push ssh key to george@192.168.88.161:22
-        george@192.168.88.164's password: 1234
+        Remote user [ENTER for user] 
+        -- push ssh key to user@192.168.88.161:22
+        user@192.168.88.164's password: 1234
         Done.
 
 If you get `lost connection` see [troubleshooting](#troubleshooting)
 
 `.servers` file are also created in local project folder and will keep this informations but not the password. Further cloud commands will use this file.
 
-Delete the `.servers` file and run `tools/cloud init` again to connect to other machines. Also you can modify the file to switch the server runtime.
+Delete the `.servers` file and run `cloud init` again to connect to other machines. Also you can modify the file to switch the server runtime.
 
 Note that the `init` funtion is invoked automaticaly if no connection is found by the other commands.
 
 #### `push`
 
-        tools/cloud push
+        cloud push
 
 Push the entire current project folder content on remote machine. Sources and binaries. Also push command will follow current sources tree structure.
 
@@ -86,7 +86,7 @@ View LiteIDE environment bar for this.
 
 #### `run`
 
-        tools/cloud run
+        cloud run
 
 `run` remote pushed project or remote executable and view results localy. Before run this command the project must be compiled and pushed on the remote machine.
 
@@ -101,30 +101,30 @@ Also note that cloud tool allow you to work remotely. If you use in you program 
 
 Worked in LiteIDE projects executables get the project folder name. If you have, from some reasons, other executables or scripts in this folder you can execute them remote with
 
-        tools/cloud run filename
+        cloud run filename
 
 #### `detach`
 
-        tools/cloud detach
+        cloud detach
 
 `detach` run remote pushed project or remote executable and detach ssh session. Useful in some circumstances when the project stops after the connection close.
 
 #### `teleport`
 
-        tools/cloud teleport
+        cloud teleport
 
 `teleport` command is nothing else than `push` and `run`. Also reflect the main concept of the cloud tool.
 
 #### `kill`
 
-        tools/cloud kill
-        tools/cloud kill filename
+        cloud kill
+        cloud kill filename
 
 `kill` command stop remote started processes.
 
 #### `deploy`
 
-        tools/cloud deploy
+        cloud deploy
 
 Completly deploy the project on remote machine and also add the main executable to remote machine startup. The project will continue running even after remote machine restart.
 
@@ -135,7 +135,7 @@ Stop and delete the project from remote machine. Doesn't affect the startup of t
 
 #### `remove`
 
-        tools/cloud remove
+        cloud remove
 
 `remove` command stop and delete the project from remote machine. Also, remove from remote machine startup.
 
@@ -145,34 +145,34 @@ Completly save the GOPATH on remote machine. Backup can be mirrored or versioned
 
 Backup tool use a `.backup` config file with the same structure as `.servers` file. `.backup` config file is found in the `GOPATH/src` folder.
 
-        tools/cloud backup
+        cloud backup
 
-Versioned backup. On remote machine a folder named `backup-USERNAME@MACHINENAME-datetime` will be created eg.:
+Versioned backup. On remote machine a folder named `backup-user@machine-datetime` will be created eg.:
 
-        backup-george@ao756-180220173221
+        backup-user@machine-180220173221
 
-mean backup from user and machine `george@ao756` at 18 Feb 2017, `3221` minutes,seconds for making unique the folder name.  
+mean backup from user and machine `user@machine` at 18 Feb 2017, `3221` minutes,seconds for making unique the folder name.  
 
-        tools/cloud backup init
+        cloud backup init
 
 Initialize or reinitialize the connection with a remote machine.
 
-        tools/cloud backup list
+        cloud backup list
 
 List existing backup folders from the remote machine.
 
-        tools/cloud backup remove
+        cloud backup remove
 
 Delete existing backup folders from the remote machine. Without arguments no folder will be removed. Posible argument is backup folder mask eg.:
 
-        tools/cloud backup remove backup                 # this will remove only the existing backup folder
-        tools/cloud backup remove backup-*               # remove any existing folder starting with `backup-` 
-        tools/cloud backup remove backup-george*         # remove any existing folder made by user `george`
-        tools/cloud backup remove backup-george@ao765*   # remove any existing made from george's machine 
+        cloud backup remove backup                 # this will remove only the existing backup folder
+        cloud backup remove backup-*               # remove any existing folder starting with `backup-` 
+        cloud backup remove backup-user*         # remove any existing folder made by user `user`
+        cloud backup remove backup-user@machine*   # remove any existing made from user's machine 
 
 **Mirroring**
 
-        tools/cloud backup mirror
+        cloud backup mirror
 
 Mirror backup are made. On the remote machine a forder named `backup` is made. This folder contain one-to-one mirror copy of local `GOPATH/src folder`.
 
@@ -182,13 +182,13 @@ Backup tool don't use differences or compresion but [teleportation](#what-exactl
 
 #### `terminal`
 
-        tools/cloud terminal
+        cloud terminal
 
 `term` start a ssh console on remote machine.
 
 #### `version`
 
-        tools/cloud version
+        cloud version
 
 Version of this tool.
 
@@ -197,7 +197,7 @@ Version of this tool.
 Change folder to your project, if you install with  [Gopei shell](https://github.com/geosoft1/tools) the cloud tool are found in `$GOROOT/bin/tools`.
 
         cd ~/src/helloworld
-        $GOROOT/bin/tools/cloud version
+        cloud version
 
 ## Faq
 
@@ -237,7 +237,7 @@ If you don't get `Done.` message check
 
 If your deployed project stops after the ssh connection close do this:
 
-        tools/cloud detach
+        cloud detach
 
 ## What code name mean?
 

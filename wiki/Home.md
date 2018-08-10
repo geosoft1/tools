@@ -1,32 +1,27 @@
-<div align=right>
-<h3><i>"Simplicity is complicated"</i><br>
-- Rob Pike
-</div>
-
 ## Table of contents
 
 - [Getting started with Gopei](#getting-started-with-gopei)
 - [Working with Gopei](#working-with-gopei)
   - [Before install](#before-install)
   - [Install in beginer mode](#install-in-beginer-mode)
-  - [Install in advanced mode](#install-in-advanced-mode)
-  - Other options
-    - [Install in server mode](#install-in-server-mode)
-    - [Install in classroom mode](#install-in-classroom-mode)
-    - [Install with no QT libs](#install-with-no-qt-libs)
-    - [Uninstall](#unistall)
-    - [Uninstall all](#uninstall-all)
-    - [Help](#help)
-    - [Version](#version)
+  - Options
+    - [-b](#-b) backward compatibility (for systems that can't support qt5)
+    - [-c](#-c) enable classroom mode (Linux only)
+    - [-g](#-g) enable git suppport
+    - [-h](#-h) show help message and exit
+    - [-s](#-s) server mode, install golang only
+    - [-u](#-u) unistall
+    - [-U](#-U) uninstall including `.gitconfig` file and `.ssh` folder
+    - [-q](#-q) set theme (eg. -q webstorm)
+    - [-x](#-x) set color scheme (eg. -x sublime)
+    - [-v](#-v) version
   - [After install](#after-install)
   - [Tools](#tools)
     - [Github tool](#github-tool)
-    - [Install tool](#install-tool)
     - [Cloud tool](#cloud-tool)
     - [Nightly build tool](#nightly-build-tool)
   - [Using git from LiteIDE](#using-git-from-liteide)
-  - [Using go from Terminal](#using-go-from-terminal)
-  - [Using toolbox from Terminal](#using-toolbox-from-terminal)
+  - [Using from Terminal](#using-from-terminal)
   - [Practical example to start a colaborative project](#practical-example-to-start-a-colaborative-project)
   - [Make talks and articles](#make-talks-and-articles)
   - [Install debugger](#install-debugger)
@@ -58,6 +53,10 @@ From Terminal go to the `tools-master` folder and simply run:
 
         ./gopei
 
+A more sophisticated instalation for big screens could be:
+
+        ./gopei -g -q webstorm -x sublime 
+
 Use `` -h `` switch to see all options.
 
 Run periodicaly or if compiler/ide versions change to update the system. Projects are never affected if you overinstall.
@@ -76,7 +75,19 @@ Gopei create `GOPATH` in `$HOME` but if you keep this folder in other place don'
 
 Gopei will install the last version of [golang](http://golang.org) compiler and a stable version of [LiteIDE](https://github.com/visualfc/liteide). Also will link go compiler with LiteIDE. No root rights are required.
 
-#### Install in advanced mode
+### Options
+
+#### -b
+
+Backward compatibility (for systems that can't support qt5). Eg. on Ubuntu 14.04 will be installed  LiteIDE X33.2 and go1.10.3. This option will be available a while.
+
+#### -c
+
+        ./gopei -c
+
+This option activate classroom mode. No settings are preserved after closing LiteIDE.
+
+#### -g
 
         ./gopei -g
 
@@ -103,32 +114,26 @@ If you uninstalled with `` -U `` then a new key will be generate on Github. Old 
 
 Remember that sometime key deploy can be very slow during Github mentenance. Just be patience or reinstall later.
 
-#### Install in server mode
+#### -h
+
+        ./gopei -h
+
+Short help message.
+
+
+#### -s
 
         ./gopei -s
  
 Install golang compiler only.
 
-
-#### Install in classroom mode
-
-        ./gopei -c
-
-This option activate classroom mode. No settings are preserved after closing LiteIDE.
-
-#### Install with no QT libs
-
-        ./gopei -q
-
-This option remove Qt libs to solve conflict problems on some systems.
-
-#### Uninstall
+#### -u
 
         ./gopei -u
 
 Uninstall all but not ssh keys and git profile.
 
-#### Uninstall all
+#### -U
 
         ./gopei -U
 
@@ -138,13 +143,21 @@ Note that `-U` don't delete the key from Github but local. You must authenticate
 
 The uninstall process don't delete go programs folder. `-U` option will delete local `liteide/goplay` folder.
 
-#### Help
+#### -q
 
-        ./gopei -h
+This option set the theme for IDE. Use names from `View:Options:LiteApp:Generic:Theme`.
 
-Short help message.
+        ./gopei -q webstorm
 
-#### Version
+#### -x
+
+This option set the color scheme for IDE editor. Use names from `View:Options:LiteEditor:Font & colors:Editor colors scheme`.
+
+        ./gopei -x sublime
+		
+You can use in combination with `-q` flag.
+
+#### -v
 
         ./gopei -v
 
@@ -165,7 +178,7 @@ If you use Ubuntu Unity interface right click on Gopei launcher icon show some u
 
 If you use the new Ubuntu Gnome interface, search in dash LiteIDE and add to favorite.
  
-Starting with Go 1.9 Mac users need to choose `darwin64-home` environment in LiteIDE otherwise the programs won't compile or run.
+Starting with Go 1.9 Mac users need to choose `darwin64-home` environment in LiteIDE otherwise the programs won't compile or run. Gopei will try to set proper environment but you should know that if something goes wrong.
 
 #### Tools
 
@@ -173,27 +186,21 @@ Starting with Go 1.9 Mac users need to choose `darwin64-home` environment in Lit
 
 Allow you to easy do some complicated tasks
 
-        tools/github
+        github
 
 Without parameters show a list of options.
 
-        tools/github new
+        github new
 
 Create a new repo from your current project directory on `github.com`. At least one file from your project must be opened in LiteIDE before running this tool. If used from [Terminal](#using-from-terminal) change the current folder to project folder.
 
-        tools/github clone githubuser/project
+        github clone githubuser/project
 
-Clone existing project (e.g. `tools/github clone geosoft1/tools`)
-
-#### Install tool
-
-        tools/install
-
-Install some useful tools like [delve](https://github.com/derekparker/delve) debugger or [presenter](https://godoc.org/golang.org/x/tools/present).
+Clone existing project (e.g. `github clone geosoft1/tools`)
 
 #### Cloud tool
 
-        tools/cloud
+        cloud
 
 Alow you to run and deploy remote projects. Without parameters show a list of options. Read more on the project [Wiki](https://github.com/geosoft1/tools/wiki/Cloud-tool) page.
 
@@ -201,13 +208,13 @@ Alow you to run and deploy remote projects. Without parameters show a list of op
 
 Schedule build and deploy at given period of time.
 
-        tools/nb
+        nb
 
 Without parameters show a list of options.
 
 #### Add a schedule
 
-        tools/nb add
+        nb add
         GOOS=linux
         nightly build ? [ENTER @midnight | m h dom mon dow] 
 
@@ -223,7 +230,7 @@ You can also queue more projects to deploy on various servers.
 
 #### Remove schedule
 
-        tools/nb remove
+        nb remove
 
 Remove a prior created schedule.
 
@@ -238,7 +245,7 @@ Remove a prior created schedule.
 
 These commands are generally sufficient but it is possible to receive some suggestions from git server in certain situations. Use those commands when you will be asked.
 
-#### Using go from Terminal
+#### Using from Terminal
 
 Is recomanded to work in LiteIDE but Gopei set environment for go in .bashrc so is posible to use Terminal.
 
@@ -252,11 +259,7 @@ If the program have dependecies do go get command before go build
 
          go get github.com/user/repository
 
-#### Using toolbox from Terminal
-
-Run follow command after install
-
-         find ~/go/bin/tools/* -exec ln -s "{}" go/bin/ ';'
+Also cloud tools are available from command line.
 
 #### Practical example to start a colaborative project
 
@@ -267,10 +270,10 @@ Run follow command after install
 * At name write `github.com/githubuser/projectname`
 * Open `main.go` from this project.
 * Press `` ctrl+` ``
-* Use `tools/github new`. You will be asked for password twice. Now your project will magicaly became a repo on Github.
+* Use `github new`. You will be asked for password twice. Now your project will magicaly became a repo on Github.
 * Use `git add filename` or simply `git add *` to add other files to your repo as you wish.
-* Use `git commit -m "-" -a` and `git push` to push files to Github. Note that first time you will need to use `git push origin master` but not if you use `tools/github new` command.
-* Use `tools/github clone githubuser/project` to clone projects.
+* Use `git commit -m "-" -a` and `git push` to push files to Github. Note that first time you will need to use `git push origin master` but not if you use `github new` command.
+* Use `github clone githubuser/project` to clone projects.
 
 Remember that you can't remove a repository from Gopei. You must authenticate on Github for.
 
@@ -278,7 +281,7 @@ Remember that you can't remove a repository from Gopei. You must authenticate on
 
 Real gophers make [talks](https://talks.golang.org) and [articles](https://blog.golang.org) based on Google [present](http://godoc.org/golang.org/x/tools/present) package. LiteIDE know markdown format. You just need to add the presenter.
 
-* Start LiteIDE press `` ctrl+` `` and execute `tools/install present` only once, first time.
+* Start LiteIDE press `` ctrl+` `` and execute `go get golang.org/x/tools/cmd/present` only once, first time.
 * Create a new directory named `talks` in $GOPATH/src or in $GOPATH/src/github.com/gituser.
 * Create new project Go Present Slide File. Use Location/Browse to put it in your talks directory.
 * Open and edit your presentation (see [present](http://godoc.org/golang.org/x/tools/present) package for how to).
@@ -290,7 +293,7 @@ Real gophers make [talks](https://talks.golang.org) and [articles](https://blog.
 
 Default gdb is not proper for debugging go programs. A good debugger is [delve](https://github.com/derekparker/delve). LiteIDE has support for. All you need to do is to install the debugger.
 
-* Start LiteIDE press `` ctrl+` `` and execute once `tools/install delve`.
+* Start LiteIDE press `` ctrl+` `` and execute once `go get github.com/derekparker/delve`.
 * Select `Debug|debugger/delve` from LiteIDE menu.
 * Use `F5`, `F10` and `F11` to debug your code.
 
@@ -313,7 +316,7 @@ You enter a wrong password. Reinstall and check the password.
 
 ### Qt
 
-Note that are sistems where Qt may conflict. Just remove Qt from LiteIDE if wont start or use `-q`.
+Note that are older sistems where Qt4 may conflict. Just remove Qt from LiteIDE if wont start.
 
         rm liteide/lib/liteide/libQt*.*
 
@@ -329,12 +332,11 @@ If `gocode` from LiteIDE don't handle newest versions of Go compiler just update
 ## Known issues
 
 * no support for localization on OS X yet
-* `.fonts` folder is not used on some systems so a Monospace font must be manualy set in LiteIDE
 * `delve` has a issue on OS X (could not launch process: could not fork/exec) and can't be used under LiteIDE.
 
 ## Platform Specific Information
 
-Gopei is build around `bash` and `curl`. Also you may need to install `git`. See your package manager to find howto (a few examples below):
+Gopei is build around `bash`, `curl` and `git`. Also some dependencies could be needed on some systems (a few examples below):
 
 * Install `git` on OS X
 
@@ -379,13 +381,17 @@ To compile a 32 bits application on the 64 bit Linux you must install some libs.
 
         zypper in glibc-devel-32bit
 
+Gnome editions may need:
+
+        gsettings set org.gnome.desktop.background show-desktop-icons true
+
 ## Release Specific Information
 
 **Gopei shell work with**
 
 * OS X 10.11 El Capitan
 * Ubuntu 12, 14, 16, 18, +Server, Lubuntu/Kubuntu 16+
-* Debian 8
+* Debian 8, 9
 * Mint 17
 * Trisquel 7
 * OpenSUSE 42
@@ -394,7 +400,9 @@ To compile a 32 bits application on the 64 bit Linux you must install some libs.
 * Sabayon 16
 * Arch Linux
 * Centos 7
-* Raspbian (Raspberry Pi3)
+* Raspbian (install in server mode and get ide from [here](https://www.gophercoders.com/install/liteide/raspberry-pi/))
+
+**Note** to use `-b` flag if the IDE won't start on older systems.
 
 ## Faq
 

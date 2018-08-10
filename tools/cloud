@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # cloud tool
-# Copyright (C) 2014-2017  geosoft1@gmail.com
+# Copyright (C) 2014-2018  geosoft1@gmail.com
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -27,19 +27,17 @@
 # REMOTE_ADDR REMOTE_PORT REMOTE_USER
 # ---
 
+set -T
+
 LONG_NAME="Cloud tool"
 CODE_NAME="Quantum Teleporter"
 AUTHOR="geosoft1@gmail.com"
 COPYRIGHT="Copyright (C) 2014-2018  $AUTHOR"
-MAJOR_VERSION=3
-MINOR_VERSION=3
-PATCH_VERSION=0
+VERSION=3.3.2
 STAGE="release"
-VERSION=$MAJOR_VERSION.$MINOR_VERSION.$PATCH_VERSION
+
 ROOT=`dirname $0`
 NAME=`basename $0`
-DATE="05 July 2016"
-LAST="18 Feb 2016"
 
 GOROOT=$HOME/go
 GOBIN=$GOROOT/bin
@@ -54,12 +52,6 @@ CONFIG_FILE=$PWD/.servers
 TMP_FOLDER=/tmp/.ssh
 
 SSH_OPTIONS=(-o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/null" -q)
-
-#set -e
-#set -o errtrace
-#trap 'echo "Error occurred on $FUNCNAME."' ERR
-
-set -T
 
 sshcmd() {
    ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR $1
@@ -94,7 +86,7 @@ usage()  {
    echo "backup            backup GOPATH folder on remote server(s)"
    echo "                  init                initialize connection to server(s)"
    echo "                  list                list all available backups"
-   echo "                  remove [filemask]   eg. backup-george@ao756-* or backup-*"
+   echo "                  remove [filemask]   eg. backup-user@machine-* or backup-*"
    echo "                  mirror              do mirror copy"
    echo "terminal          free remote ssh commands"
    echo "version           version"

@@ -1,6 +1,6 @@
-## Gopei (Go Programming Environment Installer)<br/>The Convergence
+## Gopei2 (Go Programming Environment Installer)
 
-[![version](https://img.shields.io/badge/version-1.9.3-blue.svg)](https://github.com/geosoft1/tools/archive/master.zip)
+[![version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/geosoft1/tools/archive/master.zip)
 [![license](https://img.shields.io/badge/license-gpl-blue.svg)](https://github.com/geosoft1/tools/blob/master/LICENSE)
 
 Gopei shell install [Go](http://golang.org) compiler, [LiteIDE](https://github.com/visualfc/liteide) and configure for you the entire environment, variables, paths, ide interface and even link the machine with your Github account in a few minutes with just one command.
@@ -15,24 +15,21 @@ Read the user manual on the [wiki page](https://github.com/geosoft1/tools/wiki).
 
 **Features**
 
-- Convergence, Gopei run now on many Unix/Linux based desktops and servers (yes, work on Mac).
-- Install last versions of Go compiler and a stable version of LiteIDE.
+- Work with almost any Unix/Linux based desktops and servers.
+- Install last version of Go compiler and a stable version of LiteIDE.
 - Create a simple and practical layout for ide (liteide.ini.mini).
-- Lot of gophers use Monaco font so add into ide.
 - Also create `GOPATH` and add a helloworld project.
 - Add a nice launcher to dock or desktop.
-- Extend project templates with **Go1 Simple Project** and **Go1 GPL Project**.
-- Add some useful scripts for
+- Extend project templates and new polished themes.
+- Add some useful cloud scripts for
    - working with git (be sure you have installed `git` before and a valid acount)
-   - easy install some useful tools like [delve](https://github.com/derekparker/delve) debugger or [presenter](https://godoc.org/golang.org/x/tools/present)
-   - cloud features (see [Quantum Teleporter](https://github.com/geosoft1/tools/wiki/Cloud-tool))
-   - nightly build tool (see [Night Bird](https://github.com/geosoft1/tools/wiki#nightly-build-tool))
-   - backup features (see [Backup tool](https://github.com/geosoft1/tools/wiki/Cloud-tool#backup))
-- Gopei shell is free as in free speech and free beer...
+   - servers in cloud (see [Quantum Teleporter](https://github.com/geosoft1/tools/wiki/Cloud-tool))
+   - nightly build tool (see [Night Bird](https://github.com/geosoft1/tools/wiki#nightly-build-tool)) and backup (see [Backup tool](https://github.com/geosoft1/tools/wiki/Cloud-tool#backup))
+- Gopei shell is free as in free speech and free beer and always will be.
 
 **How to use**
 
-[Download](https://github.com/geosoft1/tools/archive/master.zip) anywhere and unarchive. From Terminal go to the `tools` folder and simply run:
+[Download](https://github.com/geosoft1/tools/archive/master.zip) anywhere and unarchive. From Terminal go to the `tools-master` folder and simply run:
 
     ./gopei
 

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # golang programming environment installer
-# Copyright (C) 2014-2017  <geosoft1@gmail.com>
+# Copyright (C) 2014-2018  <geosoft1@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -16,40 +16,38 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+set -e
+
 GOPEI_LONG_NAME="Golang Programming Environment Installer"
-GOPEI_CODE_NAME="The Convergence"
+GOPEI_CODE_NAME="-"
 GOPEI_AUTHOR="geosoft1@gmail.com"
-GOPEI_COPYRIGHT="Copyright (C) 2014-2017  $GOPEI_AUTHOR"
-GOPEI_MAJOR_VERSION=1
-GOPEI_MINOR_VERSION=9
-GOPEI_PATCH_VERSION=3
-GOPEI_STAGE="release"
-GOPEI_VERSION=$GOPEI_MAJOR_VERSION.$GOPEI_MINOR_VERSION.$GOPEI_PATCH_VERSION
+GOPEI_COPYRIGHT="Copyright (C) 2014-2018  $GOPEI_AUTHOR"
+GOPEI_VERSION=2.0.0
+GOPEI_STAGE="beta"
 GOPEI_ROOT=`dirname $0`
 GOPEI_NAME=`basename $0`
-GOPEI_DATE="05 July 2016"
-GOPEI_LAST="20 Octomber 2017"
 
+#-------------------------------------------------------------------------------
 GOROOT=$HOME/go
 GOPATH=$HOME
 PATH=$PATH:$GOROOT/bin
 
-IDE_VERSION=32.2
 IDEROOT=$HOME/liteide
-
-set -e
+IDE_VERSION=x34
+LINUX_QT_VERSION=5.5.1
+MACOS_QT_VERSION=5.9.5
 
 #-------------------------------------------------------------------------------
 #get host computer arch (e.g. i686|x86_64|armv6l)
 case $(uname -m) in
-   i686 )
+   i686)
       MACHINE_TYPE=386;;
-   x86_64|amd64 )
+   x86_64|amd64)
       MACHINE_TYPE=amd64;;
-   armv6l|armv7l )
+   armv6l|armv7l)
       IS_ARM=1
       MACHINE_TYPE=armv6l;;
-   * )echo "Unknown architecture" && exit;;
+   *) echo "Unknown architecture" && exit;;
 esac
 
 #get host computer LONG_BIT (e.g 32|64)
@@ -58,33 +56,47 @@ MACHINE_BITS=$(getconf LONG_BIT)
 #get kernel name (e.g. linux|darwin|freebsd)
 KERNEL_NAME=$(uname -s | tr '[:upper:]' '[:lower:]')
 
-#set platform name (e.g. linux|macosx|freebsd)
-if [ $KERNEL_NAME == darwin ]; then
-   PLATFORM_NAME=macosx
-else
-   PLATFORM_NAME=$KERNEL_NAME	
-fi
+#tricky build IS_$(KERNEL_NAME) flag
+export IS_$(echo $KERNEL_NAME | tr '[:lower:]' '[:upper:]')=1
 
-#tricky build IS_$(PLATFORM_NAME) flag
-export IS_$(echo $PLATFORM_NAME | tr '[:lower:]' '[:upper:]')=1
+#-------------------------------------------------------------------------------
+GOLANG_ORG=`curl -fsSLk --connect-timeout 3 golang.org || exit`
+COMPILER_VERSION=`echo $GOLANG_ORG | 
+awk '{ 
+   if (match($0,/go([0-9]+.)+/)) 
+      print substr($0,RSTART,RLENGTH-1) 
+}'`
+#build compiler name (eg. go1.10.3.linux-amd64.tar.gz|go1.10.3.darwin-amd64.tar.gz)
+COMPILER_NAME=$COMPILER_VERSION.$KERNEL_NAME-$MACHINE_TYPE.tar.gz
 
-case $PLATFORM_NAME in
-linux )
-   #set profile file (e.g. .bash_profile|.bashrc|.profile)
-   PROFILE_FILE=$HOME/.bashrc
-   #build ide name based on a fixed stable version
-   IDE_NAME=liteidex$IDE_VERSION.$PLATFORM_NAME$MACHINE_BITS-qt4.tar.bz2
+#-------------------------------------------------------------------------------
+case $KERNEL_NAME in
+linux)
+   #build ide name (eg. liteidex34.linux64-qt5.5.1.tar.gz)
+   IDE_NAME=liteide$IDE_VERSION.$KERNEL_NAME$MACHINE_BITS-qt$LINUX_QT_VERSION.tar.gz
    IDE_RESOURCES=$IDEROOT/share/liteide
-   #get localized user directories
-   test -f ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs && source ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs;;
-macosx )
-   PROFILE_FILE=$HOME/.bash_profile
-   IDE_NAME=liteidex$IDE_VERSION.$PLATFORM_NAME-qt4.zip
-   IDE_RESOURCES=$IDEROOT/liteide/LiteIDE.app/Contents/Resources/
-   LAUNCHER=$(defaults read com.apple.dock | grep _CFURLString\"| awk '/LiteIDE/ {print NR-1}');;
-freebsd )
+   IDE_ENVIRON=$KERNEL_NAME$MACHINE_BITS
+   IDE_GEOMETRY='geometry=@ByteArray(\x1\xd9\xd0\xcb\0\x2\0\0\0\0\0\x43\0\0\0\x1b\0\0\x4\"\0\0\x2\xff\0\0\0\x43\0\0\0\x39\0\0\x4\"\0\0\x2\xff\0\0\0\0\0\0\0\0\x5V)'
+   IDE_STATE='state=@ByteArray(\0\0\0\xff\0\0\0\0\xfd\0\0\0\x2\0\0\0\0\0\0\0\xdd\0\0\x2q\xfc\x2\0\0\0\f\xfb\0\0\0\"\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0\x66\0o\0l\0\x64\0\x65\0r\0s\0\0\0\0\0\xff\xff\xff\xff\0\0\0\0\0\0\0\0\xfb\0\0\0&\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0\x63\0l\0\x61\0s\0s\0v\0i\0\x65\0w\0\0\0\0\0\xff\xff\xff\xff\0\0\0\0\0\0\0\0\xfb\0\0\0\"\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0o\0u\0t\0l\0i\0n\0\x65\0\0\0\0\0\xff\xff\xff\xff\0\0\0\0\0\0\0\0\xfb\0\0\0.\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0g\0o\0p\0\x61\0\x63\0k\0\x62\0r\0o\0w\0s\0\x65\0r\0\0\0\0\0\xff\xff\xff\xff\0\0\0\0\0\0\0\0\xfb\0\0\0(\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0\x66\0i\0l\0\x65\0s\0y\0s\0t\0\x65\0m\x1\0\0\0\x39\0\0\x2q\0\0\0\0\0\0\0\0\xfb\0\0\0\"\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0\x46\0o\0l\0\x64\0\x65\0r\0s\0\0\0\0\0\xff\xff\xff\xff\0\0\0\x1f\0\xff\xff\xff\xfb\0\0\0(\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0O\0p\0\x65\0n\0\x45\0\x64\0i\0t\0o\0r\0\0\0\0\0\xff\xff\xff\xff\0\0\0\x1f\0\xff\xff\xff\xfb\0\0\0*\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0G\0o\0\x43\0l\0\x61\0s\0s\0V\0i\0\x65\0w\0\0\0\0\0\xff\xff\xff\xff\0\0\0\x1f\0\xff\xff\xff\xfb\0\0\0&\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0G\0o\0O\0u\0t\0l\0i\0n\0\x65\0\0\0\0\0\xff\xff\xff\xff\0\0\0\x1f\0\xff\xff\xff\xfb\0\0\0\x34\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0G\0o\0P\0\x61\0\x63\0k\0\x61\0g\0\x65\0\x42\0r\0o\0w\0s\0\x65\0r\0\0\0\0\x33\0\0\x2q\0\0\0\x1f\0\xff\xff\xff\xfb\0\0\0(\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0\x46\0i\0l\0\x65\0S\0y\0s\0t\0\x65\0m\x1\0\0\0\x33\0\0\x2q\0\0\0\x84\0\xff\xff\xff\xfb\0\0\0&\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0\x42\0o\0o\0k\0m\0\x61\0r\0k\0s\0\0\0\0\0\xff\xff\xff\xff\0\0\0\x1f\0\xff\xff\xff\0\0\0\x3\0\0\0\0\0\0\0\0\xfc\x1\0\0\0\x1\xfb\0\0\0\x16\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0\x38\0\0\0\0\0\xff\xff\xff\xff\0\0\0S\0\xff\xff\xff\0\0\x2\xdf\0\0\x2q\0\0\0\x4\0\0\0\x4\0\0\0\x1\0\0\0\b\xfc\0\0\0\x2\0\0\0\0\0\0\0\x1\0\0\0\x16\0s\0i\0\x64\0\x65\0_\0t\0o\0o\0l\0_\0\x31\x3\0\0\0\0\xff\xff\xff\xff\0\0\0\0\0\0\0\0\0\0\0\x2\0\0\0\x3\0\0\0\x16\0t\0o\0o\0l\0\x62\0\x61\0r\0/\0s\0t\0\x64\0\0\0\0\0\xff\xff\xff\xff\0\0\0\0\0\0\0\0\0\0\0\x16\0t\0o\0o\0l\0\x62\0\x61\0r\0/\0\x65\0n\0v\x1\0\0\0\0\xff\xff\xff\xff\0\0\0\0\0\0\0\0\0\0\0\x1a\0t\0o\0o\0l\0\x62\0\x61\0r\0/\0\x62\0u\0i\0l\0\x64\x1\0\0\0\xc0\xff\xff\xff\xff\0\0\0\0\0\0\0\0)'
+   IDE_FONT_FAMILY='family=FreeMono'
+   IDE_FONT_SIZE='fontsize=12'
+   #---
    PROFILE_FILE=$HOME/.bashrc
-   #the image from <freebsd.org> seems to be a server image :-/
+   test -f ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs && source ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs;;
+darwin)
+   #build ide name (eg. liteidex34.macos-qt5.9.5.zip)
+   IDE_NAME=liteide$IDE_VERSION.macos-qt$MACOS_QT_VERSION.zip
+   IDE_RESOURCES=$IDEROOT/liteide/LiteIDE.app/Contents/Resources/
+   IDE_ENVIRON=$KERNEL_NAME$MACHINE_BITS-home
+   IDE_GEOMETRY='geometry=@ByteArray(\x1\xd9\xd0\xcb\0\x2\0\0\0\0\0 \0\0\0\x17\0\0\x3\xff\0\0\x2\xc9\0\0\0 \0\0\0-\0\0\x3\xff\0\0\x2\xc9\0\0\0\0\0\0\0\0\x4\0)'
+   IDE_STATE='state=@ByteArray(\0\0\0\xff\0\0\0\0\xfd\0\0\0\x2\0\0\0\0\0\0\0\xf9\0\0\x2\x64\xfc\x2\0\0\0\f\xfb\0\0\0\"\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0\x66\0o\0l\0\x64\0\x65\0r\0s\0\0\0\0\0\xff\xff\xff\xff\0\0\0\0\0\0\0\0\xfb\0\0\0&\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0\x63\0l\0\x61\0s\0s\0v\0i\0\x65\0w\0\0\0\0\0\xff\xff\xff\xff\0\0\0\0\0\0\0\0\xfb\0\0\0\"\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0o\0u\0t\0l\0i\0n\0\x65\0\0\0\0\0\xff\xff\xff\xff\0\0\0\0\0\0\0\0\xfb\0\0\0.\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0g\0o\0p\0\x61\0\x63\0k\0\x62\0r\0o\0w\0s\0\x65\0r\0\0\0\0\0\xff\xff\xff\xff\0\0\0\0\0\0\0\0\xfb\0\0\0(\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0\x66\0i\0l\0\x65\0s\0y\0s\0t\0\x65\0m\x1\0\0\0\x39\0\0\x2q\0\0\0\0\0\0\0\0\xfb\0\0\0\"\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0\x46\0o\0l\0\x64\0\x65\0r\0s\0\0\0\0\0\xff\xff\xff\xff\0\0\0\x1c\0\xff\xff\xff\xfb\0\0\0(\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0O\0p\0\x65\0n\0\x45\0\x64\0i\0t\0o\0r\0\0\0\0\0\xff\xff\xff\xff\0\0\0\x1c\0\xff\xff\xff\xfb\0\0\0*\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0G\0o\0\x43\0l\0\x61\0s\0s\0V\0i\0\x65\0w\0\0\0\0\0\xff\xff\xff\xff\0\0\0\x1c\0\xff\xff\xff\xfb\0\0\0&\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0G\0o\0O\0u\0t\0l\0i\0n\0\x65\0\0\0\0\0\xff\xff\xff\xff\0\0\0\x1c\0\xff\xff\xff\xfb\0\0\0\x34\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0G\0o\0P\0\x61\0\x63\0k\0\x61\0g\0\x65\0\x42\0r\0o\0w\0s\0\x65\0r\0\0\0\0\0\xff\xff\xff\xff\0\0\0\x1c\0\xff\xff\xff\xfb\0\0\0(\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0\x46\0i\0l\0\x65\0S\0y\0s\0t\0\x65\0m\x1\0\0\0\x1c\0\0\x2\x64\0\0\0\x86\0\xff\xff\xff\xfb\0\0\0&\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0\x42\0o\0o\0k\0m\0\x61\0r\0k\0s\0\0\0\0\0\xff\xff\xff\xff\0\0\0\x1c\0\xff\xff\xff\0\0\0\x3\0\0\0\0\0\0\0\0\xfc\x1\0\0\0\x1\xfb\0\0\0\x16\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0\x38\0\0\0\0\0\xff\xff\xff\xff\0\0\0v\0\xff\xff\xff\0\0\x2\xce\0\0\x2\x64\0\0\0\x4\0\0\0\x4\0\0\0\x1\0\0\0\b\xfc\0\0\0\x2\0\0\0\0\0\0\0\x1\0\0\0\x16\0s\0i\0\x64\0\x65\0_\0t\0o\0o\0l\0_\0\x31\x3\0\0\0\0\xff\xff\xff\xff\0\0\0\0\0\0\0\0\0\0\0\x2\0\0\0\x3\0\0\0\x16\0t\0o\0o\0l\0\x62\0\x61\0r\0/\0s\0t\0\x64\0\0\0\0\0\xff\xff\xff\xff\0\0\0\0\0\0\0\0\0\0\0\x16\0t\0o\0o\0l\0\x62\0\x61\0r\0/\0\x65\0n\0v\x1\0\0\0\0\xff\xff\xff\xff\0\0\0\0\0\0\0\0\0\0\0\x1a\0t\0o\0o\0l\0\x62\0\x61\0r\0/\0\x62\0u\0i\0l\0\x64\x1\0\0\0\xe5\xff\xff\xff\xff\0\0\0\0\0\0\0\0)'
+   IDE_FONT_SIZE='fontsize=12'
+   #---
+   PROFILE_FILE=$HOME/.bash_profile
+   LAUNCHER=$(defaults read com.apple.dock | grep _CFURLString\"| awk '/LiteIDE/ {print NR-1}');;
+freebsd)
+   #---
+   PROFILE_FILE=$HOME/.bashrc
    IS_SERVER=1;;
 esac
 
@@ -93,25 +105,37 @@ help()  {
    echo $GOPEI_LONG_NAME
    echo "Usage: $GOPEI_NAME [options]"
    echo "Options:"
+   echo "-b        compatibility with systems that can't support qt5 (Linux only)"
    echo "-c        enable classroom mode (Linux only)"
    echo "-g        enable git suppport"
    echo "-h        show this help message and exit"
-   echo "-q        install system only, no qt libs (Linux only)"
+   echo "-k        show key fingerprint"
    echo "-s        server mode, install golang only"
    echo "-u        uninstall"
-   echo "-U        uninstall include .gitconfig file and .ssh folder"
+   echo "-U        uninstall including .gitconfig file and .ssh folder"
+   echo "-q [name] set theme (eg. -q webstorm)"
+   echo "-x [name] set color scheme (eg. -x sublime)"
    echo "-v        version"
    exit
 }
 
-while getopts ":cghqsuUv" OPTION; do
+while getopts ":bcgkhsuUr :q:x:v" OPTION; do
 case $OPTION in
-   c )CLASSROOM_MODE=1;;
-   g )GITSERVER=github.com;;
-   h )help;;
-   q )NO_QTLIBS=1;;
-   s )IS_SERVER=1;;
-   u|U )
+   #compatible mode, will stay here a while
+   b) if [ $IS_LINUX ]; then
+         COMPILER_COMPATIBLE_VERSION=go1.10.3
+         IDE_COMPATIBLE_VERSION=32.2
+         COMPILER_NAME=$COMPILER_COMPATIBLE_VERSION.$KERNEL_NAME-$MACHINE_TYPE.tar.gz
+         IDE_VERSION=X$IDE_COMPATIBLE_VERSION
+         IDE_NAME=liteidex$IDE_COMPATIBLE_VERSION.$KERNEL_NAME$MACHINE_BITS-qt4.tar.bz2
+      fi;;
+   c) CLASSROOM_MODE=1;;
+   g) GITSERVER=github.com;;
+   h) help;;
+   k) ssh-add -l -E md5
+      exit;;
+   s) IS_SERVER=1;;
+   u|U)
       #common to all operating systems
       rm -rf $GOROOT
       rm -rf $IDEROOT
@@ -122,43 +146,29 @@ case $OPTION in
       rm -rf $HOME/.local/share/applications/liteide.desktop
       #Linux specific
       rm -f $XDG_DESKTOP_DIR/liteide.desktop
-      #rm -rf $HOME/.fonts/MONACO.TTF
-      if [ $IS_MACOSX ] && [ $LAUNCHER ]; then
+      if [ $IS_DARWIN ] && [ $LAUNCHER ]; then
          /usr/libexec/PlistBuddy -c "Delete persistent-apps:$LAUNCHER" ~/Library/Preferences/com.apple.dock.plist
          killall Dock
       fi
       if [ $OPTION == U ]; then
          rm -rf $HOME/.ssh/
          rm -f  $HOME/.gitconfig
-         #test "$(ls -A "$HOME/.local/share/data/liteide/goplay" 2>/dev/null)" || rm -rf $HOME/.local/share/data/liteide
-         #if [ $IS_MACOSX ]; then
-         #   test "$(ls -A "$HOME/Library/Application Support/LiteIDE/liteide/goplay" 2>/dev/null)" || rm -rf "$HOME/Library/Application Support/LiteIDE"
-         #fi
       fi
       #restore original profile file
       [ -e $PROFILE_FILE ] && sed -i.bk '/. ~\/.go_profile/d' $PROFILE_FILE
       rm -f $HOME/.go_profile
       rm -f $PROFILE_FILE.bk
       echo "Uninstalled." && exit;;
-   v )echo "$GOPEI_VERSION" && exit;;
-   * )echo "Unimplemented option: -$OPTARG" && help;;
+   q) IDE_QSS='Qss='$OPTARG'.qss';;
+   x) IDE_STYLE='style='$OPTARG'.xml';;
+   v) echo "$GOPEI_VERSION-$GOPEI_STAGE" && exit;;
+   *) echo "Unimplemented option: -$OPTARG" && help;;
    esac
 done
 
 clear && echo -e "$GOPEI_LONG_NAME\n$GOPEI_CODE_NAME\n$GOPEI_COPYRIGHT"
 
 #-------------------------------------------------------------------------------
-#get last version of go compiler (e.g. go1.6.2.)
-GOLANG_ORG=`curl -fsSLk --connect-timeout 3 golang.org || exit`
-COMPILER_VERSION=`echo $GOLANG_ORG | 
-awk '{ 
-   if (match($0,/go([0-9]+.)+/)) 
-      print substr($0,RSTART,RLENGTH-1) 
-}'`
-
-#build compiler name (e.g. go1.5.1.linux-386.tar.gz|go1.6.2.darvin-amd64.tar.gz)
-COMPILER_NAME=$COMPILER_VERSION.$KERNEL_NAME-$MACHINE_TYPE.tar.gz
-
 echo "Installing $COMPILER_NAME..."
 curl -fsSLkOz $COMPILER_NAME storage.googleapis.com/golang/$COMPILER_NAME || exit
 tar -x -C $HOME -f $COMPILER_NAME
@@ -173,63 +183,9 @@ grep -sq '. ~/.go_profile' $PROFILE_FILE || echo '. ~/.go_profile' >> $PROFILE_F
 echo "Create helloworld program"
 mkdir -p $GOPATH/src/helloworld && cp -r $GOROOT/test/helloworld.go $GOPATH/src/helloworld
 
-if [ $IS_SERVER ] || [ $IS_ARM ]; then
-  echo "Done." && exit
-fi
-
 #-------------------------------------------------------------------------------
-echo "Installing $IDE_NAME..."
-curl -fsSLkOz $IDE_NAME sourceforge.net/projects/liteide/files/X$IDE_VERSION/$IDE_NAME || exit
-
-case $PLATFORM_NAME in
-linux )
-   tar -x -C $HOME -f $IDE_NAME
-   #small ajustment on some Linux machines
-   [ $NO_QTLIBS ] && rm $IDEROOT/lib/liteide/libQt*.*
-   echo "Get Monaco font..."
-   curl -o $HOME/.fonts/MONACO.TTF --create-dirs -fsSLOk jorrel.googlepages.com/Monaco_Linux.ttf || exit;;
-macosx )
-   mkdir -p $IDEROOT && unzip -q -o $IDE_NAME -d $IDEROOT;;
-esac
-
-#-------------------------------------------------------------------------------
-echo "Create liteide.ini.mini"
-mkdir -p $HOME/.config/liteide && echo '[liteenv]
-currentenvid='$KERNEL_NAME$MACHINE_BITS'
-
-[liteide]
-gopath='$GOPATH'
-
-[liteapp]
-ShowEditToolbar=false
-FolderShowHidenFiles=true
-AutoLoadLastSession=false
-SplashVisible=false
-geometry=@ByteArray(\x1\xd9\xd0\xcb\0\x1\0\0\0\0\0\x37\0\0\0\xe\0\0\x4*\0\0\x3\t\0\0\0\x41\0\0\0\x34\0\0\x4 \0\0\x2\xff\0\0\0\0\0\0)
-state=@ByteArray(\0\0\0\xff\0\0\0\0\xfd\0\0\0\x2\0\0\0\0\0\0\x1\x5\0\0\x2q\xfc\x2\0\0\0\x5\xfb\0\0\0\"\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0\x66\0o\0l\0\x64\0\x65\0r\0s\0\0\0\0\0\xff\xff\xff\xff\0\0\0 \0\xff\xff\xff\xfb\0\0\0&\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0\x63\0l\0\x61\0s\0s\0v\0i\0\x65\0w\0\0\0\0\0\xff\xff\xff\xff\0\0\0 \0\xff\xff\xff\xfb\0\0\0\"\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0o\0u\0t\0l\0i\0n\0\x65\0\0\0\0\0\xff\xff\xff\xff\0\0\0 \0\xff\xff\xff\xfb\0\0\0.\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0g\0o\0p\0\x61\0\x63\0k\0\x62\0r\0o\0w\0s\0\x65\0r\0\0\0\0\0\xff\xff\xff\xff\0\0\0 \0\xff\xff\xff\xfb\0\0\0(\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0\x66\0i\0l\0\x65\0s\0y\0s\0t\0\x65\0m\x1\0\0\0\x39\0\0\x2q\0\0\0\x8e\0\xff\xff\xff\0\0\0\x3\0\0\0\0\0\0\0\0\xfc\x1\0\0\0\x1\xfb\0\0\0\x16\0s\0i\0\x64\0\x65\0_\0\x64\0o\0\x63\0k\0_\0\x38\0\0\0\0\0\xff\xff\xff\xff\0\0\0U\0\xff\xff\xff\0\0\x2\xb8\0\0\x2q\0\0\0\x4\0\0\0\x4\0\0\0\x1\0\0\0\b\xfc\0\0\0\x2\0\0\0\0\0\0\0\x1\0\0\0\x16\0s\0i\0\x64\0\x65\0_\0t\0o\0o\0l\0_\0\x31\x3\0\0\0\0\xff\xff\xff\xff\0\0\0\0\0\0\0\0\0\0\0\x2\0\0\0\x3\0\0\0\x16\0t\0o\0o\0l\0\x62\0\x61\0r\0/\0s\0t\0\x64\0\0\0\0\0\xff\xff\xff\xff\0\0\0\0\0\0\0\0\0\0\0\x16\0t\0o\0o\0l\0\x62\0\x61\0r\0/\0\x65\0n\0v\x1\0\0\0\0\xff\xff\xff\xff\0\0\0\0\0\0\0\0\0\0\0\x1a\0t\0o\0o\0l\0\x62\0\x61\0r\0/\0\x62\0u\0i\0l\0\x64\x1\0\0\0\xd2\xff\xff\xff\xff\0\0\0\0\0\0\0\0)
-
-[golangdoc]
-goroot='$GOROOT'
-
-[FileBrowser]
-root='$HOME'/src
-synceditor=false
-
-[%General]
-Language=en_US
-WelcomePageVisible=false
-
-[editor]
-family=Monaco
-fontsize=12
-
-[output]
-family=Monaco
-fontsize=12' > $HOME/.config/liteide/liteide.ini
-
-#-------------------------------------------------------------------------------
-echo "Add git support..."
 if [ $GITSERVER ]; then
+   echo "Add git support..."
    #create git configuration if not exist, otherwise use existent (~/.gitconfig)
    if [ -f $HOME/.gitconfig ]; then
       GITUSER=`awk 'NR==2 {print $3}' $HOME/.gitconfig`
@@ -265,105 +221,88 @@ if [ $GITSERVER ]; then
    ssh -o StrictHostKeyChecking=no -o LogLevel=error -T git@$GITSERVER || true
    #create github.com in $GOPATH
    mkdir -p $GOPATH/src/$GITSERVER/$GITUSER
+
+   echo "Add cloud tools..."
+   cp $GOPEI_ROOT/tools/* $GOROOT/bin
 fi
 
 #-------------------------------------------------------------------------------
+if [ $IS_SERVER ] || [ $IS_ARM ]; then
+  echo "Done." && exit
+fi
+
+#-------------------------------------------------------------------------------
+echo "Installing $IDE_NAME..."
+curl -fsSLkOz $IDE_NAME sourceforge.net/projects/liteide/files/$IDE_VERSION/$IDE_NAME || exit
+
+case $KERNEL_NAME in
+linux)
+   tar -x -C $HOME -f $IDE_NAME;;
+darwin)
+   mkdir -p $IDEROOT && unzip -q -o $IDE_NAME -d $IDEROOT;;
+esac
+
+#-------------------------------------------------------------------------------
+echo "Create liteide.ini.mini"
+mkdir -p $HOME/.config/liteide && echo '[FileBrowser]
+root='$HOME'/src
+synceditor=false
+[%General]
+Language=en_US
+WelcomePageVisible=false
+[LitApp]
+'$IDE_QSS'
+[LiteApp]
+ShowEditToolbar=false
+FolderShowHidenFiles=true
+AutoLoadLastSession=true
+SplashVisible=false
+[editor]
+'$IDE_FONT_FAMILY'
+'$IDE_FONT_SIZE'
+'$IDE_STYLE'
+[golangdoc]
+goroot='$GOROOT'
+[liteapp]
+family='$IDE_GEOMETRY'
+'$IDE_STATE'
+[liteenv]
+currentenvid='$IDE_ENVIRON'
+[liteide]
+gopath='$GOPATH'
+[output]
+'$IDE_FONT_FAMILY'
+'$IDE_FONT_SIZE'
+' > $HOME/.config/liteide/liteide.ini
+
+#-------------------------------------------------------------------------------
 echo "Create some useful resources"
-IDE_TEMPLATE=$IDE_RESOURCES/liteapp/template
+cp -R $GOPEI_ROOT/template/* $IDE_RESOURCES/liteapp/template/
+echo >> $IDE_RESOURCES/liteapp/template/project.sub
+for project in $GOPEI_ROOT/template/*; do
+   #add custom resources as project folder only
+   echo `basename $project` >> $IDE_RESOURCES/liteapp/template/project.sub
+done
+#add custom theme and colors
+cp $GOPEI_ROOT/theme/* $IDE_RESOURCES/liteapp/qss/
 
-#create gosimple template
-sed -i.bk '1i\
-gosimple
-' $IDE_TEMPLATE/project.sub
-
-mkdir -p $IDE_TEMPLATE/gosimple
-
-echo "// \$ROOT\$ project
-package main
-
-func main() {
-}" > $IDE_TEMPLATE/gosimple/main.go
-
-echo "[SETUP]
-NAME = \"Go1 Simple Project\"
-AUTHOR = geosoft1
-INFO = new go1 simple project
-TYPE = gopath
-FILES = main.go
-OPEN = main.go
-SCHEME=folder" > $IDE_TEMPLATE/gosimple/setup.inf
-
-#create GPL template
-sed -i.bk '2i\
-gogpl
-' $IDE_TEMPLATE/project.sub
-
-mkdir -p $IDE_TEMPLATE/gogpl
-
-year=`date +"%Y"`
-author=$GITUSER
-email=$GITEMAIL
-[ $author ] || author="<name of the author>"
-[ $email ] || email="<email of the author>"
-
-echo "// \$ROOT\$ project
-// Copyright (C) $year  $author  $email
-//
-// This program is free software: you can redistribute it and/or modify
-// it under the terms of the GNU General Public License as published by
-// the Free Software Foundation, either version 3 of the License, or
-// (at your option) any later version.
-//
-// This program is distributed in the hope that it will be useful,
-// but WITHOUT ANY WARRANTY; without even the implied warranty of
-// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-// GNU General Public License for more details.
-//
-// You should have received a copy of the GNU General Public License
-// along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-package main
-
-func main() {
-}" > $IDE_TEMPLATE/gogpl/main.go
-
-echo "[SETUP]
-NAME = \"Go1 GPL Project\"
-FILES = main.go LICENSE CONTRIBUTORS README.md
-AUTHOR = geosoft1
-INFO = new go1 gpl project
-TYPE = gopath
-OPEN = main.go
-SCHEME=folder" > $IDE_TEMPLATE/gogpl/setup.inf
-
-echo $GITEMAIL > $IDE_TEMPLATE/gogpl/CONTRIBUTORS
-echo "\$ROOT\$
-====" > $IDE_TEMPLATE/gogpl/README.md
-
-#set GPL license acording to FSF
-cp $GOPEI_ROOT/LICENSE $IDE_TEMPLATE/gogpl/LICENSE
-
-#add common git comands to liteide
-echo "git add *
+[ $GITSERVER ] && CLOUD_TOOLS="github\ncloud\nnb"
+#make the scripts available to ide
+echo -e "git add *
 git commit -m \"-\" -a
 git push
 git pull
-tools/github 
-tools/install
-tools/cloud
-tools/nb
+$CLOUD_TOOLS
 go list -f '{{context}}'
 go list -f '{{.GoFiles}}'
 go list -f '{{.IgnoredGoFiles}}'
+go get golang.org/x/tools/cmd/present
 godoc -http=:8080 -play" > $IDE_RESOURCES/litebuild/command/go.api
-
-#add scripts to environment
-[ -e $GOPEI_ROOT/tools ] && cp -R $GOPEI_ROOT/tools $GOROOT/bin
 
 #-------------------------------------------------------------------------------
 echo "Create smart launcher"
-case $PLATFORM_NAME in
-linux )
+case $KERNEL_NAME in
+linux)
    if [ $CLASSROOM_MODE ]; then
       cp $HOME/.config/liteide/liteide.ini $HOME/.config/liteide/liteide.ini.mini
       #add restore command
@@ -380,7 +319,7 @@ linux )
    \rType=Application" > ${XDG_DESKTOP_DIR}/liteide.desktop
 
    case $DESKTOP_SESSION in
-   ubuntu* )
+   ubuntu*)
       #extend .desktop file with some nice options
       if [ $GITSERVER ]; then
          GITACTION="$GITSERVER;"
@@ -416,10 +355,10 @@ linux )
          fi
       fi;;
    #generic desktop environment have only a desktop shortcut
-   * )chmod +x ${XDG_DESKTOP_DIR}/liteide.desktop;;
+   *) chmod +x ${XDG_DESKTOP_DIR}/liteide.desktop;;
    esac;;
 
-macosx )
+darwin)
    if [ -z $LAUNCHER ]; then
       #OS X Dock management
       #defaults read com.apple.dock persistent-apps

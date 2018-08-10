@@ -51,3 +51,13 @@ What's new in 1.7 The Convergence (milestone)
 - resolve some changes on golang.org site
 - unity/gnome (U18.04) launcher corrections
 
+What's new in Gopei2 (milestone)
+
+- mostly rewritten, remove obsolete tools/install and Monaco font
+- add go get golang.org/x/tools/cmd/present in ctrl+` list
+- update links to new LiteIDE versions based on Qt5
+- add qt4 compatibility mode for older systems
+- improve aspect on Linux and Mac, new liteide.ini.mini
+- extend project templates
+- include new polished themes and color schemes
+
