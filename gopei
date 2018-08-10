@@ -60,16 +60,6 @@ KERNEL_NAME=$(uname -s | tr '[:upper:]' '[:lower:]')
 export IS_$(echo $KERNEL_NAME | tr '[:lower:]' '[:upper:]')=1
 
 #-------------------------------------------------------------------------------
-GOLANG_ORG=`curl -fsSLk --connect-timeout 3 golang.org || exit`
-COMPILER_VERSION=`echo $GOLANG_ORG | 
-awk '{ 
-   if (match($0,/go([0-9]+.)+/)) 
-      print substr($0,RSTART,RLENGTH-1) 
-}'`
-#build compiler name (eg. go1.10.3.linux-amd64.tar.gz|go1.10.3.darwin-amd64.tar.gz)
-COMPILER_NAME=$COMPILER_VERSION.$KERNEL_NAME-$MACHINE_TYPE.tar.gz
-
-#-------------------------------------------------------------------------------
 case $KERNEL_NAME in
 linux)
    #build ide name (eg. liteidex34.linux64-qt5.5.1.tar.gz)
@@ -167,6 +157,16 @@ case $OPTION in
 done
 
 clear && echo -e "$GOPEI_LONG_NAME$GOPEI_CODE_NAME$GOPEI_COPYRIGHT"
+
+#-------------------------------------------------------------------------------
+GOLANG_ORG=`curl -fsSLk --connect-timeout 3 golang.org || exit`
+COMPILER_VERSION=`echo $GOLANG_ORG | 
+awk '{ 
+   if (match($0,/go([0-9]+.)+/)) 
+      print substr($0,RSTART,RLENGTH-1) 
+}'`
+#build compiler name (eg. go1.10.3.linux-amd64.tar.gz|go1.10.3.darwin-amd64.tar.gz)
+COMPILER_NAME=$COMPILER_VERSION.$KERNEL_NAME-$MACHINE_TYPE.tar.gz
 
 #-------------------------------------------------------------------------------
 echo "Installing $COMPILER_NAME..."
