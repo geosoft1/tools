@@ -9,6 +9,7 @@
     - [-c](#-c) enable classroom mode (Linux only)
     - [-g](#-g) enable git suppport
     - [-h](#-h) show help message and exit
+    - [-k](#-k) show key fingerprint
     - [-s](#-s) server mode, install golang only
     - [-u](#-u) unistall
     - [-U](#-U) uninstall including `.gitconfig` file and `.ssh` folder
@@ -120,6 +121,9 @@ Remember that sometime key deploy can be very slow during Github mentenance. Jus
 
 Short help message.
 
+#### -k
+
+Show key fingerprint. Useful to identify your key on git server.
 
 #### -s
 
