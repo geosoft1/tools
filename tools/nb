@@ -62,7 +62,7 @@ getGOOS() {
 
 getServers() {
    if [ ! -f $SERVERS_FILE ]; then
-      $GOBIN/tools/cloud init
+      $GOBIN/cloud init
    fi
 }
 
@@ -95,7 +95,7 @@ add() {
    getServers
    echo -n "nightly build ? [ENTER @midnight | m h dom mon dow] ";read BUILD_TIME
    if [ -z "$BUILD_TIME" ]; then BUILD_TIME="@midnight"; fi
-   (crontab -l 2>/dev/null; echo "$BUILD_TIME (export GOROOT=$HOME/go;cd $PWD && $GOBIN/go build -i && $GOBIN/tools/cloud teleport && $GOBIN/tools/cloud detach)") | crontab -
+   (crontab -l 2>/dev/null; echo "$BUILD_TIME (export GOROOT=$HOME/go;cd $PWD && $GOBIN/go build -i && $GOBIN/cloud teleport && $GOBIN/cloud detach)") | crontab -
 }
 
 remove() {

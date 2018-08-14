@@ -114,7 +114,7 @@ pushKeys() {
    else
       echo -n "$REMOTE_USER@$REMOTE_ADDR's password: "
       #because of askpass can't use scpcmd function here
-      $GOBIN/tools/ssh_askpass scp -P $REMOTE_PORT -r "${SSH_OPTIONS[@]}" $TMP_FOLDER $REMOTE_USER@$REMOTE_ADDR:
+      $GOBIN/ssh_askpass scp -P $REMOTE_PORT -r "${SSH_OPTIONS[@]}" $TMP_FOLDER $REMOTE_USER@$REMOTE_ADDR:
    fi
    #clean the mess
    rm -rf $TMP_FOLDER
