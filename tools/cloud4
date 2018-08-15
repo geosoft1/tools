@@ -88,7 +88,7 @@ usage()  {
    echo "                  list                list all available backups"
    echo "                  remove [filemask]   eg. backup-$USER@$HOSTNAME-* or backup-*"
    echo "                  mirror              do mirror copy"
-   echo "terminal          free remote ssh commands"
+   echo "cli               free remote ssh commands"
    echo "version           version"
    exit
 }
@@ -253,7 +253,7 @@ case $1 in
               delete;;
    remove   ) _kill || true
               remove;;
-   terminal ) sshcmd;;
+   cli      ) checkConfigFile && sshcmd;;
    backup   ) backup $2 $3;;
    version  ) echo $VERSION-$STAGE && exit;;
    *        ) usage;;
