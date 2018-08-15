@@ -1,0 +1,262 @@
+#!/usr/bin/env bash
+
+# cloud tool
+# Copyright (C) 2016-2018  geosoft1@gmail.com
+#
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+# project path structure
+# /home/username/src/github.com/githubusername/projectname/executablename
+#  |___________| |___________________________| |_________| |____________|
+#       |                    |                      |            |
+# HOME/REMOTE_HOME        BASEPATH            PROJECT_NAME EXECUTABLE_NAME                                
+#
+# .config file structure      .backup file structure
+# ---                         ---
+# REMOTE_ADDR=example.com     REMOTE_ADDR REMOTE_PORT REMOTE_USER
+# REMOTE_PORT=22              ---
+# REMOTE_USER=george
+# DELAY=3
+# LOG=~/log
+# ENV="A=1 B=2"
+# ARGS="-conf=conf.json"
+# ---
+
+LONG_NAME="Cloud tool"
+CODE_NAME="Quantum Teleporter"
+AUTHOR="geosoft1@gmail.com"
+COPYRIGHT="Copyright (C) 2016-2018  $AUTHOR"
+VERSION=4.0.0
+STAGE="alpha"
+
+GOPATH=$HOME
+NAME=`dirname $0`
+PROJECT_NAME=`basename $PWD`
+EXECUTABLE_NAME=$PROJECT_NAME
+BASEPATH=`echo $PWD | sed -e "s,$HOME\/,," | sed -e "s,\/$PROJECT_NAME$,,"`
+#macos may not have $HOSTNAME set
+HOSTNAME=`hostname`
+CONFIG_FILE=$PWD/.config
+TMP_FOLDER=/tmp/.ssh
+
+SSH_OPTIONS=(-o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/null" -q)
+
+sshcmd() {
+   ssh -p $REMOTE_PORT "${SSH_OPTIONS[@]}" $REMOTE_USER@$REMOTE_ADDR $1
+   #echo $?
+   #check error code of remote ssh command which tipically must be 0
+   #if error code is 1 or more print original command error message
+   if [ $? -eq 255 ]; then
+      #simulate scp lost connection when command fail :P
+      echo "lost connection" && exit
+   fi
+}
+
+scpcmd() {
+   #scp already get lost connection when command fail :P
+   scp -P $REMOTE_PORT -r "${SSH_OPTIONS[@]}" $1
+}
+
+usage()  {
+   echo "$LONG_NAME ($CODE_NAME)"
+   echo "$COPYRIGHT"
+   echo "Usage: $NAME [options]"
+   echo "Options:"
+   echo "init           -- push ssh key to remote server(s)"
+   echo "push           -- push curent source+binary tree"
+   #echo "pull          -- pull remote source+binary tree"
+   echo "run            -- run project remote,view result locally"
+   echo "detach         -- run and detach project remote"
+   echo "teleport       -- push and run project remote,view result locally"
+   echo "kill           -- stop the project remote"
+   echo "deploy         -- deploy project on remote server(s)"
+   echo "delete         -- delete project from remote server(s)"
+   echo "remove         -- uninstall project from remote server(s)"
+   echo "backup            backup $GOPATH/src (\$GOPATH) folder on remote server"
+   echo "                  init                initialize connection to server"
+   echo "                  list                list all available backups"
+   echo "                  remove [filemask]   eg. backup-$USER@$HOSTNAME-* or backup-*"
+   echo "                  mirror              do mirror copy"
+   echo "terminal          free remote ssh commands"
+   echo "version           version"
+   exit
+}
+
+pushKeys() {
+   echo "-- push ssh key to $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
+   if [ ! -f $HOME/.ssh/id_rsa.pub ]; then
+     echo "no public key found" && exit
+   fi
+   #scp create destination folder only if it copies folders
+   #so we prepare here a temporary folder for key transfer
+   mkdir -m 700 -p $TMP_FOLDER
+   #copy only the key in temporary folder
+   cp $HOME/.ssh/id_rsa.pub $TMP_FOLDER/authorized_keys
+   #safe deploy the public key to remote server
+   scpcmd "$TMP_FOLDER $REMOTE_USER@$REMOTE_ADDR:"
+   #clean the mess
+   rm -rf $TMP_FOLDER
+}
+
+getRemoteEnv() {
+   REMOTE_HOME=`sshcmd "printenv HOME"`
+   PROJECT_PATH=$REMOTE_HOME/$BASEPATH/$PROJECT_NAME
+}
+
+readConfigFile() {
+   eval $(cat $CONFIG_FILE)
+   getRemoteEnv
+   [ -n "${DELAY+set}" ] && DELAY_CMD="sleep $DELAY &&"
+   LOG_FILE="> $LOG/$EXECUTABLE_NAME.log 2>&1"
+   COMMAND_WITH_ARGS="$ENV $PROJECT_PATH/$EXECUTABLE_NAME $ARGS"
+   FULL_COMMAND_LINE="$DELAY_CMD $COMMAND_WITH_ARGS $LOG_FILE"
+   #echo -e "[debug] $FULL_COMMAND_LINE"
+}
+
+createConfigFile() {
+   if [ ! -f $CONFIG_FILE ]; then
+      echo -n "Remote server ";read REMOTE_ADDR
+      #try to guess remote ssh port
+      echo -n "Remote port [ENTER for 22] ";read REMOTE_PORT
+      if [ -z "$REMOTE_PORT" ]; then REMOTE_PORT="22"; fi
+      #try to guess remote user
+      echo -n "Remote user [ENTER for $USER] ";read REMOTE_USER
+      [ -z $REMOTE_USER ] && REMOTE_USER=$USER
+      echo -n "Delay [ENTER for none] ";read DELAY
+      #[ -z $DELAY ] && DELAY="0"
+      echo -n "Remote logfile [y/n, ENTER for ~/log] ";read LOG
+      [ -z $LOG ] && LOG="~/log"
+      echo -n "Args [ENTER for none] ";read ARGS
+      echo -n "Env [ENTER for none] ";read ENV
+      echo "REMOTE_ADDR=$REMOTE_ADDR" > $CONFIG_FILE
+      echo "REMOTE_PORT=$REMOTE_PORT" >> $CONFIG_FILE
+      echo "REMOTE_USER=$REMOTE_USER" >> $CONFIG_FILE
+      [ ! -z $DELAY ] && echo "DELAY=$DELAY" >> $CONFIG_FILE
+      echo "LOG=$LOG" >> $CONFIG_FILE
+      echo "ENV=\"$ENV\"" >> $CONFIG_FILE
+      echo "ARGS=\"$ARGS\"" >> $CONFIG_FILE
+   fi
+   #readConfigFile
+   pushKeys
+}
+
+checkConfigFile() {
+   if [ ! -f $CONFIG_FILE ]; then
+      createConfigFile
+   else
+      readConfigFile
+   fi
+}
+
+push() {
+   checkConfigFile
+   echo "-- push $PWD source+binary tree on $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
+   #force copy read-only files like some .git content
+   sshcmd "mkdir -p $BASEPATH"
+   sshcmd "mkdir -p $LOG"
+   sshcmd "chmod -R +w $BASEPATH"
+   scpcmd "$PWD $REMOTE_USER@$REMOTE_ADDR:$BASEPATH"
+}
+
+run() {
+   checkConfigFile
+   echo "-- run $EXECUTABLE_NAME on $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
+   echo "-- ENV $ENV, ARGS $ARGS" 
+   sshcmd "$COMMAND_WITH_ARGS"
+}
+
+detach() {
+   checkConfigFile
+   echo "-- run and detach $EXECUTABLE_NAME on $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
+   sshcmd "bash -c '$ENV nohup $PROJECT_PATH/$EXECUTABLE_NAME $ARGS $LOG_FILE &'"
+}
+
+teleport() {
+   checkConfigFile
+   echo "-- teleporting $EXECUTABLE_NAME on $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
+   push && run
+}
+
+_kill() {
+   checkConfigFile
+   echo "-- kill $EXECUTABLE_NAME on $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
+   sshcmd "killall $EXECUTABLE_NAME"
+}
+
+deploy() {
+   checkConfigFile
+   echo "-- deploy $EXECUTABLE_NAME on $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
+   sshcmd "(crontab -l 2>/dev/null; echo '@reboot $FULL_COMMAND_LINE') | crontab -"
+}
+
+delete() {
+   checkConfigFile
+   echo "-- delete $EXECUTABLE_NAME from $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
+   sshcmd "rm -rf $PROJECT_PATH"
+}
+
+remove() {
+   checkConfigFile
+   echo "-- remove $EXECUTABLE_NAME from $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
+   sshcmd "rm -rf $PROJECT_PATH"
+   sshcmd "(crontab -l 2>/dev/null; echo '@reboot $FULL_COMMAND_LINE') | grep -v $EXECUTABLE_NAME | crontab -"
+}
+
+backup() {
+   PWD=$GOPATH/src
+   CONFIG_FILE=$PWD/.backup
+   checkConfigFile
+   case $1 in
+      init  ) createConfigFile;;
+      list  ) echo "-- list backups from $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
+              sshcmd "ls | grep backup";;
+      remove) if [ -z $2 ]; then
+                 echo "nothing to remove" && exit
+              fi
+              echo -n "-- remove $2 from $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT? [y/n] " && read Y
+              if [ "$Y" == "y" ]; then
+              sshcmd "rm -rf $2"
+              else
+                 echo "Aborted!" && exit
+              fi;;
+      mirror) BASEPATH="backup"
+              echo "-- remove $BASEPATH source+binary tree from $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
+              sshcmd "rm -rf $BASEPATH"
+              push;;
+      *     ) BASEPATH="backup-$USER@$HOSTNAME-$(date +%d%m%Y%M%S)" && push;;
+   esac
+}
+
+case $1 in
+   init     ) rm -rf $CONFIG_FILE && createConfigFile;;
+   push     ) push;;
+   run      ) run;;
+   detach   ) detach;;
+   teleport ) teleport;;
+   kill     ) _kill;;
+   deploy   ) _kill || true
+              remove
+              push && deploy
+              detach;;
+   delete   ) _kill || true
+              delete;;
+   remove   ) _kill || true
+              remove;;
+   terminal ) sshcmd;;
+   backup   ) backup $2 $3;;
+   version  ) echo $VERSION-$STAGE && exit;;
+   *        ) usage;;
+esac
+
+echo "Done."
