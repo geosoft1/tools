@@ -4,7 +4,7 @@ Cloud tool let you run and deploy your projects on servers or on other computers
 
 - [Getting started with cloud tool](#getting-started-with-cloud-tool)
 - [Working with cloud tool](#working-with-cloud-tool)
-  - [.config file structure](#-config-file-structure)
+  - [Config file structure](#config-file-structure)
   - [Commands](#commands)
     - [init](#init)
 	- [push](#push), [run](#run), [detach](#detach), [teleport](#teleport), [kill](#kill)
@@ -40,7 +40,7 @@ Remember that before start with cloud tool you must have a ssh key with a pasphr
 
 Cloud tool is project oriented tool so at least one file from your project must be opened in LiteIDE before running this tool. If used from [Terminal](#using-from-terminal) change the current folder to project folder.
 
-#### .config file structure
+#### Config file structure
 
 Cloud tool need a `.config` file in every project folder. First line of this file has the following structure
 
