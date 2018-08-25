@@ -4,7 +4,7 @@ Cloud tool let you run and deploy your projects on servers or on other computers
 
 - [Getting started with cloud tool](#getting-started-with-cloud-tool)
 - [Working with cloud tool](#working-with-cloud-tool)
-  - [.servers file structure](#servers-file-structure)
+  - [.config file structure](#-config-file-structure)
   - [Commands](#commands)
     - [init](#init)
 	- [push](#push), [run](#run), [detach](#detach), [teleport](#teleport), [kill](#kill)
@@ -17,7 +17,7 @@ Cloud tool let you run and deploy your projects on servers or on other computers
   - [What exactly **is** Quantum Teleporter?](#what-exactly-is-quantum-teleporter)
   - [Who should use cloud tool?](#who-should-use-cloud-tool)
   - [What code name mean?](#what-code-name-mean)
-  - [How do i delete all .servers files?](#how-do-i-delete-all-servers-files)
+  - [How do i delete all .config files?](#how-do-i-delete-all-servers-files)
 - [Troubleshooting](#troubleshooting)
 - [Platform Specific Information](#platform-specific-information)
 - [Disclaimer](#disclaimer)
@@ -40,15 +40,26 @@ Remember that before start with cloud tool you must have a ssh key with a pasphr
 
 Cloud tool is project oriented tool so at least one file from your project must be opened in LiteIDE before running this tool. If used from [Terminal](#using-from-terminal) change the current folder to project folder.
 
-#### .servers file structure
+#### .config file structure
 
-Cloud tool need a `.servers` file in every project folder. First line of this file has the following structure
+Cloud tool need a `.config` file in every project folder. First line of this file has the following structure
 
-        REMOTE_IP REMOTE_PORT REMOTE_USER
+- `REMOTE_ADDR`,`REMOTE_PORT` address and port of the ssh server
+- `REMOTE_USER` user on remote server (can be different from local user)
+- `DELAY` short delay for programs working for example with `mysql` and start to quick as against the server at startup (default 1)
+- `LOG` log file (default ~/log)
+-`ENV` environment passed to your program, can contain more variables separated by space
+- `ARGS` arguments passed to your program (flags)
 
 e.g.
 
-        192.168.88.161 2222 user
+        REMOTE_ADDR=192.168.88.143
+        REMOTE_PORT=22
+        REMOTE_USER=george
+        DELAY=3
+        LOG=~/log
+        ENV="A=1 B=2"
+        ARGS="-conf=conf/home.json -debug=true"
 
 Note that if this file missing you will be ask to create.
 
@@ -69,9 +80,9 @@ You will be asked for remote server address, user and password. The current publ
 
 If you get `lost connection` see [troubleshooting](#troubleshooting)
 
-`.servers` file are also created in local project folder and will keep this informations but not the password. Further cloud commands will use this file.
+`.config` file are also created in local project folder and will keep this informations but not the password. Further cloud commands will use this file.
 
-Delete the `.servers` file and run `cloud init` again to connect to other machines. Also you can modify the file to switch the server runtime.
+Delete the `.config` file and run `cloud init` again to connect to other machines. Also you can modify the file to switch the server runtime.
 
 Note that the `init` funtion is invoked automaticaly if no connection is found by the other commands.
 
@@ -143,7 +154,7 @@ Stop and delete the project from remote machine. Doesn't affect the startup of t
 
 Completly save the GOPATH on remote machine. Backup can be mirrored or versioned (default).
 
-Backup tool use a `.backup` config file with the same structure as `.servers` file. `.backup` config file is found in the `GOPATH/src` folder.
+Backup tool use a `.backup` config file with the same structure as `.config` file. `.backup` config file is found in the `GOPATH/src` folder.
 
         cloud backup
 
@@ -215,9 +226,9 @@ All those people who want to automatize deploy on many servers, write web servic
 
 Also can be used by peoples who work colaborative and exchange or present projects.
 
-## How do i delete all .servers files?
+## How do i delete all .config files?
 
-        find -name .servers -type f -delete
+        find -name .config -type f -delete
 
 Make sure that `-delete` is the last argument in your command otherwise it will delete **everything**.
 
@@ -233,7 +244,7 @@ If you don't get `Done.` message check
 - your firewall allow ssh port
 - if the remote server respond
 - if you enter right the server address,user and password
-- .servers file exist
+- .config file exist
 
 If your deployed project stops after the ssh connection close do this:
 
