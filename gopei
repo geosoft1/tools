@@ -33,7 +33,9 @@ GOPATH=$HOME
 PATH=$PATH:$GOROOT/bin
 
 IDEROOT=$HOME/liteide
+COMPILER_COMPATIBLE_VERSION=go1.10.3
 IDE_VERSION=x34
+IDE_COMPATIBLE_VERSION=32.2
 LINUX_QT_VERSION=5.5.1
 MACOS_QT_VERSION=5.9.5
 
@@ -113,11 +115,7 @@ while getopts ":bcgkhsuUr :q:x:v" OPTION; do
 case $OPTION in
    #compatible mode, will stay here a while
    b) if [ $IS_LINUX ]; then
-         COMPILER_COMPATIBLE_VERSION=go1.10.3
-         IDE_COMPATIBLE_VERSION=32.2
-         COMPILER_NAME=$COMPILER_COMPATIBLE_VERSION.$KERNEL_NAME-$MACHINE_TYPE.tar.gz
-         IDE_VERSION=X$IDE_COMPATIBLE_VERSION
-         IDE_NAME=liteidex$IDE_COMPATIBLE_VERSION.$KERNEL_NAME$MACHINE_BITS-qt4.tar.bz2
+         IS_COMPATIBLE=1
       fi;;
    c) CLASSROOM_MODE=1;;
    g) GITSERVER=github.com;;
@@ -167,6 +165,9 @@ awk '{
 }'`
 #build compiler name (eg. go1.10.3.linux-amd64.tar.gz|go1.10.3.darwin-amd64.tar.gz)
 COMPILER_NAME=$COMPILER_VERSION.$KERNEL_NAME-$MACHINE_TYPE.tar.gz
+if [ $IS_COMPATIBLE ]; then
+   COMPILER_NAME=$COMPILER_COMPATIBLE_VERSION.$KERNEL_NAME-$MACHINE_TYPE.tar.gz
+fi
 
 #-------------------------------------------------------------------------------
 echo "Installing $COMPILER_NAME..."
@@ -229,6 +230,12 @@ fi
 #-------------------------------------------------------------------------------
 if [ $IS_SERVER ] || [ $IS_ARM ]; then
   echo "Done." && exit
+fi
+
+#-------------------------------------------------------------------------------
+if [ $IS_COMPATIBLE ]; then
+   IDE_VERSION=X$IDE_COMPATIBLE_VERSION
+   IDE_NAME=liteidex$IDE_COMPATIBLE_VERSION.$KERNEL_NAME$MACHINE_BITS-qt4.tar.bz2
 fi
 
 #-------------------------------------------------------------------------------
