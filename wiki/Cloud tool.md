@@ -4,7 +4,7 @@ Cloud tool let you run and deploy your projects on servers or on other computers
 
 - [Getting started with cloud tool](#getting-started-with-cloud-tool)
 - [Working with cloud tool](#working-with-cloud-tool)
-  - [Config file structure](#config-file-structure)
+  - [.servers file structure](#servers-file-structure)
   - [Commands](#commands)
     - [init](#init)
 	- [push](#push), [run](#run), [detach](#detach), [teleport](#teleport), [kill](#kill)
@@ -17,7 +17,7 @@ Cloud tool let you run and deploy your projects on servers or on other computers
   - [What exactly **is** Quantum Teleporter?](#what-exactly-is-quantum-teleporter)
   - [Who should use cloud tool?](#who-should-use-cloud-tool)
   - [What code name mean?](#what-code-name-mean)
-  - [How do i delete all .config files?](#how-do-i-delete-all-servers-files)
+  - [How do i delete all .servers files?](#how-do-i-delete-all-servers-files)
 - [Troubleshooting](#troubleshooting)
 - [Platform Specific Information](#platform-specific-information)
 - [Disclaimer](#disclaimer)
@@ -26,7 +26,7 @@ Cloud tool let you run and deploy your projects on servers or on other computers
 
 Cloud tool can easy used from LiteIDE by pressing `` ctrl+` `` and chosing
 
-        cloud
+        tools/cloud
 
 with no arguments to see all options. Also can be used from [Terminal](#using-from-terminal).
 
@@ -40,55 +40,44 @@ Remember that before start with cloud tool you must have a ssh key with a pasphr
 
 Cloud tool is project oriented tool so at least one file from your project must be opened in LiteIDE before running this tool. If used from [Terminal](#using-from-terminal) change the current folder to project folder.
 
-#### Config file structure
+#### .servers file structure
 
-Cloud tool need a `.config` file in every project folder. First line of this file has the following structure
+Cloud tool need a `.servers` file in every project folder. First line of this file has the following structure
 
-- `REMOTE_ADDR`,`REMOTE_PORT` address and port of the ssh server
-- `REMOTE_USER` user on remote server (can be different from local user)
-- `DELAY` short delay for programs working for example with `mysql` and start to quick as against the server at startup (default 1)
-- `LOG` log file (default ~/log)
--`ENV` environment passed to your program, can contain more variables separated by space
-- `ARGS` arguments passed to your program (flags)
+        REMOTE_IP REMOTE_PORT REMOTE_USER
 
 e.g.
 
-        REMOTE_ADDR=192.168.88.143
-        REMOTE_PORT=22
-        REMOTE_USER=george
-        DELAY=3
-        LOG=~/log
-        ENV="A=1 B=2"
-        ARGS="-conf=conf/home.json -debug=true"
+        192.168.88.161 2222 george
 
 Note that if this file missing you will be ask to create.
 
 #### Commands
 #### `init`
 
-        cloud init
+        tools/cloud init
 
 Initialize a connection with a remote machine. Run this command one time for one machine from your local project folder.
 
 You will be asked for remote server address, user and password. The current public `ssh` key will be pushed on remote machine and you will be linked with for further commands.
 
         Remote server 192.168.88.161
-        Remote user [ENTER for user] 
-        -- push ssh key to user@192.168.88.161:22
-        user@192.168.88.164's password: 1234
+        Remote user [ENTER for george] 
+        -- push ssh key to george@192.168.88.161:22
+        george@192.168.88.164's password: 1234
         Done.
 
 If you get `lost connection` see [troubleshooting](#troubleshooting)
 
-`.config` file are also created in local project folder and will keep this informations but not the password. Further cloud commands will use this file.
+`.servers` file are also created in local project folder and will keep this informations but not the password. Further cloud commands will use this file.
 
-Delete the `.config` file and run `cloud init` again to connect to other machines. Also you can modify the file to switch the server runtime.
+Delete the `.servers` file and run `tools/cloud init` again to connect to other machines. Also you can modify the file to switch the server runtime.
 
 Note that the `init` funtion is invoked automaticaly if no connection is found by the other commands.
 
 #### `push`
 
-        cloud push
+        tools/cloud push
 
 Push the entire current project folder content on remote machine. Sources and binaries. Also push command will follow current sources tree structure.
 
@@ -97,7 +86,7 @@ View LiteIDE environment bar for this.
 
 #### `run`
 
-        cloud run
+        tools/cloud run
 
 `run` remote pushed project or remote executable and view results localy. Before run this command the project must be compiled and pushed on the remote machine.
 
@@ -112,30 +101,30 @@ Also note that cloud tool allow you to work remotely. If you use in you program 
 
 Worked in LiteIDE projects executables get the project folder name. If you have, from some reasons, other executables or scripts in this folder you can execute them remote with
 
-        cloud run filename
+        tools/cloud run filename
 
 #### `detach`
 
-        cloud detach
+        tools/cloud detach
 
 `detach` run remote pushed project or remote executable and detach ssh session. Useful in some circumstances when the project stops after the connection close.
 
 #### `teleport`
 
-        cloud teleport
+        tools/cloud teleport
 
 `teleport` command is nothing else than `push` and `run`. Also reflect the main concept of the cloud tool.
 
 #### `kill`
 
-        cloud kill
-        cloud kill filename
+        tools/cloud kill
+        tools/cloud kill filename
 
 `kill` command stop remote started processes.
 
 #### `deploy`
 
-        cloud deploy
+        tools/cloud deploy
 
 Completly deploy the project on remote machine and also add the main executable to remote machine startup. The project will continue running even after remote machine restart.
 
@@ -146,7 +135,7 @@ Stop and delete the project from remote machine. Doesn't affect the startup of t
 
 #### `remove`
 
-        cloud remove
+        tools/cloud remove
 
 `remove` command stop and delete the project from remote machine. Also, remove from remote machine startup.
 
@@ -154,36 +143,36 @@ Stop and delete the project from remote machine. Doesn't affect the startup of t
 
 Completly save the GOPATH on remote machine. Backup can be mirrored or versioned (default).
 
-Backup tool use a `.backup` config file with the same structure as `.config` file. `.backup` config file is found in the `GOPATH/src` folder.
+Backup tool use a `.backup` config file with the same structure as `.servers` file. `.backup` config file is found in the `GOPATH/src` folder.
 
-        cloud backup
+        tools/cloud backup
 
-Versioned backup. On remote machine a folder named `backup-user@machine-datetime` will be created eg.:
+Versioned backup. On remote machine a folder named `backup-USERNAME@MACHINENAME-datetime` will be created eg.:
 
-        backup-user@machine-180220173221
+        backup-george@ao756-180220173221
 
-mean backup from user and machine `user@machine` at 18 Feb 2017, `3221` minutes,seconds for making unique the folder name.  
+mean backup from user and machine `george@ao756` at 18 Feb 2017, `3221` minutes,seconds for making unique the folder name.  
 
-        cloud backup init
+        tools/cloud backup init
 
 Initialize or reinitialize the connection with a remote machine.
 
-        cloud backup list
+        tools/cloud backup list
 
 List existing backup folders from the remote machine.
 
-        cloud backup remove
+        tools/cloud backup remove
 
 Delete existing backup folders from the remote machine. Without arguments no folder will be removed. Posible argument is backup folder mask eg.:
 
-        cloud backup remove backup                 # this will remove only the existing backup folder
-        cloud backup remove backup-*               # remove any existing folder starting with `backup-` 
-        cloud backup remove backup-user*         # remove any existing folder made by user `user`
-        cloud backup remove backup-user@machine*   # remove any existing made from user's machine 
+        tools/cloud backup remove backup                 # this will remove only the existing backup folder
+        tools/cloud backup remove backup-*               # remove any existing folder starting with `backup-` 
+        tools/cloud backup remove backup-george*         # remove any existing folder made by user `george`
+        tools/cloud backup remove backup-george@ao765*   # remove any existing made from george's machine 
 
 **Mirroring**
 
-        cloud backup mirror
+        tools/cloud backup mirror
 
 Mirror backup are made. On the remote machine a forder named `backup` is made. This folder contain one-to-one mirror copy of local `GOPATH/src folder`.
 
@@ -193,13 +182,13 @@ Backup tool don't use differences or compresion but [teleportation](#what-exactl
 
 #### `terminal`
 
-        cloud terminal
+        tools/cloud terminal
 
 `term` start a ssh console on remote machine.
 
 #### `version`
 
-        cloud version
+        tools/cloud version
 
 Version of this tool.
 
@@ -208,7 +197,7 @@ Version of this tool.
 Change folder to your project, if you install with  [Gopei shell](https://github.com/geosoft1/tools) the cloud tool are found in `$GOROOT/bin/tools`.
 
         cd ~/src/helloworld
-        cloud version
+        $GOROOT/bin/tools/cloud version
 
 ## Faq
 
@@ -226,9 +215,9 @@ All those people who want to automatize deploy on many servers, write web servic
 
 Also can be used by peoples who work colaborative and exchange or present projects.
 
-## How do i delete all .config files?
+## How do i delete all .servers files?
 
-        find -name .config -type f -delete
+        find -name .servers -type f -delete
 
 Make sure that `-delete` is the last argument in your command otherwise it will delete **everything**.
 
@@ -244,11 +233,11 @@ If you don't get `Done.` message check
 - your firewall allow ssh port
 - if the remote server respond
 - if you enter right the server address,user and password
-- .config file exist
+- .servers file exist
 
 If your deployed project stops after the ssh connection close do this:
 
-        cloud detach
+        tools/cloud detach
 
 ## What code name mean?
 

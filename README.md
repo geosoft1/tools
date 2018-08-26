@@ -25,7 +25,6 @@ Read the user manual on the [wiki page](https://github.com/geosoft1/tools/wiki).
 - Add some useful cloud scripts for
    - working with git (be sure you have installed `git` before and a valid acount)
    - servers in cloud (see [Quantum Teleporter](https://github.com/geosoft1/tools/wiki/Cloud-tool))
-   - nightly build tool (see [Night Bird](https://github.com/geosoft1/tools/wiki#nightly-build-tool)) and backup (see [Backup tool](https://github.com/geosoft1/tools/wiki/Cloud-tool#backup))
 - Gopei shell is free as in free speech and free beer and always will be.
 
 **How to use**

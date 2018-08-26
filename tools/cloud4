@@ -22,10 +22,10 @@
 #       |                    |                      |            |
 # HOME/REMOTE_HOME        BASEPATH            PROJECT_NAME EXECUTABLE_NAME                                
 #
-# .config file structure      .backup file structure
-# ---                         ---
-# REMOTE_ADDR=example.com     REMOTE_ADDR REMOTE_PORT REMOTE_USER
-# REMOTE_PORT=22              ---
+# .config file structure
+# ---
+# REMOTE_ADDR=example.com
+# REMOTE_PORT=22
 # REMOTE_USER=george
 # DELAY=3
 # LOG=~/log
@@ -39,9 +39,9 @@ AUTHOR="geosoft1@gmail.com"
 COPYRIGHT="Copyright (C) 2016-2018  $AUTHOR"
 VERSION=4.0.0
 STAGE="beta"
+TOOL_NAME=`basename $0`
 
 GOPATH=$HOME
-NAME=`dirname $0`
 PROJECT_NAME=`basename $PWD`
 EXECUTABLE_NAME=$PROJECT_NAME
 BASEPATH=`echo $PWD | sed -e "s,$HOME\/,," | sed -e "s,\/$PROJECT_NAME$,,"`
@@ -71,24 +71,19 @@ scpcmd() {
 usage()  {
    echo "$LONG_NAME ($CODE_NAME)"
    echo "$COPYRIGHT"
-   echo "Usage: $NAME [options]"
+   echo "Usage: $TOOL_NAME [options]"
    echo "Options:"
    echo "init           -- push ssh key to remote server(s)"
    echo "push           -- push curent source+binary tree"
    #echo "pull          -- pull remote source+binary tree"
    echo "run            -- run project remote,view result locally"
-   echo "detach         -- run and detach project remote"
    echo "teleport       -- push and run project remote,view result locally"
+   echo "detach         -- run and detach project remote"
    echo "kill           -- stop the project remote"
    echo "deploy         -- deploy project on remote server(s)"
    echo "delete         -- delete project from remote server(s)"
    echo "remove         -- uninstall project from remote server(s)"
-   echo "backup            backup $GOPATH/src (\$GOPATH) folder on remote server"
-   echo "                  init                initialize connection to server"
-   echo "                  list                list all available backups"
-   echo "                  remove [filemask]   eg. backup-$USER@$HOSTNAME-* or backup-*"
-   echo "                  mirror              do mirror copy"
-   echo "cli               free remote ssh commands"
+   echo "cli               remote terminal"
    echo "version           version"
    exit
 }
@@ -213,31 +208,6 @@ remove() {
    sshcmd "(crontab -l 2>/dev/null; echo '@reboot $FULL_COMMAND_LINE') | grep -v $EXECUTABLE_NAME | crontab -"
 }
 
-backup() {
-   PWD=$GOPATH/src
-   CONFIG_FILE=$PWD/.backup
-   checkConfigFile
-   case $1 in
-      init  ) createConfigFile;;
-      list  ) echo "-- list backups from $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
-              sshcmd "ls | grep backup";;
-      remove) if [ -z $2 ]; then
-                 echo "nothing to remove" && exit
-              fi
-              echo -n "-- remove $2 from $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT? [y/n] " && read Y
-              if [ "$Y" == "y" ]; then
-              sshcmd "rm -rf $2"
-              else
-                 echo "Aborted!" && exit
-              fi;;
-      mirror) BASEPATH="backup"
-              echo "-- remove $BASEPATH source+binary tree from $REMOTE_USER@$REMOTE_ADDR:$REMOTE_PORT"
-              sshcmd "rm -rf $BASEPATH"
-              push;;
-      *     ) BASEPATH="backup-$USER@$HOSTNAME-$(date +%d%m%Y%M%S)" && push;;
-   esac
-}
-
 case $1 in
    init     ) rm -rf $CONFIG_FILE && createConfigFile;;
    push     ) push;;
@@ -254,7 +224,6 @@ case $1 in
    remove   ) _kill || true
               remove;;
    cli      ) checkConfigFile && sshcmd;;
-   backup   ) backup $2 $3;;
    version  ) echo $VERSION-$STAGE && exit;;
    *        ) usage;;
 esac
