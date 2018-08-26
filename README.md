@@ -24,7 +24,7 @@ Read the user manual on the [wiki page](https://github.com/geosoft1/tools/wiki).
 - Extend project templates and new polished themes.
 - Add some useful cloud scripts for
    - working with git (be sure you have installed `git` before and a valid acount)
-   - servers in cloud (see [Quantum Teleporter](https://github.com/geosoft1/tools/wiki/Cloud-tool))
+   - servers in cloud (see [Quantum Teleporter](https://github.com/geosoft1/tools/wiki/Cloud-tool) and the new [cloud4](https://github.com/geosoft1/tools/wiki/Cloud4) tool).
 - Gopei shell is free as in free speech and free beer and always will be.
 
 **How to use**
