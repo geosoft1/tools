@@ -41,6 +41,8 @@ VERSION=4.0.0
 STAGE="beta"
 TOOL_NAME=`basename $0`
 
+GOROOT=$HOME/go
+GOBIN=$GOROOT/bin
 GOPATH=$HOME
 PROJECT_NAME=`basename $PWD`
 EXECUTABLE_NAME=$PROJECT_NAME
@@ -99,7 +101,14 @@ pushKeys() {
    #copy only the key in temporary folder
    cp $HOME/.ssh/id_rsa.pub $TMP_FOLDER/authorized_keys
    #safe deploy the public key to remote server
-   scpcmd "$TMP_FOLDER $REMOTE_USER@$REMOTE_ADDR:"
+   if [ -t 1 ]; then
+      # return terminal in a posix shell
+      scpcmd "$TMP_FOLDER $REMOTE_USER@$REMOTE_ADDR:"
+   else
+      echo -n "$REMOTE_USER@$REMOTE_ADDR's password: "
+      #because of askpass can't use scpcmd function here
+      $GOBIN/ssh_askpass scp -P $REMOTE_PORT -r "${SSH_OPTIONS[@]}" $TMP_FOLDER $REMOTE_USER@$REMOTE_ADDR:
+   fi
    #clean the mess
    rm -rf $TMP_FOLDER
 }
