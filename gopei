@@ -293,7 +293,7 @@ done
 #add custom theme and colors
 cp $GOPEI_ROOT/theme/* $IDE_RESOURCES/liteapp/qss/
 
-[ $GITSERVER ] && CLOUD_TOOLS="github\ncloud\nnb"
+[ $GITSERVER ] && CLOUD_TOOLS="github\ncloud4\nnb"
 #make the scripts available to ide
 echo -e "git add *
 git commit -m \"-\" -a

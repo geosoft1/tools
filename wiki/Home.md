@@ -307,6 +307,16 @@ Default gdb is not proper for debugging go programs. A good debugger is [delve](
 
 Due to maintenance procedure those sites may be inaccessible. You must try later. Also check your internet connection and restrictions.
 
+        bzip2: (stdin) is not a bzip2 file.
+        tar: Child returned status 2
+        tar: Error is not recoverable: exiting now
+
+If you check the wrong archive you will see this
+
+        We're sorry -- the Sourceforge site is currently in Disaster Recovery mode.  Please check back later.
+
+Also try later, github mentenance :(
+
         Permission denied (publickey).
 
 You enter a wrong password. Reinstall and check the password.
