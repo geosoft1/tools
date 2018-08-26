@@ -17,7 +17,6 @@ e.g.
         REMOTE_PORT=22
         REMOTE_USER=george
         DELAY=3
-        LOG=~/log
         ENV="A=1 B=2"
         ARGS="-conf=conf/home.json -debug=true"
 
