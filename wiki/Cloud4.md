@@ -1,5 +1,3 @@
-## Cloud4 tool (Quantum Teleporter)
-
 Cloud tool can easy used typing
 
         tools/cloud4
