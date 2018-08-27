@@ -18,7 +18,7 @@
 
 set -e
 
-GOPEI_LONG_NAME="Golang Programming Environment Installer\n"
+GOPEI_LONG_NAME="Golang Programming Environment Installer"
 GOPEI_CODE_NAME=""
 GOPEI_AUTHOR="geosoft1@gmail.com"
 GOPEI_COPYRIGHT="Copyright (C) 2014-2018  $GOPEI_AUTHOR"
@@ -146,7 +146,7 @@ case $OPTION in
    esac
 done
 
-clear && echo -e "$GOPEI_LONG_NAME$GOPEI_CODE_NAME$GOPEI_COPYRIGHT"
+clear && echo -e "$GOPEI_LONG_NAME\n$GOPEI_COPYRIGHT"
 
 #-------------------------------------------------------------------------------
 GOLANG_ORG=`curl -fsSLk --connect-timeout 3 golang.org || exit`
