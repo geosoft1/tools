@@ -354,7 +354,12 @@ Gopei is build around `bash` and `curl`. Also you may need to install `git`. See
 
         sudo apt-get install curl git
 
-* Ubuntu 17+ need `libpng12` which miss from official repository
+* Ubuntu 14 and LiteIDE 33+
+
+        sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+        sudo apt-get install libstdc++6
+
+* Ubuntu 17+ may need `libpng12` which miss from official repository
 
         wget -q -O /tmp/libpng12.deb http://mirrors.kernel.org/ubuntu/pool/main/libp/libpng/libpng12-0_1.2.54-1ubuntu1_amd64.deb && sudo dpkg -i /tmp/libpng12.deb && rm /tmp/libpng12.deb
 

@@ -31,11 +31,8 @@ GOPEI_NAME=`basename $0`
 GOROOT=$HOME/go
 GOPATH=$HOME
 PATH=$PATH:$GOROOT/bin
-
 IDEROOT=$HOME/liteide
-COMPILER_COMPATIBLE_VERSION=go1.10.3
 IDE_VERSION=x34
-IDE_COMPATIBLE_VERSION=32.2
 LINUX_QT_VERSION=5.5.1
 MACOS_QT_VERSION=5.9.5
 
@@ -97,7 +94,6 @@ help()  {
    echo $GOPEI_LONG_NAME
    echo "Usage: $GOPEI_NAME [options]"
    echo "Options:"
-   echo "-b        compatibility with systems that can't support qt5 (Linux only)"
    echo "-c        enable classroom mode (Linux only)"
    echo "-g        enable git suppport"
    echo "-h        show this help message and exit"
@@ -111,12 +107,8 @@ help()  {
    exit
 }
 
-while getopts ":bcgkhsuUr :q:x:v" OPTION; do
+while getopts ":cgkhsuUr :q:x:v" OPTION; do
 case $OPTION in
-   #compatible mode, will stay here a while
-   b) if [ $IS_LINUX ]; then
-         IS_COMPATIBLE=1
-      fi;;
    c) CLASSROOM_MODE=1;;
    g) GITSERVER=github.com;;
    h) help;;
@@ -163,11 +155,8 @@ awk '{
    if (match($0,/go([0-9]+.)+/)) 
       print substr($0,RSTART,RLENGTH-1) 
 }'`
-#build compiler name (eg. go1.10.3.linux-amd64.tar.gz|go1.10.3.darwin-amd64.tar.gz)
+#build compiler name (eg. go1.11.linux-amd64.tar.gz|go1.11.darwin-amd64.tar.gz)
 COMPILER_NAME=$COMPILER_VERSION.$KERNEL_NAME-$MACHINE_TYPE.tar.gz
-if [ $IS_COMPATIBLE ]; then
-   COMPILER_NAME=$COMPILER_COMPATIBLE_VERSION.$KERNEL_NAME-$MACHINE_TYPE.tar.gz
-fi
 
 #-------------------------------------------------------------------------------
 echo "Installing $COMPILER_NAME..."
@@ -233,12 +222,6 @@ if [ $IS_SERVER ] || [ $IS_ARM ]; then
 fi
 
 #-------------------------------------------------------------------------------
-if [ $IS_COMPATIBLE ]; then
-   IDE_VERSION=X$IDE_COMPATIBLE_VERSION
-   IDE_NAME=liteidex$IDE_COMPATIBLE_VERSION.$KERNEL_NAME$MACHINE_BITS-qt4.tar.bz2
-fi
-
-#-------------------------------------------------------------------------------
 echo "Installing $IDE_NAME..."
 curl -fsSLkOz $IDE_NAME sourceforge.net/projects/liteide/files/$IDE_VERSION/$IDE_NAME || exit
 
@@ -293,16 +276,12 @@ done
 #add custom theme and colors
 cp $GOPEI_ROOT/theme/* $IDE_RESOURCES/liteapp/qss/
 
-[ $GITSERVER ] && CLOUD_TOOLS="github\ncloud4"
+[ $GITSERVER ] && CLOUD_TOOLS="\ngithub\ncloud4"
 #make the scripts available to ide
 echo -e "git add *
 git commit -m \"-\" -a
 git push
-git pull
-$CLOUD_TOOLS
-go list -f '{{context}}'
-go list -f '{{.GoFiles}}'
-go list -f '{{.IgnoredGoFiles}}'
+git pull$CLOUD_TOOLS
 go get golang.org/x/tools/cmd/present
 godoc -http=:8080 -play" > $IDE_RESOURCES/litebuild/command/go.api
 

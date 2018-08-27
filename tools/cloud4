@@ -100,14 +100,14 @@ pushKeys() {
    #copy only the key in temporary folder
    cp $HOME/.ssh/id_rsa.pub $TMP_FOLDER/authorized_keys
    #safe deploy the public key to remote server
-   if [ -t 1 ]; then
-      # return terminal in a posix shell
-      scpcmd "$TMP_FOLDER $REMOTE_USER@$REMOTE_ADDR:"
-   else
-      echo -n "$REMOTE_USER@$REMOTE_ADDR's password: "
-      #because of askpass can't use scpcmd function here
-      $GOBIN/ssh_askpass scp -P $REMOTE_PORT -r "${SSH_OPTIONS[@]}" $TMP_FOLDER $REMOTE_USER@$REMOTE_ADDR:
+   if [ ! -t 1 ]; then # return terminal in a posix shell
+     echo -n "$REMOTE_USER@$REMOTE_ADDR's password: "; read PASSWORD
+     echo "echo $PASSWORD" > /tmp/1
+     chmod 777 /tmp/1
+     export SSH_ASKPASS="/tmp/1"
+     export DISPLAY=YOURDOINGITWRONG
    fi
+   scpcmd "$TMP_FOLDER $REMOTE_USER@$REMOTE_ADDR:"
    #clean the mess
    rm -rf $TMP_FOLDER
 }

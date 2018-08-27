@@ -21,4 +21,4 @@ e.g.
 
 Note that if this file missing you will be ask to create.
 
-`cloud4` use the same commands like old [cloud](https://github.com/geosoft1/tools/wiki/Cloud-tool) tool but without backup option.
+`cloud4` use almost the same commands like old [cloud](https://github.com/geosoft1/tools/wiki/Cloud-tool) tool.
