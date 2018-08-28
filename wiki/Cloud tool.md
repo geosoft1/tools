@@ -4,7 +4,7 @@ Cloud tool let you run and deploy your projects on servers or on other computers
 
 - [Getting started with cloud tool](#getting-started-with-cloud-tool)
 - [Working with cloud tool](#working-with-cloud-tool)
-  - [.config file structure](#servers-file-structure)
+  - [.config file structure](#config-file-structure)
   - [Commands](#commands)
     - [init](#init)
     - [push](#push), [run](#run), [teleport](#teleport), [detach](#detach), [kill](#kill)
@@ -16,7 +16,7 @@ Cloud tool let you run and deploy your projects on servers or on other computers
   - [What exactly **is** Quantum Teleporter?](#what-exactly-is-quantum-teleporter)
   - [Who should use cloud tool?](#who-should-use-cloud-tool)
   - [What code name mean?](#what-code-name-mean)
-  - [How do i delete all .config files?](#how-do-i-delete-all-servers-files)
+  - [How do i delete all .config files?](#how-do-i-delete-all-config-files)
 - [Troubleshooting](#troubleshooting)
 - [Platform Specific Information](#platform-specific-information)
 - [Disclaimer](#disclaimer)
