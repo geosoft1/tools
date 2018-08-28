@@ -1,7 +1,7 @@
 ## Gopei2 (Go Programming Environment Installer)
 
 [![version](https://img.shields.io/badge/version-2.0.0-blue.svg)](https://github.com/geosoft1/tools/archive/master.zip)
-![beta](https://img.shields.io/badge/beta-orange.svg)
+![rc](https://img.shields.io/badge/rc-orange.svg)
 [![license](https://img.shields.io/badge/license-gpl-blue.svg)](https://github.com/geosoft1/tools/blob/master/LICENSE)
 
 Gopei shell install [Go](http://golang.org) compiler, [LiteIDE](https://github.com/visualfc/liteide) and configure for you the entire environment, variables, paths, ide interface and even link the machine with your Github account in a few minutes with just one command.
@@ -16,15 +16,14 @@ Read the user manual on the [wiki page](https://github.com/geosoft1/tools/wiki).
 
 **Features**
 
-- Work with almost any Unix/Linux based desktops and servers.
-- Install last version of Go compiler and a stable version of LiteIDE.
+- Install last version of Go compiler and a stable version of LiteIDE on almost any Unix/Linux based desktops and servers.
 - Create a simple and practical layout for ide (liteide.ini.mini).
-- Also create `GOPATH` and add a helloworld project.
+- Also create `GOPATH` and add a hello world project.
 - Add a nice launcher to dock or desktop.
 - Extend project templates and new polished themes.
 - Add some useful cloud scripts for
-   - working with git (be sure you have installed `git` before and a valid acount)
-   - servers in cloud (see [Quantum Teleporter](https://github.com/geosoft1/tools/wiki/Cloud-tool) and the new [cloud4](https://github.com/geosoft1/tools/wiki/Cloud4) tool).
+   - working with github (be sure you have installed `git` before and a valid acount)
+   - servers in cloud (see [Quantum Teleporter](https://github.com/geosoft1/tools/wiki/Cloud-tool).
 - Gopei shell is free as in free speech and free beer and always will be.
 
 **How to use**
@@ -33,11 +32,10 @@ Read the user manual on the [wiki page](https://github.com/geosoft1/tools/wiki).
 
     ./gopei
 
+or if you have a github account
+
+    .gopei -g
+
 Use `` -h `` switch to see all options.
 
-Run periodicaly or if compiler/ide versions change to update the system. Projects are never affected if you overinstall.
-
 Note that your system must have `bash`,`curl` and `git` installed before. Also, some systems may need additional [packages](https://github.com/geosoft1/tools/wiki#platform-specific-information).
-
-Read the [wiki page](https://github.com/geosoft1/tools/wiki) for more details.
-

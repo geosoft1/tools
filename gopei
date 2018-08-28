@@ -23,7 +23,7 @@ GOPEI_CODE_NAME=""
 GOPEI_AUTHOR="geosoft1@gmail.com"
 GOPEI_COPYRIGHT="Copyright (C) 2014-2018  $GOPEI_AUTHOR"
 GOPEI_VERSION=2.0.0
-GOPEI_STAGE="beta"
+GOPEI_STAGE="rc"
 GOPEI_ROOT=`dirname $0`
 GOPEI_NAME=`basename $0`
 
@@ -276,13 +276,14 @@ done
 #add custom theme and colors
 cp $GOPEI_ROOT/theme/* $IDE_RESOURCES/liteapp/qss/
 
-[ $GITSERVER ] && CLOUD_TOOLS="\ngithub\ncloud4"
+[ $GITSERVER ] && CLOUD_TOOLS="\ngithub\ncloud"
 #make the scripts available to ide
 echo -e "git add *
 git commit -m \"-\" -a
 git push
 git pull$CLOUD_TOOLS
 go get golang.org/x/tools/cmd/present
+go get -u github.com/derekparker/delve/cmd/dlv
 godoc -http=:8080 -play" > $IDE_RESOURCES/litebuild/command/go.api
 
 #-------------------------------------------------------------------------------
