@@ -170,21 +170,21 @@ If you use the new Ubuntu Gnome interface, search in dash LiteIDE and add to fav
 
 Allow you to easy do some complicated tasks
 
-        tools/github
+        github
 
 Without parameters show a list of options.
 
-        tools/github new
+        github new
 
 Create a new repo from your current project directory on `github.com`. At least one file from your project must be opened in LiteIDE before running this tool. If used from [Terminal](#using-from-terminal) change the current folder to project folder.
 
-        tools/github clone githubuser/project
+        github clone githubuser/project
 
 Clone existing project (e.g. `tools/github clone geosoft1/tools`)
 
 #### Cloud tool
 
-        tools/cloud4
+        cloud
 
 Alow you to run and deploy remote projects. Without parameters show a list of options. Read more on the project [Wiki](https://github.com/geosoft1/tools/wiki/Cloud-tool) page.
 
@@ -241,7 +241,7 @@ If you check the wrong archive you will see this
 
         We're sorry -- the Sourceforge site is currently in Disaster Recovery mode.  Please check back later.
 
-Also try later, github mentenance :(
+Also try later, Github mentenance :(
 
         Permission denied (publickey).
 
