@@ -33,7 +33,7 @@
   - [But why Windows isn't on the list?](#but-why-windows-isnt-on-the-list)
   - [What code name mean?](#what-code-name-mean)
   - [Gopei don't install the last IDE. Why?](#gopei-dont-install-the-last-ide-why)
-  - [I don't like default IDE. What shoud i do?](#i-don-t-like-default-ide-what-shoud-i-do)
+  - [I don't like default IDE. What shoud i do?](#i-dont-like-default-ide-what-shoud-i-do)
 - [Articles](#articles)
 
 
