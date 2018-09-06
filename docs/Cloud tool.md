@@ -41,7 +41,7 @@ Cloud tool is project oriented tool so at least one file from your project must 
 
 #### .config file structure
 
-Cloud tool need a `.config` file in every project folder. First line of this file has the following structure
+Cloud tool need a `.config` file in every project folder with the following structure
 
 - `REMOTE_ADDR`,`REMOTE_PORT` address and port of the ssh server
 - `REMOTE_USER` user on remote server (can be different from local user)
@@ -56,7 +56,7 @@ e.g.
         REMOTE_USER=george
         DELAY=3
         ENV="A=1 B=2"
-        ARGS="-conf=conf/home.json -debug=true"
+        ARGS="-conf=conf/home.json -verbose"
 
 Note that if this file missing you will be ask to create.
 
@@ -187,10 +187,6 @@ Also can be used by peoples who work colaborative and exchange or present projec
 
 Make sure that `-delete` is the last argument in your command otherwise it will delete **everything**.
 
-## Why backup tool is part of cloud tool?
-
-Simply because mostly the code is shared with cloud tool.
-
 ## Troubleshooting
 
 If you don't get `Done.` message check
@@ -204,6 +200,8 @@ If you don't get `Done.` message check
 If your deployed project stops after the ssh connection close do this:
 
         cloud detach
+
+If you delete the `.ssh` folder on the remote machine don't foget to delete it from the source machine or run `cloud init`.
 
 ## What code name mean?
 

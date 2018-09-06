@@ -107,13 +107,13 @@ Short help message.
 
         ./gopei -k
 
-Short help message.
+Useful when you install on many computers and you want to identify your github key.
 
 #### Install in server mode
 
         ./gopei -s
  
-Install golang compiler only.
+Install golang compiler only. Also useful when you don'want to use the default IDE but other.
 
 #### Uninstall
 
@@ -257,7 +257,7 @@ Also, check [Platform Specific Information](#platform-specific-information) for 
 
 #### gocode
 
-If `gocode` from LiteIDE don't handle newest versions of Go compiler just update it.
+If `gocode` from LiteIDE don't handle newest versions of Go compiler try to update it.
 
        go get github.com/nsf/gocode
        mv bin/gocode liteide/bin/
