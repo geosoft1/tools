@@ -73,8 +73,8 @@ linux)
    PROFILE_FILE=$HOME/.bashrc
    test -f ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs && source ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs;;
 darwin)
-   #build ide name (eg. liteidex34.macos-qt5.9.5.zip)
-   IDE_NAME=liteide$IDE_VERSION.macos-qt$MACOS_QT_VERSION.zip
+   #build ide name (eg. liteidex34.macosx-qt5.9.5.zip)
+   IDE_NAME=liteide$IDE_VERSION.macosx-qt$MACOS_QT_VERSION.zip
    IDE_RESOURCES=$IDEROOT/liteide/LiteIDE.app/Contents/Resources/
    IDE_ENVIRON=$KERNEL_NAME$MACHINE_BITS-home
    IDE_GEOMETRY='geometry=@ByteArray(\x1\xd9\xd0\xcb\0\x2\0\0\0\0\0 \0\0\0\x17\0\0\x3\xff\0\0\x2\xc9\0\0\0 \0\0\0-\0\0\x3\xff\0\0\x2\xc9\0\0\0\0\0\0\0\0\x4\0)'
