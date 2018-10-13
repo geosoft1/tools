@@ -19,7 +19,7 @@ Read the user manual on the [wiki page](https://github.com/geosoft1/tools/wiki).
 - Create a simple and practical layout for ide (liteide.ini.mini).
 - Also create `GOPATH` and add a hello world project.
 - Add a nice launcher to dock or desktop.
-- Extend project templates and new polished themes.
+- Extend snippets, project templates and themes.
 - Add some useful cloud scripts for
    - working with github (be sure you have installed `git` before and a valid acount)
    - servers in cloud (see [Quantum Teleporter](https://github.com/geosoft1/tools/wiki/Cloud-tool)).

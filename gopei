@@ -32,7 +32,7 @@ GOROOT=$HOME/go
 GOPATH=$HOME
 PATH=$PATH:$GOROOT/bin
 IDEROOT=$HOME/liteide
-IDE_VERSION=x34.1
+IDE_VERSION=x34.2
 LINUX_QT_VERSION=5.5.1
 MACOS_QT_VERSION=5.9.5
 
@@ -275,6 +275,8 @@ for project in $GOPEI_ROOT/template/*; do
 done
 #add custom theme and colors
 cp $GOPEI_ROOT/theme/* $IDE_RESOURCES/liteapp/qss/
+#add custom snippets
+cp $GOPEI_ROOT/go.snippet.json $IDE_RESOURCES/packages/go/
 
 [ $GITSERVER ] && CLOUD_TOOLS="\ngithub\ncloud"
 #make the scripts available to ide

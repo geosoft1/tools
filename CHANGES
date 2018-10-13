@@ -55,9 +55,9 @@ What's new in Gopei2 (milestone)
 
 - mostly rewritten, remove obsolete tools/install and Monaco font
 - add go get golang.org/x/tools/cmd/present in ctrl+` list
-- update links to new LiteIDE versions based on Qt5
-- add qt4 compatibility mode for older systems
+- update links to new LiteIDE versions based on Qt5 (witch to LiteIDE 34.2)
 - improve aspect on Linux and Mac, new liteide.ini.mini
 - extend project templates
 - include new polished themes and color schemes
+- extend snippets (eg. web handler )
 - add cloud4 tool
