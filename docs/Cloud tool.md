@@ -7,7 +7,7 @@ Cloud tool let you run and deploy your projects on servers or on other computers
   - [.config file structure](#config-file-structure)
   - [Commands](#commands)
     - [init](#init)
-    - [push](#push), [run](#run), [teleport](#teleport), [detach](#detach), [kill](#kill)
+    - [push](#push), [run](#run), [teleport](#teleport), [detach](#detach), [kill](#kill), [restart](#restart)
     - [deploy](#deploy), [delete](#delete), [remove](#remove)
     - [cli](#cli)
     - [version](#version)
@@ -138,6 +138,10 @@ Worked in IDE projects executables get the project folder name. If you have, fro
 Completly deploy the project on remote machine and also add the main executable to remote machine startup. The project will continue running even after remote machine restart.
 
 Before run this command the project must be compiled with remote machine architecture.
+
+#### `restart`
+
+Kill and detach the project on remote machine.
 
 #### `delete`
 

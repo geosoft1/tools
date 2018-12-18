@@ -36,8 +36,8 @@ LONG_NAME="Cloud tool"
 CODE_NAME="Quantum Teleporter"
 AUTHOR="geosoft1@gmail.com"
 COPYRIGHT="Copyright (C) 2016-2018  $AUTHOR"
-VERSION=4.0.0
-STAGE="rc"
+VERSION=4.1.0
+STAGE="release"
 TOOL_NAME=`basename $0`
 
 GOROOT=$HOME/go
@@ -48,8 +48,9 @@ EXECUTABLE_NAME=$PROJECT_NAME
 BASEPATH=`echo $PWD | sed -e "s,$HOME\/,," | sed -e "s,\/$PROJECT_NAME$,,"`
 #macos may not have $HOSTNAME set
 HOSTNAME=`hostname`
-CONFIG_FILE=$PWD/.config
 TMP_FOLDER=/tmp/.ssh
+CONFIG_FILE=$PWD/.config
+[ ! -z $2 ] && [ -f $PWD/$2 ] && CONFIG_FILE=$PWD/$2
 
 SSH_OPTIONS=(-o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/null" -q)
 
@@ -72,7 +73,7 @@ scpcmd() {
 usage()  {
    echo "$LONG_NAME ($CODE_NAME)"
    echo "$COPYRIGHT"
-   echo "Usage: $TOOL_NAME [options]"
+   echo "Usage: $TOOL_NAME [options] filename"
    echo "Options:"
    echo "init           -- push ssh key to remote server(s)"
    echo "push           -- push curent source+binary tree"
@@ -81,11 +82,13 @@ usage()  {
    echo "teleport       -- push and run project remote,view result locally"
    echo "detach         -- run and detach project remote"
    echo "kill           -- stop the project remote"
+   echo "restart        -- kill and detach project remote"
    echo "deploy         -- deploy project on remote server(s)"
    echo "delete         -- delete project from remote server(s)"
    echo "remove         -- uninstall project from remote server(s)"
    echo "cli               remote terminal"
    echo "version           version"
+   echo "filename          config filename, default .config"
    exit
 }
 
@@ -217,6 +220,7 @@ case $1 in
    push     ) push;;
    run      ) run;;
    detach   ) detach;;
+   restart  ) _kill && detach;;
    teleport ) teleport;;
    kill     ) _kill;;
    deploy   ) _kill || true
