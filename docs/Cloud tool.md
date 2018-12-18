@@ -12,6 +12,7 @@ Cloud tool let you run and deploy your projects on servers or on other computers
     - [cli](#cli)
     - [version](#version)
   - [Using from Terminal](#using-from-terminal)
+  - [Multiple configuration files](#multiple-configuration-files)
 - [Faq](#faq)
   - [What exactly **is** Quantum Teleporter?](#what-exactly-is-quantum-teleporter)
   - [Who should use cloud tool?](#who-should-use-cloud-tool)
@@ -168,6 +169,16 @@ Version of this tool.
 ## Using from Terminal
 
 Change folder to your project and run `cloud [options]`.
+
+## Multiple configuration files
+
+An explicit name can be given to the configuration file as second argument (eg:`.home`). 
+
+		cloud init .home
+
+This name will be concatenated with `.config` base resulting the final file name `.config.home`. If no name is given the default name `.config` will be used.
+
+Useful when a project have multiple implementation and host multiple `.config` files.
 
 ## Faq
 
