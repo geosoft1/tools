@@ -49,8 +49,7 @@ BASEPATH=`echo $PWD | sed -e "s,$HOME\/,," | sed -e "s,\/$PROJECT_NAME$,,"`
 #macos may not have $HOSTNAME set
 HOSTNAME=`hostname`
 TMP_FOLDER=/tmp/.ssh
-CONFIG_FILE=$PWD/.config
-[ ! -z $2 ] && [ -f $PWD/$2 ] && CONFIG_FILE=$PWD/$2
+CONFIG_FILE=$PWD/.config$2
 
 SSH_OPTIONS=(-o "StrictHostKeyChecking no" -o "UserKnownHostsFile /dev/null" -q)
 
@@ -73,7 +72,7 @@ scpcmd() {
 usage()  {
    echo "$LONG_NAME ($CODE_NAME)"
    echo "$COPYRIGHT"
-   echo "Usage: $TOOL_NAME [options] filename"
+   echo "Usage: $TOOL_NAME [options] .config"
    echo "Options:"
    echo "init           -- push ssh key to remote server(s)"
    echo "push           -- push curent source+binary tree"
@@ -88,7 +87,7 @@ usage()  {
    echo "remove         -- uninstall project from remote server(s)"
    echo "cli               remote terminal"
    echo "version           version"
-   echo "filename          config filename, default .config"
+   echo ".config           config name (eg:.home), default .config"
    exit
 }
 
