@@ -61,3 +61,6 @@ What's new in Gopei2 (milestone)
 - include new polished themes and color schemes
 - extend snippets (eg. web handler )
 - add cloud4 tool
+
+2.1.0
+- update LiteIDE 34.2->35.5
