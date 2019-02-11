@@ -22,19 +22,22 @@ GOPEI_LONG_NAME="Golang Programming Environment Installer"
 GOPEI_CODE_NAME=""
 GOPEI_AUTHOR="geosoft1@gmail.com"
 GOPEI_COPYRIGHT="Copyright (C) 2014-2019  $GOPEI_AUTHOR"
-GOPEI_VERSION=2.1.0
+GOPEI_VERSION=2.2.0
 GOPEI_STAGE="release"
 GOPEI_ROOT=`dirname $0`
 GOPEI_NAME=`basename $0`
+
+#-------------------------------------------------------------------------------
+COMPILER_VERSION=1.11.5
+IDE_VERSION=35.5
+LINUX_QT_VERSION=5.5.1
+MACOS_QT_VERSION=5.9.5
 
 #-------------------------------------------------------------------------------
 GOROOT=$HOME/go
 GOPATH=$HOME
 PATH=$PATH:$GOROOT/bin
 IDEROOT=$HOME/liteide
-IDE_VERSION=x35.5
-LINUX_QT_VERSION=5.5.1
-MACOS_QT_VERSION=5.9.5
 
 #-------------------------------------------------------------------------------
 #get host computer arch (e.g. i686|x86_64|armv6l)
@@ -59,10 +62,10 @@ KERNEL_NAME=$(uname -s | tr '[:upper:]' '[:lower:]')
 export IS_$(echo $KERNEL_NAME | tr '[:lower:]' '[:upper:]')=1
 
 #-------------------------------------------------------------------------------
+COMPILER_NAME=go$COMPILER_VERSION.$KERNEL_NAME-$MACHINE_TYPE.tar.gz
 case $KERNEL_NAME in
 linux)
-   #build ide name
-   IDE_NAME=liteide$IDE_VERSION.$KERNEL_NAME$MACHINE_BITS-qt$LINUX_QT_VERSION.tar.gz
+   IDE_NAME=liteidex$IDE_VERSION.$KERNEL_NAME$MACHINE_BITS-qt$LINUX_QT_VERSION.tar.gz
    IDE_RESOURCES=$IDEROOT/share/liteide
    IDE_ENVIRON=$KERNEL_NAME$MACHINE_BITS
    IDE_FONT_FAMILY='family=FreeMono'
@@ -73,8 +76,7 @@ linux)
    PROFILE_FILE=$HOME/.bashrc
    test -f ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs && source ${XDG_CONFIG_HOME:-~/.config}/user-dirs.dirs;;
 darwin)
-   #build ide name
-   IDE_NAME=liteide$IDE_VERSION.macos-qt$MACOS_QT_VERSION.zip
+   IDE_NAME=liteidex$IDE_VERSION.macos-qt$MACOS_QT_VERSION.zip
    IDE_RESOURCES=$IDEROOT/liteide/LiteIDE.app/Contents/Resources/
    IDE_ENVIRON=$KERNEL_NAME$MACHINE_BITS-home
    IDE_FONT_SIZE='fontsize=12'
@@ -118,6 +120,7 @@ case $OPTION in
    u|U)
       #common to all operating systems
       rm -rf $GOROOT
+      rm -rf $HOME/gocache/
       rm -rf $IDEROOT
       #rm -rf $HOME/.dlv/
       rm -rf $HOME/.config/liteide/
@@ -147,16 +150,6 @@ case $OPTION in
 done
 
 clear && echo -e "$GOPEI_LONG_NAME\n$GOPEI_COPYRIGHT"
-
-#-------------------------------------------------------------------------------
-GOLANG_ORG=`curl -fsSLk --connect-timeout 3 golang.org || exit`
-COMPILER_VERSION=`echo $GOLANG_ORG | 
-awk '{ 
-   if (match($0,/go([0-9]+.)+/)) 
-      print substr($0,RSTART,RLENGTH-1) 
-}'`
-#build compiler name (eg. go1.11.linux-amd64.tar.gz|go1.11.darwin-amd64.tar.gz)
-COMPILER_NAME=$COMPILER_VERSION.$KERNEL_NAME-$MACHINE_TYPE.tar.gz
 
 #-------------------------------------------------------------------------------
 echo "Installing $COMPILER_NAME..."
@@ -223,7 +216,7 @@ fi
 
 #-------------------------------------------------------------------------------
 echo "Installing $IDE_NAME..."
-curl -fsSLkOz $IDE_NAME sourceforge.net/projects/liteide/files/$IDE_VERSION/$IDE_NAME || exit
+curl -fsSLkOz $IDE_NAME sourceforge.net/projects/liteide/files/x$IDE_VERSION/$IDE_NAME || exit
 
 case $KERNEL_NAME in
 linux)

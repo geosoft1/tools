@@ -39,7 +39,7 @@
 
 ## Getting started with Gopei
 
-Gopei will install the last version of [golang](http://golang.org) compiler and a stable version of [LiteIDE](https://github.com/visualfc/liteide). Also will link go compiler with LiteIDE. No root rights are required.
+Gopei will install a stable version of [golang](http://golang.org) compiler and [LiteIDE](https://github.com/visualfc/liteide). Also will link go compiler with LiteIDE. No root rights are required.
 
 [Download](https://github.com/geosoft1/tools/archive/master.zip) anywhere and unarchive.
 

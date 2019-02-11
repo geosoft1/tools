@@ -1,7 +1,9 @@
 ## Gopei2 (Go Programming Environment Installer)
 
-[![version](https://img.shields.io/badge/version-2.1.0-blue.svg)](https://github.com/geosoft1/tools/archive/master.zip)
+[![version](https://img.shields.io/badge/version-2.2.0-blue.svg)](https://github.com/geosoft1/tools/archive/master.zip)
 [![license](https://img.shields.io/badge/license-gpl-blue.svg)](https://github.com/geosoft1/tools/blob/master/LICENSE)
+![go](https://img.shields.io/badge/go-1.11.5-green.svg)
+![liteide](https://img.shields.io/badge/liteide-35.5-orange.svg)
 
 Gopei shell install [Go](http://golang.org) compiler, [LiteIDE](https://github.com/visualfc/liteide) and configure for you the entire environment, variables, paths, ide interface and even link the machine with your Github account in a few minutes with just one command.
 
@@ -15,7 +17,7 @@ Read the user manual on the [wiki page](https://github.com/geosoft1/tools/wiki).
 
 **Features**
 
-- Install last version of Go compiler and a stable version of LiteIDE on almost any Unix/Linux based desktops and servers.
+- Install a stable version of Go compiler and LiteIDE on almost any Unix/Linux based desktops and servers.
 - Create a simple and practical layout for ide (liteide.ini.mini).
 - Also create `GOPATH` and add a hello world project.
 - Add a nice launcher to dock or desktop.

@@ -64,3 +64,6 @@ What's new in Gopei2 (milestone)
 
 2.1.0
 - update LiteIDE 34.2->35.5
+
+2.2.0
+- fixed versions go:1.11.5 liteide:35.5
