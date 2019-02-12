@@ -12,7 +12,7 @@ Laura Draghici <laura.drgh@gmail.com> OS X testing support
 Pompiliu Maftei <bobses@gmail.comm> bugs correction, arch linux testing, publishing
       http://www.bobses.eu/2016/08/01/programeaza-in-go-sub-linux-cu-gopei
 Razvan Ghitescu <raztaz.ubuntu@gmail.com> armv7 testing support
-Cosmin Popescu <github.com/cosminpopescu14> testing on OS X High Sierra
+Cosmin Popescu <github.com/cosminpopescu14> testing on macOS High Sierra
 
 All contributors that help in some way.
 If they are missing, please let me know.
