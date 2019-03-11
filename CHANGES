@@ -70,3 +70,6 @@ What's new in Gopei2 (milestone)
 
 2.3.0
 - update to go1.12
+
+2.3.1
+- add snippets for tags (eg. `json:""`, `xml:""`)

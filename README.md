@@ -1,6 +1,6 @@
 ## Gopei2 (Go Programming Environment Installer)
 
-[![version](https://img.shields.io/badge/version-2.3.0-blue.svg)](https://github.com/geosoft1/tools/archive/master.zip)
+[![version](https://img.shields.io/badge/version-2.3.1-blue.svg)](https://github.com/geosoft1/tools/archive/master.zip)
 [![license](https://img.shields.io/badge/license-gpl-blue.svg)](https://github.com/geosoft1/tools/blob/master/LICENSE)
 ![go](https://img.shields.io/badge/go-1.12-green.svg)
 ![liteide](https://img.shields.io/badge/liteide-35.5-orange.svg)

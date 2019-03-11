@@ -53,5 +53,15 @@
         "info": "if error {\n return err }",
         "name": "iferr2",
         "text": "if err != nil {\n\treturn err\n}"
+    },
+    {
+        "info": "`json:\"\"`",
+        "name": "json tag",
+        "text": "`json:\"$$\"`"
+    },
+    {
+        "info": "`xml:\"\"`",
+        "name": "xml tag",
+        "text": "`xml:\"$$\"`"
     }
 ]

@@ -323,7 +323,7 @@ To compile a 32 bits application on the 64 bit Linux you must install some libs.
 
 **Gopei shell work with**
 
-* OS X 10.11 El Capitan
+* OS X 10.11 El Capitan, macOS High Sierra
 * Ubuntu 12, 14, 16, 18, +Server, Lubuntu/Kubuntu 16+
 * Debian 8
 * Mint 17
