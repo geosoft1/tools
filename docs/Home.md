@@ -15,6 +15,7 @@
     - [Set color scheme](#set-color-scheme)
     - [Version](#version)
     - [After install](#after-install)
+  - [Snippets](#snippets)
   - [Tools](#tools)
     - [Github tool](#github-tool)
     - [Cloud tool](#cloud-tool)
@@ -163,7 +164,24 @@ If you use Ubuntu right click on Gopei launcher icon show some usefull options.
 * github.com/username
 
 If you use the new Ubuntu Gnome interface, search in dash LiteIDE and add to favorite.
- 
+
+#### Snippets
+
+Beside existing LiteIDE snippets Gopei add some new as following:
+
+`handler1`
+
+	func name(w http.ResponseWriter, r *http.Request) {
+	}
+
+`json tag`
+
+	`json:\"\"`
+
+`xml tag`
+
+	`xml:\"\"`
+
 #### Tools
 
 #### Github tool
