@@ -167,7 +167,7 @@ If you use the new Ubuntu Gnome interface, search in dash LiteIDE and add to fav
 
 #### Snippets
 
-Beside existing LiteIDE snippets Gopei add some new as following:
+Gopei add some new snippets to LiteIDE as following:
 
 `handler1`
 
