@@ -22,14 +22,14 @@ GOPEI_LONG_NAME="Golang Programming Environment Installer"
 GOPEI_CODE_NAME=""
 GOPEI_AUTHOR="geosoft1@gmail.com"
 GOPEI_COPYRIGHT="Copyright (C) 2014-2019  $GOPEI_AUTHOR"
-GOPEI_VERSION=2.3.1
+GOPEI_VERSION=2.4.0
 GOPEI_STAGE="release"
 GOPEI_ROOT=`dirname $0`
 GOPEI_NAME=`basename $0`
 
 #-------------------------------------------------------------------------------
-COMPILER_VERSION=1.12
-IDE_VERSION=35.5
+COMPILER_VERSION=1.12.5
+IDE_VERSION=36
 LINUX_QT_VERSION=5.5.1
 MACOS_QT_VERSION=5.9.5
 
@@ -244,6 +244,8 @@ SplashVisible=false
 '$IDE_FONT_FAMILY'
 '$IDE_FONT_SIZE'
 '$IDE_STYLE'
+navbar_visible=false
+toolbar_visible=false
 [golangdoc]
 goroot='$GOROOT'
 [liteapp]

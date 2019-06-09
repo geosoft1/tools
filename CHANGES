@@ -63,13 +63,16 @@ What's new in Gopei2 (milestone)
 - add cloud4 tool
 
 2.1.0
-- update LiteIDE 34.2->35.5
+- update to liteide35.5
 
 2.2.0
-- fixed versions go:1.11.5 liteide:35.5
+- fixed versions go1.11.5 liteide35.5
 
 2.3.0
 - update to go1.12
 
 2.3.1
 - add snippets for tags (eg. `json:""`, `xml:""`)
+
+2.4.0
+- update to go1.12.5 liteide36
