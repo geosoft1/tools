@@ -76,3 +76,6 @@ What's new in Gopei2 (milestone)
 
 2.4.0
 - update to go1.12.5 liteide36
+
+2.5.0
+- update to go1.13
