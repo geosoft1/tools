@@ -1,11 +1,11 @@
-/* \liteide\share\liteide\liteapp\qss\ ===*/
-/* geosoft1@gmail.com */
-/* 
-white #ADADAD
-black #282829
-black (window) #3C3F41
-blue #2F65CA
-*/
+/*geosoft1@gmail.com */
+
+/* === Shared === */
+QStackedWidget, QLabel, QPushButton, QRadioButton, QCheckBox, 
+QGroupBox, QStatusBar, QToolButton, QComboBox, QDialog, QListView,
+QTabBar, QMenu, QMenuBar, QWidget::window, QTreeView  {
+    font-size: 14px;
+}
 
 QWidget  {
     background-color: #3c3f41;
@@ -13,13 +13,6 @@ QWidget  {
 }
 
 QDialogButtonBox { dialogbuttonbox-buttons-have-icons: 0; }
-
-/* === QWidget === */
-QStackedWidget, QLabel, QPushButton, QRadioButton, QCheckBox, 
-QGroupBox, QStatusBar, QToolButton, QComboBox, QDialog, QListView,
-QTabBar, QMenu, QMenuBar, QWidget::window, QTreeView  {
-    font-size: 14px;
-}
 
 /* === QToolTip === */
 QToolTip {
@@ -64,7 +57,6 @@ QRadioButton::indicator {
     border-radius: 2px;
 }
 
-
 QCheckBox::indicator::checked, QRadioButton::indicator::checked, QTreeView::indicator::checked {
     background-color: #007ACC;
 }
@@ -72,11 +64,6 @@ QCheckBox::indicator::checked, QRadioButton::indicator::checked, QTreeView::indi
 QCheckBox::indicator:disabled, QRadioButton::indicator:disabled, QTreeView::indicator:disabled {
     background-color: #333333;
 }
-
-/*QCheckBox::indicator::checked:disabled, QRadioButton::indicator::checked:disabled, QTreeView::indicator::checked:disabled {
-    background-color: qradialgradient(cx:0.5, cy:0.5, fx:0.25, fy:0.15, radius:0.3, stop:0 #BBBBBB, stop:1 #444444);
-}*/
-
 
 /* === QComboBox === */
 QComboBox {
@@ -158,17 +145,15 @@ QTabBar::tab:selected {
 }
 
 QTabBar::close-button {
-image: url(:/trolltech/styles/commonstyle/images/standardbutton-closetab-16.png);
 }
-QTabBar::close-button:hever {
-image: url(:/trolltech/styles/commonstyle/images/standardbutton-closetab-hover-16.png);
+
+QTabBar::close-button:hover {
 }
 
 /* === QToolBar === */
 QToolBar {
     background-color: #3c3f41;
     border: none;
-    /*padding: 1px;*/
 }
 
 QToolBar:handle {
@@ -186,8 +171,6 @@ QToolButton {
     font-size: 13px;
     background-color: #3c3f41;
     border: none;
- /*   margin: 1px;
-    padding: 3px;*/
 }
 
 QToolButton:hover {
@@ -224,10 +207,9 @@ background: #282829;
 }
 
 QMenu::item {
-
     padding: 0px 0px 1px 18px;
     margin:0px;
-border:0px;
+    border:0px;
 }
 
 QMenu::item:disabled {
@@ -237,6 +219,7 @@ QMenu::item:disabled {
 QMenu::item:selected {
     background: #2f65ca;
 }
+
 QMenu::item:checked {
 }
 
@@ -404,8 +387,8 @@ QTableView::item:hover {
 /* === QTreeView === */
 /*https://joekuan.wordpress.com/2015/10/02/styling-qt-qtreeview-with-css/ */
 QTreeView {
-border:0;
-background: #3c3f41;
+    border:0;
+    background: #3c3f41;
 }
 
 
