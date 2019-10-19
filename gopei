@@ -22,7 +22,7 @@ GOPEI_LONG_NAME="Golang Programming Environment Installer"
 GOPEI_CODE_NAME=""
 GOPEI_AUTHOR="geosoft1@gmail.com"
 GOPEI_COPYRIGHT="Copyright (C) 2014-2019  $GOPEI_AUTHOR"
-GOPEI_VERSION=2.5.0
+GOPEI_VERSION=2.5.1
 GOPEI_STAGE="release"
 GOPEI_ROOT=`dirname $0`
 GOPEI_NAME=`basename $0`
@@ -278,10 +278,11 @@ cp $GOPEI_ROOT/go.snippet.json $IDE_RESOURCES/packages/go/
 echo -e "git add *
 git commit -m \"-\" -a
 git push
+git reset --hard HEAD^
+git push origin -f
 git pull$CLOUD_TOOLS
 go get golang.org/x/tools/cmd/present
-go get -u github.com/derekparker/delve/cmd/dlv
-godoc -http=:8080 -play" > $IDE_RESOURCES/litebuild/command/go.api
+go get -u github.com/derekparker/delve/cmd/dlv" > $IDE_RESOURCES/litebuild/command/go.api
 
 #-------------------------------------------------------------------------------
 echo "Create smart launcher"

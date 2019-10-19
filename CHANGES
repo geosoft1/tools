@@ -79,3 +79,6 @@ What's new in Gopei2 (milestone)
 
 2.5.0
 - update to go1.13
+
+2.5.1
+- update git commands with git reset, remove obsolete godoc
