@@ -57,6 +57,8 @@ Run periodicaly or if compiler/ide versions change to update the system. Project
 
 Note that your system must have `bash`,`curl` and `git` installed before. Also, some systems need additional packages described in the [Platform Specific Information](#platform-specific-information).
 
+**Important!** On Linux `build-essential` package must be installed if available being used by testing package when `CGO_ENABLED=1` but also is required by some other packages like `go-sqlite3`.
+
 ## Working with Gopei
 
 #### Before install
