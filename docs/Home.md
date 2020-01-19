@@ -35,6 +35,7 @@
   - [What code name mean?](#what-code-name-mean)
   - [Gopei don't install the last IDE. Why?](#gopei-dont-install-the-last-ide-why)
   - [I don't like default IDE. What shoud i do?](#i-dont-like-default-ide-what-shoud-i-do)
+  - [What about personal access token?](#what-about-personal-access-token)
 - [Articles](#articles)
 
 
@@ -85,9 +86,9 @@ Also you must provide a password. You also may set no password or for simplicity
         Enter passphrase (empty for no passphrase): 
         Enter same passphrase again: 
 
-Next you will be asked for Github account password. Do not confuse with previous password.
+Next you will be asked for Github account token (see [Creating a personal access token for the command line](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)).
 
-        Password:
+        Token:
 
 Now the new key are deployed on Github. You will be asked again for phassphrase to check if the key work.
 
@@ -212,12 +213,12 @@ Alow you to run and deploy remote projects. Without parameters show a list of op
 
 * Create a git acoount on Github.
 * Open Terminal and run `./gopei -g`
-* Enter user, email and password used with Github and wait setup to complete.
+* Enter user, email and token used with Github and wait setup to complete.
 * Start LiteIDE and create new project Go1 Simple Project.
 * At name write `github.com/githubuser/projectname`
 * Open `main.go` from this project.
 * Press `` ctrl+` ``
-* Use `github new`. You will be asked for password twice. Now your project will magicaly became a repo on Github.
+* Use `github new`. You will be asked for token. Now your project will magicaly became a repo on Github.
 * Use `git add filename` or simply `git add *` to add other files to your repo as you wish.
 * Use `git commit -m "-" -a` and `git push` to push files to Github. Note that first time you will need to use `git push origin master` but not if you use `github new` command.
 * Use `github clone githubuser/project` to clone projects.
@@ -265,7 +266,7 @@ Also try later, Github mentenance :(
 
         Permission denied (publickey).
 
-You enter a wrong password. Reinstall and check the password.
+You enter a wrong token. Reinstall and check the token.
 
 #### qt
 
@@ -359,12 +360,15 @@ To compile a 32 bits application on the 64 bit Linux you must install some libs.
 ## Faq
 
 #### What exactly **is** Gopei?
+
 Gopei is an installer for Go environment (compiler+IDE) but also customize the IDE to bring best programming experience for you.
 
 #### Gopei is a shell?
+
 In a way, yes. Gopei bring a set of tools accessible from IDE to make your life better using git, debugger or other tools.
 
 #### Who should use Gopei?
+
 Basicaly Gopei was born from need to make Go language accesible to everyone with or without computer experience.
 
 So, the first target is the beginers. Also, the classroom mode can be used in teaching.
@@ -372,6 +376,7 @@ So, the first target is the beginers. Also, the classroom mode can be used in te
 Another destination is all those people who want to work simple and quickly. Golang is a simple language so tools used must be simplest too.
 
 #### Why Gopei goes multi-platform now?
+
 Next step is working in cloud. So, this was a natural step for.
 
 Another reason is that the most golang programmers seems to use OS X so this was an important target.
@@ -379,9 +384,11 @@ Another reason is that the most golang programmers seems to use OS X so this was
 Also, some users work on many servers so a server mode was an interesting idea.
 
 #### But why Windows isn't on the list?
+
 Due different architecture and especially because the missing tools, Windows need a totally different approach. No plans to porting but can work under [Windows Subsystem for Linux](https://msdn.microsoft.com/en-us/commandline/wsl/install_guide) (untested). 
 
 #### What code name mean?
+
 Silly names are funny. From now Gopei code name will reflect the most interesting idea implemented in that version.
 
 So, the first code name mean one script for many operating systems (The Convergence).
@@ -393,6 +400,10 @@ It's not outdated. From compatibility reasons some versions of IDE work or not o
 #### I don't like default IDE. What shoud i do?
 
 No problem, just use `gopei -sg` meaning server mode with all tols available and next install your favorite IDE. Go environment and tools will be available from your favorite IDE.
+
+#### What about personal access token?
+
+Github [deprecated](https://developer.github.com/v3/auth/#basic-authentication) basic authentication with password for some endpoints. Instead of this you must use tokens (see [Creating a personal access token for the command line](https://help.github.com/en/github/authenticating-to-github/creating-a-personal-access-token-for-the-command-line)).
 
 ## Articles
 

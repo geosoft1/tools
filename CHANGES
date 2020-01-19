@@ -82,3 +82,8 @@ What's new in Gopei2 (milestone)
 
 2.5.1
 - update git commands with git reset, remove obsolete godoc
+
+2.6.0
+- update copyright for all tools
+- GITTOKEN replace GITPASSWORD due github security policy changes
+- small code rewiew for all tools

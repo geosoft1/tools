@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # github tool
-# Copyright (C) 2014-2019  geosoft1@gmail.com
+# Copyright (C) 2014-2020  geosoft1@gmail.com
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@ set -e
 LONG_NAME="Github tool"
 CODE_NAME=""
 AUTHOR="geosoft1@gmail.com"
-COPYRIGHT="Copyright (C) 2014-2019  $AUTHOR"
-VERSION=1.1.1
+COPYRIGHT="Copyright (C) 2014-2020  $AUTHOR"
+VERSION=1.2.0
 STAGE="release"
 ROOT=`dirname $0`
 NAME=`basename $0`
@@ -33,13 +33,11 @@ GITUSER=`awk 'NR==2 {print $3}' $HOME/.gitconfig`
 BASENAME=`basename $PWD`
 PROJECT_NAME=$BASENAME
 
-GOPATH=$HOME
-
 usage()  {
    echo "Usage: $NAME [options]"
    echo "Options:"
    echo "new                        make a new github repository from current folder"
-   echo "clone githubuser/project   clone a github project in GOPATH/src/github.com/USER"
+   echo "clone githubuser/project   clone a github project in HOME/src/github.com/USER"
    echo "version                    version"
    exit
 }
@@ -48,8 +46,8 @@ new () {
    echo -n "Create repository $GITSERVER/$GITUSER/$PROJECT_NAME [y/n] " && read option
    [ $option == y ] || exit
 
-   echo -n "Password:" && read PASSWORD
-   curl -s -u $GITUSER:$PASSWORD https://api.$GITSERVER/user/repos -d '{"name":"'$PROJECT_NAME'"}' | awk '/message/ { gsub(/^[\t]+|[\",]/,"");print }' || exit
+   echo -n "Token:" && read -s GITTOKEN
+   curl -s -H 'Authorization: token '$GITTOKEN https://api.$GITSERVER/user/repos -d '{"name":"'$PROJECT_NAME'"}' | awk '/message/ { gsub(/^[\t]+|[\",]/,"");print }' || exit
 
    git init
    git add *
@@ -59,13 +57,13 @@ new () {
 }
 
 clone () {
-   git clone git@$GITSERVER:$1.git $GOPATH/src/$GITSERVER/$1
+   git clone git@$GITSERVER:$1.git $HOME/src/$GITSERVER/$1
 }
 
 case $1 in
    new     ) new;;
    clone   ) clone $2;;
-   version ) echo $VERSION && exit;;
+   version ) echo $VERSION-$STAGE && exit;;
    *       ) usage;;
 esac
 

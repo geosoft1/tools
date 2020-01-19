@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # golang programming environment installer
-# Copyright (C) 2014-2019  <geosoft1@gmail.com>
+# Copyright (C) 2014-2020  <geosoft1@gmail.com>
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -21,8 +21,8 @@ set -e
 GOPEI_LONG_NAME="Golang Programming Environment Installer"
 GOPEI_CODE_NAME=""
 GOPEI_AUTHOR="geosoft1@gmail.com"
-GOPEI_COPYRIGHT="Copyright (C) 2014-2019  $GOPEI_AUTHOR"
-GOPEI_VERSION=2.5.1
+GOPEI_COPYRIGHT="Copyright (C) 2014-2020  $GOPEI_AUTHOR"
+GOPEI_VERSION=2.6.0
 GOPEI_STAGE="release"
 GOPEI_ROOT=`dirname $0`
 GOPEI_NAME=`basename $0`
@@ -187,14 +187,9 @@ if [ $GITSERVER ]; then
    if [ ! -f $HOME/.ssh/id_$KEYTYPE ]; then
       ssh-keygen -qt $KEYTYPE -C "$GITEMAIL" -f $HOME/.ssh/id_$KEYTYPE
       #add a new deploy key on github with api (https://developer.github.com/v3/)
-      echo -n "Password:"; read -s GITPASSWORD
-      echo 
       KEY=`cat $HOME/.ssh/id_$KEYTYPE.pub`
-      #Key management:
-      #curl -s -X GET -u $GITUSER:$GITPASSWORD https://api.github.com/user/keys
-      #curl -s -X DELETE -u $GITUSER:$GITPASSWORD https://api.github.com/user/keys/13146480
-      #curl -s -X POST -u $GITUSER:$GITPASSWORD https://api.github.com/user/keys -d '{"key":"'"${KEY}"'"}'
-      curl -s -X POST -u $GITUSER:$GITPASSWORD https://api.$GITSERVER/user/keys -d '{"key":"'"${KEY}"'"}'| awk '/message/ { gsub(/^[\t ]+|[\",]/,"");print }'
+      echo -n "Token:" && read -s GITTOKEN
+      curl -s -X POST -H 'Authorization: token '$GITTOKEN https://api.$GITSERVER/user/keys -d '{"key":"'"${KEY}"'"}'| awk '/message/ { gsub(/^[\t ]+|[\",]/,"");print }'
    fi
    #bug workaround https://help.github.com/articles/error-permission-denied-publickey
    eval `ssh-agent -s` > /dev/null
