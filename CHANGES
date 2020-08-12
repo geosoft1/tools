@@ -87,3 +87,6 @@ What's new in Gopei2 (milestone)
 - update copyright for all tools
 - GITTOKEN replace GITPASSWORD due github security policy changes
 - small code rewiew for all tools
+
+2.7.0
+- update to go1.15 liteide37.1

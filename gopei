@@ -22,16 +22,16 @@ GOPEI_LONG_NAME="Golang Programming Environment Installer"
 GOPEI_CODE_NAME=""
 GOPEI_AUTHOR="geosoft1@gmail.com"
 GOPEI_COPYRIGHT="Copyright (C) 2014-2020  $GOPEI_AUTHOR"
-GOPEI_VERSION=2.6.0
+GOPEI_VERSION=2.7.0
 GOPEI_STAGE="release"
 GOPEI_ROOT=`dirname $0`
 GOPEI_NAME=`basename $0`
 
 #-------------------------------------------------------------------------------
-COMPILER_VERSION=1.13
-IDE_VERSION=36
+COMPILER_VERSION=1.15
+IDE_VERSION=37.1
 LINUX_QT_VERSION=5.5.1
-MACOS_QT_VERSION=5.9.5
+MACOS_QT_VERSION=5.12.5
 
 #-------------------------------------------------------------------------------
 GOROOT=$HOME/go
