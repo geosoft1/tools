@@ -287,6 +287,7 @@ If `gocode` from LiteIDE don't handle newest versions of Go compiler try to upda
 
 - If not default configured Mac users need to have `darwin64-home` environment in LiteIDE otherwise the programs won't compile or run.
 - For cross compiling Mac users need to edit new environment (`IDE Tools:Environment`) and set `GOROOT=$HOME/go`.
+- Starting with go1.16 `go mod init` command is needed for each new or existing project.
 
 ## Platform Specific Information
 
@@ -345,7 +346,7 @@ To compile a 32 bits application on the 64 bit Linux you must install some libs.
 **Gopei shell work with**
 
 * OS X 10.11 El Capitan, macOS High Sierra
-* Ubuntu 12, 14, 16, 18, +Server, Lubuntu/Kubuntu 16+
+* Ubuntu 12, 14, 16, 18, 20
 * Debian 8
 * Mint 17
 * Trisquel 7
