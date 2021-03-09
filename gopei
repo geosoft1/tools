@@ -257,6 +257,7 @@ gopath='$GOPATH'
 
 #-------------------------------------------------------------------------------
 echo "Create some useful resources"
+cp -r $GOPEI_ROOT/gopher/ $GOROOT/doc
 cp -R $GOPEI_ROOT/template/* $IDE_RESOURCES/liteapp/template/
 echo >> $IDE_RESOURCES/liteapp/template/project.sub
 for project in $GOPEI_ROOT/template/*; do
