@@ -94,3 +94,6 @@ What's new in Gopei2 (milestone)
 2.8.0
 - update to go1.16 liteide37.4
 - add missing gopher icons in go/doc
+
+2.9.0
+- update to go1.18.2 and liteide38.0

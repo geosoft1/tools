@@ -21,7 +21,7 @@ set -e
 LONG_NAME="Github tool"
 CODE_NAME=""
 AUTHOR="geosoft1@gmail.com"
-COPYRIGHT="Copyright (C) 2014-2021  $AUTHOR"
+COPYRIGHT="Copyright (C) 2014-2022  $AUTHOR"
 VERSION=1.2.0
 STAGE="release"
 ROOT=`dirname $0`

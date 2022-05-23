@@ -35,7 +35,7 @@
 LONG_NAME="Cloud tool"
 CODE_NAME="Quantum Teleporter"
 AUTHOR="geosoft1@gmail.com"
-COPYRIGHT="Copyright (C) 2016-2021  $AUTHOR"
+COPYRIGHT="Copyright (C) 2016-2022  $AUTHOR"
 VERSION=4.1.1
 STAGE="release"
 TOOL_NAME=`basename $0`

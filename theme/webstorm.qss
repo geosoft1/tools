@@ -1,15 +1,14 @@
-/*geosoft1@gmail.com */
+/* geosoft1@gmail.com */
+/* cp webstorm.qss liteide/share/liteide/liteapp/qss */
 
 /* === Shared === */
-QStackedWidget, QLabel, QPushButton, QRadioButton, QCheckBox, 
-QGroupBox, QStatusBar, QToolButton, QComboBox, QDialog, QListView,
-QTabBar, QMenu, QMenuBar, QWidget::window, QTreeView  {
-    font-size: 14px;
-}
-
 QWidget  {
     background-color: #3c3f41;
     color: #F1F1F1;
+}
+
+QStackedWidget, QLabel, QPushButton, QRadioButton, QCheckBox, QGroupBox, QStatusBar, QToolButton, QComboBox, QDialog, QListView, QTabBar, QMenu, QMenuBar, QWidget::window, QTreeView  {
+    font-size: 14px;
 }
 
 QDialogButtonBox { dialogbuttonbox-buttons-have-icons: 0; }
@@ -22,7 +21,7 @@ QToolTip {
 }
 
 /* === QPushButton === */
-QPushButton {
+/*QPushButton {
     border: 1px solid #333333;
     padding: 4px;
     min-width: 65px;
@@ -43,7 +42,7 @@ QPushButton:pressed {
 
 QPushButton:disabled {
     color: #333333;
-}
+}*/
 
 /* === Checkable items === */
 QCheckBox::indicator, QRadioButton::indicator, QTreeView::indicator {
@@ -79,7 +78,6 @@ QComboBox:hover {
 
 QComboBox::drop-down {
     background-color: #333337;
-
     subcontrol-origin: padding;
     subcontrol-position: top right;
     border-left: 1px solid #333333;
@@ -168,7 +166,6 @@ QToolBar::separator {
 
 /* === QToolButton === */
 QToolButton {
-    font-size: 13px;
     background-color: #3c3f41;
     border: none;
 }
@@ -181,6 +178,7 @@ QToolButton:hover {
 QToolButton[popupMode="1"] { /* only for MenuButtonPopup */
     padding-right: 20px; /* make way for the popup button */
 }
+
 QToolButton[popupMode="2"] { /* only for InstantPopup */
     padding-right: 10px; /* make way for the InstantPopup button */
 }
@@ -207,9 +205,8 @@ background: #282829;
 }
 
 QMenu::item {
-    padding: 0px 0px 1px 18px;
-    margin:0px;
-    border:0px;
+    padding: 2px 25px 4px 20px;
+    border: 1px solid transparent;
 }
 
 QMenu::item:disabled {
@@ -244,7 +241,7 @@ QMenu::indicator {
 
 /* === QMenuBar === */
 QMenuBar {
-background: #3c3f41;
+    background: #3c3f41;
     color: white;
 }
 
@@ -263,7 +260,7 @@ QMenuBar::item:selected {
 QMenuBar::item:pressed {
     background: #2f65ca;
 }
- 
+
 /* === QScrollBar:vertical === */
 QScrollBar:vertical {
     background: #3E3E42;
@@ -350,7 +347,6 @@ QLineEdit, QListView, QTreeView, QTableView, QAbstractSpinBox {
 QAbstractScrollArea, QLineEdit, QTextEdit, QAbstractSpinBox {
     border-color: #333333;
     border: 1px solid #333333;
-
 }
 
 /* === QHeaderView === */
@@ -391,8 +387,3 @@ QTreeView {
     background: #3c3f41;
 }
 
-
-/* === Customizations === */
-QFrame#infoLabel {
-    border: 1px inset #333333;
-}
